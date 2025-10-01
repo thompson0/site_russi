@@ -22,11 +22,11 @@ export default function Sidebar() {
                             </svg>
                         }
                     />
-                    <SidebarItem label="Sobre" badge="3" icon="" />
-                    <SidebarItem label="Serviços" icon="" />
-                    <SidebarItem label="Contato" icon="" />
-                    <SidebarItem label="Trabalhe Conosco" icon="" />
-                    <SidebarItem label="Área Restrita" badge="Admin" icon="" />
+                    <SidebarItem label="Sobre" badge="3" icon="" route="" />
+                    <SidebarItem label="Serviços" icon="" route="" />
+                    <SidebarItem label="Contato" icon="" route="" />
+                    <SidebarItem label="Trabalhe Conosco" icon="" route="e" />
+                    <SidebarItem label="Área Restrita" badge="Admin" icon="" route="/login" />
                 </ul>
             </div>
         </aside>
