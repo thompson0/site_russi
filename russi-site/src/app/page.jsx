@@ -1,6 +1,6 @@
 import Footer from "../components/footer"
 import Banner from "../components/header/banner";
-import HamburgerButton from "@/components/menu/HamburgerButton";
+import Sidebar from "../components/Sidebar/SideBar";
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br" className="dark">
@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
           <Banner></Banner>
         </header>
         <main>
-          
+          <Sidebar></Sidebar>
         </main>
         {children}
             <Footer></Footer>
