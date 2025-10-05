@@ -1,9 +1,43 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export function LoginForm(props) {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(error);
+
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/user");
+      }
+    } 
+    
+    catch (error) {
+      console.error(error);
+      setError("Erro no login, tente novamente.");
+    }
+  };
+
   return (
     <Card
       className="overflow-hidden p-0 w-full max-w-md mx-4 sm:mx-6 md:mx-auto lg:mx-0"
@@ -18,7 +52,9 @@ export function LoginForm(props) {
           </p>
         </div>
 
-        <form className="flex flex-col gap-6 w-full">
+        <form className="flex flex-col gap-6 w-full" onSubmit={handleSubmit}>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <div className="flex flex-col gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -26,6 +62,8 @@ export function LoginForm(props) {
               type="email"
               placeholder="m@example.com"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -39,7 +77,13 @@ export function LoginForm(props) {
                 Forgot your password?
               </a>
             </div>
-            <Input id="password" type="password" required />
+            <Input
+              id="password"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
           <Button type="submit" className="w-full">
@@ -54,7 +98,7 @@ export function LoginForm(props) {
 
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
-            <a href="#" className="underline underline-offset-4">
+            <a href="login/signup" className="underline underline-offset-4">
               Sign up
             </a>
           </div>
