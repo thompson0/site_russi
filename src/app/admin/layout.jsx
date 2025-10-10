@@ -8,7 +8,7 @@ export default async function AdminLayout({ children }) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
-    if (!token) redirect("/user");
+    if (!token) redirect("/login");
 
     let userRole;
     try {
@@ -17,24 +17,20 @@ export default async function AdminLayout({ children }) {
         userRole = decoded.role;
 
     } catch {
-        redirect("/user");
+        redirect("/login");
     }
 
     if (userRole !== "admin") redirect("/user");
     return (
-        <>
-            <div className="dark">
+            <header className="dark">
                 <SidebarProvider>
                     <AppSidebar />
-                    <main>
+                    <main className="flex-1">
                         <SidebarTrigger />
                         {children}
                     </main>
                 </SidebarProvider>
-            </div>
-
-
-        </>
+            </header>
 
     );
 }

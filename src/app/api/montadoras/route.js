@@ -6,7 +6,13 @@ export async function GET() {
     try {
         await connectDB()
         const montadoras = await Montadora.find()
-        return NextResponse.json(montadoras, { status: 200 })
+
+        return NextResponse.json(montadoras, {
+            status: 200,
+            headers: {
+                "Cache-Control": "public, max-age=60, stale-while-revalidate=120",
+            },
+        });
     } catch (error) {
         console.error("Erro ao buscar montadoras:", error);
         return NextResponse.json(

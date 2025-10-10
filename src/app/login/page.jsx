@@ -2,8 +2,8 @@ import { LoginForm } from "@/components/login-form"
 import BgVideo from "@/components/video"
 export default function LoginPage({ children }) {
   return (
-    <html lang="pt-br" className="dark">
-      <body className="flex flex-col min-h-screen ">
+    <div lang="pt-br" className="dark">
+      <div className="flex flex-col min-h-screen ">
         <BgVideo></BgVideo>
         <header className="flex-grow">
         </header>
@@ -14,8 +14,8 @@ export default function LoginPage({ children }) {
           {children}
         </main>
 
-      </body>
-    </html>
+      </div>
+    </div>
 
   )
 }

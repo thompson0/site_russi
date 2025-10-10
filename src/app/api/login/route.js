@@ -10,7 +10,7 @@ export async function POST(req) {
   const { email, password } = await req.json();
 
   const user = await User.findOne({ email });
-  console.log("Usuário encontrado:", user);
+  console.log("Usuário encontrado:");
 
   if (!user) {
     return new Response(JSON.stringify({ message: "Usuário não encontrado" }), {

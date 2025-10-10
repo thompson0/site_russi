@@ -17,7 +17,7 @@ export function middleware(req) {
     }
 
     if (url.startsWith("/admin") && decoded.role !== "admin") {
-      return NextResponse.redirect(new URL("/user", req.url));
+      return NextResponse.redirect(new URL("/login", req.url));
     }
   }
 
