@@ -1,12 +1,13 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Public_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+const publicSans = Public_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+// Map monospace variable to Public Sans as well to unify all fonts
+const publicSansAsMono = Public_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -19,9 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html className="dark" lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -1,5 +1,3 @@
-import { SheetMontadora } from "./SheetMontadora";
-
 function MontadoraCard({ nome, logo, id }) {
   return (
     <div className="w-96 h-80 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">

@@ -1,8 +1,9 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/AppSidebar"
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
+import NavBar from "@/components/Login/NavBar";
 
 export default async function AdminLayout({ children }) {
     const cookieStore = await cookies();
@@ -26,7 +27,7 @@ export default async function AdminLayout({ children }) {
                 <SidebarProvider>
                     <AppSidebar />
                     <main className="flex-1">
-                        <SidebarTrigger />
+                  <NavBar></NavBar>
                         {children}
                     </main>
                 </SidebarProvider>

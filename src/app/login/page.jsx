@@ -1,5 +1,5 @@
-import { LoginForm } from "@/components/login-form"
-import BgVideo from "@/components/video"
+import { LoginForm } from "@/components/LoginForm"
+import BgVideo from "@/components/Video"
 export default function LoginPage({ children }) {
   return (
     <div lang="pt-br" className="dark">
