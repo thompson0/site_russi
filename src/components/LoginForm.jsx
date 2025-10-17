@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 export function LoginForm(props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setPassword] = useState("");
   const [error, setError] = useState("");
   
   const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ export function LoginForm(props) {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, senha }),
       });
 
       const data = await res.json();
@@ -78,10 +78,10 @@ export function LoginForm(props) {
               </a>
             </div>
             <Input
-              id="password"
-              type="password"
+              id="senha"
+              type="senha"
               required
-              value={password}
+              value={senha}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

@@ -1,23 +1,13 @@
-import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/db";
-import Montadora from "@/models/Montadora";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
-    try {
-        await connectDB()
-        const montadoras = await Montadora.find()
-
-        return NextResponse.json(montadoras, {
-            status: 200,
-            headers: {
-                "Cache-Control": "public, max-age=60, stale-while-revalidate=120",
-            },
-        });
-    } catch (error) {
-        console.error("Erro ao buscar montadoras:", error);
-        return NextResponse.json(
-            { message: "Erro ao buscar montadoras" },
-            { status: 500 }
-        )
-    }
+  try {
+    const montadoras = await prisma.montadoras.findMany();
+    return new Response(JSON.stringify(montadoras, (_, v) =>
+      typeof v === "bigint" ? Number(v) : v
+    ));
+  } catch (error) {
+    console.error("erro:", error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
 }

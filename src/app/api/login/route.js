@@ -1,16 +1,17 @@
-import { connectDB } from "@/lib/db";
-import User from "@/models/User";
+import { prisma } from "@/lib/prisma";
+
 import bcrypt from "bcryptjs";
 import { signToken } from "@/lib/jwt";
 import { serialize } from "cookie";
 
 export async function POST(req) {
-  await connectDB();
 
-  const { email, password } = await req.json();
 
-  const user = await User.findOne({ email });
-  console.log("Usuário encontrado:");
+  const { email, senha } = await req.json();
+
+ const user = await prisma.usuarios.findFirst({
+    where: { email },
+  });
 
   if (!user) {
     return new Response(JSON.stringify({ message: "Usuário não encontrado" }), {
@@ -19,14 +20,14 @@ export async function POST(req) {
   }
 
 
-  const isValid = await bcrypt.compare(password, user.password);
+  const isValid = await bcrypt.compare(senha, user.senha);
   if (!isValid) {
     return new Response(JSON.stringify({ message: "Senha incorreta ou E-mail incorretos" }), {
       status: 401,
     });
   }
 
-  const token = signToken({ id: user._id, role: user.role });
+  const token = signToken({ id: user.id, permissao: user.permissao });
   const cookie = serialize("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -36,7 +37,7 @@ export async function POST(req) {
   });
 
   return new Response(
-    JSON.stringify({ message: "Login feito com sucesso", role: user.role }),
+    JSON.stringify({ message: "Login feito com sucesso", permissao: user.permissao }),
     {
       status: 200,
       headers: {
