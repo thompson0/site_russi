@@ -5,7 +5,7 @@ function CarroCard({ modelo, foto, ano }) {
         <img
           src={foto}
           alt={modelo}
-          className="max-h-44 w-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+          className=" w-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
         />
       </div>
 

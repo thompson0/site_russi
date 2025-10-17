@@ -6,7 +6,6 @@ const publicSans = Public_Sans({
   subsets: ["latin"],
 });
 
-// Map monospace variable to Public Sans as well to unify all fonts
 const publicSansAsMono = Public_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],

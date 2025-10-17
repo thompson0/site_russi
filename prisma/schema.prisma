@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model carros {
+  id           BigInt  @id @unique @default(autoincrement())
+  nome         String?
+  ano_de       BigInt?
+  ano_ate      BigInt?
+  versao       String?
+  montadora_id BigInt?
+  foto_url     String?
+  imagem       String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model categorias {
+  id   BigInt  @id @unique @default(autoincrement())
+  nome String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model contatos {
+  id           BigInt  @id @unique @default(autoincrement())
+  departamento String?
+  colaborador  String?
+  telefone     String?
+  ramal        String?
+  email        String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model duvidas {
+  id       BigInt  @id @unique @default(autoincrement())
+  pergunta String?
+  resposta String?
+  posicao  BigInt? @default(9999)
+  ordem    BigInt? @default(0)
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model manuais {
+  id           BigInt  @id @unique @default(autoincrement())
+  titulo       String?
+  conteudo     String?
+  ordem        BigInt? @default(0)
+  categoria_id BigInt?
+  descricao    String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model montadoras {
+  id       BigInt  @id @unique @default(autoincrement())
+  nome     String?
+  logo_url String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model produto_fotos {
+  id         BigInt  @id @unique @default(autoincrement())
+  produto_id BigInt?
+  foto_url   String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model produtos {
+  id        BigInt  @id @unique @default(autoincrement())
+  nome      String?
+  codigo    String?
+  foto_url  String?
+  video_url String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model usuarios {
+  id           BigInt  @id @unique @default(autoincrement())
+  username     String?
+  senha        String?
+  nome         String?
+  email        String?
+  permissao    String?
+  cpf          String?
+  telefone     String?
+  trocar_senha BigInt? @default(1)
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model videos {
+  id        BigInt  @id @unique @default(autoincrement())
+  titulo    String?
+  descricao String?
+  url       String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model videos_assistidos {
+  id             BigInt    @id @unique @default(autoincrement())
+  usuario_id     BigInt?
+  video_id       BigInt?
+  data_assistido DateTime? @default(now()) @db.Timestamp(6)
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model videos_instalador {
+  id        BigInt  @id @unique @default(autoincrement())
+  titulo    String?
+  descricao String?
+  url       String?
+
+  
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+

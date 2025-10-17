@@ -38,7 +38,11 @@ export function AppSidebar() {
     <Sidebar className="flex flex-col justify-between">
       <SidebarContent>
         <SidebarHeader>
-          <img src="/logo.png" alt="" />
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="w-20 h-auto object-contain drop-shadow-md"
+          />
         </SidebarHeader>
         <SidebarMenu>
           {topItems.map((item) => (
