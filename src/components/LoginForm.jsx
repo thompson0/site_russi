@@ -14,7 +14,7 @@ export function LoginForm(props) {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(error);
+    setError("");
 
     try {
       const res = await fetch("/api/login", {
@@ -24,8 +24,12 @@ export function LoginForm(props) {
       });
 
       const data = await res.json();
+      if (!res.ok) {
+        setError(data?.message || "Erro no login, tente novamente.");
+        return;
+      }
 
-      if (data.role === "admin") {
+      if (data.permissao === "admin") {
         router.push("/admin");
       } else {
         router.push("/user");
@@ -79,7 +83,7 @@ export function LoginForm(props) {
             </div>
             <Input
               id="senha"
-              type="senha"
+              type="password"
               required
               value={senha}
               onChange={(e) => setPassword(e.target.value)}

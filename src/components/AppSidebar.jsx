@@ -37,11 +37,11 @@ export function AppSidebar() {
   return (
     <Sidebar className="flex flex-col justify-between">
       <SidebarContent>
-        <SidebarHeader>
+        <SidebarHeader className=" flex justify-center items-center py-4">
           <img
             src="/logo.png"
             alt="Logo"
-            className="w-20 h-auto object-contain drop-shadow-md"
+            className="w-[70%] h-auto object-contain drop-shadow-md"
           />
         </SidebarHeader>
         <SidebarMenu>
@@ -51,13 +51,13 @@ export function AppSidebar() {
                 {item.action ? (
                   <button
                     onClick={item.action}
-                    className="flex items-center gap-2 w-full text-left"
+                    className="flex items-center w-full text-left"
                   >
                     <item.icon />
                     <span>{item.title}</span>
                   </button>
                 ) : (
-                  <a href={item.url} className="flex items-center gap-2">
+                  <a href={item.url} className="flex items-center ml-">
                     <item.icon />
                     <span>{item.title}</span>
                   </a>
