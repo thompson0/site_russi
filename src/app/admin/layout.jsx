@@ -2,8 +2,10 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import jwt from "jsonwebtoken";
+import { verifyToken } from "@/lib/jwt";
 import NavBar from "@/components/Login/NavBar";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({ children }) {
     const cookieStore = await cookies();
@@ -11,17 +13,9 @@ export default async function AdminLayout({ children }) {
 
     if (!token) redirect("/login");
 
-    let userRole;
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        userRole = decoded.role;
-
-    } catch {
-        redirect("/login");
-    }
-
-    if (userRole !== "admin") redirect("/user");
+    const decoded = verifyToken(token);
+    if (!decoded) redirect("/login");
+    if (decoded.permissao !== "admin") redirect("/user");
     return (
             <header className="dark">
                 <SidebarProvider>

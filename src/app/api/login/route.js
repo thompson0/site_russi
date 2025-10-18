@@ -27,7 +27,8 @@ export async function POST(req) {
     });
   }
 
-  const token = signToken({ id: user.id, permissao: user.permissao });
+  const token = signToken({ id: Number(user.id), permissao: user.permissao });
+  console.log(user.permissao)
   const cookie = serialize("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

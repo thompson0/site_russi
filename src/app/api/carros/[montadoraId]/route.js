@@ -1,25 +1,22 @@
-import { connectDB } from "@/lib/db";
-import Carro from "@/models/Carro.js";
-import mongoose from "mongoose";
+import { prisma } from "@/lib/prisma";
 
-export async function GET(req, { params }) {
-  
+export async function GET(req, context) {
   try {
-    await connectDB();
-    const { montadoraId } = await params;
+    const { montadoraId } = await context.params; 
 
-    if (!mongoose.Types.ObjectId.isValid(montadoraId)) {
-      return new Response(
-        JSON.stringify({ message: "ID inválido" }),
-        { status: 400 }
-      );
-    }
-
-    const carros = await Carro.find({ montadoraId });
-    return new Response(JSON.stringify(carros), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
+    const carros = await prisma.carros.findMany({
+      where: {
+        montadora_id: BigInt(montadoraId),
+      },
     });
+
+    return new Response(
+      JSON.stringify(
+        carros,
+        (_, v) => (typeof v === "bigint" ? v.toString() : v)
+      ),
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Erro ao buscar carros:", error);
     return new Response(
