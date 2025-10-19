@@ -39,7 +39,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarHeader className=" flex justify-center items-center py-4">
           <img
-            src="/logo.png"
+            src="/logo_index.png"
             alt="Logo"
             className="w-[70%] h-auto object-contain drop-shadow-md"
           />

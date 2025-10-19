@@ -16,11 +16,12 @@ export default async function AdminLayout({ children }) {
     const decoded = verifyToken(token);
     if (!decoded) redirect("/login");
     if (decoded.permissao !== "admin") redirect("/user");
+
     return (
-            <header className="dark">
+            <header>
                 <SidebarProvider>
                     <AppSidebar />
-                    <main className="flex-1">
+                    <main className="flex-1 ">
                   <NavBar></NavBar>
                         {children}
                     </main>

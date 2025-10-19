@@ -12,7 +12,7 @@
 # testing
 /coverage
 /seeds
-
+/prisma/schema.prisma
 # next.js
 /.next/
 /out/
