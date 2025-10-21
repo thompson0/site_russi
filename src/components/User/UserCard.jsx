@@ -7,11 +7,6 @@ import {
 } from "@/components/ui/card"
 
 function UserCard({ name, permission, email, picture }) {
-   const badgeColor =
-    permission === "admin"
-      ? "bg-red-500 text-white"
-      : "bg-green-500 text-white";
-
   return (
     <Card>
       <CardHeader>
@@ -26,7 +21,7 @@ function UserCard({ name, permission, email, picture }) {
         <p>
           Permissão:{" "}
           <span
-            className={`px-2 py-1 rounded-md text-sm font-medium ${badgeColor}`}
+            className={`px-2 py-1 rounded-md text-sm font-medium `}
           >
             {permission}
           </span>
