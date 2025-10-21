@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 3600; // cache for 1 hour per param
+
 export async function GET(req, context) {
   try {
     const { montadoraId } = await context.params; 
@@ -8,6 +10,13 @@ export async function GET(req, context) {
       where: {
         montadora_id: BigInt(montadoraId),
       },
+      select: {
+        id: true,
+        nome: true,
+        ano_de: true,
+        ano_ate: true,
+        foto_url: true,
+      },
     });
 
     return new Response(
@@ -15,7 +24,13 @@ export async function GET(req, context) {
         carros,
         (_, v) => (typeof v === "bigint" ? v.toString() : v)
       ),
-      { status: 200 }
+      {
+        status: 200,
+        headers: {
+          "Cache-Control": "public, max-age=60, s-maxage=3600, stale-while-revalidate=600",
+          "Content-Type": "application/json",
+        },
+      }
     );
   } catch (error) {
     console.error("Erro ao buscar carros:", error);

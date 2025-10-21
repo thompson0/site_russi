@@ -9,7 +9,7 @@ async function NavBar() {
         <div className="flex h-full items-center justify-between px-4">
           <SidebarTrigger>
           </SidebarTrigger>
-          <DropProfile name={user.username}
+          <DropProfile name={user.nome}
           picture={user.foto_url}>
 
           </DropProfile>

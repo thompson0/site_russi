@@ -9,8 +9,9 @@ export async function POST(req) {
 
   const { email, senha } = await req.json();
 
- const user = await prisma.usuarios.findFirst({
+ const user = await prisma.usuarios.findUnique({
     where: { email },
+    select: { id: true, senha: true, permissao: true, email: true, nome: true, username: true },
   });
 
   if (!user) {

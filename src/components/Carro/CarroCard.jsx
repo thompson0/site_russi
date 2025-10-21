@@ -12,9 +12,7 @@ function CarroCard({ montadoraId }) {
       try {
         const baseUrl =
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        const res = await fetch(`${baseUrl}/api/carros/${montadoraId}`, {
-          cache: "no-store",
-        });
+        const res = await fetch(`${baseUrl}/api/carros/${montadoraId}`);
 
         if (!res.ok) throw new Error("Erro ao buscar carros");
 
