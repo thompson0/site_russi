@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 
-export const revalidate = 3600; // cache for 1 hour per param
+export const revalidate = 3600; 
 
 export async function GET(req, context) {
   try {
@@ -9,13 +9,6 @@ export async function GET(req, context) {
     const carros = await prisma.carros.findMany({
       where: {
         montadora_id: BigInt(montadoraId),
-      },
-      select: {
-        id: true,
-        nome: true,
-        ano_de: true,
-        ano_ate: true,
-        foto_url: true,
       },
     });
 

@@ -1,5 +1,7 @@
+import AllUsers from "@/components/User/AllUsers";
 import UserCard from "@/components/User/UserCard";
 import { getUserFromCookie } from "@/lib/auth";
+
 export default async function UserPage() {
     const user = await getUserFromCookie();
 
@@ -15,12 +17,22 @@ export default async function UserPage() {
 
     return (
 
-        <div className=" flex flex-col w-full p-6 items-center">
-            <div className="w-full max-w-6xl text-left">
-                <h1 className="text-4xl font-bold mb-8 text-center sm:text-left">Profile</h1>
-                <UserCard name={user.nome}
-                email={user.email}
-                permission={user.permissao} />
+        <div className="flex flex-col w-full items-center mx-4 md:mx-0 md:p-8">
+            <div className="w-full max-w-7xl">
+                <h1 className="text-4xl font-bold mb-2.5 text-center sm:text-left">Profile</h1>
+
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div className="md:col-span-2">
+                        <UserCard
+                            name={user.nome}
+                            email={user.email}
+                            permission={user.permissao}
+                        />
+                    </div>
+                    <div className="md:col-span-3">
+                        <AllUsers />
+                    </div>
+                </div>
             </div>
         </div>
 

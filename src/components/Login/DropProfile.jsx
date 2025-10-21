@@ -12,14 +12,16 @@ import Link from "next/link";
 function DropProfile({name , picture}) {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger><Avatar>
+            <DropdownMenuTrigger>
+            <Avatar>
                 <AvatarImage src={picture} />
                 <AvatarFallback>CN</AvatarFallback>
-            </Avatar></DropdownMenuTrigger>
+            </Avatar>
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>{name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href={`admin/user`}>
+                <Link href={`/admin/user`}>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
                 </Link>
                 <DropdownMenuItem>Billing</DropdownMenuItem>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Progress } from "@/components/ui/progress"
+import { ProgressDemo } from "@/components/ProgressDemo"
 
 function CarroCard({ montadoraId }) {
   const [carros, setCarros] = useState([]);
@@ -32,7 +32,7 @@ function CarroCard({ montadoraId }) {
     return (
       <div>
         <p className="text-gray-400 text-center mt-10">Carregando carros...</p>
-        <Progress value={33} />
+        <ProgressDemo/>
       </div>
     );
 

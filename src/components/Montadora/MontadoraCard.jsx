@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Progress } from "../ui/progress";
+import { ProgressDemo } from "@/components/ProgressDemo";
 import Link from "next/link";
 
 function MontadoraCard() {
@@ -34,7 +34,7 @@ function MontadoraCard() {
     return (
       <div>
         <p className="text-center mt-10">Carregando montadoras...</p>;
-        <Progress value={33} />
+        <ProgressDemo/>
       </div>
     )
 
