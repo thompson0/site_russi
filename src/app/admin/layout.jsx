@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,7 +18,7 @@ export default async function AdminLayout({ children }) {
     if (decoded.permissao !== "admin") redirect("/user");
 
     return (
-            <header>
+            <header className="root">
                 <SidebarProvider>
                     <AppSidebar />
                     <main className="flex-1 ">

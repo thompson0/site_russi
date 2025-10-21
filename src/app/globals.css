@@ -78,8 +78,8 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
-/*
-  .dark {
+
+.dark {
   --background: oklch(19.825% 0.02292 257.312);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(24.442% 0.08737 271.882 / 0.89);
@@ -112,15 +112,15 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
-*/
+
 
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
-

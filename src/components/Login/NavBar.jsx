@@ -4,7 +4,7 @@ import {User, UserStar } from "lucide-react"
 function NavBar({user, role, foto}) {
   return (
     <>
-      <nav className="dark:bg-sidebar h-auto sm:h-1/12 top-0 w-full bg-white border-1">
+      <nav className=":bg-sidebar h-auto sm:h-1/12 top-0 w-full bg-white border-1">
         <div className="flex h-full items-center justify-between px-4">
         <SidebarTrigger>
         </SidebarTrigger>

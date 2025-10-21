@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className="dark" lang="en">
+    <html className="" lang="en">
       <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
         {children}
       </body>

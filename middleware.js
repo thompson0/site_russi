@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 export function middleware(req) {
   const { pathname } = req.nextUrl;
 
-  // Only guard protected areas
   if (!pathname.startsWith("/admin") && !pathname.startsWith("/user")) {
     return NextResponse.next();
   }

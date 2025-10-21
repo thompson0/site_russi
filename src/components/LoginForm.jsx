@@ -44,10 +44,10 @@ export function LoginForm(props) {
 
   return (
     <Card
-      className="overflow-hidden p-0 w-full max-w-md mx-4 sm:mx-6 md:mx-auto lg:mx-0"
+      className="dark bg-card overflow-hidden p-0 w-full max-w-md mx-4 sm:mx-6 md:mx-auto lg:mx-0 "
       {...props}
     >
-      <CardContent className="p-6 flex flex-col gap-6 md:p-8">
+      <CardContent className=" dark p-6 flex flex-col gap-6 md:p-8">
         <div className="flex flex-col items-center text-center">
           <img src="logo.png" alt="" />
           <h1 className="text-2xl font-bold">Welcome back</h1>

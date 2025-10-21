@@ -35,7 +35,7 @@ export function AppSidebar() {
   ];
 
   return (
-    <Sidebar className="flex flex-col justify-between">
+    <Sidebar className=" flex flex-col justify-between">
       <SidebarContent>
         <SidebarHeader className=" flex justify-center items-center py-4">
           <img

@@ -2,7 +2,7 @@ import { LoginForm } from "@/components/LoginForm"
 import BgVideo from "@/components/Video"
 export default function LoginPage({ children }) {
   return (
-    <div lang="pt-br" className="dark">
+    <div lang="pt-br" className="">
       <div className="flex flex-col min-h-screen ">
         <BgVideo></BgVideo>
         <header className="flex-grow">
