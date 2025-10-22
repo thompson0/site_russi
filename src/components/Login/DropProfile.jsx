@@ -15,7 +15,7 @@ function DropProfile({name , picture}) {
             <DropdownMenuTrigger>
             <Avatar>
                 <AvatarImage src={picture} />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback> {name?.charAt(0) || "?"}</AvatarFallback>
             </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

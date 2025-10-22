@@ -51,13 +51,13 @@ export function AppSidebar() {
                 {item.action ? (
                   <button
                     onClick={item.action}
-                    className="flex items-center w-full text-left"
+                    className="flex items-center w-full text-left text-[var(--foreground)]"
                   >
                     <item.icon />
                     <span>{item.title}</span>
                   </button>
                 ) : (
-                  <a href={item.url} className="flex items-center ml-">
+                  <a href={item.url} className="flex items-center ml- text-[var(--foreground)]">
                     <item.icon />
                     <span>{item.title}</span>
                   </a>
