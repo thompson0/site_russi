@@ -30,12 +30,12 @@ export function AppSidebar() {
   ];
 
   const bottomItems = [
-    { title: "Config", url: "/config", icon: Cog },
+    { title: "Config", url: "/admin/config", icon: Cog },
     { title: "Log-out", action: handleLogout, icon: LogOut },
   ];
 
   return (
-    <Sidebar className=" flex flex-col justify-between">
+    <Sidebar className=" flex flex-col overflow-x-hidden justify-between">
       <SidebarContent>
         <SidebarHeader className=" flex justify-center items-center py-4">
           <img
@@ -44,20 +44,20 @@ export function AppSidebar() {
             className="w-[70%] h-auto object-contain drop-shadow-md"
           />
         </SidebarHeader>
-        <SidebarMenu>
+        <SidebarMenu className="text-[var(--foreground)]">
           {topItems.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
                 {item.action ? (
                   <button
                     onClick={item.action}
-                    className="flex items-center w-full text-left text-[var(--foreground)]"
+                    className="flex items-center w-full  text-left "
                   >
                     <item.icon />
                     <span>{item.title}</span>
                   </button>
                 ) : (
-                  <a href={item.url} className="flex items-center ml- text-[var(--foreground)]">
+                  <a href={item.url} className="flex items-center p-5 ">
                     <item.icon />
                     <span>{item.title}</span>
                   </a>
@@ -75,13 +75,13 @@ export function AppSidebar() {
                 {item.action ? (
                   <button
                     onClick={item.action}
-                    className="flex items-center gap-2 w-full text-left"
+                    className="flex items-center gap-2 p-5 w-full text-left"
                   >
                     <item.icon />
                     <span>{item.title}</span>
                   </button>
                 ) : (
-                  <a href={item.url} className="flex items-center gap-2">
+                  <a href={item.url} className="flex items-center p-5 gap-2">
                     <item.icon />
                     <span>{item.title}</span>
                   </a>

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import AllUsers from "@/components/User/AllUsers";
 import UserCard from "@/components/User/UserCard";
 import { getUserFromCookie } from "@/lib/auth";
@@ -21,17 +22,17 @@ export default async function UserPage() {
             <div className="w-full max-w-7xl">
                 <h1 className="text-4xl font-bold mb-2.5 text-center sm:text-left">Profile</h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <div className=" gap-6">
                     <div className="md:col-span-2">
                         <UserCard
                             name={user.nome}
                             email={user.email}
                             permission={user.permissao}
+                            user={user}
                         />
+                       
                     </div>
-                    <div className="md:col-span-3">
-                        <AllUsers />
-                    </div>
+                    
                 </div>
             </div>
         </div>
