@@ -1,5 +1,6 @@
 import { Public_Sans } from "next/font/google";
 import "./globals.css";
+import { AlertProvider } from "@/context/AlertContext"
 
 const publicSans = Public_Sans({
   variable: "--font-geist-sans",
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
   return (
     <html className="" lang="en">
       <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
+        <AlertProvider>
         {children}
+        </AlertProvider>
       </body>
     </html>
   );

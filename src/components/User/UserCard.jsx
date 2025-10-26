@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { EditProfile } from "@/components/User/EditProfile"
-function UserCard({ name, permission, email, picture, user }) {
+function UserCard({ name, permissao, email, picture, user }) {
   return (
+    
     <Card className="min-h-[32rem] md:min-h-[36rem]">
       <div className="flex justify-center mt-6">
         <Avatar className="w-32 h-32">
@@ -34,7 +35,7 @@ function UserCard({ name, permission, email, picture, user }) {
           <span
             className={`px-2 py-1 rounded-md font-semibold `}
           >
-            {permission}
+            {permissao}
           </span>
         </p>
         </CardTitle>

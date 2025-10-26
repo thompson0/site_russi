@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getUserFromCookie } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 
-export async function POST(req) {
+export async function PUT(req) {
   try {
     const user = await getUserFromCookie();
     if (!user) return new Response("Não autorizado", { status: 401 });

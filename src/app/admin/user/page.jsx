@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import AllUsers from "@/components/User/AllUsers";
 import UserCard from "@/components/User/UserCard";
 import { getUserFromCookie } from "@/lib/auth";
 
@@ -27,7 +25,7 @@ export default async function UserPage() {
                         <UserCard
                             name={user.nome}
                             email={user.email}
-                            permission={user.permissao}
+                            permissao={user.permissao}
                             user={user}
                         />
                        
