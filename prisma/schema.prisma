@@ -4,11 +4,10 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
   relationMode = "foreignKeys"
-
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -18,11 +17,12 @@ model carros {
   ano_de       BigInt?
   ano_ate      BigInt?
   versao       String?
-  montadora_id BigInt? 
+  montadora_id BigInt?
   foto_url     String?
   imagem       String?
 
-  montadora    montadoras? @relation(fields: [montadora_id], references: [id])
+  montadora montadoras?      @relation(fields: [montadora_id], references: [id])
+  produtos  carro_produtos[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -61,7 +61,7 @@ model manuais {
 }
 
 model montadoras {
-  id       BigInt  @id @unique @default(autoincrement())
+  id       BigInt   @id @unique @default(autoincrement())
   nome     String?
   logo_url String?
   carros   carros[]
@@ -81,6 +81,8 @@ model produtos {
   codigo    String?
   foto_url  String?
   video_url String?
+
+  carros carro_produtos[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -122,10 +124,14 @@ model videos_instalador {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model carro_produtos {
-  carro_id   BigInt?
-  produto_id BigInt?
+  carro_id   BigInt
+  produto_id BigInt
 
-  @@ignore
+  carro   carros   @relation(fields: [carro_id], references: [id])
+  produto produtos @relation(fields: [produto_id], references: [id])
+
+  @@id([carro_id, produto_id])
+  @@map("carro_produtos")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
