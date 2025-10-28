@@ -13,22 +13,18 @@ import {
 } from "@/components/ui/dialog"
 import { Pencil } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
-import { useRouter } from "next/navigation"
+import { useSecureFetch } from "@/hooks/useSecureFetch"
 
 export default function EditUser({ id }) {
-  const [form, setForm] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-    permissao: "",
-  })
-  const [loading, setLoading] = useState(false)
-  const { triggerAlert } = useAlert() 
-  const router = useRouter()
+  const [form, setForm] = useState({ nome: "", email: "", senha: "", permissao: "" })
+  const [open, setOpen] = useState(false)
+  const { triggerAlert } = useAlert()
+  const { secureFetch, loading } = useSecureFetch()
+
   async function fetchUserData() {
     try {
-      const res = await fetch(`/api/user/${id}`)
-      if (!res.ok) throw new Error("Erro ao buscar usuário")
+      const res = await secureFetch(`/api/user/${id}`)
+      if (!res || !res.ok) throw new Error("Erro ao buscar usuário")
       const data = await res.json()
       setForm({
         nome: data.nome || "",
@@ -43,28 +39,28 @@ export default function EditUser({ id }) {
 
   async function handleEditUser(e) {
     e.preventDefault()
-    setLoading(true)
-    try {
-      const res = await fetch(`/api/user/${id}`, {
+
+    const res = await secureFetch(
+      `/api/user/${id}`,
+      {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      })
+      },
+      {
+        refresh: true,
+        successMsg: "Usuário atualizado com sucesso!",
+        errorMsg: "Falha ao atualizar o usuário.",
+      }
+    )
 
-      if (!res.ok) throw new Error("Erro ao atualizar usuário")
-       await router.refresh()
-
-      triggerAlert("success", "Usuário atualizado!", "As informações foram salvas.")
-    } catch (err) {
-      console.error(err)
-      triggerAlert("error", "Falha ao atualizar!", "Verifique os dados e tente novamente.")
-    } finally {
-      setLoading(false)
+    if (res) {
+      setForm((f) => ({ ...f, senha: "" })) 
+      setOpen(false) 
     }
   }
 
   return (
-    <Dialog onOpenChange={(open) => open && fetchUserData()}>
+    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (o) fetchUserData() }}>
       <DialogTrigger asChild>
         <Button size="icon" title="Editar usuário">
           <Pencil className="w-5 h-5" />
@@ -103,12 +99,15 @@ export default function EditUser({ id }) {
             required
           />
 
-          <DialogFooter>
+          <DialogFooter className="gap-2">
             <DialogClose asChild>
-              <Button type="submit" disabled={loading}>
-                {loading ? "Salvando..." : "Salvar"}
+              <Button type="button" variant="outline">
+                Cancelar
               </Button>
             </DialogClose>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Salvando..." : "Salvar"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
