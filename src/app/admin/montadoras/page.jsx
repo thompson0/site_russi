@@ -1,4 +1,4 @@
-import MontadoraCard from "../../../components/Montadora/MontadoraCard";
+import MontadoraCard from "@/components/Montadora/MontadoraCard";
 
 
 export default async function MontadorasPage() {

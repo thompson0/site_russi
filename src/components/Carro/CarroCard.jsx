@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ProgressDemo } from "@/components/ProgressDemo"
-
+import Link from "next/link";
 function CarroCard({ montadoraId }) {
   const [carros, setCarros] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,13 +26,13 @@ function CarroCard({ montadoraId }) {
     }
 
     if (montadoraId) fetchCarros();
-  }, [montadoraId]); 
+  }, [montadoraId]);
 
   if (loading)
     return (
       <div>
         <p className="text-gray-400 text-center mt-10">Carregando carros...</p>
-        <ProgressDemo/>
+        <ProgressDemo />
       </div>
     );
 
@@ -46,30 +46,32 @@ function CarroCard({ montadoraId }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {carros.map((carro) => (
-        <div
-          key={carro.id}
-          className="group w-full h-80d rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden"
-        >
-          <div className="flex-1 flex items-center justify-center ">
-            <img
-              src={carro.foto_url || "/placeholder.png"}
-              alt={carro.nome}
-              className="w-full h-48 object-contain p-3 group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+        <Link key={carro.id} href={`/admin/produtos/${carro.id}`}>
+          <div
+            key={carro.id}
+            className="group w-full h-80d rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden"
+          >
+            <div className="flex-1 flex items-center justify-center ">
+              <img
+                src={carro.foto_url || "/placeholder.png"}
+                alt={carro.nome}
+                className="w-full h-48 object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
 
-          <div className="p-4 text-center border-t ">
-            <h2 className="text-xl font-semibold  d truncate">
-              {carro.nome}
-            </h2>
-            <p className="text-sm   mt-1">
-              Ano:{" "}
-              <span className="font-medium ">
-                {carro.ano_de} - {carro.ano_ate}  
-              </span>
-            </p>
+            <div className="p-4 text-center border-t ">
+              <h2 className="text-xl font-semibold  d truncate">
+                {carro.nome}
+              </h2>
+              <p className="text-sm   mt-1">
+                Ano:{" "}
+                <span className="font-medium ">
+                  {carro.ano_de} - {carro.ano_ate}
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
