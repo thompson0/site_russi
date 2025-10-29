@@ -4,12 +4,12 @@ export const revalidate = 3600;
 
 export async function GET() {
   try {
-    const produtos = await prisma.produtos.findMany({
-      select: { id: true, nome: true, codigo: true, foto_url:true, video_url:true},
+    const carros = await prisma.carros.findMany({
+      select: { id: true, nome: true, ano_de:true, ano_ate:true, versao:true, montadora_id:true, foto_url:true, imagem:true},
     });
     return new Response(
       JSON.stringify(
-        produtos,
+        carros,
         (_, v) => (typeof v === "bigint" ? Number(v) : v)
       ),
       {
