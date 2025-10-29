@@ -6,14 +6,14 @@ function ProdutoItem({ produto }) {
         <Card>
             <CardContent>
                 <img
-                    src={produto.foto_url || "/placeholder.png"}
+                    src={`/static/${produto.foto_url}`}
                     alt={produto.nome}
                     className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300"
                 />
             </CardContent>
 
             <CardFooter>
-                <h2 className="text-lg font-semibold truncate text-gray-900">
+                <h2 className="text-lg font-semibold truncate">
                     {produto.nome}
                 </h2>
             </CardFooter>

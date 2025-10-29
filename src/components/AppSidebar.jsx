@@ -1,6 +1,6 @@
 "use client";
 
-import { Car, Home, LogOut, Cog } from "lucide-react";
+import { Car, Home, LogOut, Cog, CarFront, Handbag } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -27,6 +27,8 @@ export function AppSidebar() {
   const topItems = [
     { title: "Home", url: "/", icon: Home },
     { title: "Montadora", url: "/admin/montadoras", icon: Car },
+    { title: "Carros", url: "/admin/carros", icon: CarFront },
+    { title: "Produtos", url: "/admin/produtos", icon: Handbag },
   ];
 
   const bottomItems = [

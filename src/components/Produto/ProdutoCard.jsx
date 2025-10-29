@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { ProgressDemo } from "@/components/ProgressDemo"
 import ProdutoItem from "./ProdutoItem";
+import Link from "next/link";
 
 function ProdutoCard({ carroId }) {
     const [produtos, setProdutos] = useState([]);
@@ -45,10 +46,15 @@ function ProdutoCard({ carroId }) {
         return <p className="text-center mt-10">Nenhuma produto encontrada.</p>;
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {produtos.map((produto) => (
-                <ProdutoItem key={produto.id} produto={produto}>
-                </ProdutoItem>
+                <Link
+                    key={produto.id}
+                    href={`/admin/produtos/acessorios/${produto.id}`}
+                    className="block" 
+                >
+                    <ProdutoItem produto={produto} />
+                </Link>
             ))}
         </div>
     );
