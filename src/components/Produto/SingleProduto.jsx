@@ -51,34 +51,33 @@ export default function SingleProduto() {
 
     return (
 
-        <Card className="m-8 min-h-[80vh] flex flex-col">
-            <CardHeader>
-                <CardTitle className="text-center text-4xl">
-                    {produto.nome}
-                </CardTitle>
+        <div className="h-screen flex flex-col">
+            <CardHeader className="py-4">
+                <CardTitle className="text-center text-4xl">{produto.nome}</CardTitle>
             </CardHeader>
 
-            <CardContent className="flex flex-col items-center  text-center gap-6 ">
+            <CardContent className="flex flex-col flex-grow items-center justify-center gap-6 overflow-hidden">
+            
                 <img
                     src={produto.foto_url ? `/static/${produto.foto_url}` : "/placeholder.png"}
                     alt={produto.nome}
-                    className="w-96 h-96 object-contain rounded-md border mx-auto"
+                    className="max-w-[80%] max-h-[40vh] object-contain rounded-md border"
                 />
-                {produto?.video_url ? (
-                    <EmbedVideo embedUrl={produto.video_url} />
-                ) : null}
-        
-            </CardContent>
 
-            <CardFooter className="flex justify-between border-t pt-4">
+                {produto?.video_url && (
+                    <div className="w-full flex justify-center">
+                        <div className="w-[80%] h-[40vh] rounded-lg overflow-hidden">
+                            <EmbedVideo embedUrl={produto.video_url} />
+                        </div>
+                    </div>
+                )}
+            </CardContent>
+            <CardFooter className="flex justify-between border-t py-4 px-8">
                 <Button variant="outline" onClick={() => router.back()}>
                     Voltar
                 </Button>
-                <Button onClick={() => alert("Função editar futura")}>
-                    Editar
-                </Button>
             </CardFooter>
-        </Card>
+        </div>
 
     )
 }

@@ -15,7 +15,7 @@ import { Input } from "../ui/input"
 import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 
-export default function AddCarro() {
+export default function AddCarro({ onCreated }) {
   const [form, setForm] = useState({
     nome: "",
     ano_de: "",
@@ -31,7 +31,7 @@ export default function AddCarro() {
   async function handleAddCarro(e) {
     e.preventDefault()
     const res = await secureFetch(
-      "/api/carros/create",
+      "/api/carros/",
       {
         method: "POST",
         body: JSON.stringify({
@@ -42,13 +42,17 @@ export default function AddCarro() {
         }),
       },
       {
-        refresh: true,
         successMsg: "Carro criado com sucesso!",
         errorMsg: "Não foi possível criar o carro.",
       }
     )
 
     if (res) {
+      let created = null
+      try {
+        created = await res.json()
+      } catch {}
+      if (created && onCreated) onCreated(created)
       setForm({
         nome: "",
         ano_de: "",
