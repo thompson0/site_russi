@@ -1,83 +1,66 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useParams, useRouter } from "next/navigation"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ProgressDemo } from "@/components/ProgressDemo"
-import EmbedVideo from "@/components/Produto/EmbedVideo"
+import { useEffect, useState } from "react";
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { ProgressDemo } from "@/components/ProgressDemo";
+import EditProduto from "./EditProduto";
 
-export default function SingleProduto() {
-    const { id } = useParams()
-    const router = useRouter()
-    const [produto, setProduto] = useState(null)
-    const [loading, setLoading] = useState(true)
+export default function SingleProduto({ id }) {
+  const [produto, setProduto] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function fetchProduto() {
-            try {
-                const baseUrl =
-                    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-                const res = await fetch(`${baseUrl}/api/produtos/acessorios/${id}`)
+  useEffect(() => {
+    async function fetchProduto() {
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+        const res = await fetch(`${baseUrl}/api/produtos/${id}`);
+        if (!res.ok) throw new Error("Erro ao buscar produto");
+        const data = await res.json();
+        setProduto(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProduto();
+  }, [id]);
 
-                if (!res.ok) throw new Error("Erro ao buscar produto")
-
-                const data = await res.json()
-                setProduto(data)
-            } catch (err) {
-                console.error("Erro ao carregar produto:", err)
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        if (id) fetchProduto()
-    }, [id])
-
-    if (loading)
-        return (
-            <div className="flex flex-col items-center mt-10">
-                <p className="text-gray-500 mb-3">Carregando produto...</p>
-                <ProgressDemo />
-            </div>
-        )
-
-    if (!produto)
-        return (
-            <div className="text-center mt-10 text-gray-500">
-                Produto não encontrado.
-            </div>
-        )
-
+  if (loading)
     return (
+      <div className="text-center mt-10">
+        <p className="text-gray-400 mb-4">Carregando produto...</p>
+        <ProgressDemo />
+      </div>
+    );
 
-        <div className="h-screen flex flex-col">
-            <CardHeader className="py-4">
-                <CardTitle className="text-center text-4xl">{produto.nome}</CardTitle>
-            </CardHeader>
+  if (!produto)
+    return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
 
-            <CardContent className="flex flex-col flex-grow items-center justify-center gap-6 overflow-hidden">
-            
-                <img
-                    src={produto.foto_url ? `/static/${produto.foto_url}` : "/placeholder.png"}
-                    alt={produto.nome}
-                    className="max-w-[80%] max-h-[40vh] object-contain rounded-md border"
-                />
+  return (
+    <Card className="max-w-3xl mx-auto mt-10 p-6">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold">{produto.nome}</CardTitle>
+      </CardHeader>
 
-                {produto?.video_url && (
-                    <div className="w-full flex justify-center">
-                        <div className="w-[80%] h-[40vh] rounded-lg overflow-hidden">
-                            <EmbedVideo embedUrl={produto.video_url} />
-                        </div>
-                    </div>
-                )}
-            </CardContent>
-            <CardFooter className="flex justify-between border-t py-4 px-8">
-                <Button variant="outline" onClick={() => router.back()}>
-                    Voltar
-                </Button>
-            </CardFooter>
-        </div>
+      <CardContent className="space-y-4">
+        <img
+          src={produto.foto_url || "/placeholder.png"}
+          alt={produto.nome}
+          className="mx-auto w-64 h-64 object-contain"
+        />
 
-    )
+        <p><strong>Código:</strong> {produto.codigo}</p>
+
+        {produto.video_url && (
+          <video
+            src={produto.video_url}
+            controls
+            className="w-full rounded-lg mt-4"
+          />
+        )}
+        <EditProduto produto={produto}></EditProduto>
+      </CardContent>
+    </Card>
+  );
 }

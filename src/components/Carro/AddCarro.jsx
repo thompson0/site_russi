@@ -48,11 +48,6 @@ export default function AddCarro({ onCreated }) {
     )
 
     if (res) {
-      let created = null
-      try {
-        created = await res.json()
-      } catch {}
-      if (created && onCreated) onCreated(created)
       setForm({
         nome: "",
         ano_de: "",
