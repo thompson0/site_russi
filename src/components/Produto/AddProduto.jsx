@@ -13,12 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { PlusCircle } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
+import { useRefresh } from "@/context/RefreshContext";
 
 export default function AddProduto({carroId }) {
   const [form, setForm] = useState({ nome: "", codigo: "", foto_url: "", video_url: "", });
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const { triggerAlert } = useAlert();
+  const { triggerRefresh } = useRefresh();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +37,7 @@ export default function AddProduto({carroId }) {
 
       const data = await res.json();
       if (typeof onCreated === "function") onCreated(data);
+      triggerRefresh();
 
       setForm({ nome: "", codigo: "", foto_url: "", video_url: "", });
       setOpen(false);

@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { ProgressDemo } from "@/components/ProgressDemo";
 import Link from "next/link";
+import { useRefresh } from "@/context/RefreshContext";
 
 function MontadoraCard() {
   const [montadoras, setMontadoras] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { refreshKey } = useRefresh();
 
   useEffect(() => {
     async function fetchMontadoras() {
@@ -27,7 +29,7 @@ function MontadoraCard() {
     }
 
     fetchMontadoras();
-  }, []);
+  }, [refreshKey]);
 
   if (loading)
 

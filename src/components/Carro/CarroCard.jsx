@@ -7,9 +7,11 @@ import DeleteCarro from "./DeleteCarro";
 import EditCarro from "./EditCarro";
 import AddCarro from "./AddCarro";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
+import { useRefresh } from "@/context/RefreshContext";
 function CarroCard({ montadoraId }) {
   const [carros, setCarros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { refreshKey } = useRefresh();
 
   useEffect(() => {
     async function fetchCarros() {
@@ -30,7 +32,7 @@ function CarroCard({ montadoraId }) {
     }
 
     if (montadoraId) fetchCarros();
-  }, [montadoraId]);
+  }, [montadoraId, refreshKey]);
 
   function handleCreated(newCar) {
     if (!newCar) return;

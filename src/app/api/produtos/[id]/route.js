@@ -33,11 +33,17 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     const { id } = await params;
-    const body = await req.json();
+    const { nome, codigo, foto_url, video_url } = await req.json();
+
+    const data = {};
+    if (nome !== undefined) data.nome = nome;
+    if (codigo !== undefined) data.codigo = codigo;
+    if (foto_url !== undefined) data.foto_url = foto_url;
+    if (video_url !== undefined) data.video_url = video_url;
 
     const produto = await prisma.produtos.update({
       where: { id: BigInt(id) },
-      data: body,
+      data,
     });
 
     return Response.json({ ...produto, id: Number(produto.id) }, { status: 200 });

@@ -4,8 +4,15 @@ export default async function ProdutosPorCarro({ params }) {
     const { carroId } = await params;
 
     return (
-        <ProdutoCard carroId={carroId}>
+        <div className="min-h-screen p-6">
+            <h1 className="text-3xl font-bold text-center mb-8">
+                Carros
+            </h1>
 
-        </ProdutoCard>
+
+            <ProdutoCard carroId={carroId}>
+
+            </ProdutoCard>
+        </div>
     );
 }

@@ -14,6 +14,7 @@ import {
 import { Input } from "../ui/input"
 import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
+import { useRefresh } from "@/context/RefreshContext"
 
 export default function AddCarro({ onCreated }) {
   const [form, setForm] = useState({
@@ -27,6 +28,7 @@ export default function AddCarro({ onCreated }) {
   })
   const [open, setOpen] = useState(false)
   const { secureFetch, loading } = useSecureFetch()
+  const { triggerRefresh } = useRefresh()
 
   async function handleAddCarro(e) {
     e.preventDefault()
@@ -58,6 +60,7 @@ export default function AddCarro({ onCreated }) {
         imagem: "",
       })
       setOpen(false)
+      triggerRefresh()
     }
   }
 

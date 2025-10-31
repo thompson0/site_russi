@@ -5,12 +5,14 @@ import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "@/componen
 import { ProgressDemo } from "@/components/ProgressDemo";
 import EditProduto from "./EditProduto";
 import QrCodeButton from "./QrCode";
+import { useRefresh } from "@/context/RefreshContext";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 
 export default function SingleProduto({ id }) {
   const [produto, setProduto] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { refreshKey } = useRefresh();
 
   useEffect(() => {
     async function fetchProduto() {
@@ -27,7 +29,7 @@ export default function SingleProduto({ id }) {
       }
     }
     fetchProduto();
-  }, [id]);
+  }, [id, refreshKey]);
 
   if (loading)
     return (

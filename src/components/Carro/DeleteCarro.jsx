@@ -4,10 +4,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
+import { useRefresh } from "@/context/RefreshContext"
 
 export default function DeleteCarro({ id, onDelete }) {
   const [loading, setLoading] = useState(false)
   const { triggerAlert } = useAlert()
+  const { triggerRefresh } = useRefresh()
 
   async function handleDelete() {
     if (!id) {
@@ -27,6 +29,7 @@ export default function DeleteCarro({ id, onDelete }) {
       if (!res.ok) throw new Error("Erro ao deletar carro")
 
       triggerAlert("success", "Sucesso!", "Carro deletado com sucesso!")
+      triggerRefresh()
 
       if (onDelete) onDelete(id)
     } catch (err) {
@@ -49,4 +52,3 @@ export default function DeleteCarro({ id, onDelete }) {
     </Button>
   )
 }
-
