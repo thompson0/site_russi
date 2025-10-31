@@ -12,11 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
+import { useAlert } from "@/context/AlertContext";
 
 export default function EditProduto({ produto, onUpdated }) {
   const [form, setForm] = useState(produto || {});
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { triggerAlert } = useAlert();
 
   async function handleUpdate(e) {
     e.preventDefault();
@@ -36,7 +38,7 @@ export default function EditProduto({ produto, onUpdated }) {
       setOpen(false);
     } catch (err) {
       console.error(err);
-      alert("Erro ao atualizar produto");
+      triggerAlert("error", "Erro!", "Erro ao atualizar produto");
     } finally {
       setLoading(false);
     }
@@ -44,6 +46,7 @@ export default function EditProduto({ produto, onUpdated }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
+       
       <DialogTrigger asChild>
         <Button variant="outline" size="icon">
           <Pencil size={18} />

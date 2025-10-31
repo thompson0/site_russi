@@ -3,12 +3,15 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+import { useAlert } from "@/context/AlertContext"
+
 export default function DeleteCarro({ id, onDelete }) {
   const [loading, setLoading] = useState(false)
+  const { triggerAlert } = useAlert()
 
   async function handleDelete() {
     if (!id) {
-      alert("ID do carro não informado.")
+      triggerAlert("error", "Erro!", "ID do carro não informado.")
       return
     }
 
@@ -23,12 +26,12 @@ export default function DeleteCarro({ id, onDelete }) {
 
       if (!res.ok) throw new Error("Erro ao deletar carro")
 
-      alert("Carro deletado com sucesso!")
+      triggerAlert("success", "Sucesso!", "Carro deletado com sucesso!")
 
       if (onDelete) onDelete(id)
     } catch (err) {
       console.error(err)
-      alert("Não foi possível excluir o carro.")
+      triggerAlert("error", "Erro!", "Não foi possível excluir o carro.")
     } finally {
       setLoading(false)
     }
@@ -41,8 +44,9 @@ export default function DeleteCarro({ id, onDelete }) {
       disabled={loading}
       size="icon"
     >
-        <Trash2></Trash2>
+      <Trash2 />
       {loading ? "Excluindo..." : ""}
     </Button>
   )
 }
+

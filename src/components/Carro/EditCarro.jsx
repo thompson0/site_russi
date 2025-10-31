@@ -15,11 +15,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ProgressDemo } from "@/components/ProgressDemo"
 import { Pencil } from "lucide-react"
+import { useAlert } from "@/context/AlertContext"
 
 export default function EditCarro({ id, onUpdated }) {
   const [carro, setCarro] = useState(null)
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const { triggerAlert } = useAlert()
 
   async function fetchCarro() {
     try {
@@ -49,14 +51,14 @@ export default function EditCarro({ id, onUpdated }) {
       })
 
       if (!res.ok) throw new Error("Erro ao salvar alterações")
-      alert("Carro atualizado com sucesso!")
+      triggerAlert("success", "Sucesso!", "Carro atualizado com sucesso!")
       try {
         const updated = await res.json()
         if (updated && onUpdated) onUpdated(updated)
       } catch {}
     } catch (err) {
       console.error(err)
-      alert("Erro ao atualizar carro.")
+      triggerAlert("error", "Erro!", "Erro ao atualizar carro.")
     } finally {
       setSaving(false)
     }

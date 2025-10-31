@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { useAlert } from "@/context/AlertContext";
 
 export default function DeleteProduto({produtoId, onDelete }) {
   const [loading, setLoading] = useState(false);
+  const { triggerAlert } = useAlert();
 
   async function handleDelete() {
     if (!confirm("Tem certeza que deseja excluir este produto?")) return;
@@ -23,7 +25,7 @@ export default function DeleteProduto({produtoId, onDelete }) {
       onDelete?.(produtoId);
     } catch (err) {
       console.error(err);
-      alert("Erro ao deletar produto");
+      triggerAlert("error", "Erro!", "Erro ao deletar produto");
     } finally {
       setLoading(false);
     }

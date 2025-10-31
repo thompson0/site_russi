@@ -12,11 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { PlusCircle } from "lucide-react";
+import { useAlert } from "@/context/AlertContext";
 
 export default function AddProduto({carroId }) {
   const [form, setForm] = useState({ nome: "", codigo: "", foto_url: "", video_url: "", });
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { triggerAlert } = useAlert();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +40,7 @@ export default function AddProduto({carroId }) {
       setOpen(false);
     } catch (err) {
       console.error(err);
-      alert("Erro ao criar produto");
+      triggerAlert("error", "Erro!", "Erro ao criar produto");
     } finally {
       setLoading(false);
     }

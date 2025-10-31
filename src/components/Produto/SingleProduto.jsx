@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
 import { ProgressDemo } from "@/components/ProgressDemo";
 import EditProduto from "./EditProduto";
+import QrCodeButton from "./QrCode";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 
 export default function SingleProduto({ id }) {
   const [produto, setProduto] = useState(null);
@@ -38,10 +41,11 @@ export default function SingleProduto({ id }) {
     return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
 
   return (
-    <Card className="max-w-3xl mx-auto mt-10 p-6">
+    <Card className="max-w-4xl mx-auto mt-10 p-6">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold">{produto.nome}</CardTitle>
       </CardHeader>
+     
 
       <CardContent className="space-y-4">
         <img
@@ -59,7 +63,11 @@ export default function SingleProduto({ id }) {
             className="w-full rounded-lg mt-4"
           />
         )}
+        <CardFooter className="flex justify-between">
+
         <EditProduto produto={produto}></EditProduto>
+           <QrCodeButton url={`${baseUrl}/visitante/produtos/${id}`} productname={produto.nome}></QrCodeButton>
+        </CardFooter>
       </CardContent>
     </Card>
   );
