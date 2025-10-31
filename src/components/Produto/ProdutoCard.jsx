@@ -34,9 +34,11 @@ export default function ProdutoCard({ carroId }) {
     return <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>;
 
   return (
-    <div>
-         <h1 className="text-4xl font-bold mb-8 text-center sm:text-left">Produtos</h1>
+    <Card>
+      <div className="flex fle-end">
+
         <AddProduto carroId={carroId} />
+      </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {produtos.map((p) => (
         <Card
@@ -65,6 +67,6 @@ export default function ProdutoCard({ carroId }) {
         </Card>
       ))}
     </div>
-    </div>
+    </Card>
   );
 }
