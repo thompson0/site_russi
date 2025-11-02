@@ -23,8 +23,11 @@ function QrCodeButton({ url, productname }) {
   }
 
   return (
-    <Button size="icon" variant="outline" onClick={handleDownload}>
-      <QrCode size={24} />
+    <Button size="" variant="outline" onClick={handleDownload}>
+      
+      <QrCode size={24} 
+       />
+       Baixar Qrcode
     </Button>
   );
 }

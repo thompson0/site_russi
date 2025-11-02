@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "../ui/button"
 import {
   Dialog,
@@ -12,11 +12,12 @@ import {
   DialogClose,
 } from "../ui/dialog"
 import { Input } from "../ui/input"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select"
 import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 import { useRefresh } from "@/context/RefreshContext"
 
-export default function AddCarro({ onCreated }) {
+export default function AddCarro({ onCreated, Allcarros }) {
   const [form, setForm] = useState({
     nome: "",
     ano_de: "",
@@ -27,9 +28,23 @@ export default function AddCarro({ onCreated }) {
     imagem: "",
   })
   const [open, setOpen] = useState(false)
+  const [montadoras, setMontadoras] = useState([])
   const { secureFetch, loading } = useSecureFetch()
   const { triggerRefresh } = useRefresh()
 
+  useEffect(() => {
+    async function fetchMontadoras() {
+      try {
+        const res = await fetch("/api/montadoras")
+        const data = await res.json()
+        setMontadoras(data)
+      } catch (err) {
+        console.error("Erro ao buscar montadoras:", err)
+      }
+    }
+    fetchMontadoras()
+  }, [])
+ 
   async function handleAddCarro(e) {
     e.preventDefault()
     const res = await secureFetch(
@@ -61,10 +76,12 @@ export default function AddCarro({ onCreated }) {
       })
       setOpen(false)
       triggerRefresh()
+      
     }
   }
 
   return (
+    
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="icon">
@@ -84,34 +101,51 @@ export default function AddCarro({ onCreated }) {
             onChange={(e) => setForm({ ...form, nome: e.target.value })}
             required
           />
+
           <Input
             placeholder="Ano de início (ex: 2015)"
             type="number"
             value={form.ano_de}
             onChange={(e) => setForm({ ...form, ano_de: e.target.value })}
           />
+
           <Input
             placeholder="Ano final (ex: 2022)"
             type="number"
             value={form.ano_ate}
             onChange={(e) => setForm({ ...form, ano_ate: e.target.value })}
           />
+
           <Input
             placeholder="Versão"
             value={form.versao}
             onChange={(e) => setForm({ ...form, versao: e.target.value })}
           />
-          <Input
-            placeholder="ID da montadora"
-            type="number"
-            value={form.montadora_id}
-            onChange={(e) => setForm({ ...form, montadora_id: e.target.value })}
-          />
+
+          {Allcarros === true && (
+            <Select
+              value={form.montadora_id}
+              onValueChange={(value) => setForm({ ...form, montadora_id: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione a montadora" />
+              </SelectTrigger>
+              <SelectContent>
+                {montadoras.map((m) => (
+                  <SelectItem key={m.id} value={String(m.id)}>
+                    {m.nome}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+
           <Input
             placeholder="URL da foto"
             value={form.foto_url}
             onChange={(e) => setForm({ ...form, foto_url: e.target.value })}
           />
+
           <Input
             placeholder="Imagem (caso diferente da foto)"
             value={form.imagem}

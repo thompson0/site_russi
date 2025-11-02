@@ -33,7 +33,12 @@ export default function ProdutoCard({ carroId }) {
     return <p className="text-gray-400 text-center mt-10">Carregando produtos...</p>;
 
   if (produtos.length === 0)
-    return <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>;
+    return(
+    <div className="flex flex-col justify-center mb-4">
+          <p className="text-gray-400 text-center ">Nenhum produto encontrado.</p>
+        <AddProduto carroId={carroId} />
+      </div>
+  )
 
    return (
     <Card className="p-4">

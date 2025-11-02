@@ -4,7 +4,7 @@ export default async function ProdutoDetalhe({ params }) {
   const { id } = await params;
     return(
         <>
-        <SingleProduto id={id}></SingleProduto>
+        <SingleProduto className="" id={id}></SingleProduto>
         </>
     )
 }

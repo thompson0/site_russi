@@ -20,7 +20,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html className="" lang="en">
+    <html>
       <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
         <AlertProvider>
           <RefreshProvider>

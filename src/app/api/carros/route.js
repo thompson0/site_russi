@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 
-// Helper para converter BigInt → Number
 function serializeBigInt(data) {
   return JSON.parse(
     JSON.stringify(data, (_, v) => (typeof v === "bigint" ? Number(v) : v))
@@ -92,9 +91,10 @@ export async function DELETE(req) {
 
     if (!id) return NextResponse.json({ error: "ID não fornecido" }, { status: 400 })
 
-    await prisma.carros.delete({
-      where: { id: BigInt(id) },
-    })
+    await prisma.$transaction([
+      prisma.carro_produtos.deleteMany({ where: { carro_id: BigInt(id) } }),
+      prisma.carros.delete({ where: { id: BigInt(id) } }),
+    ])
 
     return NextResponse.json({ message: "Carro deletado com sucesso" })
   } catch (error) {
