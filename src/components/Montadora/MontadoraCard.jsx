@@ -48,7 +48,7 @@ function MontadoraCard() {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {montadoras.map((m) => (
         <Link key={m.id} href={`/admin/montadoras/${m.id}`}>
-          <div className="w-full h-80 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden bg-white">
+          <div className="w-full h-80 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden ">
             <div className="flex-1 flex items-center justify-center bg-gray-50">
               <img
                 src={m.logo_url || "/placeholder.png"}

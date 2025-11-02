@@ -1,3 +1,4 @@
+
 import HomePage from "@/components/Home";
 
 export default function RootLayout({ children }) {
@@ -6,6 +7,7 @@ export default function RootLayout({ children }) {
       <body>
         <main>
         <HomePage></HomePage>
+        
         {children}
         </main>
       </body>

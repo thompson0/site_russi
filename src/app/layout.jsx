@@ -2,7 +2,7 @@ import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import { AlertProvider } from "@/context/AlertContext"
 import { RefreshProvider } from "@/context/RefreshContext"
-
+import { ThemeProvider } from "next-themes";
 const publicSans = Public_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,11 +20,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
         <AlertProvider>
           <RefreshProvider>
+            <ThemeProvider 
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            
+            >
             {children}
+
+            </ThemeProvider>
           </RefreshProvider>
         </AlertProvider>
       </body>
