@@ -42,7 +42,6 @@ export default function AllProdutos() {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {produtos.map((p) => (
         <Card key={p.id} className="group overflow-hidden transition-all hover:shadow-lg">
-          <Link href={`/visitante/${p.id}`}>
             <CardHeader className="flex items-center justify-center h-48 cursor-pointer">
               <img
                 src={p.foto_url || "/placeholder.png"}
@@ -50,7 +49,7 @@ export default function AllProdutos() {
                 className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
               />
             </CardHeader>
-          </Link>
+  
           <CardContent className="text-center">
             <h2 className="text-lg font-semibold truncate">{p.nome}</h2>
             {p.codigo && (
@@ -58,7 +57,7 @@ export default function AllProdutos() {
             )}
           </CardContent>
           <CardFooter className="justify-center text-sm text-muted-foreground">
-            <Link href={`/visitante/${p.id}`} className="underline hover:no-underline">
+            <Link href={`/admin/produto/${p.id}`} className="underline hover:no-underline">
               Ver detalhes
             </Link>
           </CardFooter>
