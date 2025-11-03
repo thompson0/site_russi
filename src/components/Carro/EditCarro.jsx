@@ -23,7 +23,7 @@ export default function EditCarro({ id, onUpdated }) {
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const { triggerAlert } = useAlert()
-  const { triggerRefresh } = useRefresh()
+  const { triggerRefresh, refreshKey } = useRefresh()
 
   async function fetchCarro() {
     try {
