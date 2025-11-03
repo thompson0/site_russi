@@ -2,10 +2,16 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req, { params }) {
   try {
-    const { id } = await params;
+    const { id } = await params || {};
+    let idBigInt;
+    try {
+      idBigInt = BigInt(id);
+    } catch {
+      return Response.json({ error: "ID inválido" }, { status: 400 });
+    }
 
     const produto = await prisma.produtos.findUnique({
-      where: { id: BigInt(id) },
+      where: { id: idBigInt },
       include: {
         carros: {
           select: { carro_id: true },
@@ -32,7 +38,14 @@ export async function GET(req, { params }) {
 
 export async function PUT(req, { params }) {
   try {
-    const { id } = await params;
+    const { id } = params || {};
+    let idBigInt;
+    try {
+      idBigInt = BigInt(id);
+    } catch {
+      return Response.json({ error: "ID inválido" }, { status: 400 });
+    }
+
     const { nome, codigo, foto_url, video_url } = await req.json();
 
     const data = {};
@@ -42,7 +55,7 @@ export async function PUT(req, { params }) {
     if (video_url !== undefined) data.video_url = video_url;
 
     const produto = await prisma.produtos.update({
-      where: { id: BigInt(id) },
+      where: { id: idBigInt },
       data,
     });
 
@@ -55,15 +68,20 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
-    const { id } = await params;
-
+    const { id } = params || {};
+    let idBigInt;
+    try {
+      idBigInt = BigInt(id);
+    } catch {
+      return Response.json({ error: "ID inválido" }, { status: 400 });
+    }
 
     await prisma.carro_produtos.deleteMany({
-      where: { produto_id: BigInt(id) },
+      where: { produto_id: idBigInt },
     });
 
     await prisma.produtos.delete({
-      where: { id: BigInt(id) },
+      where: { id: idBigInt },
     });
 
     return Response.json({ message: "Produto deletado com sucesso" }, { status: 200 });

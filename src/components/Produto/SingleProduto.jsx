@@ -9,7 +9,7 @@ import { useRefresh } from "@/context/RefreshContext";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-export default function SingleProduto({ id }) {
+export default function SingleProduto({ id, qrcode = false }) {
   const [produto, setProduto] = useState(null);
   const [loading, setLoading] = useState(true);
   const { refreshKey } = useRefresh();
@@ -42,10 +42,10 @@ export default function SingleProduto({ id }) {
     return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
 
   return (
-    <div className="flex justify-center items-center max-h-screen  p-4">
-      <Card className="max-w-4xl w-full  shadow-lg">
+    <div className="flex justify-center items-center max-h-screen p-4">
+      <Card className="max-w-4xl w-full shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-4xl font-bold ">{produto.nome}</CardTitle>
+          <CardTitle className="text-4xl font-bold">{produto.nome}</CardTitle>
         </CardHeader>
 
         <CardContent className="flex flex-col items-center gap-4">
@@ -63,18 +63,20 @@ export default function SingleProduto({ id }) {
             <video
               src={produto.video_url}
               controls
-              className="w-full rounded-lg "
+              className="w-full rounded-lg"
             />
           )}
         </CardContent>
 
-        <CardFooter className="flex justify-between ">
-          <EditProduto produto={produto} />
-          <QrCodeButton
-            url={`${baseUrl}/visitante/produtos/${id}`}
-            productname={produto.nome}
-          />
-        </CardFooter>
+        {!qrcode && (
+          <CardFooter className="flex justify-between">
+            <EditProduto produto={produto} />
+            <QrCodeButton
+              url={`${baseUrl}/visitante/produtos/${id}`}
+              productname={produto.nome}
+            />
+          </CardFooter>
+        )}
       </Card>
     </div>
   );
