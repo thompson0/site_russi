@@ -29,7 +29,7 @@ export default function EditCarro({ id, onUpdated }) {
     try {
       setLoading(true)
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      const res = await fetch(`${baseUrl}/api/carros`)
+      const res = await fetch(`${baseUrl}/api/carros?k=${refreshKey}`)
       if (!res.ok) throw new Error("Erro ao buscar carros")
       const data = await res.json()
       const found = Array.isArray(data) ? data.find((c) => String(c.id) === String(id)) : null

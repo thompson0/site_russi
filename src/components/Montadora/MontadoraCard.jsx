@@ -15,7 +15,7 @@ function MontadoraCard() {
       try {
         const baseUrl =
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        const res = await fetch(`${baseUrl}/api/montadoras`);
+        const res = await fetch(`${baseUrl}/api/montadoras?k=${refreshKey}`);
 
         if (!res.ok) throw new Error("Erro ao buscar montadoras");
 

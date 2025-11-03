@@ -17,7 +17,7 @@ export default function SingleProduto({ id, qrcode = false }) {
   useEffect(() => {
     async function fetchProduto() {
       try {
-        const res = await fetch(`${baseUrl}/api/produtos/${id}`);
+        const res = await fetch(`${baseUrl}/api/produtos/${id}?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar produto");
         const data = await res.json();
         setProduto(data);
