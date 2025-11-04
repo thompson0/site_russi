@@ -128,10 +128,21 @@ export default function AddProduto({ carroId, Allprodutos }) {
             onChange={(e) => setForm({ ...form, codigo: e.target.value })}
             required
           />
-          <Input
-            placeholder="URL da imagem"
-            value={form.foto_url}
-            onChange={(e) => setForm({ ...form, foto_url: e.target.value })}
+           <Input
+            placeholder="URL da foto"
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (!file) return
+
+              const reader = new FileReader()
+              reader.onloadend = () => {
+                setForm({ ...form, foto_url: reader.result }) 
+              }
+              reader.readAsDataURL(file)
+            }}
           />
           <Input
             placeholder="URL do vídeo"

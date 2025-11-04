@@ -40,13 +40,23 @@ export async function POST(req) {
     const body = await req.json()
     const { nome, ano_de, ano_ate, versao, montadora_id, foto_url, imagem } = body
 
+    const anoDeVal = ano_de !== undefined && ano_de !== null && `${ano_de}` !== ""
+      ? BigInt(ano_de)
+      : null
+    const anoAteVal = ano_ate !== undefined && ano_ate !== null && `${ano_ate}` !== ""
+      ? BigInt(ano_ate)
+      : null
+    const montadoraIdVal = montadora_id !== undefined && montadora_id !== null && `${montadora_id}` !== ""
+      ? BigInt(montadora_id)
+      : null
+
     const novoCarro = await prisma.carros.create({
       data: {
         nome,
-        ano_de: BigInt(ano_de),
-        ano_ate: BigInt(ano_ate),
+        ano_de: anoDeVal,
+        ano_ate: anoAteVal,
         versao,
-        montadora_id: BigInt(montadora_id),
+        montadora_id: montadoraIdVal,
         foto_url,
         imagem,
       },

@@ -63,14 +63,14 @@ function CarroCard({ montadoraId }) {
     return (
       <p className="text-gray-400 text-center mt-10 flex flex-col">
         Nenhum carro encontrado.
-        <AddCarro onCreated={handleCreated} />
+        <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />
       </p>
     );
 
   return (
     <Card className="flex flex-col p-6 ">
       <div className="flex justify-end ">
-        <AddCarro onCreated={handleCreated} />
+        <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">

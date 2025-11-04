@@ -17,13 +17,13 @@ import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 import { useRefresh } from "@/context/RefreshContext"
 
-export default function AddCarro({ onCreated, Allcarros }) {
+export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
   const [form, setForm] = useState({
     nome: "",
     ano_de: "",
     ano_ate: "",
     versao: "",
-    montadora_id: "",
+    montadora_id: montadoraId ? String(montadoraId) : "",
     foto_url: "",
     imagem: "",
   })
@@ -44,9 +44,21 @@ export default function AddCarro({ onCreated, Allcarros }) {
     }
     fetchMontadoras()
   }, [])
- 
+
+  // Atualiza montadora quando o prop mudar (página por montadora)
+  useEffect(() => {
+    if (montadoraId) {
+      setForm((prev) => ({ ...prev, montadora_id: String(montadoraId) }))
+    }
+  }, [montadoraId])
+
   async function handleAddCarro(e) {
     e.preventDefault()
+    // Se estiver no catálogo geral (Allcarros), exigir seleção de montadora
+    if (Allcarros === true && !form.montadora_id) {
+      alert("Selecione a montadora do carro.")
+      return
+    }
     const res = await secureFetch(
       "/api/carros/",
       {
@@ -55,7 +67,7 @@ export default function AddCarro({ onCreated, Allcarros }) {
           ...form,
           ano_de: Number(form.ano_de),
           ano_ate: Number(form.ano_ate),
-          montadora_id: Number(form.montadora_id),
+          montadora_id: form.montadora_id ? Number(form.montadora_id) : undefined,
         }),
       },
       {
@@ -70,7 +82,7 @@ export default function AddCarro({ onCreated, Allcarros }) {
         ano_de: "",
         ano_ate: "",
         versao: "",
-        montadora_id: "",
+        montadora_id: montadoraId ? String(montadoraId) : "",
         foto_url: "",
         imagem: "",
       })
@@ -81,7 +93,7 @@ export default function AddCarro({ onCreated, Allcarros }) {
   }
 
   return (
-    
+
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="icon">
@@ -142,15 +154,21 @@ export default function AddCarro({ onCreated, Allcarros }) {
 
           <Input
             placeholder="URL da foto"
-            value={form.foto_url}
-            onChange={(e) => setForm({ ...form, foto_url: e.target.value })}
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (!file) return
+
+              const reader = new FileReader()
+              reader.onloadend = () => {
+                setForm({ ...form, foto_url: reader.result }) 
+              }
+              reader.readAsDataURL(file)
+            }}
           />
 
-          <Input
-            placeholder="Imagem (caso diferente da foto)"
-            value={form.imagem}
-            onChange={(e) => setForm({ ...form, imagem: e.target.value })}
-          />
 
           <DialogFooter>
             <DialogClose asChild>
