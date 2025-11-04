@@ -1,0 +1,54 @@
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useAlert } from "@/context/AlertContext"
+
+function getCsrfToken() {
+  if (typeof document === "undefined") return ""
+  const match = document.cookie
+    .split("; ")
+    .find((c) => c.startsWith("csrf_token="))
+  return match ? match.split("=")[1] : ""
+}
+
+export function useSecureFetch() {
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { triggerAlert } = useAlert()
+
+  async function secureFetch(url, options = {}, { refresh = false, successMsg, errorMsg } = {}) {
+    setLoading(true)
+    try {
+      const csrf = getCsrfToken()
+
+      const res = await fetch(url, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          "x-csrf-token": csrf,
+          ...(options.headers || {}),
+        },
+      })
+
+      if (!res.ok) {
+        const msg = (await res.text().catch(() => "")) || errorMsg || "Erro na operação."
+        triggerAlert("error", "Erro!", msg)
+        return null
+      }
+
+      if (refresh) await router.refresh()
+      if (successMsg) triggerAlert("success", "Sucesso!", successMsg)
+
+      return res
+    } catch (err) {
+      console.error(err)
+      triggerAlert("error", "Erro!", errorMsg || "Falha de conexão.")
+      return null
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return { secureFetch, loading }
+}
