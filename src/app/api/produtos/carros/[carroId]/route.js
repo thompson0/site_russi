@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req, { params }) {
   try {
-    const { carroId } = params || {};
+    const { carroId } = await params || {};
     let carroIdBig;
     try {
       carroIdBig = BigInt(carroId);
@@ -43,7 +43,6 @@ export async function POST(req, { params }) {
       return Response.json({ error: "carroId inválido" }, { status: 400 });
     }
 
-    // Verifica se o carro existe para evitar violação de FK
     const carroExists = await prisma.carros.findUnique({
       where: { id: carroIdBig },
       select: { id: true },

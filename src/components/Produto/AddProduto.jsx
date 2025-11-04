@@ -14,7 +14,9 @@ import { Input } from "@/components/ui/input";
 import { PlusCircle } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
 import { useRefresh } from "@/context/RefreshContext";
+import { useSecureFetch } from "@/hooks/useSecureFetch";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
+import { Label } from "../ui/label";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 export default function AddProduto({ carroId, Allprodutos }) {
@@ -27,9 +29,9 @@ export default function AddProduto({ carroId, Allprodutos }) {
   });
   const [carros, setCarros] = useState([]);
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { triggerAlert } = useAlert();
   const { triggerRefresh, refreshKey } = useRefresh();
+  const { secureFetch, loading } = useSecureFetch();
 
   useEffect(() => {
     if (!Allprodutos) return;
@@ -50,21 +52,25 @@ export default function AddProduto({ carroId, Allprodutos }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
 
     try {
       const idParaUsar = Allprodutos ? form.carro_id : carroId;
       if (!idParaUsar) throw new Error("Selecione um carro");
 
-      const res = await fetch(`/api/produtos/carros/${idParaUsar}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await secureFetch(
+        `/api/produtos/carros/${idParaUsar}`,
+        {
+          method: "POST",
+          body: JSON.stringify(form),
+        },
+        {
+          successMsg: "Produto adicionado com sucesso!",
+          errorMsg: "Erro ao criar produto.",
+        }
+      );
 
-      if (!res.ok) throw new Error("Erro ao criar produto");
+      if (!res) return;
 
-      triggerAlert("success", "Sucesso!", "Produto adicionado com sucesso!");
       triggerRefresh();
       setForm({
         nome: "",
@@ -77,8 +83,6 @@ export default function AddProduto({ carroId, Allprodutos }) {
     } catch (err) {
       console.error(err);
       triggerAlert("error", "Erro!", err.message || "Erro ao criar produto");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -128,6 +132,7 @@ export default function AddProduto({ carroId, Allprodutos }) {
             onChange={(e) => setForm({ ...form, codigo: e.target.value })}
             required
           />
+             <Label>Foto do produto</Label>
            <Input
             placeholder="URL da foto"
             id="picture"

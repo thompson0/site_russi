@@ -16,6 +16,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 import { useRefresh } from "@/context/RefreshContext"
+import { Label } from "../ui/label"
 
 export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
   const [form, setForm] = useState({
@@ -45,7 +46,6 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
     fetchMontadoras()
   }, [])
 
-  // Atualiza montadora quando o prop mudar (página por montadora)
   useEffect(() => {
     if (montadoraId) {
       setForm((prev) => ({ ...prev, montadora_id: String(montadoraId) }))
@@ -54,7 +54,6 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
 
   async function handleAddCarro(e) {
     e.preventDefault()
-    // Se estiver no catálogo geral (Allcarros), exigir seleção de montadora
     if (Allcarros === true && !form.montadora_id) {
       alert("Selecione a montadora do carro.")
       return
@@ -151,7 +150,7 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
               </SelectContent>
             </Select>
           )}
-
+           <Label>Foto do carro</Label>
           <Input
             placeholder="URL da foto"
             id="picture"
@@ -168,8 +167,6 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
               reader.readAsDataURL(file)
             }}
           />
-
-
           <DialogFooter>
             <DialogClose asChild>
               <Button type="button" variant="outline">

@@ -17,6 +17,7 @@ import { ProgressDemo } from "@/components/ProgressDemo"
 import { Pencil } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
 import { useRefresh } from "@/context/RefreshContext"
+import { useSecureFetch } from "@/hooks/useSecureFetch"
 
 export default function EditCarro({ id, onUpdated }) {
   const [carro, setCarro] = useState(null)
@@ -24,15 +25,17 @@ export default function EditCarro({ id, onUpdated }) {
   const [saving, setSaving] = useState(false)
   const { triggerAlert } = useAlert()
   const { triggerRefresh, refreshKey } = useRefresh()
+  const { secureFetch } = useSecureFetch()
 
   async function fetchCarro() {
     try {
       setLoading(true)
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      const res = await fetch(`${baseUrl}/api/carros?k=${refreshKey}`)
+      const res = await secureFetch(`/api/carros?k=${refreshKey}`)
       if (!res.ok) throw new Error("Erro ao buscar carros")
       const data = await res.json()
-      const found = Array.isArray(data) ? data.find((c) => String(c.id) === String(id)) : null
+      const found = Array.isArray(data)
+        ? data.find((c) => String(c.id) === String(id))
+        : null
       setCarro(found || null)
     } catch (err) {
       console.error("Erro ao carregar carro:", err)
@@ -41,24 +44,24 @@ export default function EditCarro({ id, onUpdated }) {
     }
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault()
     setSaving(true)
     try {
-      const res = await fetch("/api/carros", {
+      const res = await secureFetch("/api/carros", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...carro, id }),
       })
 
       if (!res.ok) throw new Error("Erro ao salvar alterações")
+
       triggerAlert("success", "Sucesso!", "Carro atualizado com sucesso!")
       triggerRefresh()
+
       try {
         const updated = await res.json()
         if (updated && onUpdated) onUpdated(updated)
-      } catch {}
+      } catch { }
     } catch (err) {
       console.error(err)
       triggerAlert("error", "Erro!", "Erro ao atualizar carro.")
@@ -91,7 +94,9 @@ export default function EditCarro({ id, onUpdated }) {
               <Label>Nome</Label>
               <Input
                 value={carro.nome || ""}
-                onChange={(e) => setCarro({ ...carro, nome: e.target.value })}
+                onChange={(e) =>
+                  setCarro({ ...carro, nome: e.target.value })
+                }
               />
             </div>
 
@@ -99,7 +104,9 @@ export default function EditCarro({ id, onUpdated }) {
               <Label>Versão</Label>
               <Input
                 value={carro.versao || ""}
-                onChange={(e) => setCarro({ ...carro, versao: e.target.value })}
+                onChange={(e) =>
+                  setCarro({ ...carro, versao: e.target.value })
+                }
               />
             </div>
 
@@ -127,13 +134,23 @@ export default function EditCarro({ id, onUpdated }) {
             </div>
 
             <div>
-              <Label>URL da Imagem</Label>
-              <Input
-                value={carro.foto_url || ""}
-                onChange={(e) =>
-                  setCarro({ ...carro, foto_url: e.target.value })
-                }
-              />
+              <Label>Foto do carro</Label>
+                  <Input
+            placeholder="URL da foto"
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (!file) return
+
+              const reader = new FileReader()
+              reader.onloadend = () => {
+                setForm({ ...form, foto_url: reader.result }) 
+              }
+              reader.readAsDataURL(file)
+            }}
+          />
             </div>
 
             <DialogFooter className="mt-6 flex justify-end gap-2">

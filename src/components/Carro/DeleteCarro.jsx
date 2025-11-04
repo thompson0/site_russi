@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
 import { useRefresh } from "@/context/RefreshContext"
+import { useSecureFetch } from "@/hooks/useSecureFetch"
 
 export default function DeleteCarro({ id, onDelete }) {
-  const [loading, setLoading] = useState(false)
   const { triggerAlert } = useAlert()
   const { triggerRefresh } = useRefresh()
+  const { secureFetch, loading } = useSecureFetch()
 
   async function handleDelete() {
     if (!id) {
@@ -20,24 +20,19 @@ export default function DeleteCarro({ id, onDelete }) {
     const confirmar = confirm("Tem certeza que deseja excluir este carro?")
     if (!confirmar) return
 
-    try {
-      setLoading(true)
-      const res = await fetch(`/api/carros?id=${id}`, {
-        method: "DELETE",
-      })
+    const res = await secureFetch(
+      `/api/carros?id=${id}`,
+      { method: "DELETE" },
+      {
+        successMsg: "Carro deletado com sucesso!",
+        errorMsg: "Não foi possível excluir o carro.",
+      }
+    )
 
-      if (!res.ok) throw new Error("Erro ao deletar carro")
+    if (!res) return
 
-      triggerAlert("success", "Sucesso!", "Carro deletado com sucesso!")
-      triggerRefresh()
-
-      if (onDelete) onDelete(id)
-    } catch (err) {
-      console.error(err)
-      triggerAlert("error", "Erro!", "Não foi possível excluir o carro.")
-    } finally {
-      setLoading(false)
-    }
+    triggerRefresh()
+    if (onDelete) onDelete(id)
   }
 
   return (

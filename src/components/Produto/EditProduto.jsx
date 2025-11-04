@@ -14,43 +14,47 @@ import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import { useAlert } from "@/context/AlertContext";
 import { useRefresh } from "@/context/RefreshContext";
+import { useSecureFetch } from "@/hooks/useSecureFetch";
+import { Label } from "../ui/label";
 
 export default function EditProduto({ produto, onUpdated }) {
   const [form, setForm] = useState(produto || {});
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { triggerAlert } = useAlert();
   const { triggerRefresh } = useRefresh();
+  const { secureFetch, loading } = useSecureFetch();
 
   async function handleUpdate(e) {
     e.preventDefault();
-    setLoading(true);
 
     try {
-      const res = await fetch(`/api/produtos/${produto.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await secureFetch(
+        `/api/produtos/${produto.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(form),
+        },
+        {
+          successMsg: "Produto atualizado com sucesso!",
+          errorMsg: "Erro ao atualizar produto.",
+        }
+      );
 
-      if (!res.ok) throw new Error("Erro ao atualizar produto");
+      if (!res) return;
 
       const data = await res.json();
       if (typeof onUpdated === "function") onUpdated(data);
-      triggerAlert("success", "Sucesso!", "Produto atualizado com sucesso!");
       triggerRefresh();
       setOpen(false);
     } catch (err) {
       console.error(err);
-      triggerAlert("error", "Erro!", "Erro ao atualizar produto");
-    } finally {
-      setLoading(false);
+      triggerAlert("error", "Erro!", "Erro ao atualizar produto.");
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-       
+
       <DialogTrigger asChild>
         <Button variant="outline" size="icon">
           <Pencil size={18} />
@@ -71,10 +75,22 @@ export default function EditProduto({ produto, onUpdated }) {
             value={form.codigo}
             onChange={(e) => setForm({ ...form, codigo: e.target.value })}
           />
+          <Label>Foto do produto</Label>
           <Input
-            placeholder="URL da imagem"
-            value={form.foto_url}
-            onChange={(e) => setForm({ ...form, foto_url: e.target.value })}
+            placeholder="URL da foto"
+            id="picture"
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (!file) return
+
+              const reader = new FileReader()
+              reader.onloadend = () => {
+                setForm({ ...form, foto_url: reader.result })
+              }
+              reader.readAsDataURL(file)
+            }}
           />
           <Input
             placeholder="URL do vídeo"

@@ -38,7 +38,7 @@ export async function GET(req, { params }) {
 
 export async function PUT(req, { params }) {
   try {
-    const { id } = params || {};
+    const { id } = await params || {};
     let idBigInt;
     try {
       idBigInt = BigInt(id);
@@ -68,7 +68,7 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
-    const { id } = params || {};
+    const { id } = await params || {};
     let idBigInt;
     try {
       idBigInt = BigInt(id);
