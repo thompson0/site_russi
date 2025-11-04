@@ -72,7 +72,7 @@ export default function SingleProduto({ id, qrcode = false }) {
           <CardFooter className="flex justify-between">
             <EditProduto produto={produto} />
             <QrCodeButton
-              url={`${baseUrl}/visitante/produtos/${id}`}
+              url={`${baseUrl}/visitante/produto/${id}`}
               productname={produto.nome}
             />
           </CardFooter>
