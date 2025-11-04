@@ -32,7 +32,7 @@ export function LoginForm(props) {
       if (data.permissao === "admin") {
         router.push("/admin");
       } else {
-        router.push("/user");
+        router.push("/visitante");
       }
     } 
     
@@ -50,9 +50,9 @@ export function LoginForm(props) {
       <CardContent className=" dark p-6 flex flex-col gap-6 md:p-8">
         <div className="flex flex-col items-center text-center">
           <img src="logo.png" alt="" />
-          <h1 className="text-2xl font-bold">Welcome back</h1>
+          <h1 className="text-2xl font-bold">Bem vindo</h1>
           <p className="text-muted-foreground">
-            Login to your Acme Inc account
+            Faça login na Russi
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export function LoginForm(props) {
                 href="#"
                 className="text-sm underline-offset-2 hover:underline"
               >
-                Forgot your password?
+                Esqueceu a senha?
               </a>
             </div>
             <Input
@@ -95,16 +95,7 @@ export function LoginForm(props) {
           </Button>
 
           <div className="relative text-center text-sm">
-            <span className="bg-card text-muted-foreground px-2">
-              Or continue with
-            </span>
-          </div>
-
-          <div className="text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <a href="login/signup" className="underline underline-offset-4">
-              Sign up
-            </a>
+        
           </div>
         </form>
       </CardContent>
