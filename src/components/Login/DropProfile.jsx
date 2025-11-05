@@ -24,9 +24,6 @@ function DropProfile({name , picture}) {
                 <Link href={`/admin/user`}>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
