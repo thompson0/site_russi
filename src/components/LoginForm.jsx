@@ -6,6 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+
 export function LoginForm(props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -17,7 +20,7 @@ export function LoginForm(props) {
     setError("");
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch(`${baseUrl}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha }),
