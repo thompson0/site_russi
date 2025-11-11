@@ -10,6 +10,12 @@ export async function GET(req, { params }) {
       return Response.json({ error: "ID inválido" }, { status: 400 });
     }
 
+
+    prisma.produtos.update({
+      where: { id },
+      data: { views: { increment: 1 } },
+    }).catch(() => { });
+
     const produto = await prisma.produtos.findUnique({
       where: { id: idBigInt },
       include: {
@@ -53,6 +59,8 @@ export async function PUT(req, { params }) {
     if (codigo !== undefined) data.codigo = codigo;
     if (foto_url !== undefined) data.foto_url = foto_url;
     if (video_url !== undefined) data.video_url = video_url;
+
+
 
     const produto = await prisma.produtos.update({
       where: { id: idBigInt },

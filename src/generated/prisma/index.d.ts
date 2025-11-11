@@ -2278,8 +2278,8 @@ export namespace Prisma {
     montadora_id?: boolean
     foto_url?: boolean
     imagem?: boolean
-    montadora?: boolean | carros$montadoraArgs<ExtArgs>
     produtos?: boolean | carros$produtosArgs<ExtArgs>
+    montadora?: boolean | carros$montadoraArgs<ExtArgs>
     _count?: boolean | CarrosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["carros"]>
 
@@ -2320,8 +2320,8 @@ export namespace Prisma {
 
   export type carrosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "ano_de" | "ano_ate" | "versao" | "montadora_id" | "foto_url" | "imagem", ExtArgs["result"]["carros"]>
   export type carrosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    montadora?: boolean | carros$montadoraArgs<ExtArgs>
     produtos?: boolean | carros$produtosArgs<ExtArgs>
+    montadora?: boolean | carros$montadoraArgs<ExtArgs>
     _count?: boolean | CarrosCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type carrosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2334,8 +2334,8 @@ export namespace Prisma {
   export type $carrosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "carros"
     objects: {
-      montadora: Prisma.$montadorasPayload<ExtArgs> | null
       produtos: Prisma.$carro_produtosPayload<ExtArgs>[]
+      montadora: Prisma.$montadorasPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -2740,8 +2740,8 @@ export namespace Prisma {
    */
   export interface Prisma__carrosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    montadora<T extends carros$montadoraArgs<ExtArgs> = {}>(args?: Subset<T, carros$montadoraArgs<ExtArgs>>): Prisma__montadorasClient<$Result.GetResult<Prisma.$montadorasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     produtos<T extends carros$produtosArgs<ExtArgs> = {}>(args?: Subset<T, carros$produtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_produtosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    montadora<T extends carros$montadoraArgs<ExtArgs> = {}>(args?: Subset<T, carros$montadoraArgs<ExtArgs>>): Prisma__montadorasClient<$Result.GetResult<Prisma.$montadorasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3175,25 +3175,6 @@ export namespace Prisma {
   }
 
   /**
-   * carros.montadora
-   */
-  export type carros$montadoraArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the montadoras
-     */
-    select?: montadorasSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the montadoras
-     */
-    omit?: montadorasOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: montadorasInclude<ExtArgs> | null
-    where?: montadorasWhereInput
-  }
-
-  /**
    * carros.produtos
    */
   export type carros$produtosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3215,6 +3196,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Carro_produtosScalarFieldEnum | Carro_produtosScalarFieldEnum[]
+  }
+
+  /**
+   * carros.montadora
+   */
+  export type carros$montadoraArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the montadoras
+     */
+    select?: montadorasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the montadoras
+     */
+    omit?: montadorasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: montadorasInclude<ExtArgs> | null
+    where?: montadorasWhereInput
   }
 
   /**
@@ -8592,7 +8592,7 @@ export namespace Prisma {
 
   export type Produto_fotosGroupByOutputType = {
     id: bigint
-    produto_id: bigint | null
+    produto_id: bigint
     foto_url: string | null
     _count: Produto_fotosCountAggregateOutputType | null
     _avg: Produto_fotosAvgAggregateOutputType | null
@@ -8646,7 +8646,7 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
-      produto_id: bigint | null
+      produto_id: bigint
       foto_url: string | null
     }, ExtArgs["result"]["produto_fotos"]>
     composites: {}
@@ -9268,7 +9268,7 @@ export namespace Prisma {
     /**
      * The data needed to create a produto_fotos.
      */
-    data?: XOR<produto_fotosCreateInput, produto_fotosUncheckedCreateInput>
+    data: XOR<produto_fotosCreateInput, produto_fotosUncheckedCreateInput>
   }
 
   /**
@@ -9454,10 +9454,12 @@ export namespace Prisma {
 
   export type ProdutosAvgAggregateOutputType = {
     id: number | null
+    views: number | null
   }
 
   export type ProdutosSumAggregateOutputType = {
     id: bigint | null
+    views: number | null
   }
 
   export type ProdutosMinAggregateOutputType = {
@@ -9466,6 +9468,7 @@ export namespace Prisma {
     codigo: string | null
     foto_url: string | null
     video_url: string | null
+    views: number | null
   }
 
   export type ProdutosMaxAggregateOutputType = {
@@ -9474,6 +9477,7 @@ export namespace Prisma {
     codigo: string | null
     foto_url: string | null
     video_url: string | null
+    views: number | null
   }
 
   export type ProdutosCountAggregateOutputType = {
@@ -9482,16 +9486,19 @@ export namespace Prisma {
     codigo: number
     foto_url: number
     video_url: number
+    views: number
     _all: number
   }
 
 
   export type ProdutosAvgAggregateInputType = {
     id?: true
+    views?: true
   }
 
   export type ProdutosSumAggregateInputType = {
     id?: true
+    views?: true
   }
 
   export type ProdutosMinAggregateInputType = {
@@ -9500,6 +9507,7 @@ export namespace Prisma {
     codigo?: true
     foto_url?: true
     video_url?: true
+    views?: true
   }
 
   export type ProdutosMaxAggregateInputType = {
@@ -9508,6 +9516,7 @@ export namespace Prisma {
     codigo?: true
     foto_url?: true
     video_url?: true
+    views?: true
   }
 
   export type ProdutosCountAggregateInputType = {
@@ -9516,6 +9525,7 @@ export namespace Prisma {
     codigo?: true
     foto_url?: true
     video_url?: true
+    views?: true
     _all?: true
   }
 
@@ -9611,6 +9621,7 @@ export namespace Prisma {
     codigo: string | null
     foto_url: string | null
     video_url: string | null
+    views: number | null
     _count: ProdutosCountAggregateOutputType | null
     _avg: ProdutosAvgAggregateOutputType | null
     _sum: ProdutosSumAggregateOutputType | null
@@ -9638,6 +9649,7 @@ export namespace Prisma {
     codigo?: boolean
     foto_url?: boolean
     video_url?: boolean
+    views?: boolean
     carros?: boolean | produtos$carrosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produtos"]>
@@ -9648,6 +9660,7 @@ export namespace Prisma {
     codigo?: boolean
     foto_url?: boolean
     video_url?: boolean
+    views?: boolean
   }, ExtArgs["result"]["produtos"]>
 
   export type produtosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9656,6 +9669,7 @@ export namespace Prisma {
     codigo?: boolean
     foto_url?: boolean
     video_url?: boolean
+    views?: boolean
   }, ExtArgs["result"]["produtos"]>
 
   export type produtosSelectScalar = {
@@ -9664,9 +9678,10 @@ export namespace Prisma {
     codigo?: boolean
     foto_url?: boolean
     video_url?: boolean
+    views?: boolean
   }
 
-  export type produtosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "foto_url" | "video_url", ExtArgs["result"]["produtos"]>
+  export type produtosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "foto_url" | "video_url" | "views", ExtArgs["result"]["produtos"]>
   export type produtosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carros?: boolean | produtos$carrosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
@@ -9685,6 +9700,7 @@ export namespace Prisma {
       codigo: string | null
       foto_url: string | null
       video_url: string | null
+      views: number | null
     }, ExtArgs["result"]["produtos"]>
     composites: {}
   }
@@ -10114,6 +10130,7 @@ export namespace Prisma {
     readonly codigo: FieldRef<"produtos", 'String'>
     readonly foto_url: FieldRef<"produtos", 'String'>
     readonly video_url: FieldRef<"produtos", 'String'>
+    readonly views: FieldRef<"produtos", 'Int'>
   }
     
 
@@ -15844,7 +15861,8 @@ export namespace Prisma {
     nome: 'nome',
     codigo: 'codigo',
     foto_url: 'foto_url',
-    video_url: 'video_url'
+    video_url: 'video_url',
+    views: 'views'
   };
 
   export type ProdutosScalarFieldEnum = (typeof ProdutosScalarFieldEnum)[keyof typeof ProdutosScalarFieldEnum]
@@ -15961,20 +15979,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -15985,6 +15989,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -16017,8 +16035,8 @@ export namespace Prisma {
     montadora_id?: BigIntNullableFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableFilter<"carros"> | string | null
     imagem?: StringNullableFilter<"carros"> | string | null
-    montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
     produtos?: Carro_produtosListRelationFilter
+    montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }
 
   export type carrosOrderByWithRelationInput = {
@@ -16030,8 +16048,8 @@ export namespace Prisma {
     montadora_id?: SortOrderInput | SortOrder
     foto_url?: SortOrderInput | SortOrder
     imagem?: SortOrderInput | SortOrder
-    montadora?: montadorasOrderByWithRelationInput
     produtos?: carro_produtosOrderByRelationAggregateInput
+    montadora?: montadorasOrderByWithRelationInput
   }
 
   export type carrosWhereUniqueInput = Prisma.AtLeast<{
@@ -16046,8 +16064,8 @@ export namespace Prisma {
     montadora_id?: BigIntNullableFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableFilter<"carros"> | string | null
     imagem?: StringNullableFilter<"carros"> | string | null
-    montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
     produtos?: Carro_produtosListRelationFilter
+    montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }, "id" | "id">
 
   export type carrosOrderByWithAggregationInput = {
@@ -16343,28 +16361,29 @@ export namespace Prisma {
     OR?: produto_fotosWhereInput[]
     NOT?: produto_fotosWhereInput | produto_fotosWhereInput[]
     id?: BigIntFilter<"produto_fotos"> | bigint | number
-    produto_id?: BigIntNullableFilter<"produto_fotos"> | bigint | number | null
+    produto_id?: BigIntFilter<"produto_fotos"> | bigint | number
     foto_url?: StringNullableFilter<"produto_fotos"> | string | null
   }
 
   export type produto_fotosOrderByWithRelationInput = {
     id?: SortOrder
-    produto_id?: SortOrderInput | SortOrder
+    produto_id?: SortOrder
     foto_url?: SortOrderInput | SortOrder
   }
 
   export type produto_fotosWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
+    id_produto_id?: produto_fotosIdProduto_idCompoundUniqueInput
     AND?: produto_fotosWhereInput | produto_fotosWhereInput[]
     OR?: produto_fotosWhereInput[]
     NOT?: produto_fotosWhereInput | produto_fotosWhereInput[]
-    produto_id?: BigIntNullableFilter<"produto_fotos"> | bigint | number | null
+    produto_id?: BigIntFilter<"produto_fotos"> | bigint | number
     foto_url?: StringNullableFilter<"produto_fotos"> | string | null
-  }, "id" | "id">
+  }, "id_produto_id" | "id">
 
   export type produto_fotosOrderByWithAggregationInput = {
     id?: SortOrder
-    produto_id?: SortOrderInput | SortOrder
+    produto_id?: SortOrder
     foto_url?: SortOrderInput | SortOrder
     _count?: produto_fotosCountOrderByAggregateInput
     _avg?: produto_fotosAvgOrderByAggregateInput
@@ -16378,7 +16397,7 @@ export namespace Prisma {
     OR?: produto_fotosScalarWhereWithAggregatesInput[]
     NOT?: produto_fotosScalarWhereWithAggregatesInput | produto_fotosScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"produto_fotos"> | bigint | number
-    produto_id?: BigIntNullableWithAggregatesFilter<"produto_fotos"> | bigint | number | null
+    produto_id?: BigIntWithAggregatesFilter<"produto_fotos"> | bigint | number
     foto_url?: StringNullableWithAggregatesFilter<"produto_fotos"> | string | null
   }
 
@@ -16391,6 +16410,7 @@ export namespace Prisma {
     codigo?: StringNullableFilter<"produtos"> | string | null
     foto_url?: StringNullableFilter<"produtos"> | string | null
     video_url?: StringNullableFilter<"produtos"> | string | null
+    views?: IntNullableFilter<"produtos"> | number | null
     carros?: Carro_produtosListRelationFilter
   }
 
@@ -16400,6 +16420,7 @@ export namespace Prisma {
     codigo?: SortOrderInput | SortOrder
     foto_url?: SortOrderInput | SortOrder
     video_url?: SortOrderInput | SortOrder
+    views?: SortOrderInput | SortOrder
     carros?: carro_produtosOrderByRelationAggregateInput
   }
 
@@ -16412,6 +16433,7 @@ export namespace Prisma {
     codigo?: StringNullableFilter<"produtos"> | string | null
     foto_url?: StringNullableFilter<"produtos"> | string | null
     video_url?: StringNullableFilter<"produtos"> | string | null
+    views?: IntNullableFilter<"produtos"> | number | null
     carros?: Carro_produtosListRelationFilter
   }, "id" | "id">
 
@@ -16421,6 +16443,7 @@ export namespace Prisma {
     codigo?: SortOrderInput | SortOrder
     foto_url?: SortOrderInput | SortOrder
     video_url?: SortOrderInput | SortOrder
+    views?: SortOrderInput | SortOrder
     _count?: produtosCountOrderByAggregateInput
     _avg?: produtosAvgOrderByAggregateInput
     _max?: produtosMaxOrderByAggregateInput
@@ -16437,6 +16460,7 @@ export namespace Prisma {
     codigo?: StringNullableWithAggregatesFilter<"produtos"> | string | null
     foto_url?: StringNullableWithAggregatesFilter<"produtos"> | string | null
     video_url?: StringNullableWithAggregatesFilter<"produtos"> | string | null
+    views?: IntNullableWithAggregatesFilter<"produtos"> | number | null
   }
 
   export type usuariosWhereInput = {
@@ -16714,8 +16738,8 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
-    montadora?: montadorasCreateNestedOneWithoutCarrosInput
     produtos?: carro_produtosCreateNestedManyWithoutCarroInput
+    montadora?: montadorasCreateNestedOneWithoutCarrosInput
   }
 
   export type carrosUncheckedCreateInput = {
@@ -16738,8 +16762,8 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
-    montadora?: montadorasUpdateOneWithoutCarrosNestedInput
     produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
+    montadora?: montadorasUpdateOneWithoutCarrosNestedInput
   }
 
   export type carrosUncheckedUpdateInput = {
@@ -17051,43 +17075,43 @@ export namespace Prisma {
 
   export type produto_fotosCreateInput = {
     id?: bigint | number
-    produto_id?: bigint | number | null
+    produto_id: bigint | number
     foto_url?: string | null
   }
 
   export type produto_fotosUncheckedCreateInput = {
     id?: bigint | number
-    produto_id?: bigint | number | null
+    produto_id: bigint | number
     foto_url?: string | null
   }
 
   export type produto_fotosUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type produto_fotosUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type produto_fotosCreateManyInput = {
     id?: bigint | number
-    produto_id?: bigint | number | null
+    produto_id: bigint | number
     foto_url?: string | null
   }
 
   export type produto_fotosUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type produto_fotosUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -17097,6 +17121,7 @@ export namespace Prisma {
     codigo?: string | null
     foto_url?: string | null
     video_url?: string | null
+    views?: number | null
     carros?: carro_produtosCreateNestedManyWithoutProdutoInput
   }
 
@@ -17106,6 +17131,7 @@ export namespace Prisma {
     codigo?: string | null
     foto_url?: string | null
     video_url?: string | null
+    views?: number | null
     carros?: carro_produtosUncheckedCreateNestedManyWithoutProdutoInput
   }
 
@@ -17115,6 +17141,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     carros?: carro_produtosUpdateManyWithoutProdutoNestedInput
   }
 
@@ -17124,6 +17151,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     carros?: carro_produtosUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
@@ -17133,6 +17161,7 @@ export namespace Prisma {
     codigo?: string | null
     foto_url?: string | null
     video_url?: string | null
+    views?: number | null
   }
 
   export type produtosUpdateManyMutationInput = {
@@ -17141,6 +17170,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type produtosUncheckedUpdateManyInput = {
@@ -17149,6 +17179,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type usuariosCreateInput = {
@@ -17453,15 +17484,15 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type MontadorasNullableScalarRelationFilter = {
-    is?: montadorasWhereInput | null
-    isNot?: montadorasWhereInput | null
-  }
-
   export type Carro_produtosListRelationFilter = {
     every?: carro_produtosWhereInput
     some?: carro_produtosWhereInput
     none?: carro_produtosWhereInput
+  }
+
+  export type MontadorasNullableScalarRelationFilter = {
+    is?: montadorasWhereInput | null
+    isNot?: montadorasWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -17739,6 +17770,11 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type produto_fotosIdProduto_idCompoundUniqueInput = {
+    id: bigint | number
+    produto_id: bigint | number
+  }
+
   export type produto_fotosCountOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
@@ -17767,16 +17803,29 @@ export namespace Prisma {
     produto_id?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type produtosCountOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
     codigo?: SortOrder
     foto_url?: SortOrder
     video_url?: SortOrder
+    views?: SortOrder
   }
 
   export type produtosAvgOrderByAggregateInput = {
     id?: SortOrder
+    views?: SortOrder
   }
 
   export type produtosMaxOrderByAggregateInput = {
@@ -17785,6 +17834,7 @@ export namespace Prisma {
     codigo?: SortOrder
     foto_url?: SortOrder
     video_url?: SortOrder
+    views?: SortOrder
   }
 
   export type produtosMinOrderByAggregateInput = {
@@ -17793,10 +17843,28 @@ export namespace Prisma {
     codigo?: SortOrder
     foto_url?: SortOrder
     video_url?: SortOrder
+    views?: SortOrder
   }
 
   export type produtosSumOrderByAggregateInput = {
     id?: SortOrder
+    views?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type usuariosCountOrderByAggregateInput = {
@@ -18001,17 +18069,17 @@ export namespace Prisma {
     produto_id?: SortOrder
   }
 
-  export type montadorasCreateNestedOneWithoutCarrosInput = {
-    create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
-    connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
-    connect?: montadorasWhereUniqueInput
-  }
-
   export type carro_produtosCreateNestedManyWithoutCarroInput = {
     create?: XOR<carro_produtosCreateWithoutCarroInput, carro_produtosUncheckedCreateWithoutCarroInput> | carro_produtosCreateWithoutCarroInput[] | carro_produtosUncheckedCreateWithoutCarroInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutCarroInput | carro_produtosCreateOrConnectWithoutCarroInput[]
     createMany?: carro_produtosCreateManyCarroInputEnvelope
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
+  }
+
+  export type montadorasCreateNestedOneWithoutCarrosInput = {
+    create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
+    connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
+    connect?: montadorasWhereUniqueInput
   }
 
   export type carro_produtosUncheckedCreateNestedManyWithoutCarroInput = {
@@ -18041,16 +18109,6 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type montadorasUpdateOneWithoutCarrosNestedInput = {
-    create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
-    connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
-    upsert?: montadorasUpsertWithoutCarrosInput
-    disconnect?: montadorasWhereInput | boolean
-    delete?: montadorasWhereInput | boolean
-    connect?: montadorasWhereUniqueInput
-    update?: XOR<XOR<montadorasUpdateToOneWithWhereWithoutCarrosInput, montadorasUpdateWithoutCarrosInput>, montadorasUncheckedUpdateWithoutCarrosInput>
-  }
-
   export type carro_produtosUpdateManyWithoutCarroNestedInput = {
     create?: XOR<carro_produtosCreateWithoutCarroInput, carro_produtosUncheckedCreateWithoutCarroInput> | carro_produtosCreateWithoutCarroInput[] | carro_produtosUncheckedCreateWithoutCarroInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutCarroInput | carro_produtosCreateOrConnectWithoutCarroInput[]
@@ -18063,6 +18121,16 @@ export namespace Prisma {
     update?: carro_produtosUpdateWithWhereUniqueWithoutCarroInput | carro_produtosUpdateWithWhereUniqueWithoutCarroInput[]
     updateMany?: carro_produtosUpdateManyWithWhereWithoutCarroInput | carro_produtosUpdateManyWithWhereWithoutCarroInput[]
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
+  }
+
+  export type montadorasUpdateOneWithoutCarrosNestedInput = {
+    create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
+    connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
+    upsert?: montadorasUpsertWithoutCarrosInput
+    disconnect?: montadorasWhereInput | boolean
+    delete?: montadorasWhereInput | boolean
+    connect?: montadorasWhereUniqueInput
+    update?: XOR<XOR<montadorasUpdateToOneWithWhereWithoutCarrosInput, montadorasUpdateWithoutCarrosInput>, montadorasUncheckedUpdateWithoutCarrosInput>
   }
 
   export type carro_produtosUncheckedUpdateManyWithoutCarroNestedInput = {
@@ -18133,6 +18201,14 @@ export namespace Prisma {
     connectOrCreate?: carro_produtosCreateOrConnectWithoutProdutoInput | carro_produtosCreateOrConnectWithoutProdutoInput[]
     createMany?: carro_produtosCreateManyProdutoInputEnvelope
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type carro_produtosUpdateManyWithoutProdutoNestedInput = {
@@ -18324,6 +18400,22 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -18349,23 +18441,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type montadorasCreateWithoutCarrosInput = {
-    id?: bigint | number
-    nome?: string | null
-    logo_url?: string | null
-  }
-
-  export type montadorasUncheckedCreateWithoutCarrosInput = {
-    id?: bigint | number
-    nome?: string | null
-    logo_url?: string | null
-  }
-
-  export type montadorasCreateOrConnectWithoutCarrosInput = {
-    where: montadorasWhereUniqueInput
-    create: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
-  }
-
   export type carro_produtosCreateWithoutCarroInput = {
     produto: produtosCreateNestedOneWithoutCarrosInput
   }
@@ -18384,27 +18459,21 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type montadorasUpsertWithoutCarrosInput = {
-    update: XOR<montadorasUpdateWithoutCarrosInput, montadorasUncheckedUpdateWithoutCarrosInput>
+  export type montadorasCreateWithoutCarrosInput = {
+    id?: bigint | number
+    nome?: string | null
+    logo_url?: string | null
+  }
+
+  export type montadorasUncheckedCreateWithoutCarrosInput = {
+    id?: bigint | number
+    nome?: string | null
+    logo_url?: string | null
+  }
+
+  export type montadorasCreateOrConnectWithoutCarrosInput = {
+    where: montadorasWhereUniqueInput
     create: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
-    where?: montadorasWhereInput
-  }
-
-  export type montadorasUpdateToOneWithWhereWithoutCarrosInput = {
-    where?: montadorasWhereInput
-    data: XOR<montadorasUpdateWithoutCarrosInput, montadorasUncheckedUpdateWithoutCarrosInput>
-  }
-
-  export type montadorasUpdateWithoutCarrosInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    nome?: NullableStringFieldUpdateOperationsInput | string | null
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type montadorasUncheckedUpdateWithoutCarrosInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    nome?: NullableStringFieldUpdateOperationsInput | string | null
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type carro_produtosUpsertWithWhereUniqueWithoutCarroInput = {
@@ -18429,6 +18498,29 @@ export namespace Prisma {
     NOT?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
     carro_id?: BigIntFilter<"carro_produtos"> | bigint | number
     produto_id?: BigIntFilter<"carro_produtos"> | bigint | number
+  }
+
+  export type montadorasUpsertWithoutCarrosInput = {
+    update: XOR<montadorasUpdateWithoutCarrosInput, montadorasUncheckedUpdateWithoutCarrosInput>
+    create: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
+    where?: montadorasWhereInput
+  }
+
+  export type montadorasUpdateToOneWithWhereWithoutCarrosInput = {
+    where?: montadorasWhereInput
+    data: XOR<montadorasUpdateWithoutCarrosInput, montadorasUncheckedUpdateWithoutCarrosInput>
+  }
+
+  export type montadorasUpdateWithoutCarrosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type montadorasUncheckedUpdateWithoutCarrosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type carrosCreateWithoutMontadoraInput = {
@@ -18560,6 +18652,7 @@ export namespace Prisma {
     codigo?: string | null
     foto_url?: string | null
     video_url?: string | null
+    views?: number | null
   }
 
   export type produtosUncheckedCreateWithoutCarrosInput = {
@@ -18568,6 +18661,7 @@ export namespace Prisma {
     codigo?: string | null
     foto_url?: string | null
     video_url?: string | null
+    views?: number | null
   }
 
   export type produtosCreateOrConnectWithoutCarrosInput = {
@@ -18625,6 +18719,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type produtosUncheckedUpdateWithoutCarrosInput = {
@@ -18633,6 +18728,7 @@ export namespace Prisma {
     codigo?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type carro_produtosCreateManyCarroInput = {

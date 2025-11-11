@@ -12,7 +12,7 @@ datasource db {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model carros {
-  id           BigInt  @id @unique @default(autoincrement())
+  id           BigInt           @id @unique @default(autoincrement())
   nome         String?
   ano_de       BigInt?
   ano_ate      BigInt?
@@ -20,9 +20,8 @@ model carros {
   montadora_id BigInt?
   foto_url     String?
   imagem       String?
-
-  montadora montadoras?      @relation(fields: [montadora_id], references: [id])
-  produtos  carro_produtos[]
+  produtos     carro_produtos[]
+  montadora    montadoras?      @relation(fields: [montadora_id], references: [id])
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -69,20 +68,22 @@ model montadoras {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model produto_fotos {
-  id         BigInt  @id @unique @default(autoincrement())
-  produto_id BigInt?
+  id         BigInt  @unique @default(autoincrement())
+  produto_id BigInt
   foto_url   String?
+
+  @@id([id, produto_id])
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model produtos {
-  id        BigInt  @id @unique @default(autoincrement())
+  id        BigInt           @id @unique @default(autoincrement())
   nome      String?
   codigo    String?
   foto_url  String?
   video_url String?
-
-  carros carro_produtos[]
+  views     Int?             @db.SmallInt
+  carros    carro_produtos[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -126,9 +127,8 @@ model videos_instalador {
 model carro_produtos {
   carro_id   BigInt
   produto_id BigInt
-
-  carro   carros   @relation(fields: [carro_id], references: [id])
-  produto produtos @relation(fields: [produto_id], references: [id])
+  carro      carros   @relation(fields: [carro_id], references: [id])
+  produto    produtos @relation(fields: [produto_id], references: [id])
 
   @@id([carro_id, produto_id])
   @@map("carro_produtos")

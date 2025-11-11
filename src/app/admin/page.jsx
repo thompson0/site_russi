@@ -1,13 +1,21 @@
+import DashboardProdutos from "@/components/Produto/DashboardProdutos";
+import MostView from "@/components/Produto/MostView";
+
 export default async function AdminPage({ children }) {
 
 
   return (
     <>
-      <div>
-        <h1>Oi admins</h1>
-        <ul>
 
-        </ul>
+      <div>
+        <MostView>
+          
+        </MostView>
+      </div>
+      <div>
+      <DashboardProdutos>
+
+      </DashboardProdutos>
       </div>
 
 

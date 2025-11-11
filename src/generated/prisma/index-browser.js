@@ -179,7 +179,8 @@ exports.Prisma.ProdutosScalarFieldEnum = {
   nome: 'nome',
   codigo: 'codigo',
   foto_url: 'foto_url',
-  video_url: 'video_url'
+  video_url: 'video_url',
+  views: 'views'
 };
 
 exports.Prisma.UsuariosScalarFieldEnum = {
