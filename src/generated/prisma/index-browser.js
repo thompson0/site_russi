@@ -128,7 +128,8 @@ exports.Prisma.CarrosScalarFieldEnum = {
   versao: 'versao',
   montadora_id: 'montadora_id',
   foto_url: 'foto_url',
-  imagem: 'imagem'
+  imagem: 'imagem',
+  data_criacao: 'data_criacao'
 };
 
 exports.Prisma.CategoriasScalarFieldEnum = {
@@ -180,7 +181,8 @@ exports.Prisma.ProdutosScalarFieldEnum = {
   codigo: 'codigo',
   foto_url: 'foto_url',
   video_url: 'video_url',
-  views: 'views'
+  views: 'views',
+  data_criacao: 'data_criacao'
 };
 
 exports.Prisma.UsuariosScalarFieldEnum = {

@@ -25,7 +25,7 @@ export function AppSidebar() {
     }
   }
   const topItems = [
-    { title: "Home", url: "/", icon: Home },
+    { title: "Home", url: "/admin", icon: Home },
     { title: "Montadora", url: "/admin/montadoras", icon: Car },
     { title: "Carros", url: "/admin/catalogo/carros", icon: CarFront },
     { title: "Produtos", url: "/admin/catalogo/produtos", icon: Handbag },

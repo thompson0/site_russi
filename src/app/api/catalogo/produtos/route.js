@@ -3,11 +3,17 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
   try {
     const produtos = await prisma.produtos.findMany({
-      select: { id: true, nome: true, codigo: true, foto_url: true, video_url: true },
+      select: { id: true, nome: true, codigo: true, foto_url: true, video_url: true, views: true },
     });
+
+    const normalized = produtos.map((p) => ({
+      ...p,
+      views: typeof p.views === "number" ? p.views : 0,
+    }));
+
     return new Response(
       JSON.stringify(
-        produtos,
+        normalized,
         (_, v) => (typeof v === "bigint" ? Number(v) : v)
       ),
       {

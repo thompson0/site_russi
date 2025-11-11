@@ -135,24 +135,23 @@ export default function EditCarro({ id, onUpdated }) {
 
             <div>
               <Label>Foto do carro</Label>
-                  <Input
-            placeholder="URL da foto"
-            id="picture"
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0]
-              if (!file) return
+              <Input
+                placeholder="URL da foto"
+                id="picture"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0]
+                  if (!file) return
 
-              const reader = new FileReader()
-              reader.onloadend = () => {
-                setForm({ ...form, foto_url: reader.result }) 
-              }
-              reader.readAsDataURL(file)
-            }}
-          />
+                  const reader = new FileReader()
+                  reader.onloadend = () => {
+                    setCarro({ ...carro, foto_url: reader.result })
+                  }
+                  reader.readAsDataURL(file)
+                }}
+              />
             </div>
-
             <DialogFooter className="mt-6 flex justify-end gap-2">
               <DialogClose asChild>
                 <Button type="button" variant="outline">

@@ -2079,6 +2079,7 @@ export namespace Prisma {
     montadora_id: bigint | null
     foto_url: string | null
     imagem: string | null
+    data_criacao: Date | null
   }
 
   export type CarrosMaxAggregateOutputType = {
@@ -2090,6 +2091,7 @@ export namespace Prisma {
     montadora_id: bigint | null
     foto_url: string | null
     imagem: string | null
+    data_criacao: Date | null
   }
 
   export type CarrosCountAggregateOutputType = {
@@ -2101,6 +2103,7 @@ export namespace Prisma {
     montadora_id: number
     foto_url: number
     imagem: number
+    data_criacao: number
     _all: number
   }
 
@@ -2128,6 +2131,7 @@ export namespace Prisma {
     montadora_id?: true
     foto_url?: true
     imagem?: true
+    data_criacao?: true
   }
 
   export type CarrosMaxAggregateInputType = {
@@ -2139,6 +2143,7 @@ export namespace Prisma {
     montadora_id?: true
     foto_url?: true
     imagem?: true
+    data_criacao?: true
   }
 
   export type CarrosCountAggregateInputType = {
@@ -2150,6 +2155,7 @@ export namespace Prisma {
     montadora_id?: true
     foto_url?: true
     imagem?: true
+    data_criacao?: true
     _all?: true
   }
 
@@ -2248,6 +2254,7 @@ export namespace Prisma {
     montadora_id: bigint | null
     foto_url: string | null
     imagem: string | null
+    data_criacao: Date
     _count: CarrosCountAggregateOutputType | null
     _avg: CarrosAvgAggregateOutputType | null
     _sum: CarrosSumAggregateOutputType | null
@@ -2278,6 +2285,7 @@ export namespace Prisma {
     montadora_id?: boolean
     foto_url?: boolean
     imagem?: boolean
+    data_criacao?: boolean
     produtos?: boolean | carros$produtosArgs<ExtArgs>
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
     _count?: boolean | CarrosCountOutputTypeDefaultArgs<ExtArgs>
@@ -2292,6 +2300,7 @@ export namespace Prisma {
     montadora_id?: boolean
     foto_url?: boolean
     imagem?: boolean
+    data_criacao?: boolean
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
   }, ExtArgs["result"]["carros"]>
 
@@ -2304,6 +2313,7 @@ export namespace Prisma {
     montadora_id?: boolean
     foto_url?: boolean
     imagem?: boolean
+    data_criacao?: boolean
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
   }, ExtArgs["result"]["carros"]>
 
@@ -2316,9 +2326,10 @@ export namespace Prisma {
     montadora_id?: boolean
     foto_url?: boolean
     imagem?: boolean
+    data_criacao?: boolean
   }
 
-  export type carrosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "ano_de" | "ano_ate" | "versao" | "montadora_id" | "foto_url" | "imagem", ExtArgs["result"]["carros"]>
+  export type carrosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "ano_de" | "ano_ate" | "versao" | "montadora_id" | "foto_url" | "imagem" | "data_criacao", ExtArgs["result"]["carros"]>
   export type carrosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produtos?: boolean | carros$produtosArgs<ExtArgs>
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
@@ -2346,6 +2357,7 @@ export namespace Prisma {
       montadora_id: bigint | null
       foto_url: string | null
       imagem: string | null
+      data_criacao: Date
     }, ExtArgs["result"]["carros"]>
     composites: {}
   }
@@ -2779,6 +2791,7 @@ export namespace Prisma {
     readonly montadora_id: FieldRef<"carros", 'BigInt'>
     readonly foto_url: FieldRef<"carros", 'String'>
     readonly imagem: FieldRef<"carros", 'String'>
+    readonly data_criacao: FieldRef<"carros", 'DateTime'>
   }
     
 
@@ -9469,6 +9482,7 @@ export namespace Prisma {
     foto_url: string | null
     video_url: string | null
     views: number | null
+    data_criacao: Date | null
   }
 
   export type ProdutosMaxAggregateOutputType = {
@@ -9478,6 +9492,7 @@ export namespace Prisma {
     foto_url: string | null
     video_url: string | null
     views: number | null
+    data_criacao: Date | null
   }
 
   export type ProdutosCountAggregateOutputType = {
@@ -9487,6 +9502,7 @@ export namespace Prisma {
     foto_url: number
     video_url: number
     views: number
+    data_criacao: number
     _all: number
   }
 
@@ -9508,6 +9524,7 @@ export namespace Prisma {
     foto_url?: true
     video_url?: true
     views?: true
+    data_criacao?: true
   }
 
   export type ProdutosMaxAggregateInputType = {
@@ -9517,6 +9534,7 @@ export namespace Prisma {
     foto_url?: true
     video_url?: true
     views?: true
+    data_criacao?: true
   }
 
   export type ProdutosCountAggregateInputType = {
@@ -9526,6 +9544,7 @@ export namespace Prisma {
     foto_url?: true
     video_url?: true
     views?: true
+    data_criacao?: true
     _all?: true
   }
 
@@ -9622,6 +9641,7 @@ export namespace Prisma {
     foto_url: string | null
     video_url: string | null
     views: number | null
+    data_criacao: Date
     _count: ProdutosCountAggregateOutputType | null
     _avg: ProdutosAvgAggregateOutputType | null
     _sum: ProdutosSumAggregateOutputType | null
@@ -9650,6 +9670,7 @@ export namespace Prisma {
     foto_url?: boolean
     video_url?: boolean
     views?: boolean
+    data_criacao?: boolean
     carros?: boolean | produtos$carrosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produtos"]>
@@ -9661,6 +9682,7 @@ export namespace Prisma {
     foto_url?: boolean
     video_url?: boolean
     views?: boolean
+    data_criacao?: boolean
   }, ExtArgs["result"]["produtos"]>
 
   export type produtosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9670,6 +9692,7 @@ export namespace Prisma {
     foto_url?: boolean
     video_url?: boolean
     views?: boolean
+    data_criacao?: boolean
   }, ExtArgs["result"]["produtos"]>
 
   export type produtosSelectScalar = {
@@ -9679,9 +9702,10 @@ export namespace Prisma {
     foto_url?: boolean
     video_url?: boolean
     views?: boolean
+    data_criacao?: boolean
   }
 
-  export type produtosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "foto_url" | "video_url" | "views", ExtArgs["result"]["produtos"]>
+  export type produtosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "foto_url" | "video_url" | "views" | "data_criacao", ExtArgs["result"]["produtos"]>
   export type produtosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carros?: boolean | produtos$carrosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
@@ -9701,6 +9725,7 @@ export namespace Prisma {
       foto_url: string | null
       video_url: string | null
       views: number | null
+      data_criacao: Date
     }, ExtArgs["result"]["produtos"]>
     composites: {}
   }
@@ -10131,6 +10156,7 @@ export namespace Prisma {
     readonly foto_url: FieldRef<"produtos", 'String'>
     readonly video_url: FieldRef<"produtos", 'String'>
     readonly views: FieldRef<"produtos", 'Int'>
+    readonly data_criacao: FieldRef<"produtos", 'DateTime'>
   }
     
 
@@ -15789,7 +15815,8 @@ export namespace Prisma {
     versao: 'versao',
     montadora_id: 'montadora_id',
     foto_url: 'foto_url',
-    imagem: 'imagem'
+    imagem: 'imagem',
+    data_criacao: 'data_criacao'
   };
 
   export type CarrosScalarFieldEnum = (typeof CarrosScalarFieldEnum)[keyof typeof CarrosScalarFieldEnum]
@@ -15862,7 +15889,8 @@ export namespace Prisma {
     codigo: 'codigo',
     foto_url: 'foto_url',
     video_url: 'video_url',
-    views: 'views'
+    views: 'views',
+    data_criacao: 'data_criacao'
   };
 
   export type ProdutosScalarFieldEnum = (typeof ProdutosScalarFieldEnum)[keyof typeof ProdutosScalarFieldEnum]
@@ -15979,20 +16007,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -16003,6 +16017,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -16035,6 +16063,7 @@ export namespace Prisma {
     montadora_id?: BigIntNullableFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableFilter<"carros"> | string | null
     imagem?: StringNullableFilter<"carros"> | string | null
+    data_criacao?: DateTimeFilter<"carros"> | Date | string
     produtos?: Carro_produtosListRelationFilter
     montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }
@@ -16048,6 +16077,7 @@ export namespace Prisma {
     montadora_id?: SortOrderInput | SortOrder
     foto_url?: SortOrderInput | SortOrder
     imagem?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
     produtos?: carro_produtosOrderByRelationAggregateInput
     montadora?: montadorasOrderByWithRelationInput
   }
@@ -16064,6 +16094,7 @@ export namespace Prisma {
     montadora_id?: BigIntNullableFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableFilter<"carros"> | string | null
     imagem?: StringNullableFilter<"carros"> | string | null
+    data_criacao?: DateTimeFilter<"carros"> | Date | string
     produtos?: Carro_produtosListRelationFilter
     montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }, "id" | "id">
@@ -16077,6 +16108,7 @@ export namespace Prisma {
     montadora_id?: SortOrderInput | SortOrder
     foto_url?: SortOrderInput | SortOrder
     imagem?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
     _count?: carrosCountOrderByAggregateInput
     _avg?: carrosAvgOrderByAggregateInput
     _max?: carrosMaxOrderByAggregateInput
@@ -16096,6 +16128,7 @@ export namespace Prisma {
     montadora_id?: BigIntNullableWithAggregatesFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableWithAggregatesFilter<"carros"> | string | null
     imagem?: StringNullableWithAggregatesFilter<"carros"> | string | null
+    data_criacao?: DateTimeWithAggregatesFilter<"carros"> | Date | string
   }
 
   export type categoriasWhereInput = {
@@ -16411,6 +16444,7 @@ export namespace Prisma {
     foto_url?: StringNullableFilter<"produtos"> | string | null
     video_url?: StringNullableFilter<"produtos"> | string | null
     views?: IntNullableFilter<"produtos"> | number | null
+    data_criacao?: DateTimeFilter<"produtos"> | Date | string
     carros?: Carro_produtosListRelationFilter
   }
 
@@ -16421,6 +16455,7 @@ export namespace Prisma {
     foto_url?: SortOrderInput | SortOrder
     video_url?: SortOrderInput | SortOrder
     views?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
     carros?: carro_produtosOrderByRelationAggregateInput
   }
 
@@ -16434,6 +16469,7 @@ export namespace Prisma {
     foto_url?: StringNullableFilter<"produtos"> | string | null
     video_url?: StringNullableFilter<"produtos"> | string | null
     views?: IntNullableFilter<"produtos"> | number | null
+    data_criacao?: DateTimeFilter<"produtos"> | Date | string
     carros?: Carro_produtosListRelationFilter
   }, "id" | "id">
 
@@ -16444,6 +16480,7 @@ export namespace Prisma {
     foto_url?: SortOrderInput | SortOrder
     video_url?: SortOrderInput | SortOrder
     views?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
     _count?: produtosCountOrderByAggregateInput
     _avg?: produtosAvgOrderByAggregateInput
     _max?: produtosMaxOrderByAggregateInput
@@ -16461,6 +16498,7 @@ export namespace Prisma {
     foto_url?: StringNullableWithAggregatesFilter<"produtos"> | string | null
     video_url?: StringNullableWithAggregatesFilter<"produtos"> | string | null
     views?: IntNullableWithAggregatesFilter<"produtos"> | number | null
+    data_criacao?: DateTimeWithAggregatesFilter<"produtos"> | Date | string
   }
 
   export type usuariosWhereInput = {
@@ -16738,6 +16776,7 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
     produtos?: carro_produtosCreateNestedManyWithoutCarroInput
     montadora?: montadorasCreateNestedOneWithoutCarrosInput
   }
@@ -16751,6 +16790,7 @@ export namespace Prisma {
     montadora_id?: bigint | number | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
     produtos?: carro_produtosUncheckedCreateNestedManyWithoutCarroInput
   }
 
@@ -16762,6 +16802,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
     montadora?: montadorasUpdateOneWithoutCarrosNestedInput
   }
@@ -16775,6 +16816,7 @@ export namespace Prisma {
     montadora_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUncheckedUpdateManyWithoutCarroNestedInput
   }
 
@@ -16787,6 +16829,7 @@ export namespace Prisma {
     montadora_id?: bigint | number | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
   }
 
   export type carrosUpdateManyMutationInput = {
@@ -16797,6 +16840,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type carrosUncheckedUpdateManyInput = {
@@ -16808,6 +16852,7 @@ export namespace Prisma {
     montadora_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type categoriasCreateInput = {
@@ -17122,6 +17167,7 @@ export namespace Prisma {
     foto_url?: string | null
     video_url?: string | null
     views?: number | null
+    data_criacao?: Date | string
     carros?: carro_produtosCreateNestedManyWithoutProdutoInput
   }
 
@@ -17132,6 +17178,7 @@ export namespace Prisma {
     foto_url?: string | null
     video_url?: string | null
     views?: number | null
+    data_criacao?: Date | string
     carros?: carro_produtosUncheckedCreateNestedManyWithoutProdutoInput
   }
 
@@ -17142,6 +17189,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     carros?: carro_produtosUpdateManyWithoutProdutoNestedInput
   }
 
@@ -17152,6 +17200,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     carros?: carro_produtosUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
@@ -17162,6 +17211,7 @@ export namespace Prisma {
     foto_url?: string | null
     video_url?: string | null
     views?: number | null
+    data_criacao?: Date | string
   }
 
   export type produtosUpdateManyMutationInput = {
@@ -17171,6 +17221,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type produtosUncheckedUpdateManyInput = {
@@ -17180,6 +17231,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type usuariosCreateInput = {
@@ -17484,6 +17536,17 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type Carro_produtosListRelationFilter = {
     every?: carro_produtosWhereInput
     some?: carro_produtosWhereInput
@@ -17513,6 +17576,7 @@ export namespace Prisma {
     montadora_id?: SortOrder
     foto_url?: SortOrder
     imagem?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type carrosAvgOrderByAggregateInput = {
@@ -17531,6 +17595,7 @@ export namespace Prisma {
     montadora_id?: SortOrder
     foto_url?: SortOrder
     imagem?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type carrosMinOrderByAggregateInput = {
@@ -17542,6 +17607,7 @@ export namespace Prisma {
     montadora_id?: SortOrder
     foto_url?: SortOrder
     imagem?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type carrosSumOrderByAggregateInput = {
@@ -17599,6 +17665,20 @@ export namespace Prisma {
     _sum?: NestedBigIntNullableFilter<$PrismaModel>
     _min?: NestedBigIntNullableFilter<$PrismaModel>
     _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type categoriasCountOrderByAggregateInput = {
@@ -17821,6 +17901,7 @@ export namespace Prisma {
     foto_url?: SortOrder
     video_url?: SortOrder
     views?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type produtosAvgOrderByAggregateInput = {
@@ -17835,6 +17916,7 @@ export namespace Prisma {
     foto_url?: SortOrder
     video_url?: SortOrder
     views?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type produtosMinOrderByAggregateInput = {
@@ -17844,6 +17926,7 @@ export namespace Prisma {
     foto_url?: SortOrder
     video_url?: SortOrder
     views?: SortOrder
+    data_criacao?: SortOrder
   }
 
   export type produtosSumOrderByAggregateInput = {
@@ -18109,6 +18192,10 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type carro_produtosUpdateManyWithoutCarroNestedInput = {
     create?: XOR<carro_produtosCreateWithoutCarroInput, carro_produtosUncheckedCreateWithoutCarroInput> | carro_produtosCreateWithoutCarroInput[] | carro_produtosUncheckedCreateWithoutCarroInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutCarroInput | carro_produtosCreateOrConnectWithoutCarroInput[]
@@ -18307,6 +18394,17 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
@@ -18398,6 +18496,20 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18531,6 +18643,7 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
     produtos?: carro_produtosCreateNestedManyWithoutCarroInput
   }
 
@@ -18542,6 +18655,7 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
     produtos?: carro_produtosUncheckedCreateNestedManyWithoutCarroInput
   }
 
@@ -18583,6 +18697,7 @@ export namespace Prisma {
     montadora_id?: BigIntNullableFilter<"carros"> | bigint | number | null
     foto_url?: StringNullableFilter<"carros"> | string | null
     imagem?: StringNullableFilter<"carros"> | string | null
+    data_criacao?: DateTimeFilter<"carros"> | Date | string
   }
 
   export type carro_produtosCreateWithoutProdutoInput = {
@@ -18627,6 +18742,7 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
     montadora?: montadorasCreateNestedOneWithoutCarrosInput
   }
 
@@ -18639,6 +18755,7 @@ export namespace Prisma {
     montadora_id?: bigint | number | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
   }
 
   export type carrosCreateOrConnectWithoutProdutosInput = {
@@ -18653,6 +18770,7 @@ export namespace Prisma {
     foto_url?: string | null
     video_url?: string | null
     views?: number | null
+    data_criacao?: Date | string
   }
 
   export type produtosUncheckedCreateWithoutCarrosInput = {
@@ -18662,6 +18780,7 @@ export namespace Prisma {
     foto_url?: string | null
     video_url?: string | null
     views?: number | null
+    data_criacao?: Date | string
   }
 
   export type produtosCreateOrConnectWithoutCarrosInput = {
@@ -18688,6 +18807,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     montadora?: montadorasUpdateOneWithoutCarrosNestedInput
   }
 
@@ -18700,6 +18820,7 @@ export namespace Prisma {
     montadora_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type produtosUpsertWithoutCarrosInput = {
@@ -18720,6 +18841,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type produtosUncheckedUpdateWithoutCarrosInput = {
@@ -18729,6 +18851,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type carro_produtosCreateManyCarroInput = {
@@ -18755,6 +18878,7 @@ export namespace Prisma {
     versao?: string | null
     foto_url?: string | null
     imagem?: string | null
+    data_criacao?: Date | string
   }
 
   export type carrosUpdateWithoutMontadoraInput = {
@@ -18765,6 +18889,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
   }
 
@@ -18776,6 +18901,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUncheckedUpdateManyWithoutCarroNestedInput
   }
 
@@ -18787,6 +18913,7 @@ export namespace Prisma {
     versao?: NullableStringFieldUpdateOperationsInput | string | null
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type carro_produtosCreateManyProdutoInput = {

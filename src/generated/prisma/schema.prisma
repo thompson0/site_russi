@@ -20,6 +20,7 @@ model carros {
   montadora_id BigInt?
   foto_url     String?
   imagem       String?
+  data_criacao DateTime         @default(now()) @db.Timestamptz(6)
   produtos     carro_produtos[]
   montadora    montadoras?      @relation(fields: [montadora_id], references: [id])
 }
@@ -77,13 +78,14 @@ model produto_fotos {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model produtos {
-  id        BigInt           @id @unique @default(autoincrement())
-  nome      String?
-  codigo    String?
-  foto_url  String?
-  video_url String?
-  views     Int?             @db.SmallInt
-  carros    carro_produtos[]
+  id           BigInt           @id @unique @default(autoincrement())
+  nome         String?
+  codigo       String?
+  foto_url     String?
+  video_url    String?
+  views        Int?             @default(0) @db.SmallInt
+  data_criacao DateTime         @default(now()) @db.Timestamptz(6)
+  carros       carro_produtos[]
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.

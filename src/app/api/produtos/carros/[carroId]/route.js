@@ -35,7 +35,7 @@ export async function GET(req, { params }) {
 
 export async function POST(req, { params }) {
   try {
-    const { carroId } = params || {};
+    const { carroId } = await params || {};
     let carroIdBig;
     try {
       carroIdBig = BigInt(carroId);

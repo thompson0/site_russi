@@ -28,7 +28,7 @@ function MostView() {
 
   if (!produto) {
     return (
-      <Card className="w-full">
+      <Card className="w-full shadow-sm border border-border/50">
         <CardHeader>
           <CardTitle>Mais acessado</CardTitle>
           <CardDescription>Carregando...</CardDescription>
@@ -38,27 +38,31 @@ function MostView() {
   }
 
   return (
-    <Card className="shadow-sm border border-border/50">
-      <CardHeader>
-        <CardTitle> Produto mais acessado</CardTitle>
-        <CardDescription>{produto.nome}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col items-center space-y-3">
-        {produto.foto_url && (
-          <img
-            src={produto.foto_url}
-            alt={produto.nome}
-            className="w-40 h-40 object-cover rounded-lg border"
-          />
-        )}
-        <p className="text-sm text-center text-muted-foreground">
-          Visualizações:{" "}
-          <span className="font-semibold text-foreground">
-            {produto.views}
-          </span>
-        </p>
-      </CardContent>
-    </Card>
+    <div className="p-6 space-y-6">
+
+
+      <Card className="w-full shadow-sm border border-border/50">
+        <CardHeader>
+          <CardTitle>Produto mais acessado</CardTitle>
+          <CardDescription>{produto.nome}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center space-y-3">
+          {produto.foto_url && (
+            <img
+              src={produto.foto_url}
+              alt={produto.nome}
+              className="w-40 h-40 object-cover rounded-lg border"
+            />
+          )}
+          <p className="text-sm text-center text-muted-foreground">
+            Visualizações:{" "}
+            <span className="font-semibold text-foreground">
+              {produto.views}
+            </span>
+          </p>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
