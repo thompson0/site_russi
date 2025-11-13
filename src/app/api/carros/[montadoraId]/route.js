@@ -20,7 +20,7 @@ export async function GET(req, context) {
       {
         status: 200,
         headers: {
-          "Cache-Control": "public, max-age=60, s-maxage=3600, stale-while-revalidate=600",
+          "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=120",
           "Content-Type": "application/json",
         },
       }

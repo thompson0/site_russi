@@ -6,6 +6,7 @@ import { ProgressDemo } from "@/components/ProgressDemo";
 import EditProduto from "./EditProduto";
 import QrCodeButton from "./QrCode";
 import { useRefresh } from "@/context/RefreshContext";
+import ProdutoVideo from "../Videos/ProdutoVideo";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -21,6 +22,7 @@ export default function SingleProduto({ id, qrcode = false }) {
         if (!res.ok) throw new Error("Erro ao buscar produto");
         const data = await res.json();
         setProduto(data);
+        
       } catch (err) {
         console.error(err);
       } finally {
@@ -40,10 +42,11 @@ export default function SingleProduto({ id, qrcode = false }) {
 
   if (!produto)
     return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
-
+        
   return (
     <div className="flex justify-center items-center max-h-screen p-4">
       <Card className="max-w-4xl w-full shadow-lg">
+
         <CardHeader className="text-center">
           <CardTitle className="text-4xl font-bold">{produto.nome}</CardTitle>
         </CardHeader>
@@ -59,13 +62,9 @@ export default function SingleProduto({ id, qrcode = false }) {
             <strong>Código:</strong> {produto.codigo}
           </p>
 
-          {produto.video_url && (
-            <video
-              src={produto.video_url}
-              controls
-              className="w-full rounded-lg"
-            />
-          )}
+        <ProdutoVideo url={produto.video_url} />
+
+
         </CardContent>
 
         {!qrcode && (

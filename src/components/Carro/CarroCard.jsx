@@ -98,7 +98,7 @@ function CarroCard({ montadoraId }) {
                 </span>
               </p>
             </CardContent>
-
+            
             <CardFooter className="flex justify-between">
               <DeleteCarro id={carro.id} onDelete={handleDeleted} />
               <EditCarro id={carro.id} onUpdated={handleUpdated} />

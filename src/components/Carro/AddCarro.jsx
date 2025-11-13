@@ -54,28 +54,38 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
 
   async function handleAddCarro(e) {
     e.preventDefault()
+
     if (Allcarros === true && !form.montadora_id) {
       alert("Selecione a montadora do carro.")
       return
     }
-    const res = await secureFetch(
-      "/api/carros/",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          ...form,
-          ano_de: Number(form.ano_de),
-          ano_ate: Number(form.ano_ate),
-          montadora_id: form.montadora_id ? Number(form.montadora_id) : undefined,
-        }),
-      },
-      {
-        successMsg: "Carro criado com sucesso!",
-        errorMsg: "Não foi possível criar o carro.",
-      }
-    )
 
-    if (res) {
+    try {
+      const res = await secureFetch(
+        "/api/carros",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...form,
+            ano_de: Number(form.ano_de),
+            ano_ate: Number(form.ano_ate),
+            montadora_id: form.montadora_id ? Number(form.montadora_id) : undefined,
+          }),
+        },
+        {
+          successMsg: "Carro criado com sucesso!",
+          errorMsg: "Não foi possível criar o carro.",
+        }
+      )
+
+      if (!res.ok) throw new Error("Erro ao criar carro")
+      const novoCarro = await res.json()
+
+      if (onCreated) onCreated(novoCarro)
+
+      triggerRefresh()
+
+
       setForm({
         nome: "",
         ano_de: "",
@@ -86,13 +96,12 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
         imagem: "",
       })
       setOpen(false)
-      triggerRefresh()
-      
+    } catch (err) {
+      console.error("Erro ao adicionar carro:", err)
     }
   }
 
   return (
-
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="icon">
@@ -150,7 +159,8 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
               </SelectContent>
             </Select>
           )}
-           <Label>Foto do carro</Label>
+
+          <Label>Foto do carro</Label>
           <Input
             placeholder="URL da foto"
             id="picture"
@@ -159,14 +169,14 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
             onChange={(e) => {
               const file = e.target.files[0]
               if (!file) return
-
               const reader = new FileReader()
               reader.onloadend = () => {
-                setForm({ ...form, foto_url: reader.result }) 
+                setForm({ ...form, foto_url: reader.result })
               }
               reader.readAsDataURL(file)
             }}
           />
+
           <DialogFooter>
             <DialogClose asChild>
               <Button type="button" variant="outline">

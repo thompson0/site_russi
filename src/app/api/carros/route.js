@@ -7,8 +7,38 @@ function serializeBigInt(data) {
   )
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get("id")
+
+    if (id) {
+      const carro = await prisma.carros.findUnique({
+        where: { id: BigInt(id) },
+        select: {
+          id: true,
+          nome: true,
+          ano_de: true,
+          ano_ate: true,
+          versao: true,
+          montadora_id: true,
+          foto_url: true,
+          imagem: true,
+        },
+      })
+
+      if (!carro) {
+        return NextResponse.json({ error: "Carro não encontrado" }, { status: 404 })
+      }
+
+      return NextResponse.json(serializeBigInt(carro), {
+        headers: {
+          "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=120",
+          "Content-Type": "application/json",
+        },
+      })
+    }
+
     const carros = await prisma.carros.findMany({
       select: {
         id: true,
@@ -24,7 +54,7 @@ export async function GET() {
 
     return NextResponse.json(serializeBigInt(carros), {
       headers: {
-        "Cache-Control": "public, max-age=60, s-maxage=3600, stale-while-revalidate=600",
+        "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=120",
         "Content-Type": "application/json",
       },
     })
@@ -62,7 +92,13 @@ export async function POST(req) {
       },
     })
 
-    return NextResponse.json(serializeBigInt(novoCarro), { status: 201 })
+    return NextResponse.json(serializeBigInt(novoCarro), { 
+      status: 201,
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Content-Type": "application/json",
+      },
+    })
   } catch (error) {
     console.error("Erro ao criar carro:", error)
     return NextResponse.json({ error: error.message }, { status: 500 })
@@ -86,7 +122,12 @@ export async function PUT(req) {
       },
     })
 
-    return NextResponse.json(serializeBigInt(carroAtualizado))
+    return NextResponse.json(serializeBigInt(carroAtualizado), {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Content-Type": "application/json",
+      },
+    })
   } catch (error) {
     console.error("Erro ao atualizar carro:", error)
     return NextResponse.json({ error: error.message }, { status: 500 })
@@ -106,7 +147,12 @@ export async function DELETE(req) {
       prisma.carros.delete({ where: { id: BigInt(id) } }),
     ])
 
-    return NextResponse.json({ message: "Carro deletado com sucesso" })
+    return NextResponse.json({ message: "Carro deletado com sucesso" }, {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Content-Type": "application/json",
+      },
+    })
   } catch (error) {
     console.error("Erro ao deletar carro:", error)
     return NextResponse.json({ error: error.message }, { status: 500 })
