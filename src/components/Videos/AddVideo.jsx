@@ -38,8 +38,8 @@ export default function AddVideo({ onCreated }) {
           body: JSON.stringify(form),
         },
         {
-          successMsg: "V\u00eddeo adicionado com sucesso!",
-          errorMsg: "Erro ao criar v\u00eddeo.",
+          successMsg: "Video adicionado com sucesso!",
+          errorMsg: "Erro ao criar video.",
         }
       );
 
@@ -59,7 +59,7 @@ export default function AddVideo({ onCreated }) {
       setOpen(false);
     } catch (err) {
       console.error(err);
-      triggerAlert("error", "Erro!", "Erro ao criar v\u00eddeo.");
+      triggerAlert("error", "Erro!", "Erro ao criar video.");
     }
   }
 
@@ -73,23 +73,23 @@ export default function AddVideo({ onCreated }) {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Novo V\u00eddeo</DialogTitle>
+          <DialogTitle>Novo Video</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <Input
-            placeholder="T\u00edtulo"
+            placeholder="Titulo"
             value={form.titulo}
             onChange={(e) => setForm({ ...form, titulo: e.target.value })}
             required
           />
           <Input
-            placeholder="Descri\u00e7\u00e3o"
+            placeholder="Descrição do video"
             value={form.descricao}
             onChange={(e) => setForm({ ...form, descricao: e.target.value })}
           />
           <Input
-            placeholder="URL do v\u00eddeo"
+            placeholder="URL do video"
             value={form.url}
             onChange={(e) => setForm({ ...form, url: e.target.value })}
             required

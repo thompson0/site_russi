@@ -34,8 +34,8 @@ export default function EditVideo({ video, onUpdated }) {
           body: JSON.stringify(form),
         },
         {
-          successMsg: "V\u00eddeo atualizado com sucesso!",
-          errorMsg: "Erro ao atualizar v\u00eddeo.",
+          successMsg: "Video atualizado com sucesso!",
+          errorMsg: "Erro ao atualizar video.",
         }
       );
 
@@ -50,7 +50,7 @@ export default function EditVideo({ video, onUpdated }) {
       setOpen(false);
     } catch (err) {
       console.error(err);
-      triggerAlert("error", "Erro!", "Erro ao atualizar v\u00eddeo.");
+      triggerAlert("error", "Erro!", "Erro ao atualizar video.");
     }
   }
 
@@ -63,27 +63,27 @@ export default function EditVideo({ video, onUpdated }) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Editar V\u00eddeo</DialogTitle>
+          <DialogTitle>Editar Video</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleUpdate} className="space-y-3">
           <Input
-            placeholder="T\u00edtulo"
+            placeholder="Titulo"
             value={form.titulo || ""}
             onChange={(e) => setForm({ ...form, titulo: e.target.value })}
           />
           <Input
-            placeholder="Descri\u00e7\u00e3o"
+            placeholder="Descrição do video"
             value={form.descricao || ""}
             onChange={(e) => setForm({ ...form, descricao: e.target.value })}
           />
           <Input
-            placeholder="URL do v\u00eddeo"
+            placeholder="URL do video"
             value={form.url || ""}
             onChange={(e) => setForm({ ...form, url: e.target.value })}
           />
           <DialogFooter>
             <Button type="submit" disabled={loading}>
-              {loading ? "Salvando..." : "Salvar altera\u00e7\u00f5es"}
+              {loading ? "Salvando..." : "Salvar alterações"}
             </Button>
           </DialogFooter>
         </form>

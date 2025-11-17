@@ -13,11 +13,11 @@ export default function DeleteVideo({ id, onDelete }) {
 
   async function handleDelete() {
     if (!id) {
-      triggerAlert("error", "Erro!", "ID do v\u00eddeo n\u00e3o informado.");
+      triggerAlert("error", "Erro!", "ID do video não informado.");
       return;
     }
 
-    const confirmar = confirm("Tem certeza que deseja excluir este v\u00eddeo?");
+    const confirmar = confirm("Tem certeza que deseja excluir este video?");
     if (!confirmar) return;
 
     const res = await secureFetch(
