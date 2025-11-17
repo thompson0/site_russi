@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 
 export const revalidate = 3600;
 
-
 const toJson = (data) =>
   JSON.stringify(data, (_, v) => (typeof v === "bigint" ? Number(v) : v));
 
@@ -19,8 +18,12 @@ export async function GET() {
         "Content-Type": "application/json",
       },
     });
+
   } catch (err) {
-    return Response.json({ error: err.message }, { status: 500 });
+    return new Response(toJson({ error: err.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
 
@@ -36,8 +39,15 @@ export async function POST(req) {
       },
     });
 
-    return Response.json(newVideo, { status: 201 });
+    return new Response(toJson(newVideo), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
+
   } catch (err) {
-    return Response.json({ error: err.message }, { status: 500 });
+    return new Response(toJson({ error: err.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

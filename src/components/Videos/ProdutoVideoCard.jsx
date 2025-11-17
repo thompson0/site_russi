@@ -1,7 +1,7 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import ProdutoVideo from "./ProdutoVideo";
 
-export default function ProdutoVideoCard({ video }) {
+export default function ProdutoVideoCard({ video, children }) {
   return (
     <Card className="w-full shadow-lg border rounded-xl overflow-hidden">
       <CardContent >
@@ -20,6 +20,12 @@ export default function ProdutoVideoCard({ video }) {
             <p className="text-sm text-muted-foreground">{video.descricao}</p>
           )}
         </CardHeader>
+      )}
+
+      {children && (
+        <CardFooter className="flex justify-end gap-2">
+          {children}
+        </CardFooter>
       )}
     </Card>
   );
