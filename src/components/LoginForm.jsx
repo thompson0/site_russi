@@ -52,7 +52,7 @@ export function LoginForm(props) {
     >
       <CardContent className=" dark p-6 flex flex-col gap-6 md:p-8">
         <div className="flex flex-col items-center text-center">
-          <img src="logo.png" alt="" />
+          <img src="/logo.png" alt="" />
           <h1 className="text-2xl font-bold">Bem vindo</h1>
           <p className="text-muted-foreground">
             Faça login na Russi
