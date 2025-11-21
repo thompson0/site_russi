@@ -1,7 +1,7 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import DropProfile from "./DropProfile";
 import { getUserFromCookie } from "@/lib/auth";
-import { DarkMode } from "../Darkmode";
+import { DarkMode } from "../Home/Darkmode";
 async function NavBar() {
   const user = await getUserFromCookie();
   return (

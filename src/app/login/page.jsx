@@ -1,5 +1,5 @@
-import { LoginForm } from "@/components/LoginForm"
-import BgVideo from "@/components/Video"
+import { LoginForm } from "@/components/Home/LoginForm"
+import BgVideo from "@/components/Home/Video"
 export default function LoginPage({ children }) {
   return (
     <div lang="pt-br" className="">

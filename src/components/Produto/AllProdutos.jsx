@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
-import { ProgressDemo } from "@/components/ProgressDemo";
+import { ProgressDemo } from "@/components/Home/ProgressDemo";
 import { useRefresh } from "@/context/RefreshContext";
 import EditProduto from "./EditProduto";
 import DeleteProduto from "./DeleteProduto";

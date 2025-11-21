@@ -1,4 +1,4 @@
-import NavHome from "@/components/NavHome";
+import NavHome from "@/components/Home/NavHome";
 
 export default function LayoutVisitante({ children }) {
   return (

@@ -21,17 +21,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning>
-      <body className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
+      <body  className={`${publicSans.variable} ${publicSansAsMono.variable} antialiased`}>
         <AlertProvider>
           <RefreshProvider>
             <ThemeProvider 
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="system"
             enableSystem
-            
             >
             {children}
-
             </ThemeProvider>
           </RefreshProvider>
         </AlertProvider>
