@@ -16,7 +16,7 @@ function HomePage() {
             <Separator className="my-1" />
 
 
-            <div className="px-3 sm:px-6 lg:px-8 mt-2 sm:mt-4 lg:mt-5">
+            <div className="mt-2 sm:mt-4 lg:mt-5">
 
                 <WelcomeMessage />
                 <SectionCard

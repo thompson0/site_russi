@@ -10,9 +10,9 @@ export default function SectionCard({
   return (
     <section
       className={cn(
-        "relative w-screen left-1/2 -translate-x-1/2 py-10 transition-colors",
+        " w-full min-h-[25%] py-10 transition-colors",
         variant === "light" && "bg-background text-foreground",
-        variant === "dark" && "bg-foreground text-background"
+        variant === "dark" && "bg-primary text-background"
       )}
     >
       <div
