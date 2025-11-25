@@ -15,19 +15,16 @@ function NavHome() {
   return (
     <nav className="top-0 left-0 w-full flex justify-between items-center p-4">
 
-      <div className="flex items-center gap-4">
-        <Image
-          src="/logo_index.png"
-          alt="Logo"
-          width={200}
-          height={200}
-          className="rounded-lg object-contain"
-        />
-      </div>
-
       <NavigationMenu>
-
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <DarkMode />
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <NavigationMenu>
         <NavigationMenuList className="flex items-center gap-4">
+
           <NavigationMenuItem>
             <Link href="/login">
               <Button>Login</Button>
@@ -41,14 +38,8 @@ function NavHome() {
               </Button>
             </Link>
           </NavigationMenuItem>
-        </NavigationMenuList>
 
-        <NavigationMenuList className="flex items-center p-5"> 
-          <NavigationMenuItem>
-            <DarkMode />
-          </NavigationMenuItem>
         </NavigationMenuList>
-
       </NavigationMenu>
 
     </nav>

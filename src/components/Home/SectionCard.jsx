@@ -5,19 +5,30 @@ export default function SectionCard({
   texto,
   align = "left",
   variant = "light",
+  sectionWidth = "full", 
   children,
 }) {
+
+  const sectionWidthMap = {
+    full: "w-full",                          
+    boxed: "max-w-6xl mx-auto w-full",       
+    medium: "max-w-4xl mx-auto w-full",
+    small: "max-w-2xl mx-auto w-full",
+  };
+
   return (
     <section
       className={cn(
-        " w-full min-h-[25%] py-10 transition-colors",
+        sectionWidthMap[sectionWidth] || sectionWidthMap.full, 
+        "py-10 transition-colors rounded-2xl",
+
         variant === "light" && "bg-background text-foreground",
         variant === "dark" && "bg-primary text-background"
       )}
     >
       <div
         className={cn(
-          "w-full mx-auto flex flex-col gap-4 px-6",
+          "flex flex-col gap-4 px-6",
 
           align === "left" && "items-start text-left",
           align === "right" && "items-end text-right",
@@ -29,7 +40,9 @@ export default function SectionCard({
         )}
 
         {texto && (
-          <p className="text-base whitespace-pre-line opacity-90">{texto}</p>
+          <p className="text-base whitespace-pre-line opacity-90">
+            {texto}
+          </p>
         )}
 
         {children}
