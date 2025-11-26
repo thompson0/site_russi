@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProgressDemo } from "@/components/ProgressDemo";
+import { ProgressDemo } from "@/components/Home/ProgressDemo";
 import Link from "next/link";
 import DeleteCarro from "./DeleteCarro";
 import EditCarro from "./EditCarro";

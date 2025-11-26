@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
-import { ProgressDemo } from "@/components/ProgressDemo";
+import { ProgressDemo } from "@/components/Home/ProgressDemo";
 import EditProduto from "./EditProduto";
 import QrCodeButton from "./QrCode";
 import { useRefresh } from "@/context/RefreshContext";
