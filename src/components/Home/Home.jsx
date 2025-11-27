@@ -57,24 +57,24 @@ function HomePage() {
             
             <HeroSection />
 
-            <section className="py-20 bg-background">
+            <section className="py-12 sm:py-16 lg:py-20 bg-background">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                    <div className="text-center mb-10 sm:mb-16">
+                        <span className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
                             Quem Somos
                         </span>
-                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">
+                        <h2 className="mt-2 sm:mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                             Sobre a Russi Acessórios
                         </h2>
-                        <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+                        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
                             Nossa empresa nasceu da parceria com os principais distribuidores do mercado, 
                             com experiência de 35 anos no ramo de acessórios automotivos.
                         </p>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div className="relative">
-                            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div className="relative order-2 lg:order-1">
+                            <div className="relative h-[280px] sm:h-[350px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl">
                                 <Image
                                     src="/sectionimg.png"
                                     alt="Russi Acessórios Timeline"
@@ -83,36 +83,36 @@ function HomePage() {
                                     className="object-contain"
                                 />
                             </div>
-                            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl">
+                            <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
                                 <div className="text-center text-white">
-                                    <div className="text-3xl font-bold">35</div>
-                                    <div className="text-xs">Anos</div>
+                                    <div className="text-xl sm:text-2xl lg:text-3xl font-bold">35</div>
+                                    <div className="text-[10px] sm:text-xs">Anos</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="space-y-6">
-                            <p className="text-lg text-muted-foreground leading-relaxed">
+                        <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
+                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                                 São 24 anos dedicados exclusivamente ao desenvolvimento de terceirização 
                                 em Concessionárias de veículos, agregando valor e dinamismo à atividade.
                             </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
+                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                                 Garantimos através de nossos fornecedores: assistência técnica e treinamento 
                                 da equipe efetuada diretamente pelos principais fabricantes de acessórios.
                             </p>
                             
-                            <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4">
                                 {beneficios.map((beneficio, index) => (
                                     <div 
                                         key={index}
-                                        className="flex items-start gap-3 p-4 rounded-xl bg-accent/50 hover:bg-accent transition-colors"
+                                        className="flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-accent/50 hover:bg-accent transition-colors"
                                     >
-                                        <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                        <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                                             {beneficio.icon}
                                         </div>
-                                        <div>
-                                            <h4 className="font-semibold text-foreground">{beneficio.titulo}</h4>
-                                            <p className="text-sm text-muted-foreground">{beneficio.texto}</p>
+                                        <div className="min-w-0">
+                                            <h4 className="font-semibold text-sm sm:text-base text-foreground">{beneficio.titulo}</h4>
+                                            <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{beneficio.texto}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -122,22 +122,22 @@ function HomePage() {
                 </div>
             </section>
 
-            <section className="py-20 bg-slate-900 text-white">
+            <section className="py-12 sm:py-16 lg:py-20 bg-slate-900 text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
+                    <div className="text-center mb-10 sm:mb-16">
+                        <span className="text-xs sm:text-sm font-semibold text-blue-400 uppercase tracking-wider">
                             Nossos Diferenciais
                         </span>
-                        <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
+                        <h2 className="mt-2 sm:mt-3 text-2xl sm:text-3xl md:text-4xl font-bold">
                             Por que escolher a Russi?
                         </h2>
-                        <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+                        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-2">
                             Oferecemos uma estrutura completa para atender às necessidades 
                             da sua concessionária com excelência.
                         </p>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {diferenciais.map((card, index) => (
                             <CardsHome 
                                 key={index} 
@@ -151,44 +151,44 @@ function HomePage() {
                 </div>
             </section>
 
-            <section id="contato" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
+            <section id="contato" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div className="space-y-6">
-                            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div className="space-y-4 sm:space-y-6 text-center lg:text-left">
+                            <span className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
                                 Entre em Contato
                             </span>
-                            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                                 Vamos conversar sobre sua concessionária
                             </h2>
-                            <p className="text-lg text-muted-foreground">
+                            <p className="text-base sm:text-lg text-muted-foreground">
                                 Estamos prontos para apresentar nossas soluções e mostrar 
                                 como podemos agregar valor ao seu negócio.
                             </p>
                             
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                                        <Users className="w-6 h-6 text-blue-600" />
+                            <div className="space-y-3 sm:space-y-4">
+                                <div className="flex items-center gap-3 sm:gap-4 justify-center lg:justify-start">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Users className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                                     </div>
-                                    <div>
-                                        <h4 className="font-semibold text-foreground">Atendimento Personalizado</h4>
-                                        <p className="text-sm text-muted-foreground">Equipe dedicada para sua empresa</p>
+                                    <div className="text-left">
+                                        <h4 className="font-semibold text-sm sm:text-base text-foreground">Atendimento Personalizado</h4>
+                                        <p className="text-xs sm:text-sm text-muted-foreground">Equipe dedicada para sua empresa</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
-                                        <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                                <div className="flex items-center gap-3 sm:gap-4 justify-center lg:justify-start">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                                     </div>
-                                    <div>
-                                        <h4 className="font-semibold text-foreground">Resposta Rápida</h4>
-                                        <p className="text-sm text-muted-foreground">Retornamos em até 24 horas</p>
+                                    <div className="text-left">
+                                        <h4 className="font-semibold text-sm sm:text-base text-foreground">Resposta Rápida</h4>
+                                        <p className="text-xs sm:text-sm text-muted-foreground">Retornamos em até 24 horas</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-background rounded-2xl shadow-2xl p-8">
+                        <div className="bg-background rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
                             <ContactForms />
                         </div>
                     </div>
