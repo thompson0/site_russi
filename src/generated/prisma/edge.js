@@ -237,7 +237,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/bcr/site_russi/src/generated/prisma",
+      "value": "/home/runner/workspace/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -251,7 +251,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/bcr/site_russi/prisma/schema.prisma",
+    "sourceFilePath": "/home/runner/workspace/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
