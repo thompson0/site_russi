@@ -4,44 +4,108 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { DarkMode } from "./Darkmode";
-import { MonitorPlay } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-} from "@/components/ui/navigation-menu";
+import { MonitorPlay, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 function NavHome() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="top-0 left-0 w-full flex justify-between items-center p-4">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 md:h-20">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Russi Acessórios"
+              width={48}
+              height={48}
+              className="w-10 h-10 md:w-12 md:h-12"
+            />
+            <div className="hidden sm:block">
+              <span className={`font-bold text-lg md:text-xl tracking-tight transition-colors ${
+                isScrolled ? "text-foreground" : "text-white"
+              }`}>
+                Russi Acessórios
+              </span>
+              <p className={`text-xs transition-colors ${
+                isScrolled ? "text-muted-foreground" : "text-white/70"
+              }`}>
+                Desde 1986
+              </p>
+            </div>
+          </Link>
 
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
+          <div className="hidden md:flex items-center gap-2">
             <DarkMode />
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-      <NavigationMenu>
-        <NavigationMenuList className="flex items-center gap-4">
-
-          <NavigationMenuItem>
-            <Link href="/login">
-              <Button>Login</Button>
-            </Link>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
+            
             <Link href="/visitante/videos">
-              <Button className="flex gap-2 items-center">
-                Vídeos <MonitorPlay size={16} />
+              <Button 
+                variant="ghost" 
+                className={`flex gap-2 items-center transition-colors ${
+                  isScrolled 
+                    ? "text-foreground hover:bg-accent" 
+                    : "text-white hover:bg-white/10"
+                }`}
+              >
+                <MonitorPlay size={18} />
+                Vídeos
               </Button>
             </Link>
-          </NavigationMenuItem>
 
-        </NavigationMenuList>
-      </NavigationMenu>
+            <Link href="/login">
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
+              >
+                Entrar
+              </Button>
+            </Link>
+          </div>
 
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className={isScrolled ? "text-foreground" : "text-white"} size={24} />
+            ) : (
+              <Menu className={isScrolled ? "text-foreground" : "text-white"} size={24} />
+            )}
+          </button>
+        </div>
+
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border py-4 px-2 space-y-2">
+            <Link href="/visitante/videos" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <MonitorPlay size={18} />
+                Vídeos
+              </Button>
+            </Link>
+            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button className="w-full">Entrar</Button>
+            </Link>
+            <div className="pt-2 border-t border-border">
+              <DarkMode />
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
