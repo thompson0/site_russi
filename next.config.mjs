@@ -1,16 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ['*'],
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-  },
+  allowedDevOrigins: [
+    process.env.REPLIT_DEV_DOMAIN,
+    '*.replit.dev',
+  ].filter(Boolean),
 };
 
 export default nextConfig;
