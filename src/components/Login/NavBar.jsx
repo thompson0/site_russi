@@ -1,26 +1,70 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import DropProfile from "./DropProfile";
-import { getUserFromCookie } from "@/lib/auth";
-import { DarkMode } from "../Home/Darkmode";
-async function NavBar() {
-  const user = await getUserFromCookie();
-  return (
-    <>
-      <nav className=":bg-sidebar min-h-20 top-0 w-full border-1">
-        <div className="flex h-full p-5 items-center justify-between px-4">
-          <SidebarTrigger>
-          </SidebarTrigger>
-          <div className="flex gap-5">
+"use client";
 
-          <DropProfile name={user.nome}
-          picture={user.foto_url}>
-            
-          </DropProfile>
-          <DarkMode></DarkMode>
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { DarkMode } from "../Home/Darkmode";
+import { Bell, Search, Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+function NavBar() {
+  const pathname = usePathname();
+  
+  const getPageTitle = () => {
+    if (pathname === "/admin") return "Dashboard";
+    if (pathname.includes("/montadoras")) return "Montadoras";
+    if (pathname.includes("/catalogo/carros")) return "Carros";
+    if (pathname.includes("/catalogo/produtos")) return "Produtos";
+    if (pathname.includes("/videos")) return "Vídeos";
+    if (pathname.includes("/user")) return "Usuários";
+    if (pathname.includes("/config")) return "Configurações";
+    return "Admin";
+  };
+
+  return (
+    <nav className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-xl border-b border-border/50">
+      <div className="flex h-16 items-center justify-between px-4 md:px-6">
+        <div className="flex items-center gap-4">
+          <SidebarTrigger className="p-2 hover:bg-accent rounded-lg transition-colors">
+            <Menu className="w-5 h-5" />
+          </SidebarTrigger>
+          
+          <div className="hidden md:block">
+            <h1 className="text-lg font-semibold text-foreground">{getPageTitle()}</h1>
+            <p className="text-xs text-muted-foreground">Gerencie seu conteúdo</p>
           </div>
         </div>
-      </nav>
-    </>
+
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-accent/50 rounded-lg border border-border/50">
+            <Search className="w-4 h-4 text-muted-foreground" />
+            <input 
+              type="text" 
+              placeholder="Buscar..." 
+              className="bg-transparent border-none outline-none text-sm w-40 placeholder:text-muted-foreground"
+            />
+            <kbd className="hidden lg:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+              ⌘K
+            </kbd>
+          </div>
+
+          <button className="relative p-2 hover:bg-accent rounded-lg transition-colors">
+            <Bell className="w-5 h-5 text-muted-foreground" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
+          </button>
+
+          <DarkMode />
+
+          <div className="flex items-center gap-3 pl-2 md:pl-4 border-l border-border/50">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow-lg shadow-blue-500/20">
+              A
+            </div>
+            <div className="hidden md:block">
+              <p className="text-sm font-medium text-foreground">Admin</p>
+              <p className="text-xs text-muted-foreground">Administrador</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }
 
