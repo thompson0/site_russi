@@ -94,70 +94,73 @@ export default function Timeline() {
         </div>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 to-indigo-600 hidden sm:block" />
+          {/* Vertical line - centered with pseudo-element approach */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-gradient-to-b from-blue-500 to-indigo-600 z-0" />
 
-          <div className="space-y-6 sm:space-y-8">
-            {timelineItems.map((item, index) => (
-              <div
-                key={index}
-                className={`flex flex-col sm:flex-row gap-4 sm:gap-8 ${
-                  index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-                }`}
-              >
-                {/* Timeline dot and content - Mobile */}
-                <div className="flex gap-4 sm:hidden flex-1">
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg font-bold shadow-lg">
-                      {item.icon}
+          <div className="space-y-8 md:space-y-0">
+            {timelineItems.map((item, index) => {
+              const isEven = index % 2 === 0;
+              
+              return (
+                <div key={index} className="relative">
+                  {/* Mobile Layout */}
+                  <div className="flex gap-4 md:hidden">
+                    <div className="flex flex-col items-center">
+                      <div className="relative z-10 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl shadow-lg ring-4 ring-background">
+                        {item.icon}
+                      </div>
+                      {index < timelineItems.length - 1 && (
+                        <div className="w-1 flex-1 min-h-[60px] bg-gradient-to-b from-blue-400 to-indigo-500 mt-2" />
+                      )}
                     </div>
-                    {index < timelineItems.length - 1 && (
-                      <div className="w-1 h-12 bg-blue-200 mt-2" />
-                    )}
-                  </div>
-                  <div className="flex-1 pb-6">
-                    <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
-                      {item.year}
-                    </Badge>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                  </div>
-                </div>
-
-                {/* Timeline content - Desktop */}
-                <div className="hidden sm:flex sm:flex-1 justify-end">
-                  {index % 2 === 0 && (
-                    <div className="w-full max-w-xs text-right pr-6">
-                      <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2 float-right">
-                        {item.year}
-                      </Badge>
-                      <h3 className="text-lg font-bold text-foreground clear-both">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Timeline dot - Desktop */}
-                <div className="hidden sm:flex justify-center">
-                  <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold shadow-lg border-4 border-background">
-                    {item.icon}
-                  </div>
-                </div>
-
-                {/* Timeline content - Desktop right */}
-                <div className="hidden sm:flex sm:flex-1">
-                  {index % 2 === 1 && (
-                    <div className="w-full max-w-xs pl-6">
+                    <div className="flex-1 pb-8">
                       <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
                         {item.year}
                       </Badge>
-                      <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+                      <h3 className="text-base font-bold text-foreground">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
                     </div>
-                  )}
+                  </div>
+
+                  {/* Desktop Layout - 3 column grid */}
+                  <div className="hidden md:grid md:grid-cols-[1fr_80px_1fr] md:gap-4 md:items-center md:py-4">
+                    {/* Left content */}
+                    <div className={`${isEven ? 'text-right pr-4' : 'order-3 text-left pl-4'}`}>
+                      {isEven && (
+                        <div className="inline-block">
+                          <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
+                            {item.year}
+                          </Badge>
+                          <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                        </div>
+                      )}
+                      {!isEven && (
+                        <div>
+                          <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
+                            {item.year}
+                          </Badge>
+                          <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Center dot */}
+                    <div className={`flex justify-center ${!isEven ? 'order-2' : ''}`}>
+                      <div className="relative z-10 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-2xl shadow-lg ring-4 ring-background">
+                        {item.icon}
+                      </div>
+                    </div>
+
+                    {/* Right content (empty for even, content for odd) */}
+                    <div className={`${isEven ? 'order-3' : 'order-1 text-right pr-4'}`}>
+                      {/* Empty placeholder for layout balance */}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
