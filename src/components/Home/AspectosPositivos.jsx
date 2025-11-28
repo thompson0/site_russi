@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle } from "lucide-react";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function AspectosPositivos() {
   const aspectos = [
@@ -29,7 +29,7 @@ export default function AspectosPositivos() {
           {aspectos.map((aspecto, index) => (
             <div key={index} className="flex gap-3 sm:gap-4 items-start group">
               <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mt-0.5 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
+                <CheckCircleIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
               </div>
               <p className="text-sm sm:text-base leading-relaxed text-slate-200 group-hover:text-white transition-colors">
                 {aspecto}

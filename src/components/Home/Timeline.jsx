@@ -2,6 +2,20 @@
 
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useRef, useState } from "react";
+import { 
+  StarIcon, 
+  TruckIcon, 
+  ComputerDesktopIcon, 
+  BuildingOfficeIcon, 
+  GlobeAltIcon, 
+  BuildingOffice2Icon,
+  ArrowPathIcon,
+  CogIcon,
+  QrCodeIcon,
+  GlobeAmericasIcon,
+  ChartBarIcon,
+  RocketLaunchIcon
+} from "@heroicons/react/24/outline";
 
 export default function Timeline() {
   const [visibleItems, setVisibleItems] = useState(new Set());
@@ -11,73 +25,73 @@ export default function Timeline() {
     {
       year: "1986",
       title: "Fundação",
-      icon: "⭐",
+      Icon: StarIcon,
       description: "Nascimento da Russi Acessórios"
     },
     {
       year: "1992",
       title: "Ingresso no Ramo de Concessionárias",
-      icon: "🚗",
+      Icon: TruckIcon,
       description: "Entrada oficial no mercado de concessionárias"
     },
     {
       year: "2006",
       title: "Implantação do Sistema de Gestão ERP",
-      icon: "💻",
+      Icon: ComputerDesktopIcon,
       description: "Modernização dos processos empresariais"
     },
     {
       year: "2010",
       title: "Construção da 1ª Sede",
-      icon: "🏢",
+      Icon: BuildingOfficeIcon,
       description: "Sede de 390m² para operações"
     },
     {
       year: "2013",
       title: "Expansão Nacional",
-      icon: "🌎",
+      Icon: GlobeAltIcon,
       description: "Atingindo 139 concessionárias no Brasil"
     },
     {
       year: "2014",
       title: "Nova Sede Administrativa",
-      icon: "🏛️",
+      Icon: BuildingOffice2Icon,
       description: "Sede de 440m² para expansão"
     },
     {
       year: "2017",
       title: "Modernização Integrada",
-      icon: "🔄",
+      Icon: ArrowPathIcon,
       description: "Atualização de Telefonia, Logomarca e Hardware"
     },
     {
       year: "2019",
       title: "Novo Sistema ERP",
-      icon: "⚙️",
+      Icon: CogIcon,
       description: "Implantação de sistema de gestão avançado"
     },
     {
       year: "2021",
       title: "Código de Barras",
-      icon: "📦",
+      Icon: QrCodeIcon,
       description: "Introdução de leitor e código de barras no estoque"
     },
     {
       year: "2023",
       title: "Transformação Digital",
-      icon: "🌐",
+      Icon: GlobeAmericasIcon,
       description: "Implementação de plataforma e-commerce integrada"
     },
     {
       year: "2024",
       title: "Expansão de Serviços",
-      icon: "📈",
+      Icon: ChartBarIcon,
       description: "Lançamento de novos serviços ao cliente"
     },
     {
       year: "2025",
       title: "Inovação Contínua",
-      icon: "🚀",
+      Icon: RocketLaunchIcon,
       description: "Investimentos em IA e automação de processos"
     }
   ];
@@ -143,11 +157,9 @@ export default function Timeline() {
         </div>
 
         <div className="relative">
-          {/* Desktop vertical line - starts from first dot center, ends at last dot center */}
           <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-1 bg-slate-300 dark:bg-slate-700 z-0"
                style={{ top: "32px", bottom: "32px" }} />
           
-          {/* Animated progress line */}
           <div 
             className="hidden md:block absolute left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-600 z-0 transition-all duration-700 ease-out"
             style={{ top: "32px", height: progressHeight, maxHeight: "calc(100% - 64px)" }} 
@@ -156,6 +168,7 @@ export default function Timeline() {
           <div className="space-y-8 md:space-y-0">
             {timelineItems.map((item, index) => {
               const isEven = index % 2 === 0;
+              const IconComponent = item.Icon;
               
               return (
                 <div 
@@ -165,14 +178,13 @@ export default function Timeline() {
                   className="relative"
                   style={getItemStyle(index)}
                 >
-                  {/* Mobile Layout */}
                   <div className="flex gap-4 md:hidden">
                     <div className="flex flex-col items-center">
                       <div 
-                        className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg ring-4 ring-background"
+                        className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center shadow-lg ring-4 ring-background"
                         style={getIconStyle(index)}
                       >
-                        {item.icon}
+                        <IconComponent className="w-6 h-6 text-white" />
                       </div>
                       {index < timelineItems.length - 1 && (
                         <div 
@@ -186,7 +198,7 @@ export default function Timeline() {
                       )}
                     </div>
                     <div className="flex-1 pb-8">
-                      <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
+                      <Badge className="bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700 mb-2">
                         {item.year}
                       </Badge>
                       <h3 className="text-base font-bold text-foreground">{item.title}</h3>
@@ -194,13 +206,11 @@ export default function Timeline() {
                     </div>
                   </div>
 
-                  {/* Desktop Layout - 3 column grid */}
                   <div className="hidden md:grid md:grid-cols-[1fr_80px_1fr] md:gap-4 md:items-center md:py-4">
-                    {/* Left content */}
                     <div className={`${isEven ? 'text-right pr-4' : 'order-3 text-left pl-4'}`}>
                       {isEven ? (
                         <div className="inline-block">
-                          <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
+                          <Badge className="bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700 mb-2">
                             {item.year}
                           </Badge>
                           <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
@@ -208,7 +218,7 @@ export default function Timeline() {
                         </div>
                       ) : (
                         <div>
-                          <Badge className="bg-blue-500/20 text-blue-700 border-blue-300 mb-2">
+                          <Badge className="bg-blue-500/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700 mb-2">
                             {item.year}
                           </Badge>
                           <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
@@ -217,17 +227,15 @@ export default function Timeline() {
                       )}
                     </div>
 
-                    {/* Center dot */}
                     <div className={`flex justify-center ${!isEven ? 'order-2' : ''}`}>
                       <div 
-                        className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg ring-4 ring-background"
+                        className="relative z-10 w-14 h-14 rounded-full flex items-center justify-center shadow-lg ring-4 ring-background"
                         style={getIconStyle(index)}
                       >
-                        {item.icon}
+                        <IconComponent className="w-7 h-7 text-white" />
                       </div>
                     </div>
 
-                    {/* Right content (empty placeholder for layout balance) */}
                     <div className={`${isEven ? 'order-3' : 'order-1 text-right pr-4'}`} />
                   </div>
                 </div>

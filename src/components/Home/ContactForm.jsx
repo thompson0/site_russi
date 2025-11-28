@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Send } from "lucide-react"
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline"
 
 export function ContactForms() {
   return (
@@ -75,7 +75,7 @@ export function ContactForms() {
           size="lg"
           className="w-full h-10 sm:h-12 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold mt-1 sm:mt-2"
         >
-          <Send className="w-4 h-4 mr-2" />
+          <PaperAirplaneIcon className="w-4 h-4 mr-2" />
           Enviar Mensagem
         </Button>
       </form>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPinIcon, PhoneIcon, EnvelopeIcon, ClockIcon } from "@heroicons/react/24/outline";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -61,19 +61,19 @@ export default function Footer() {
             <h4 className="font-semibold text-sm sm:text-lg">Contato</h4>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-400">
               <li className="flex items-start gap-2 sm:gap-3">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                <MapPinIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0 mt-0.5" />
                 <span>São Paulo, SP - Brasil</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
+                <PhoneIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
                 <span>(11) 9999-9999</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
+                <EnvelopeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
                 <span className="break-all">contato@russi.com.br</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
-                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
+                <ClockIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
                 <span>Seg - Sex: 8h às 18h</span>
               </li>
             </ul>

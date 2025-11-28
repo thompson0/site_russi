@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Play, Award, Calendar } from "lucide-react";
+import { ArrowRightIcon, PlayIcon, TrophyIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -26,11 +26,11 @@ export default function HeroSection() {
         <div className="text-center space-y-6 sm:space-y-8">
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm">
-              <Award className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <TrophyIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               35 anos de experiência
             </Badge>
             <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm">
-              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <CalendarIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Desde 1986
             </Badge>
           </div>
@@ -55,7 +55,7 @@ export default function HeroSection() {
                 className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl shadow-blue-500/25"
               >
                 Fale Conosco
-                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </Link>
             <Link href="/visitante/videos" className="w-full sm:w-auto">
@@ -64,7 +64,7 @@ export default function HeroSection() {
                 variant="outline"
                 className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg backdrop-blur-sm"
               >
-                <Play className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                <PlayIcon className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                 Ver Vídeos
               </Button>
             </Link>
