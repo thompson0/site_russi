@@ -31,8 +31,8 @@ export async function POST(req) {
   console.log(user.permissao)
   const cookie = serialize("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: false,
+    sameSite: "lax",
     maxAge: 3600,
     path: "/",
   });
