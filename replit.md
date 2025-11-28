@@ -77,7 +77,7 @@ The project is configured for Replit autoscale deployment:
 - **Port**: 5000
 
 ## Features
-- **Home Page**: Company presentation and timeline
+- **Home Page**: Company presentation, timeline (1986-2025), and benefits listing
 - **Product Catalog**: Browse products by car manufacturer and model
 - **Video Library**: Tutorial videos for installers
 - **User Authentication**: Login system with role-based access
@@ -100,23 +100,59 @@ The application uses JWT-based authentication with:
 - Middleware protection for `/admin/*` and `/user/*` routes
 - Automatic redirect to `/login` for unauthenticated users
 
-## Recent Changes (2025-11-27)
-- Configured Next.js to run on port 5000 with host 0.0.0.0
-- Added allowedDevOrigins configuration for Replit proxy support
-- Set up development workflow for Replit environment
-- Configured deployment for autoscale
-- Generated Prisma client from existing schema
+## Recent Changes (2025-11-28)
 
-### Landing Page Redesign
-- New modern fixed header with logo, scroll-responsive styling, and mobile menu
+### Landing Page Complete Redesign
+- Modern fixed header with logo, scroll-responsive styling, and mobile menu
 - Hero section with dark gradient background, statistics counters, and call-to-action buttons
-- Redesigned "About" section with benefits grid showing key differentials
-- Updated card components with dark theme and hover effects
-- Improved contact form section with better layout and field organization
-- Complete footer redesign with company info, quick links, and contact details
+- Complete mobile responsiveness across all sections and screen sizes
+
+### New Timeline Component
+- Company history timeline from 1986 to 2025
+- 12 key milestones including:
+  - 1986: Fundação
+  - 1992: Ingresso no Ramo de Concessionárias
+  - 2006: Implantação do Sistema de Gestão ERP
+  - 2010-2014: Expansão e sede administrativa
+  - 2017-2019: Modernização integrada e novos sistemas
+  - 2021: Código de barras e estoque
+  - 2023-2025: Transformação digital, e-commerce, expansão de serviços e inovação com IA
+- Desktop and mobile responsive layout with alternating card positions
+
+### Benefícios da Terceirização (AspectosPositivos Component)
+- New dedicated section with 9 key benefits
+- Includes: desburocratização, zero estoque, alívio organizacional, garantia estendida, especialização, diversificação, dedicação ao cliente, crescimento de vendas, e pagamento à vista
+- Professional design with checkmark icons and hover effects
+- Fully responsive and mobile-optimized
+
+### Content Updates
+- Updated "Apresentação da Empresa" section with refined company description
+- Company established partnerships with main market distributors
+- 35 years total experience, 24 years dedicated to dealership outsourcing
+- Technical support and training directly from accessory manufacturers
+- Constant market trend updates
+
+### Responsive Design
+- All components now fully optimized for mobile (320px+), tablet, and desktop
+- Proper text scaling, spacing, and touch-friendly elements
+- Breakpoints: sm (640px), md (768px), lg (1024px)
+- Fixed header, hero section, about section, benefits cards, contact form, and footer all responsive
+
+## Components
+
+### Home Components
+- `NavHome.jsx` - Navigation header with mobile menu
+- `HeroSection.jsx` - Hero section with hero text and statistics
+- `Timeline.jsx` - Company history timeline 1986-2025
+- `AspectosPositivos.jsx` - Benefits and advantages section
+- `CardsHome.jsx` - Reusable card component for differentials
+- `ContactForm.jsx` - Contact form with mobile optimization
+- `Footer.jsx` - Footer with company info and links
 
 ## Notes
 - The Prisma client is generated to `src/generated/prisma` (custom output path)
 - The application uses Turbopack for faster development builds
 - All API routes are in `src/app/api/*`
 - Custom hooks for secure fetch operations are in `src/hooks/`
+- Timeline and AspectosPositivos components include emojis and icons for visual clarity
+- All content matches the official company presentation materials provided

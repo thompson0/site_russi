@@ -3,6 +3,8 @@ import HeroSection from "./HeroSection";
 import CardsHome from "./CardsHome";
 import Footer from "./Footer";
 import ContactForms from "./ContactForm";
+import Timeline from "./Timeline";
+import AspectosPositivos from "./AspectosPositivos";
 import { Building2, GraduationCap, Car, CheckCircle2, Truck, Shield, Users, Headphones } from "lucide-react";
 import Image from "next/image";
 
@@ -10,22 +12,22 @@ const beneficios = [
     {
         icon: <CheckCircle2 className="w-6 h-6" />,
         titulo: "Desburocratização",
-        texto: "Simplificamos a venda e pós-venda de acessórios para sua concessionária"
+        texto: "Desburocratização da venda e pós venda de acessórios"
     },
     {
         icon: <Truck className="w-6 h-6" />,
         titulo: "Zero Estoque",
-        texto: "Estoque próprio com entregas diárias, sem necessidade de investimento"
+        texto: "Zero Estoque para o concessionário (temos estoque próprio, com entregas diárias)"
     },
     {
         icon: <Shield className="w-6 h-6" />,
         titulo: "Garantia Estendida",
-        texto: "1 ano de garantia em todos os produtos, muito além dos 90 dias legais"
+        texto: "Sem problemas com produtos de garantia (prazo por lei 90 dias, porem estendemos para 1 ano)"
     },
     {
         icon: <Headphones className="w-6 h-6" />,
         titulo: "Suporte Total",
-        texto: "Dedicação exclusiva ao cliente na parte de acessórios automotivos"
+        texto: "Dedicação total ao cliente na parte dos acessórios"
     },
 ];
 
@@ -57,18 +59,21 @@ function HomePage() {
             
             <HeroSection />
 
+            <Timeline />
+
+            <AspectosPositivos />
+
             <section className="py-12 sm:py-16 lg:py-20 bg-background">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-10 sm:mb-16">
                         <span className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
-                            Quem Somos
+                            Apresentação
                         </span>
                         <h2 className="mt-2 sm:mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-                            Sobre a Russi Acessórios
+                            Apresentação da Empresa
                         </h2>
                         <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
-                            Nossa empresa nasceu da parceria com os principais distribuidores do mercado, 
-                            com experiência de 35 anos no ramo de acessórios automotivos.
+                            Conheça a história, valores e compromissos da Russi Acessórios
                         </p>
                     </div>
 
@@ -93,12 +98,10 @@ function HomePage() {
 
                         <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
                             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                                São 24 anos dedicados exclusivamente ao desenvolvimento de terceirização 
-                                em Concessionárias de veículos, agregando valor e dinamismo à atividade.
+                                Nossa empresa nasceu da parceria com os principais distribuidores do mercado, com experiência de 35 anos no ramo de acessórios, dos quais 24 anos dedicados exclusivamente ao desenvolvimento de terceirização em Concessionárias de veículos, agregando valor e dinamismo a atividade.
                             </p>
                             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                                Garantimos através de nossos fornecedores: assistência técnica e treinamento 
-                                da equipe efetuada diretamente pelos principais fabricantes de acessórios.
+                                Garantimos através de nossos fornecedores: assistência técnica e treinamento da equipe efetuada diretamente pelos principais fabricantes de acessórios, mantendo desta forma, atualização constante sobre os últimos lançamentos e tendências do mercado.
                             </p>
                             
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4">
