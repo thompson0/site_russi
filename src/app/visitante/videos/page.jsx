@@ -1,5 +1,11 @@
 import ProdutoVideoCard from "@/components/Videos/ProdutoVideoCard";
-import { PlayCircle, Video, Lightbulb, Wrench, GraduationCap } from "lucide-react";
+import { 
+  PlayCircleIcon, 
+  VideoCameraIcon, 
+  LightBulbIcon, 
+  WrenchScrewdriverIcon, 
+  AcademicCapIcon 
+} from "@heroicons/react/24/outline";
 
 export const revalidate = 60;
 
@@ -19,17 +25,17 @@ export default async function VideosPage() {
 
   const features = [
     {
-      icon: Wrench,
+      icon: WrenchScrewdriverIcon,
       title: "Instalação",
       description: "Tutoriais passo a passo para instalação de acessórios"
     },
     {
-      icon: Lightbulb,
+      icon: LightBulbIcon,
       title: "Dicas Técnicas",
       description: "Orientações profissionais para melhor aproveitamento"
     },
     {
-      icon: GraduationCap,
+      icon: AcademicCapIcon,
       title: "Treinamento",
       description: "Capacitação para instaladores e profissionais"
     }
@@ -46,7 +52,7 @@ export default async function VideosPage() {
         
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium mb-6">
-            <Video className="w-4 h-4" />
+            <VideoCameraIcon className="w-4 h-4" />
             <span>Central de Vídeos Informativos</span>
           </div>
           
@@ -64,12 +70,12 @@ export default async function VideosPage() {
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <div className="flex items-center gap-2 text-white/80">
-              <PlayCircle className="w-5 h-5 text-blue-300" />
+              <PlayCircleIcon className="w-5 h-5 text-blue-300" />
               <span>{videos.length} vídeos disponíveis</span>
             </div>
             <div className="hidden sm:block w-px h-6 bg-white/20"></div>
             <div className="flex items-center gap-2 text-white/80">
-              <GraduationCap className="w-5 h-5 text-purple-300" />
+              <AcademicCapIcon className="w-5 h-5 text-purple-300" />
               <span>Conteúdo profissional</span>
             </div>
           </div>
@@ -102,7 +108,7 @@ export default async function VideosPage() {
           
           {videos.length > 0 && (
             <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
-              <Video className="w-4 h-4 text-blue-500" />
+              <VideoCameraIcon className="w-4 h-4 text-blue-500" />
               <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
                 {videos.length} {videos.length === 1 ? 'vídeo' : 'vídeos'} encontrado{videos.length !== 1 ? 's' : ''}
               </span>
@@ -113,7 +119,7 @@ export default async function VideosPage() {
         {!videos?.length ? (
           <div className="text-center py-16 px-4">
             <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-6">
-              <Video className="w-10 h-10 text-muted-foreground" />
+              <VideoCameraIcon className="w-10 h-10 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">Nenhum vídeo disponível</h3>
             <p className="text-muted-foreground max-w-md mx-auto">

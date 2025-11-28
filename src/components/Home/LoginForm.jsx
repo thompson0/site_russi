@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export function LoginForm(props) {
   const router = useRouter();
@@ -118,7 +118,7 @@ export function LoginForm(props) {
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                <ArrowPathIcon className="w-4 h-4 mr-2 animate-spin" />
                 Entrando...
               </>
             ) : (

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { DarkMode } from "./Darkmode";
-import { MonitorPlay, Menu, X } from "lucide-react";
+import { PlayCircleIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 
 function NavHome() {
@@ -63,7 +63,7 @@ function NavHome() {
                     : "text-white hover:bg-white/10"
                 }`}
               >
-                <MonitorPlay size={18} />
+                <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
               </Button>
             </Link>
@@ -82,9 +82,9 @@ function NavHome() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className={isScrolled ? "text-foreground" : "text-white"} size={24} />
+              <XMarkIcon className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             ) : (
-              <Menu className={isScrolled ? "text-foreground" : "text-white"} size={24} />
+              <Bars3Icon className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             )}
           </button>
         </div>
@@ -93,7 +93,7 @@ function NavHome() {
           <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border py-4 px-2 space-y-2">
             <Link href="/visitante/videos" onClick={() => setIsMobileMenuOpen(false)}>
               <Button variant="ghost" className="w-full justify-start gap-2">
-                <MonitorPlay size={18} />
+                <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
               </Button>
             </Link>

@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import ProdutoVideo from "./ProdutoVideo";
-import { PlayCircle, Clock } from "lucide-react";
+import { PlayCircleIcon, ClockIcon } from "@heroicons/react/24/outline";
 
 export default function ProdutoVideoCard({ video, children }) {
   return (
@@ -11,7 +11,7 @@ export default function ProdutoVideoCard({ video, children }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
           <div className="absolute bottom-3 left-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium">
-              <PlayCircle className="w-3.5 h-3.5" />
+              <PlayCircleIcon className="w-4 h-4" />
               <span>Assistir</span>
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function ProdutoVideoCard({ video, children }) {
               <>
                 <span className="w-1 h-1 rounded-full bg-muted-foreground/30"></span>
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Clock className="w-3.5 h-3.5" />
+                  <ClockIcon className="w-4 h-4" />
                   <span>{video.duracao}</span>
                 </div>
               </>

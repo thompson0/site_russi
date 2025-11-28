@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { DarkMode } from "../Home/Darkmode";
-import { Bell, Search, Menu } from "lucide-react";
+import { BellIcon, MagnifyingGlassIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 
 function NavBar() {
@@ -24,7 +24,7 @@ function NavBar() {
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
           <SidebarTrigger className="p-2 hover:bg-accent rounded-lg transition-colors">
-            <Menu className="w-5 h-5" />
+            <Bars3Icon className="w-5 h-5" />
           </SidebarTrigger>
           
           <div className="hidden md:block">
@@ -35,7 +35,7 @@ function NavBar() {
 
         <div className="flex items-center gap-2 md:gap-4">
           <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-accent/50 rounded-lg border border-border/50">
-            <Search className="w-4 h-4 text-muted-foreground" />
+            <MagnifyingGlassIcon className="w-4 h-4 text-muted-foreground" />
             <input 
               type="text" 
               placeholder="Buscar..." 
@@ -47,7 +47,7 @@ function NavBar() {
           </div>
 
           <button className="relative p-2 hover:bg-accent rounded-lg transition-colors">
-            <Bell className="w-5 h-5 text-muted-foreground" />
+            <BellIcon className="w-5 h-5 text-muted-foreground" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
           </button>
 

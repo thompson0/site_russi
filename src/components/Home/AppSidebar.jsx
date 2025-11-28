@@ -1,6 +1,15 @@
 "use client";
 
-import { Car, Home, LogOut, Cog, CarFront, Package, MonitorPlay, ChevronRight, Users } from "lucide-react";
+import { 
+  HomeIcon, 
+  TruckIcon, 
+  CubeIcon, 
+  PlayCircleIcon, 
+  UsersIcon,
+  Cog6ToothIcon,
+  ArrowRightOnRectangleIcon,
+  ChevronRightIcon
+} from "@heroicons/react/24/outline";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -28,17 +37,17 @@ export function AppSidebar() {
   }
 
   const topItems = [
-    { title: "Dashboard", url: "/admin", icon: Home },
-    { title: "Montadoras", url: "/admin/montadoras", icon: Car },
-    { title: "Carros", url: "/admin/catalogo/carros", icon: CarFront },
-    { title: "Produtos", url: "/admin/catalogo/produtos", icon: Package },
-    { title: "Vídeos", url: "/admin/videos", icon: MonitorPlay },
-    { title: "Usuários", url: "/admin/user", icon: Users },
+    { title: "Dashboard", url: "/admin", icon: HomeIcon },
+    { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon },
+    { title: "Carros", url: "/admin/catalogo/carros", icon: TruckIcon },
+    { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
+    { title: "Vídeos", url: "/admin/videos", icon: PlayCircleIcon },
+    { title: "Usuários", url: "/admin/user", icon: UsersIcon },
   ];
 
   const bottomItems = [
-    { title: "Configurações", url: "/admin/config", icon: Cog },
-    { title: "Sair", action: handleLogout, icon: LogOut },
+    { title: "Configurações", url: "/admin/config", icon: Cog6ToothIcon },
+    { title: "Sair", action: handleLogout, icon: ArrowRightOnRectangleIcon },
   ];
 
   const isActive = (url) => {
@@ -79,7 +88,7 @@ export function AppSidebar() {
                     >
                       <item.icon className={`w-5 h-5 ${active ? "text-white" : "text-slate-500 group-hover:text-blue-400"}`} />
                       <span className="font-medium text-sm">{item.title}</span>
-                      {active && <ChevronRight className="w-4 h-4 ml-auto" />}
+                      {active && <ChevronRightIcon className="w-4 h-4 ml-auto" />}
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

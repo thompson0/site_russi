@@ -1,5 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import { Car, Package, Users, PlayCircle, TrendingUp, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { 
+  TruckIcon, 
+  CubeIcon, 
+  UsersIcon, 
+  PlayCircleIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon
+} from "@heroicons/react/24/outline";
 
 async function getStats() {
   try {
@@ -35,40 +42,36 @@ export default async function AdminPage() {
     {
       title: "Total de Carros",
       value: stats.carrosCount,
-      icon: Car,
+      icon: TruckIcon,
       trend: "+12%",
       trendUp: true,
-      color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-500/10",
       iconColor: "text-blue-500"
     },
     {
       title: "Total de Produtos",
       value: stats.produtosCount,
-      icon: Package,
+      icon: CubeIcon,
       trend: "+8%",
       trendUp: true,
-      color: "from-emerald-500 to-emerald-600",
       bgColor: "bg-emerald-500/10",
       iconColor: "text-emerald-500"
     },
     {
       title: "Usuários Ativos",
       value: stats.usuariosCount,
-      icon: Users,
+      icon: UsersIcon,
       trend: "+5%",
       trendUp: true,
-      color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-500/10",
       iconColor: "text-purple-500"
     },
     {
       title: "Vídeos",
       value: stats.videosCount,
-      icon: PlayCircle,
+      icon: PlayCircleIcon,
       trend: "-2%",
       trendUp: false,
-      color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-500/10",
       iconColor: "text-orange-500"
     },
@@ -97,15 +100,16 @@ export default async function AdminPage() {
             key={index}
             className="group relative overflow-hidden rounded-2xl bg-card border border-border/50 p-5 hover:shadow-lg hover:shadow-black/5 transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-5 rounded-full -translate-y-1/2 translate-x-1/2" 
-                 style={{ background: `linear-gradient(135deg, var(--${stat.iconColor.split('-')[1]}-500), transparent)` }} />
-            
             <div className="flex items-start justify-between">
               <div className={`p-3 rounded-xl ${stat.bgColor}`}>
                 <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
               </div>
               <div className={`flex items-center gap-1 text-xs font-medium ${stat.trendUp ? 'text-emerald-500' : 'text-red-500'}`}>
-                {stat.trendUp ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                {stat.trendUp ? (
+                  <ArrowTrendingUpIcon className="w-4 h-4" />
+                ) : (
+                  <ArrowTrendingDownIcon className="w-4 h-4" />
+                )}
                 {stat.trend}
               </div>
             </div>
@@ -139,7 +143,7 @@ export default async function AdminPage() {
                     {carro.foto_url ? (
                       <img src={carro.foto_url} alt={carro.nome} className="w-full h-full object-cover rounded-xl" />
                     ) : (
-                      <Car className="w-6 h-6 text-blue-500" />
+                      <TruckIcon className="w-6 h-6 text-blue-500" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -179,7 +183,7 @@ export default async function AdminPage() {
                     {produto.foto_url ? (
                       <img src={produto.foto_url} alt={produto.nome} className="w-full h-full object-cover rounded-xl" />
                     ) : (
-                      <Package className="w-6 h-6 text-emerald-500" />
+                      <CubeIcon className="w-6 h-6 text-emerald-500" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
