@@ -130,65 +130,59 @@
 }
 
 /* Scrollbar customizada - sempre visível */
+:root {
+  --scrollbar-track: #e2e8f0;
+  --scrollbar-thumb: #6366f1;
+  --scrollbar-thumb-hover: #4f46e5;
+}
+
+.dark {
+  --scrollbar-track: #1e293b;
+  --scrollbar-thumb: #6366f1;
+  --scrollbar-thumb-hover: #818cf8;
+}
+
 html {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
+  overflow-y: scroll !important;
+  scrollbar-gutter: stable !important;
 }
 
-/* Chrome, Edge, Safari */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* Chrome, Edge, Safari - usando variáveis CSS */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 12px !important;
+  height: 12px !important;
+  display: block !important;
 }
 
-::-webkit-scrollbar-track {
-  background: #e2e8f0;
-  border-radius: 5px;
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--scrollbar-track) !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #6366f1);
-  border-radius: 5px;
-  border: 2px solid #e2e8f0;
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, var(--scrollbar-thumb)) !important;
+  border-radius: 6px !important;
+  border: 3px solid var(--scrollbar-track) !important;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2563eb, #4f46e5);
-}
-
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-track,
-:is(.dark *)::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-
-.dark ::-webkit-scrollbar-thumb,
-:is(.dark *)::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #6366f1);
-  border: 2px solid #1e293b;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover,
-:is(.dark *)::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #60a5fa, #818cf8);
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, var(--scrollbar-thumb-hover)) !important;
 }
 
 /* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #6366f1 #e2e8f0;
+html, body {
+  scrollbar-width: auto !important;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track) !important;
 }
 
-.dark * {
-  scrollbar-color: #6366f1 #1e293b;
-}
-
-/* Esconde scrollbar no Chrome, Edge e Safari */
+/* Esconde scrollbar apenas quando classe específica é usada */
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
-/* Esconde scrollbar no Firefox */
 .no-scrollbar {
-  scrollbar-width: none;
+  scrollbar-width: none !important;
 }
