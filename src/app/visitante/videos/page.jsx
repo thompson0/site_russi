@@ -37,7 +37,7 @@ export default async function VideosPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative py-16 md:py-24 overflow-hidden">
+      <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         
