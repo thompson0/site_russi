@@ -46,3 +46,4 @@ build = ["npm", "run", "build"]
 
 [userenv.shared]
 DIRECT_URL = "postgresql://neondb_owner:npg_aMY8JVwm3ogb@ep-noisy-lab-a5b8o74f.us-east-2.aws.neon.tech/neondb?sslmode=require"
+JWT_SECRET = "2392de24f30a2e10572acfa402c1abdd8e50f1ecbff1a578686c34221e63318e"
