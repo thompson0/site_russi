@@ -194,9 +194,9 @@ export default async function AdminPage() {
         </div>
       </div>
 
-      <div className="rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 border border-blue-200 dark:border-blue-800/50 p-6 md:p-8 overflow-hidden">
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
+      <div className="rounded-2xl bg-gradient-to-r from-slate-800 to-slate-900 p-6 md:p-8 overflow-hidden">
+        <div className="grid grid-cols-[120px_1fr] md:grid-cols-[160px_1fr] gap-6 items-center">
+          <div className="relative w-[120px] h-[120px] md:w-[160px] md:h-[160px]">
             <Image 
               src="/support-illustration.png" 
               alt="Suporte" 
@@ -204,22 +204,21 @@ export default async function AdminPage() {
               className="object-contain"
             />
           </div>
-          <div className="flex-1 text-center md:text-left">
-            <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
-              <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-500/20">
-                <Headphones className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-2 rounded-lg bg-blue-500/20">
+                <Headphones className="w-5 h-5 text-blue-400" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Precisa de ajuda?</h3>
+              <h3 className="text-xl font-bold text-white">Precisa de ajuda?</h3>
             </div>
-            <p className="text-slate-600 dark:text-slate-300 mt-1 mb-4">
-              Nossa equipe de suporte técnico está disponível para ajudar você com qualquer dúvida ou problema. 
-              Estamos aqui para garantir que sua experiência seja a melhor possível!
+            <p className="text-slate-300 mt-1 mb-4">
+              Nossa equipe de suporte técnico está disponível para ajudar você com qualquer dúvida ou problema.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-              <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-colors shadow-lg shadow-blue-500/25">
+            <div className="flex flex-wrap gap-3">
+              <button className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-lg font-semibold transition-all shadow-lg shadow-blue-500/30">
                 Contatar Suporte
               </button>
-              <button className="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-semibold transition-colors border border-slate-200 dark:border-slate-600">
+              <button className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold transition-all border border-white/20">
                 Ver FAQ
               </button>
             </div>
