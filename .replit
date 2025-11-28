@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "web"]
+modules = ["nodejs-20", "web", "postgresql-16"]
 [agent]
 expertMode = true
 
@@ -41,3 +41,8 @@ externalPort = 3000
 deploymentTarget = "autoscale"
 run = ["npm", "start"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.shared]
+DIRECT_URL = "postgresql://neondb_owner:npg_aMY8JVwm3ogb@ep-noisy-lab-a5b8o74f.us-east-2.aws.neon.tech/neondb?sslmode=require"
