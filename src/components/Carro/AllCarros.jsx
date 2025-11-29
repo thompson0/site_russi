@@ -8,8 +8,6 @@ import DeleteCarro from "./DeleteCarro";
 import AddCarro from "./AddCarro";
 import { useRefresh } from "@/context/RefreshContext";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
 export default function AllCarros() {
   const [carros, setCarros] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +16,7 @@ export default function AllCarros() {
   useEffect(() => {
     async function fetchCarros() {
       try {
-        const res = await fetch(`${baseUrl}/api/catalogo/carros?k=${refreshKey}`);
+        const res = await fetch(`/api/catalogo/carros?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar carros");
         const data = await res.json();
         setCarros(data);

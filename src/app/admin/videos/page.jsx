@@ -7,7 +7,7 @@ import EditVideo from "@/components/Videos/EditVideo";
 import ProdutoVideoCard from "@/components/Videos/ProdutoVideoCard";
 import { useRefresh } from "@/context/RefreshContext";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
 
 export default function AdminVideosPage() {
   const [videos, setVideos] = useState([]);
@@ -17,7 +17,7 @@ export default function AdminVideosPage() {
   useEffect(() => {
     async function fetchVideos() {
       try {
-        const res = await fetch(`${baseUrl}/api/videos?k=${refreshKey}`);
+        const res = await fetch(`/api/videos?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar vídeos");
         const data = await res.json();
         setVideos(data);

@@ -16,9 +16,7 @@ function CarroCard({ montadoraId }) {
   useEffect(() => {
     async function fetchCarros() {
       try {
-        const baseUrl =
-          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        const res = await fetch(`${baseUrl}/api/carros/${montadoraId}?k=${refreshKey}`);
+        const res = await fetch(`/api/carros/${montadoraId}?k=${refreshKey}`);
 
         if (!res.ok) throw new Error("Erro ao buscar carros");
 

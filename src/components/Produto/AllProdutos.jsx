@@ -9,7 +9,7 @@ import EditProduto from "./EditProduto";
 import DeleteProduto from "./DeleteProduto";
 import AddProduto from "./AddProduto";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
 
 export default function AllProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -19,7 +19,7 @@ export default function AllProdutos() {
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const res = await fetch(`${baseUrl}/api/catalogo/produtos?k=${refreshKey}`);
+        const res = await fetch(`/api/catalogo/produtos?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar produtos");
         const data = await res.json();
         setProdutos(data);

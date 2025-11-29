@@ -17,7 +17,7 @@ import { useRefresh } from "@/context/RefreshContext";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Label } from "../ui/label";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
 
 export default function AddProduto({ carroId, Allprodutos }) {
   const [form, setForm] = useState({
@@ -38,7 +38,7 @@ export default function AddProduto({ carroId, Allprodutos }) {
 
     async function fetchCarros() {
       try {
-        const res = await fetch(`${baseUrl}/api/catalogo/carros?k=${refreshKey}`);
+        const res = await fetch(`/api/catalogo/carros?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar carros");
         const data = await res.json();
         setCarros(data);

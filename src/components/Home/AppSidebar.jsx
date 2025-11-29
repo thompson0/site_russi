@@ -42,7 +42,7 @@ export function AppSidebar() {
     { title: "Carros", url: "/admin/catalogo/carros", icon: TruckIcon },
     { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
     { title: "Vídeos", url: "/admin/videos", icon: PlayCircleIcon },
-    { title: "Usuários", url: "/admin/user", icon: UsersIcon },
+    { title: "Perfil", url: "/admin/user", icon: UsersIcon },
   ];
 
   const bottomItems = [

@@ -7,8 +7,8 @@ import EditProduto from "./EditProduto";
 import QrCodeButton from "./QrCode";
 import { useRefresh } from "@/context/RefreshContext";
 import ProdutoVideo from "../Videos/ProdutoVideo";
-
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
 
 export default function SingleProduto({ id, qrcode = false }) {
   const [produto, setProduto] = useState(null);
@@ -18,7 +18,7 @@ export default function SingleProduto({ id, qrcode = false }) {
   useEffect(() => {
     async function fetchProduto() {
       try {
-        const res = await fetch(`${baseUrl}/api/produtos/${id}?k=${refreshKey}`);
+        const res = await fetch(`/api/produtos/${id}?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar produto");
         const data = await res.json();
         setProduto(data);

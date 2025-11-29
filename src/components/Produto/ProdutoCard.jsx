@@ -15,8 +15,7 @@ export default function ProdutoCard({ carroId }) {
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-        const res = await fetch(`${baseUrl}/api/produtos/carros/${carroId}?k=${refreshKey}`);
+        const res = await fetch(`/api/produtos/carros/${carroId}?k=${refreshKey}`);
         if (!res.ok) throw new Error("Erro ao buscar produtos");
         const data = await res.json();
         setProdutos(data);
