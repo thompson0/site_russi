@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 space-y-4">
             <div className="flex items-center gap-2 sm:gap-3">
               <Image
-                src="/logo.png"
+                src="/logo_index.png"
                 alt="Russi Acessórios"
                 width={48}
                 height={48}

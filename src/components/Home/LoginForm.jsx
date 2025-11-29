@@ -55,7 +55,7 @@ export function LoginForm(props) {
       <CardContent className="p-6 sm:p-8">
         <div className="flex flex-col items-center text-center mb-6 sm:mb-8">
           <img 
-            src="/logo.png" 
+            src="/logo_index.png" 
             alt="Russi Acessórios" 
             className="w-32 sm:w-40 md:w-48 h-auto mb-4"
           />

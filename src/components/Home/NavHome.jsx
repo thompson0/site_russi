@@ -31,7 +31,7 @@ function NavHome() {
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/logo.png"
+              src="/logo_index.png"
               alt="Russi Acessórios"
               width={48}
               height={48}
