@@ -88,7 +88,7 @@ function NavHome() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border py-4 px-2 space-y-2">
             <Link href="/visitante/videos" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start gap-2">
+              <Button variant="ghost" className="w-full justify-start gap-2 text-foreground">
                 <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
               </Button>
