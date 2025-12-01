@@ -95,7 +95,7 @@ export default function SACPage() {
                     <p className="text-slate-400 mb-4">{card.description}</p>
                     <a 
                       href={`mailto:${card.email}`}
-                      className={`inline-flex items-center gap-2 text-${card.color === "blue" ? "blue" : "indigo"}-400 hover:text-${card.color === "blue" ? "blue" : "indigo"}-300 font-medium transition-colors group/link`}
+                      className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors group/link"
                     >
                       <EnvelopeIcon className="w-5 h-5" />
                       <span className="group-hover/link:underline">{card.email}</span>
