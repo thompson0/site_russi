@@ -84,9 +84,9 @@ export default function Timeline() {
     },
     {
       year: "2024",
-      title: "Expansão de Serviços",
+      title: "Especialização em Películas",
       Icon: ChartBarIcon,
-      description: "Lançamento de novos serviços ao cliente"
+      description: "Películas de Segurança e Películas de Proteção de Pintura"
     },
     {
       year: "2025",
