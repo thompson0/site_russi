@@ -38,14 +38,14 @@ export default function BrandsCarousel() {
           {duplicatedBrands.map((brand, index) => (
             <div
               key={`${brand.name}-${index}`}
-              className="flex-shrink-0 mx-4 sm:mx-6 lg:mx-8"
+              className="flex-shrink-0 mx-6 sm:mx-8 lg:mx-10"
             >
-              <div className="w-24 h-16 sm:w-32 sm:h-20 lg:w-40 lg:h-24 bg-white rounded-xl shadow-lg flex items-center justify-center p-3 sm:p-4 hover:scale-110 transition-transform duration-300 cursor-default">
+              <div className="w-36 h-28 sm:w-44 sm:h-32 lg:w-52 lg:h-36 bg-white rounded-2xl shadow-lg flex items-center justify-center p-4 sm:p-5 hover:scale-110 transition-transform duration-300 cursor-default">
                 <Image
                   src={brand.logo}
                   alt={`Logo ${brand.name}`}
-                  width={120}
-                  height={60}
+                  width={180}
+                  height={120}
                   className="object-contain max-h-full max-w-full grayscale hover:grayscale-0 transition-all duration-300"
                 />
               </div>
