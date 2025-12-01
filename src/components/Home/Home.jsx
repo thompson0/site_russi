@@ -25,22 +25,22 @@ const beneficios = [
     {
         icon: <CheckCircleIcon className="w-5 h-5 sm:w-6 sm:h-6" />,
         titulo: "Desburocratização",
-        texto: "Desburocratização da venda e pós venda de acessórios"
+        texto: "Venda e pós-venda simplificados"
     },
     {
         icon: <TruckIcon className="w-5 h-5 sm:w-6 sm:h-6" />,
         titulo: "Zero Estoque",
-        texto: "Zero Estoque para o concessionário (temos estoque próprio, com entregas diárias)"
+        texto: "Estoque próprio com entregas diárias"
     },
     {
         icon: <ShieldCheckIcon className="w-5 h-5 sm:w-6 sm:h-6" />,
         titulo: "Garantia Estendida",
-        texto: "Sem problemas com produtos de garantia (prazo por lei 90 dias, porem estendemos para 1 ano)"
+        texto: "Garantia de 1 ano em todos os produtos"
     },
     {
         icon: <PhoneIcon className="w-5 h-5 sm:w-6 sm:h-6" />,
         titulo: "Suporte Total",
-        texto: "Dedicação total ao cliente na parte dos acessórios"
+        texto: "Dedicação total ao cliente"
     },
 ];
 
