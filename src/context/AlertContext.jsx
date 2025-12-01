@@ -36,19 +36,18 @@ export function AlertProvider({ children }) {
 
       {alert.show && (
         <Alert
-          className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] sm:w-auto shadow-md border
-            ${
-              alert.type === "error"
-                ? "bg-red-50 border-red-300"
-                : alert.type === "info"
+          className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] sm:w-auto shadow-md border text-black
+    ${alert.type === "error"
+              ? "bg-red-50 border-red-300"
+              : alert.type === "info"
                 ? "bg-blue-50 border-blue-300"
                 : "bg-green-50 border-green-300"
             }`}
         >
           {renderIcon()}
-          <div>
-            <AlertTitle>{alert.title}</AlertTitle>
-            <AlertDescription>{alert.message}</AlertDescription>
+          <div className="text-black">
+            <AlertTitle className="text-black">{alert.title}</AlertTitle>
+            <AlertDescription className="text-black">{alert.message}</AlertDescription>
           </div>
         </Alert>
       )}

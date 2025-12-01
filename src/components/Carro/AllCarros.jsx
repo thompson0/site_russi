@@ -7,6 +7,7 @@ import EditCarro from "./EditCarro";
 import DeleteCarro from "./DeleteCarro";
 import AddCarro from "./AddCarro";
 import { useRefresh } from "@/context/RefreshContext";
+import Link from "next/link";
 
 export default function AllCarros() {
   const [carros, setCarros] = useState([]);
@@ -38,7 +39,7 @@ export default function AllCarros() {
     );
 
   if (carros.length === 0)
-    return <p className="text-gray-400 text-center mt-10">Nenhum carro encontrado.</p>;
+    return <p className="text-gray-400 text-center mt-10">Nenhum carro encontrado.</p>
 
   return (
     <div className="flex flex-col gap-6">
@@ -49,17 +50,19 @@ export default function AllCarros() {
         }} />
       </div>
 
- 
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {carros.map((carro) => (
           <Card key={carro.id} className="group overflow-hidden transition-all hover:shadow-lg">
-            <CardHeader className="flex items-center justify-center h-48 bg-gray-50">
-              <img
-                src={carro.foto_url || "/placeholder.png"}
-                alt={carro.nome}
-                className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
-              />
-            </CardHeader>
+            <Link href={`/admin/produtos/${carro.id}`}>
+              <CardHeader className="flex items-center justify-center h-48 bg-gray-50 cursor-pointer">
+                <img
+                  src={carro.foto_url || "/placeholder.png"}
+                  alt={carro.nome}
+                  className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                />
+              </CardHeader>
+            </Link>
 
             <CardContent className="text-center">
               <CardTitle className="text-xl font-semibold truncate">{carro.nome}</CardTitle>
@@ -79,9 +82,11 @@ export default function AllCarros() {
                 id={carro.id}
                 onUpdated={(updated) => {
                   if (!updated) return;
-                  setCarros((prev) => prev.map((c) => (
-                    String(c.id) === String(updated.id) ? { ...c, ...updated } : c
-                  )));
+                  setCarros((prev) =>
+                    prev.map((c) =>
+                      String(c.id) === String(updated.id) ? { ...c, ...updated } : c
+                    )
+                  );
                 }}
               />
               <DeleteCarro
@@ -91,9 +96,11 @@ export default function AllCarros() {
                 }}
               />
             </CardFooter>
+
           </Card>
         ))}
       </div>
+
     </div>
   );
 }
