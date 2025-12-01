@@ -53,6 +53,8 @@ function AnimatedCounter({ end, duration = 2000, suffix = "" }) {
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -66,11 +68,24 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleCanPlay = () => setVideoLoaded(true);
+      video.addEventListener("canplaythrough", handleCanPlay);
+      if (video.readyState >= 3) {
+        setVideoLoaded(true);
+      }
+      return () => video.removeEventListener("canplaythrough", handleCanPlay);
+    }
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className={`absolute inset-0 w-full h-full overflow-hidden transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}>
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted

@@ -55,8 +55,8 @@ function NavHome() {
               <Button
                 variant="ghost"
                 className={`flex gap-2 items-center transition-colors ${isScrolled
-                    ? "text-foreground hover:bg-accent"
-                    : "text-white hover:bg-white/10"
+                    ? "text-foreground hover:bg-accent hover:text-foreground"
+                    : "text-white hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <ChatBubbleLeftRightIcon className="w-5 h-5" />
@@ -68,8 +68,8 @@ function NavHome() {
               <Button
                 variant="ghost"
                 className={`flex gap-2 items-center transition-colors ${isScrolled
-                    ? "text-foreground hover:bg-accent"
-                    : "text-white hover:bg-white/10"
+                    ? "text-foreground hover:bg-accent hover:text-foreground"
+                    : "text-white hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <PlayCircleIcon className="w-5 h-5" />
