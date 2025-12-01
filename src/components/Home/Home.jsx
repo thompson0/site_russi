@@ -241,11 +241,9 @@ function HomePage() {
                         </AnimatedSection>
 
                         <AnimatedSection animation="fadeRight" delay={200}>
-                            <InteractiveCard glowColor="indigo" className="rounded-xl sm:rounded-2xl">
-                                <div className="bg-background rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 hover:shadow-blue-500/10 transition-shadow duration-500">
-                                    <ContactForms />
-                                </div>
-                            </InteractiveCard>
+                            <div className="bg-background rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
+                                <ContactForms />
+                            </div>
                         </AnimatedSection>
                     </div>
                 </div>

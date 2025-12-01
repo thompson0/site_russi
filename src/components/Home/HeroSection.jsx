@@ -113,22 +113,21 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-2 sm:pt-4 px-4">
-            <Link href="#contato" className="w-full sm:w-auto group">
+            <Link href="#contato" className="w-full sm:w-auto">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl shadow-blue-500/25 transition-all duration-300 hover:shadow-blue-500/40 hover:scale-105 group-hover:-translate-y-1"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl shadow-blue-500/25 transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
                 Fale Conosco
-                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </Link>
-            <Link href="/visitante/videos" className="w-full sm:w-auto group">
+            <Link href="/visitante/videos" className="w-full sm:w-auto">
               <Button 
                 size="lg" 
-                variant="outline"
-                className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 group-hover:-translate-y-1"
+                className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
-                <PlayIcon className="mr-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
+                <PlayIcon className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                 Ver Vídeos
               </Button>
             </Link>
