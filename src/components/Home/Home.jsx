@@ -122,10 +122,10 @@ function HomePage() {
                         </AnimatedSection>
 
                         <AnimatedSection animation="fadeRight" delay={300} className="space-y-4 sm:space-y-6 order-1 lg:order-2">
-                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-justify">
                                 Nossa empresa nasceu da parceria com os principais distribuidores do mercado, com experiência de 35 anos no ramo de acessórios, dos quais 24 anos dedicados exclusivamente ao desenvolvimento de terceirização em Concessionárias de veículos, agregando valor e dinamismo a atividade.
                             </p>
-                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-justify">
                                 Garantimos através de nossos fornecedores: assistência técnica e treinamento da equipe efetuada diretamente pelos principais fabricantes de acessórios, mantendo desta forma, atualização constante sobre os últimos lançamentos e tendências do mercado.
                             </p>
                             
