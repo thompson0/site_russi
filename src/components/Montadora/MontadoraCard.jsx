@@ -33,7 +33,7 @@ function MontadoraCard() {
 
     return (
       <div>
-        <p className="text-center mt-10">Carregando montadoras...</p>;
+        <p className="text-center mt-10"> Carregando montadoras...</p>
         <ProgressDemo />
       </div>
     )
