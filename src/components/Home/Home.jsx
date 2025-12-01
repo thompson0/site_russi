@@ -10,6 +10,7 @@ import AspectosPositivos from "./AspectosPositivos";
 import FloatingElements from "./FloatingElements";
 import AnimatedSection from "./AnimatedSection";
 import InteractiveCard from "./InteractiveCard";
+import BrandsCarousel from "./BrandsCarousel";
 import { 
   BuildingOffice2Icon, 
   AcademicCapIcon, 
@@ -72,6 +73,8 @@ function HomePage() {
             <NavHome />
             
             <HeroSection />
+
+            <BrandsCarousel />
 
             <AnimatedSection animation="fadeUp">
                 <Timeline />
