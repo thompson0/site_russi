@@ -4,40 +4,125 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon, PlayIcon, TrophyIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import FuturisticBackground from "./FuturisticBackground";
+import { useEffect, useState, useRef } from "react";
+
+function AnimatedCounter({ end, duration = 2000, suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    const element = document.getElementById(`counter-${end}`);
+    if (element) observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [end]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible, end, duration]);
+
+  return (
+    <span id={`counter-${end}`}>
+      {count}{suffix}
+    </span>
+  );
+}
 
 export default function HeroSection() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/fundo.png')",
-        }}
-      />
-      
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-900/85 to-slate-800/80" />
-      
-      <div className="absolute inset-0 opacity-30 hidden sm:block">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" />
-      </div>
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-24 sm:py-20 sm:pt-32">
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleCanPlay = () => setVideoLoaded(true);
+      video.addEventListener("canplaythrough", handleCanPlay);
+      if (video.readyState >= 3) {
+        setVideoLoaded(true);
+      }
+      return () => video.removeEventListener("canplaythrough", handleCanPlay);
+    }
+  }, []);
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
+      {/* Video Background */}
+      <div className={`absolute inset-0 w-full h-full overflow-hidden transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}>
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+        >
+          <source src="/speedmetter.mp4" type="video/mp4" />
+        </video>
+      </div>
+      
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/70 to-slate-800/60" />
+      
+      <FuturisticBackground />
+
+      <div 
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-24 sm:py-20 sm:pt-32"
+        style={{
+          transform: `translate(${mousePosition.x * -0.3}px, ${mousePosition.y * -0.3}px)`,
+          transition: "transform 0.1s ease-out",
+        }}
+      >
         <div className="text-center space-y-6 sm:space-y-8">
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm">
+            <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm backdrop-blur-sm hover:bg-blue-500/30 transition-all duration-300 hover:scale-105 cursor-default">
               <TrophyIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               35 anos de experiência
             </Badge>
-            <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm">
+            <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm backdrop-blur-sm hover:bg-emerald-500/30 transition-all duration-300 hover:scale-105 cursor-default">
               <CalendarIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Desde 1986
             </Badge>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight px-2">
-            Especialistas em
-            <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="inline-block hover:scale-105 transition-transform duration-300">Especialistas em</span>
+            <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
               Acessórios Automotivos
             </span>
           </h1>
@@ -52,7 +137,7 @@ export default function HeroSection() {
             <Link href="#contato" className="w-full sm:w-auto">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl shadow-blue-500/25"
+                className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl shadow-blue-500/25 transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
                 Fale Conosco
                 <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
@@ -61,8 +146,7 @@ export default function HeroSection() {
             <Link href="/visitante/videos" className="w-full sm:w-auto">
               <Button 
                 size="lg" 
-                variant="outline"
-                className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg backdrop-blur-sm"
+                className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
                 <PlayIcon className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                 Ver Vídeos
@@ -71,28 +155,30 @@ export default function HeroSection() {
           </div>
 
           <div className="pt-8 sm:pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto px-2">
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">35+</div>
-              <div className="text-xs sm:text-sm text-slate-400">Anos no Mercado</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">215</div>
-              <div className="text-xs sm:text-sm text-slate-400">Funcionários</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">108K+</div>
-              <div className="text-xs sm:text-sm text-slate-400">Produtos/Ano</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">9+</div>
-              <div className="text-xs sm:text-sm text-slate-400">Marcas Atendidas</div>
-            </div>
+            {[
+              { value: 35, suffix: "+", label: "Anos no Mercado" },
+              { value: 215, suffix: "", label: "Funcionários" },
+              { value: 108, suffix: "K+", label: "Produtos/Ano" },
+              { value: 9, suffix: "+", label: "Marcas Atendidas" },
+            ].map((stat, index) => (
+              <div 
+                key={index} 
+                className="text-center group cursor-default"
+              >
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 transition-all duration-300 group-hover:scale-110 group-hover:text-blue-400">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-xs sm:text-sm text-slate-400 transition-colors group-hover:text-slate-300">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center pt-1.5 sm:pt-2">
+        <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center pt-1.5 sm:pt-2 hover:border-white/50 transition-colors cursor-pointer">
           <div className="w-1 h-2 sm:w-1.5 sm:h-3 bg-white/50 rounded-full" />
         </div>
       </div>

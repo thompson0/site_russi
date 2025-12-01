@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { DarkMode } from "./Darkmode";
-import { PlayCircleIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PlayCircleIcon, Bars3Icon, XMarkIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 
 function NavHome() {
@@ -51,12 +51,25 @@ function NavHome() {
           <div className="hidden md:flex items-center gap-2">
             <DarkMode />
 
+            <Link href="/sac">
+              <Button
+                variant="ghost"
+                className={`flex gap-2 items-center transition-colors ${isScrolled
+                    ? "text-foreground hover:bg-accent hover:text-foreground"
+                    : "text-white hover:bg-white/10 hover:text-white"
+                  }`}
+              >
+                <ChatBubbleLeftRightIcon className="w-5 h-5" />
+                SAC
+              </Button>
+            </Link>
+
             <Link href="/visitante/videos">
               <Button
                 variant="ghost"
                 className={`flex gap-2 items-center transition-colors ${isScrolled
-                    ? "text-foreground hover:bg-accent"
-                    : "text-white hover:bg-white/10"
+                    ? "text-foreground hover:bg-accent hover:text-foreground"
+                    : "text-white hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <PlayCircleIcon className="w-5 h-5" />
@@ -87,8 +100,14 @@ function NavHome() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border py-4 px-2 space-y-2">
+            <Link href="/sac" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start gap-2 text-foreground">
+                <ChatBubbleLeftRightIcon className="w-5 h-5" />
+                SAC
+              </Button>
+            </Link>
             <Link href="/visitante/videos" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start gap-2">
+              <Button variant="ghost" className="w-full justify-start gap-2 text-foreground">
                 <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
               </Button>
