@@ -105,11 +105,11 @@ function HomePage() {
                             <InteractiveCard className="rounded-2xl" glowColor="blue">
                                 <div className="relative h-[280px] sm:h-[350px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/sectionimg.png"
-                                        alt="Russi Acessórios Timeline"
+                                        src="/sectionimg-new.png"
+                                        alt="Russi Acessórios - Showroom de Acessórios Automotivos"
                                         fill
                                         sizes="(max-width: 1024px) 100vw, 50vw"
-                                        className="object-contain"
+                                        className="object-cover"
                                     />
                                 </div>
                             </InteractiveCard>
