@@ -62,7 +62,7 @@ export default function HeroSection() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg backdrop-blur-sm"
+                className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg backdrop-blur-sm"
               >
                 <PlayIcon className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                 Ver Vídeos

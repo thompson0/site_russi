@@ -46,7 +46,7 @@ const diferenciais = [
     },
     {
         titulo: "Marcas Atendidas",
-        texto: "Hyundai, Chery, Honda, Ford, Chevrolet, Subaru, Toyota, Volkswagen, GWM e grupos como CAOA, D21 Motors, Tsusho.",
+        texto: "Hyundai, Chery, Honda, Ford, Chevrolet, Subaru, Toyota, Volkswagen, GWM",
         icon: <Car size={32} className="text-purple-500" />,
         destaque: "Parcerias"
     }

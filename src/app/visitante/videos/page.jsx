@@ -50,12 +50,11 @@ export default function VideosPage() {
 
   return (
     <div className="min-h-screen">
-      {/* HERO SECTION */}
+      
       <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
 
-        {/* Glow Effects */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
 
@@ -78,7 +77,7 @@ export default function VideosPage() {
             profissionais do setor automotivo.
           </p>
 
-          {/* Feature Icons */}
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {features.map((feature, index) => (
               <div
@@ -100,7 +99,7 @@ export default function VideosPage() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
       </section>
 
-      {/* LISTAGEM */}
+   
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
           <div>
@@ -122,7 +121,6 @@ export default function VideosPage() {
           )}
         </div>
 
-        {/* Empty State */}
         {loading ? (
           <p className="text-center text-muted-foreground py-10">
             Carregando vídeos...

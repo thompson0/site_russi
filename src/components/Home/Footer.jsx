@@ -14,11 +14,11 @@ export default function Footer() {
               <Image
                 src="/logo_index.png"
                 alt="Russi Acessórios"
-                width={48}
-                height={48}
-                className="w-10 h-10 sm:w-12 sm:h-12"
+                width={100}
+                height={100}
+            
               />
-              <div>
+              <div> 
                 <span className="font-bold text-base sm:text-xl">Russi Acessórios</span>
                 <p className="text-[10px] sm:text-xs text-slate-400">Desde 1986</p>
               </div>

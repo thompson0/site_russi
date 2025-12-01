@@ -21,11 +21,10 @@ function NavHome() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
@@ -33,19 +32,17 @@ function NavHome() {
             <Image
               src="/logo_index.png"
               alt="Russi Acessórios"
-              width={48}
-              height={48}
-              className="w-10 h-10 md:w-12 md:h-12"
+              width={100}
+              height={100}
+              className=""
             />
             <div className="hidden sm:block">
-              <span className={`font-bold text-lg md:text-xl tracking-tight transition-colors ${
-                isScrolled ? "text-foreground" : "text-white"
-              }`}>
+              <span className={`font-bold text-lg md:text-xl tracking-tight transition-colors ${isScrolled ? "text-foreground" : "text-white"
+                }`}>
                 Russi Acessórios
               </span>
-              <p className={`text-xs transition-colors ${
-                isScrolled ? "text-muted-foreground" : "text-white/70"
-              }`}>
+              <p className={`text-xs transition-colors ${isScrolled ? "text-muted-foreground" : "text-white/70"
+                }`}>
                 Desde 1986
               </p>
             </div>
@@ -53,15 +50,14 @@ function NavHome() {
 
           <div className="hidden md:flex items-center gap-2">
             <DarkMode />
-            
+
             <Link href="/visitante/videos">
-              <Button 
-                variant="ghost" 
-                className={`flex gap-2 items-center transition-colors ${
-                  isScrolled 
-                    ? "text-foreground hover:bg-accent" 
+              <Button
+                variant="ghost"
+                className={`flex gap-2 items-center transition-colors ${isScrolled
+                    ? "text-foreground hover:bg-accent"
                     : "text-white hover:bg-white/10"
-                }`}
+                  }`}
               >
                 <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
@@ -69,7 +65,7 @@ function NavHome() {
             </Link>
 
             <Link href="/login">
-              <Button 
+              <Button
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
               >
                 Entrar
