@@ -3,15 +3,15 @@
 import Image from "next/image";
 
 const brands = [
-  { name: "Hyundai", logo: "/logos/hyundai.jpg" },
-  { name: "Chery", logo: "/logos/chery.jpg" },
-  { name: "Honda", logo: "/logos/honda.jpg" },
-  { name: "Ford", logo: "/logos/ford.jpg" },
-  { name: "Chevrolet", logo: "/logos/chevrolet.jpg" },
-  { name: "Subaru", logo: "/logos/subaru.jpg" },
-  { name: "Toyota", logo: "/logos/toyota.jpg" },
-  { name: "Volkswagen", logo: "/logos/volkswagen.jpg" },
-  { name: "GWM", logo: "/logos/gwm.jpg" },
+  { name: "Hyundai", logo: "/logos/hyundai.png" },
+  { name: "Chery", logo: "/logos/chery.png" },
+  { name: "Honda", logo: "/logos/honda.png" },
+  { name: "Ford", logo: "/logos/ford.png" },
+  { name: "Chevrolet", logo: "/logos/chevrolet.png" },
+  { name: "Subaru", logo: "/logos/subaru.png" },
+  { name: "Toyota", logo: "/logos/toyota.png" },
+  { name: "Volkswagen", logo: "/logos/volkswagen.png" },
+  { name: "GWM", logo: "/logos/gwm.png" },
 ];
 
 export default function BrandsCarousel() {
