@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon, PlayIcon, TrophyIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import FuturisticBackground from "./FuturisticBackground";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function AnimatedCounter({ end, duration = 2000, suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -68,15 +68,21 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300"
-        style={{
-          backgroundImage: "url('/fundo.png')",
-          transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px) scale(1.1)`,
-        }}
-      />
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+        >
+          <source src="/speedmetter.mp4" type="video/mp4" />
+        </video>
+      </div>
       
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-800/85" />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/70 to-slate-800/60" />
       
       <FuturisticBackground />
 
