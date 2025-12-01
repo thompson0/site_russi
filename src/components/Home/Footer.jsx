@@ -14,9 +14,9 @@ export default function Footer() {
               <Image
                 src="/logo_index.png"
                 alt="Russi Acessórios"
-                width={100}
-                height={100}
-            
+                width={150}
+                height={150}
+                className="object-contain"
               />
               <div> 
                 <span className="font-bold text-base sm:text-xl">Russi Acessórios</span>

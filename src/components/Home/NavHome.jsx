@@ -32,9 +32,9 @@ function NavHome() {
             <Image
               src="/logo_index.png"
               alt="Russi Acessórios"
-              width={100}
-              height={100}
-              className=""
+              width={150}
+              height={150}
+              className="object-contain"
             />
             <div className="hidden sm:block">
               <span className={`font-bold text-lg md:text-xl tracking-tight transition-colors ${isScrolled ? "text-foreground" : "text-white"
