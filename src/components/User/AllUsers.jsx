@@ -9,7 +9,7 @@ async function AllUsers() {
     const users = await prisma.usuarios.findMany()
 
     return (
-        <ScrollArea className="w-full rounded-md border">
+        <ScrollArea className="w-full h-96 rounded-md border">
             <div className="p-4">
                 <h4 className="mb-4 text-sm leading-none font-medium">Usuários</h4>
 

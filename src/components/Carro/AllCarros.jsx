@@ -30,6 +30,7 @@ export default function AllCarros() {
     fetchCarros();
   }, [refreshKey]);
 
+
   if (loading)
     return (
       <div>
@@ -38,22 +39,41 @@ export default function AllCarros() {
       </div>
     );
 
+
   if (carros.length === 0)
-    return <p className="text-gray-400 text-center mt-10">Nenhum carro encontrado.</p>
+    return (
+      <div className="flex flex-col gap-6">
+        <p className="text-gray-400 text-center mt-10">Nenhum carro encontrado.</p>
+
+        <div className="flex justify-end px-4">
+          <AddCarro
+            Allcarros={true}
+            onCreated={(novo) => {
+              if (!novo) return;
+              setCarros((prev) => [novo, ...prev]);
+            }}
+          />
+        </div>
+      </div>
+    );
+
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-end px-4">
-        <AddCarro Allcarros={true} onCreated={(novo) => {
-          if (!novo) return;
-          setCarros((prev) => [novo, ...prev]);
-        }} />
+        <AddCarro
+          Allcarros={true}
+          onCreated={(novo) => {
+            if (!novo) return;
+            setCarros((prev) => [novo, ...prev]);
+          }}
+        />
       </div>
-
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {carros.map((carro) => (
           <Card key={carro.id} className="group overflow-hidden transition-all hover:shadow-lg">
+
             <Link href={`/admin/produtos/${carro.id}`}>
               <CardHeader className="flex items-center justify-center h-48 bg-gray-50 cursor-pointer">
                 <img
@@ -89,10 +109,13 @@ export default function AllCarros() {
                   );
                 }}
               />
+
               <DeleteCarro
                 id={carro.id}
                 onDelete={(deletedId) => {
-                  setCarros((prev) => prev.filter((c) => String(c.id) !== String(deletedId)));
+                  setCarros((prev) =>
+                    prev.filter((c) => String(c.id) !== String(deletedId))
+                  );
                 }}
               />
             </CardFooter>
@@ -100,7 +123,6 @@ export default function AllCarros() {
           </Card>
         ))}
       </div>
-
     </div>
   );
 }

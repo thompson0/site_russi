@@ -40,8 +40,22 @@ export default function AllProdutos() {
       </div>
     );
 
-  if (produtos.length === 0)
-    return <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>;
+if (produtos.length === 0)
+  return (
+    <div className="flex flex-col gap-6">
+      <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>
+
+      <div className="flex justify-end px-4">
+        <AddProduto
+          Allprodutos={true}
+          onCreated={(novo) => {
+            if (!novo) return;
+            setProdutos((prev) => [novo, ...prev]);
+          }}
+        />
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-col gap-6">
