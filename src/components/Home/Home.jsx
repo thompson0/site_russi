@@ -131,14 +131,14 @@ function HomePage() {
                             
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4">
                                 {beneficios.map((beneficio, index) => (
-                                    <InteractiveCard key={index} glowColor="blue">
-                                        <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-accent/50 hover:bg-accent transition-all duration-300 group cursor-default">
+                                    <InteractiveCard key={index} glowColor="blue" className="h-full">
+                                        <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl bg-accent/50 hover:bg-accent transition-all duration-300 group cursor-default h-[72px] sm:h-[80px]">
                                             <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
                                                 {beneficio.icon}
                                             </div>
-                                            <div className="min-w-0">
+                                            <div className="min-w-0 flex flex-col justify-center">
                                                 <h4 className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">{beneficio.titulo}</h4>
-                                                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{beneficio.texto}</p>
+                                                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">{beneficio.texto}</p>
                                             </div>
                                         </div>
                                     </InteractiveCard>
