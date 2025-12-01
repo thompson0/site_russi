@@ -64,7 +64,7 @@ export function AppSidebar() {
               <span className="text-white font-bold text-lg">R</span>
             </div>
             <div>
-              <h2 className="text-white font-semibold text-lg tracking-tight">Russi Admin</h2>
+              <h2 className=" font-semibold text-lg tracking-tight">Russi Admin</h2>
               <p className="text-slate-400 text-xs">Painel de Controle</p>
             </div>
           </div>
