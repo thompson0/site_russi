@@ -66,11 +66,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
                 <PhoneIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
-                <span>(11) 9999-9999</span>
+                <span>(55) 1123717000</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
                 <EnvelopeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
-                <span className="break-all">contato@russi.com.br</span>
+                <span className="break-all">contato@russiacessorios.com.br</span>
               </li>
               <li className="flex items-center gap-2 sm:gap-3">
                 <ClockIcon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 flex-shrink-0" />
