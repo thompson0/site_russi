@@ -61,7 +61,7 @@ export function AppSidebar() {
     <Sidebar className="border-r-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
       <SidebarContent className="px-3">
         
-        {/* HEADER */}
+   
         <SidebarHeader className="py-6 px-2">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
@@ -90,7 +90,7 @@ export function AppSidebar() {
                     <Link
                       href={item.url}
                       className={`
-                        flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
+                        group/item flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
                         ${active
                           ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25"
                           : "text-slate-400"
@@ -103,7 +103,7 @@ export function AppSidebar() {
                           ${
                             active
                               ? "text-white"
-                              : "text-slate-500 hover:text-blue-400"
+                              : "text-slate-500 group-hover/item:text-blue-400"
                           }
                         `}
                       />
@@ -139,16 +139,16 @@ export function AppSidebar() {
                     {item.action ? (
                       <button
                         onClick={item.action}
-                        className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-400"
+                        className="group/item flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-400"
                       >
-                        <item.icon className="w-5 h-5 text-slate-500 hover:text-red-400" />
+                        <item.icon className="w-5 h-5 text-slate-500 transition-colors group-hover/item:text-red-400" />
                         <span className="font-medium text-sm">{item.title}</span>
                       </button>
                     ) : (
                       <Link
                         href={item.url}
                         className={`
-                          flex items-center gap-3 px-3 py-2.5 rounded-lg
+                          group/item flex items-center gap-3 px-3 py-2.5 rounded-lg 
                           ${active ? "bg-slate-800 text-white" : "text-slate-400"}
                         `}
                       >
@@ -158,7 +158,7 @@ export function AppSidebar() {
                             ${
                               active
                                 ? "text-white"
-                                : "text-slate-500 hover:text-blue-400"
+                                : "text-slate-500 group-hover/item:text-gray-200"
                             }
                           `}
                         />
