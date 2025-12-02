@@ -1,25 +1,41 @@
-import AllUsers from "@/components/User/AllUsers";
-import {getUserFromCookie} from "@/lib/auth"
-import { Card , CardHeader, CardContent } from "@/components/ui/card";
-import AddUser from "@/components/User/AddUser";
+import UserCard from "@/components/User/UserCard";
+import { getUserFromCookie } from "@/lib/auth";
 
-async function ConfigAdminPage() {
-    const user = await getUserFromCookie()
-    
+export default async function UserPage() {
+    const user = await getUserFromCookie();
+
+    if (!user) {
+        return (
+            <div className="text-center mt-20">
+                <h1 className="text-2xl font-bold text-red-600">
+                    Acesso negado — faça login
+                </h1>
+            </div>
+        );
+    }
+
     return (
 
-        <Card className=" flex m-6 gap-5">
-           <CardHeader className="flex flex-row justify-between text-4xl font-bold  text-center sm:text-left">
-             <h1 className="">Olá {user.nome}</h1>
-                <AddUser></AddUser>
-            </CardHeader> 
-            <CardContent>
-                <AllUsers></AllUsers>
-            </CardContent>
+        <div className="flex flex-col w-full items-center mx-4 md:mx-0 md:p-8">
+            <div className="w-full max-w-7xl">
+                <h1 className="text-4xl font-bold mb-2.5 text-center sm:text-left">Profile</h1>
 
-        </Card>
+                <div className=" gap-6">
+                    <div className="md:col-span-2">
+                        <UserCard
+                            name={user.nome}
+                            email={user.email}
+                            permissao={user.permissao}
+                            user={user}
+                        />
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
-     );
+
+    );
 }
 
-export default ConfigAdminPage;
