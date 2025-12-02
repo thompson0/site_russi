@@ -6,7 +6,6 @@ const brands = [
   { name: "Hyundai", logo: "/logos/hyundai.png" },
   { name: "Chery", logo: "/logos/chery.png" },
   { name: "Honda", logo: "/logos/honda.png" },
-  { name: "Ford", logo: "/logos/ford.png" },
   { name: "Chevrolet", logo: "/logos/chevrolet.png" },
   { name: "Subaru", logo: "/logos/subaru.png" },
   { name: "Toyota", logo: "/logos/toyota.png" },
