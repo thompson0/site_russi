@@ -21,9 +21,9 @@ function NavHome() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
-          : "bg-transparent"
+          : "bg-transparent border-b border-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,7 +48,7 @@ function NavHome() {
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className=" md:flex items-center gap-2">
             <DarkMode />
 
             <Link href="/sac">
