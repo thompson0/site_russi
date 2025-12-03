@@ -89,6 +89,49 @@ The application will be available at http://0.0.0.0:5000
 - `npm run build` - Build for production (includes Prisma generation)
 - `npm start` - Start production server on port 5000
 - `npm run prisma:generate` - Generate Prisma client
+- `npm run db:seed` - Populate database with initial data
+- `npm run db:reset` - Reset database and run seed (WARNING: deletes all data)
+
+## Database Seed
+
+### Running the Seed
+To populate the database with initial data for testing and deployment:
+
+```bash
+npm run db:seed
+```
+
+To completely reset the database and start fresh:
+
+```bash
+npm run db:reset
+```
+
+### Test Users Created by Seed
+
+| Email | Password | Role | Sector |
+|-------|----------|------|--------|
+| admin@russi.com.br | 123456 | Admin | - |
+| supervisor.comercial@russi.com.br | 123456 | Supervisor | Comercial |
+| supervisor.instalacao@russi.com.br | 123456 | Supervisor | Instalação |
+| vendedor@russi.com.br | 123456 | Vendedor Interno | Comercial |
+| instalador@russi.com.br | 123456 | Instalador | Instalação |
+
+**IMPORTANT:** Change passwords after first login!
+
+### Seed Data Included
+- **4 Setores**: Comercial, Instalação, Administrativo, Logística
+- **5 Usuários**: 1 admin, 2 supervisors, 1 vendedor, 1 instalador
+- **8 Montadoras**: Chevrolet, Fiat, Volkswagen, Ford, Toyota, Honda, Hyundai, Jeep
+- **8 Carros**: Sample vehicles from each manufacturer
+- **10 Produtos**: Sample automotive accessories
+- **18 Associações**: Product-vehicle relationships
+- **5 Contatos**: Department contacts with phone/email
+- **5 FAQs**: Frequently asked questions
+- **4 Manuais**: Training and procedure manuals
+- **3 Vídeos RH**: HR procedure videos
+- **4 Vídeos Internos**: Internal training videos per sector
+- **2 Vídeos Públicos**: Public promotional videos
 
 ## Deployment
 The project is configured for Replit autoscale deployment:
