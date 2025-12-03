@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ProdutoVideoCard from "@/components/Videos/ProdutoVideoCard";
+import NavHome from "@/components/Home/NavHome";
 import {
   PlayCircleIcon,
   VideoCameraIcon,
@@ -50,6 +51,7 @@ export default function VideosPage() {
 
   return (
     <div className="min-h-screen">
+      <NavHome />
       
       <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>

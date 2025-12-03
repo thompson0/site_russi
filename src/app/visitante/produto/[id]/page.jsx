@@ -1,6 +1,6 @@
-import SingleProduto from "@/components/Produto/SingleProduto";
+import VisitorProductView from "@/components/Produto/VisitorProductView";
 
 export default async function VisitanteProdutoPage({ params }) {
   const { id } = await params;
-  return <SingleProduto qrcode={true} id={id} />;
+  return <VisitorProductView id={id} />;
 }
