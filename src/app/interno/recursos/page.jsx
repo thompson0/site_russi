@@ -14,13 +14,132 @@ import {
   Building2,
   Headphones,
   MessageCircle,
-  Search,
   ArrowRight,
   Clock,
   Users,
   Shield,
-  Sparkles
 } from "lucide-react";
+
+const STATIC_FAQ = [
+  {
+    id: 1,
+    pergunta: "Como faço para solicitar férias?",
+    resposta: "Para solicitar férias, acesse o sistema de RH ou entre em contato diretamente com o departamento de Recursos Humanos pelo ramal 201. É necessário fazer a solicitação com pelo menos 30 dias de antecedência."
+  },
+  {
+    id: 2,
+    pergunta: "Qual é o horário de funcionamento da empresa?",
+    resposta: "O horário de funcionamento é de segunda a sexta-feira, das 8h às 18h. O horário de almoço é das 12h às 13h30."
+  },
+  {
+    id: 3,
+    pergunta: "Como solicitar materiais de escritório?",
+    resposta: "Os materiais de escritório devem ser solicitados através do seu supervisor direto, que encaminhará o pedido para o departamento Administrativo."
+  },
+  {
+    id: 4,
+    pergunta: "Como funciona o vale-transporte e vale-refeição?",
+    resposta: "Os benefícios são creditados no início de cada mês. O vale-transporte é calculado conforme a necessidade informada no momento da admissão. O vale-refeição possui valor fixo definido em acordo coletivo."
+  },
+  {
+    id: 5,
+    pergunta: "Como reportar problemas técnicos no sistema?",
+    resposta: "Problemas técnicos devem ser reportados ao departamento de TI através do ramal 205 ou pelo e-mail ti@russi.com.br. Descreva o problema detalhadamente para agilizar o atendimento."
+  },
+  {
+    id: 6,
+    pergunta: "Como faço para atualizar meus dados cadastrais?",
+    resposta: "Para atualização de dados cadastrais (endereço, telefone, conta bancária, etc.), entre em contato com o RH pelo ramal 201 ou compareça pessoalmente ao departamento com os documentos comprobatórios."
+  },
+  {
+    id: 7,
+    pergunta: "Qual o procedimento para justificar faltas?",
+    resposta: "Faltas devem ser justificadas com atestado médico ou documento comprobatório entregue ao RH em até 48 horas. Comunique seu supervisor imediatamente em caso de ausência."
+  },
+  {
+    id: 8,
+    pergunta: "Como funciona o programa de treinamentos?",
+    resposta: "Os treinamentos são definidos conforme o setor e função. Acesse a área de Treinamentos neste portal para ver os vídeos disponíveis para sua área. Treinamentos presenciais são agendados pelo supervisor."
+  }
+];
+
+const STATIC_MANUAIS = [
+  {
+    id: 1,
+    titulo: "Manual do Colaborador",
+    descricao: "Guia completo com todas as políticas, procedimentos e informações importantes para colaboradores da Russi Acessórios.",
+    conteudo: "Este manual contém informações sobre código de conduta, políticas de RH, benefícios, procedimentos internos e orientações gerais."
+  },
+  {
+    id: 2,
+    titulo: "Guia de Uso do Sistema ERP",
+    descricao: "Instruções para utilização do sistema de gestão empresarial utilizado na empresa.",
+    conteudo: "Aprenda a navegar pelo sistema, realizar consultas, emitir relatórios e executar as principais operações do dia a dia."
+  },
+  {
+    id: 3,
+    titulo: "Procedimentos de Segurança",
+    descricao: "Normas e procedimentos de segurança do trabalho aplicáveis a todos os setores.",
+    conteudo: "Orientações sobre uso de EPIs, procedimentos de emergência, prevenção de acidentes e boas práticas de segurança."
+  },
+  {
+    id: 4,
+    titulo: "Manual de Instalação de Acessórios",
+    descricao: "Guia técnico com procedimentos padrão para instalação de acessórios automotivos.",
+    conteudo: "Procedimentos técnicos, ferramentas necessárias, cuidados especiais e dicas para instalação correta de cada tipo de acessório."
+  }
+];
+
+const STATIC_CONTATOS = [
+  {
+    id: 1,
+    departamento: "Recursos Humanos",
+    colaborador: "Departamento de RH",
+    ramal: "201",
+    telefone: "(11) 1234-5678",
+    email: "rh@russi.com.br"
+  },
+  {
+    id: 2,
+    departamento: "Comercial",
+    colaborador: "Equipe Comercial",
+    ramal: "202",
+    telefone: "(11) 1234-5679",
+    email: "comercial@russi.com.br"
+  },
+  {
+    id: 3,
+    departamento: "Instalação",
+    colaborador: "Coordenação de Instalação",
+    ramal: "203",
+    telefone: "(11) 1234-5680",
+    email: "instalacao@russi.com.br"
+  },
+  {
+    id: 4,
+    departamento: "Administrativo",
+    colaborador: "Departamento Administrativo",
+    ramal: "204",
+    telefone: "(11) 1234-5681",
+    email: "administrativo@russi.com.br"
+  },
+  {
+    id: 5,
+    departamento: "TI / Suporte",
+    colaborador: "Equipe de Tecnologia",
+    ramal: "205",
+    telefone: "(11) 1234-5682",
+    email: "ti@russi.com.br"
+  },
+  {
+    id: 6,
+    departamento: "Logística",
+    colaborador: "Coordenação Logística",
+    ramal: "206",
+    telefone: "(11) 1234-5683",
+    email: "logistica@russi.com.br"
+  }
+];
 
 function QuickAccessCard({ icon: Icon, title, description, color, onClick, count }) {
   const colorClasses = {
@@ -145,7 +264,7 @@ function FAQItem({ duvida, index }) {
 
 function ManualCard({ manual }) {
   return (
-    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-green-500/50 transition-all duration-300 group cursor-pointer">
+    <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-green-500/50 transition-all duration-300 group">
       <div className="flex items-start gap-4">
         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
           <FileText className="w-7 h-7 text-white" />
@@ -166,11 +285,6 @@ function ManualCard({ manual }) {
           </p>
         </div>
       )}
-      
-      <div className="mt-4 flex items-center gap-2 text-green-400 text-sm font-medium">
-        <span>Ler documento</span>
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-      </div>
     </div>
   );
 }
@@ -268,32 +382,20 @@ function EmptyState({ icon: Icon, title, description }) {
 export default function RecursosPage() {
   const [activeSection, setActiveSection] = useState(null);
   const [rhVideos, setRhVideos] = useState([]);
-  const [duvidas, setDuvidas] = useState([]);
-  const [manuais, setManuais] = useState([]);
-  const [contatos, setContatos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchVideos() {
       try {
-        const [rhRes, duvidasRes, manuaisRes, contatosRes] = await Promise.all([
-          fetch("/api/rh"),
-          fetch("/api/comum/duvidas"),
-          fetch("/api/comum/manuais"),
-          fetch("/api/comum/contatos"),
-        ]);
-
+        const rhRes = await fetch("/api/rh");
         if (rhRes.ok) setRhVideos(await rhRes.json());
-        if (duvidasRes.ok) setDuvidas(await duvidasRes.json());
-        if (manuaisRes.ok) setManuais(await manuaisRes.json());
-        if (contatosRes.ok) setContatos(await contatosRes.json());
       } catch (error) {
-        console.error("Erro ao buscar dados:", error);
+        console.error("Erro ao buscar vídeos:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchData();
+    fetchVideos();
   }, []);
 
   if (loading) {
@@ -352,7 +454,7 @@ export default function RecursosPage() {
             description="Documentação de treinamento e guias do sistema"
             color="green"
             onClick={() => setActiveSection("manuais")}
-            count={manuais.length}
+            count={STATIC_MANUAIS.length}
           />
           <QuickAccessCard
             icon={HelpCircle}
@@ -360,7 +462,7 @@ export default function RecursosPage() {
             description="Respostas rápidas para as principais perguntas"
             color="blue"
             onClick={() => setActiveSection("faq")}
-            count={duvidas.length}
+            count={STATIC_FAQ.length}
           />
           <QuickAccessCard
             icon={Phone}
@@ -368,7 +470,7 @@ export default function RecursosPage() {
             description="Lista completa dos departamentos e contatos"
             color="orange"
             onClick={() => setActiveSection("contatos")}
-            count={contatos.length}
+            count={STATIC_CONTATOS.length}
           />
         </div>
       )}
@@ -417,19 +519,11 @@ export default function RecursosPage() {
             subtitle="Documentação de treinamento e guias técnicos"
             color="green"
           />
-          {manuais.length === 0 ? (
-            <EmptyState 
-              icon={FileText}
-              title="Nenhum manual disponível"
-              description="Os manuais e apostilas de treinamento serão adicionados em breve."
-            />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {manuais.map((manual) => (
-                <ManualCard key={manual.id} manual={manual} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {STATIC_MANUAIS.map((manual) => (
+              <ManualCard key={manual.id} manual={manual} />
+            ))}
+          </div>
         </section>
       )}
 
@@ -441,43 +535,27 @@ export default function RecursosPage() {
             subtitle="Respostas para as perguntas mais comuns"
             color="blue"
           />
-          {duvidas.length === 0 ? (
-            <EmptyState 
-              icon={HelpCircle}
-              title="Nenhuma dúvida cadastrada"
-              description="As dúvidas frequentes serão adicionadas em breve."
-            />
-          ) : (
-            <div className="space-y-4 max-w-4xl">
-              {duvidas.map((duvida, index) => (
-                <FAQItem key={duvida.id} duvida={duvida} index={index} />
-              ))}
-            </div>
-          )}
+          <div className="space-y-4 max-w-4xl">
+            {STATIC_FAQ.map((duvida, index) => (
+              <FAQItem key={duvida.id} duvida={duvida} index={index} />
+            ))}
+          </div>
         </section>
       )}
 
       {activeSection === "contatos" && (
-        <section>
+        <section id="contatos">
           <SectionHeader 
             icon={Phone}
             title="Ramais e Contatos"
             subtitle="Lista completa dos departamentos"
             color="orange"
           />
-          {contatos.length === 0 ? (
-            <EmptyState 
-              icon={Phone}
-              title="Nenhum contato cadastrado"
-              description="Os contatos dos departamentos serão adicionados em breve."
-            />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {contatos.map((contato) => (
-                <ContatoCard key={contato.id} contato={contato} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {STATIC_CONTATOS.map((contato) => (
+              <ContatoCard key={contato.id} contato={contato} />
+            ))}
+          </div>
         </section>
       )}
 

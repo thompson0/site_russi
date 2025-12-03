@@ -21,17 +21,12 @@ const ROLE_LABELS = {
 export default async function InternoPage() {
   const user = await getUserFromCookie();
 
-  const [videosCount, rhVideosCount, manuaisCount, contatosCount] = await Promise.all([
-    prisma.videos_internos.count({
-      where: {
-        ativo: true,
-        ...(user.role !== 'admin' && user.setor_id ? { setor_id: user.setor_id } : {}),
-      },
-    }),
-    prisma.videos_rh_procedimentos.count({ where: { ativo: true } }),
-    prisma.manuais.count(),
-    prisma.contatos.count(),
-  ]);
+  const videosCount = await prisma.videos_internos.count({
+    where: {
+      ativo: true,
+      ...(user.role !== 'admin' && user.setor_id ? { setor_id: user.setor_id } : {}),
+    },
+  });
 
   const quickLinks = [
     {
@@ -48,21 +43,25 @@ export default async function InternoPage() {
       icon: BookOpen,
       color: "from-purple-500 to-pink-500",
     },
-    {
+  ];
+
+  if (user.role !== 'instalador') {
+    quickLinks.push({
       href: "/catalogo/carros",
       label: "Catálogo Digital",
       description: "Produtos e acessórios",
       icon: FileText,
       color: "from-green-500 to-emerald-500",
-    },
-    {
-      href: "/interno/recursos#contatos",
-      label: "Ramais",
-      description: `${contatosCount} contatos`,
-      icon: Phone,
-      color: "from-orange-500 to-amber-500",
-    },
-  ];
+    });
+  }
+
+  quickLinks.push({
+    href: "/interno/recursos#contatos",
+    label: "Ramais",
+    description: "6 departamentos",
+    icon: Phone,
+    color: "from-orange-500 to-amber-500",
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

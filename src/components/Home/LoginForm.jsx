@@ -33,11 +33,7 @@ export function LoginForm(props) {
         return;
       }
 
-      if (data.role === "admin" || data.role === "supervisor") {
-        router.push("/admin");
-      } else {
-        router.push("/interno");
-      }
+      router.push("/interno");
     } 
     
     catch (error) {
