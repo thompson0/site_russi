@@ -1,0 +1,11 @@
+modules = ["nodejs-20", "web"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+DIRECT_URL = "postgresql://neondb_owner:npg_imqRtc3T6DOL@ep-icy-forest-afme9pgp.c-2.us-west-2.aws.neon.tech/neondb?sslmode=require"
