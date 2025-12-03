@@ -288,14 +288,14 @@ export default function VideosInternosPage() {
             <div className="space-y-2">
               <Label htmlFor="setor">Setor</Label>
               <Select
-                value={form.setor_id}
-                onValueChange={(value) => setForm({ ...form, setor_id: value })}
+                value={form.setor_id || "all"}
+                onValueChange={(value) => setForm({ ...form, setor_id: value === "all" ? "" : value })}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o setor (opcional)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Todos os setores</SelectItem>
+                  <SelectItem value="all">Todos os setores</SelectItem>
                   {setores.map((setor) => (
                     <SelectItem key={setor.id} value={setor.id.toString()}>
                       {setor.nome}

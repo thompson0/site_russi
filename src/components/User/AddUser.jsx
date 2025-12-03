@@ -159,14 +159,14 @@ export default function AddUser({ currentUserRole = "admin" }) {
           <div className="space-y-2">
             <Label htmlFor="setor">Setor</Label>
             <Select
-              value={form.setor_id}
-              onValueChange={(value) => setForm({ ...form, setor_id: value })}
+              value={form.setor_id || "none"}
+              onValueChange={(value) => setForm({ ...form, setor_id: value === "none" ? "" : value })}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Selecione o setor (opcional)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Nenhum</SelectItem>
+                <SelectItem value="none">Nenhum</SelectItem>
                 {setores.map((setor) => (
                   <SelectItem key={setor.id} value={setor.id.toString()}>
                     {setor.nome}
