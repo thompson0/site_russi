@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: [
-    process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : null,
-    'https://*.replit.dev',
-  ].filter(Boolean),
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['*.replit.dev', '*.repl.co'],
+    },
+  },
 };
 
 export default nextConfig;
