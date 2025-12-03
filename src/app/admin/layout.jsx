@@ -21,9 +21,9 @@ export default async function AdminLayout({ children }) {
         <div className="min-h-screen bg-background">
             <SidebarProvider>
                 <AppSidebar />
-                <main className="flex-1 flex flex-col min-h-screen">
+                <main className="flex-1 flex flex-col min-h-screen w-full overflow-x-hidden">
                     <NavBar />
-                    <div className="flex-1 bg-accent/30">
+                    <div className="flex-1 bg-accent/30 p-4 md:p-6">
                         {children}
                     </div>
                 </main>

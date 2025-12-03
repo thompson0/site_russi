@@ -44,7 +44,7 @@ export default function SingleProduto({ id, qrcode = false }) {
     return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
         
   return (
-    <div className="flex justify-center items-center max-h-screen p-4">
+    <div className="flex justify-center items-start min-h-full">
       <Card className="max-w-4xl w-full shadow-lg">
 
         <CardHeader className="text-center">
