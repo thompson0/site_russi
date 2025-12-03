@@ -1,7 +1,8 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Dialog,
   DialogTrigger,
@@ -11,15 +12,49 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Pencil } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 
+const ROLES = [
+  { value: "admin", label: "Administrador" },
+  { value: "supervisor", label: "Supervisor" },
+  { value: "vendedor_interno", label: "Vendedor Interno" },
+  { value: "instalador", label: "Instalador" },
+]
+
 export default function EditUser({ id }) {
-  const [form, setForm] = useState({ nome: "", email: "", senha: "", permissao: "" })
+  const [form, setForm] = useState({ 
+    nome: "", 
+    email: "", 
+    senha: "", 
+    permissao: "",
+    role: "",
+    setor_id: "",
+  })
   const [open, setOpen] = useState(false)
+  const [setores, setSetores] = useState([])
   const { triggerAlert } = useAlert()
   const { secureFetch, loading } = useSecureFetch()
+
+  async function fetchSetores() {
+    try {
+      const res = await fetch("/api/setores")
+      if (res.ok) {
+        const data = await res.json()
+        setSetores(data)
+      }
+    } catch (error) {
+      console.error("Erro ao buscar setores:", error)
+    }
+  }
 
   async function fetchUserData() {
     try {
@@ -31,11 +66,20 @@ export default function EditUser({ id }) {
         email: data.email || "",
         senha: "",
         permissao: data.permissao || "",
+        role: data.role || "vendedor_interno",
+        setor_id: data.setor_id?.toString() || "",
       })
     } catch (err) {
       triggerAlert("error", "Erro ao carregar", "Não foi possível buscar os dados.")
     }
   }
+
+  useEffect(() => {
+    if (open) {
+      fetchSetores()
+      fetchUserData()
+    }
+  }, [open])
 
   async function handleEditUser(e) {
     e.preventDefault()
@@ -44,7 +88,10 @@ export default function EditUser({ id }) {
       `/api/user/${id}`,
       {
         method: "PUT",
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          setor_id: form.setor_id === "none" || !form.setor_id ? null : parseInt(form.setor_id),
+        }),
       },
       {
         refresh: true,
@@ -60,44 +107,91 @@ export default function EditUser({ id }) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (o) fetchUserData() }}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="icon" title="Editar usuário">
           <Pencil className="w-5 h-5" />
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Editar usuário</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleEditUser} className="space-y-3">
-          <Input
-            placeholder="Nome"
-            value={form.nome}
-            onChange={(e) => setForm({ ...form, nome: e.target.value })}
-            required
-          />
-          <Input
-            placeholder="Email"
-            type="email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
-          />
-          <Input
-            placeholder="Nova senha (opcional)"
-            type="password"
-            value={form.senha}
-            onChange={(e) => setForm({ ...form, senha: e.target.value })}
-          />
-          <Input
-            placeholder="Permissão (ex: admin ou user)"
-            value={form.permissao}
-            onChange={(e) => setForm({ ...form, permissao: e.target.value })}
-            required
-          />
+        <form onSubmit={handleEditUser} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="nome">Nome</Label>
+            <Input
+              id="nome"
+              placeholder="Nome completo"
+              value={form.nome}
+              onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              placeholder="email@exemplo.com"
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="senha">Nova Senha (opcional)</Label>
+            <Input
+              id="senha"
+              placeholder="Deixe em branco para manter a atual"
+              type="password"
+              value={form.senha}
+              onChange={(e) => setForm({ ...form, senha: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="role">Cargo</Label>
+            <Select
+              value={form.role || "vendedor_interno"}
+              onValueChange={(value) => setForm({ ...form, role: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione o cargo" />
+              </SelectTrigger>
+              <SelectContent>
+                {ROLES.map((role) => (
+                  <SelectItem key={role.value} value={role.value}>
+                    {role.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="setor">Setor</Label>
+            <Select
+              value={form.setor_id || "none"}
+              onValueChange={(value) => setForm({ ...form, setor_id: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione o setor" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Nenhum</SelectItem>
+                {setores.map((setor) => (
+                  <SelectItem key={setor.id} value={setor.id.toString()}>
+                    {setor.nome}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           <DialogFooter className="gap-2">
             <DialogClose asChild>

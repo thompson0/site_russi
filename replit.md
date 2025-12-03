@@ -157,7 +157,6 @@ The project is configured for Replit autoscale deployment:
 - `/interno/treinamentos` - Sector-based training videos
 - `/interno/recursos` - HR procedures, manuals, FAQ, contacts
 - `/admin/*` - Admin dashboard (requires admin or supervisor role)
-- `/admin/setores` - Sector management (admin only)
 - `/admin/videos-internos` - Internal training video management
 - `/admin/user` - User management with role-based permissions
 - `/user/*` - User profile pages (requires authentication)
@@ -185,7 +184,32 @@ The application uses JWT-based authentication with:
 - Automatic redirect to `/login` for unauthenticated users
 - Redirect to `/interno` for non-admin users accessing admin routes
 
-## Recent Changes (2025-11-28)
+## Recent Changes (2025-12-03)
+
+### Sector Management Removed
+- Removed admin setores page and create/update/delete API routes
+- Setores API now only supports GET (read-only list)
+- Sectors are managed through database seed only
+- Removed setores link from admin sidebar
+
+### User Edit Form Enhanced
+- Added role selection dropdown (Admin, Supervisor, Vendedor Interno, Instalador)
+- Added sector selection dropdown for assigning users to departments
+- Updated user API to handle role and setor_id updates
+
+### Login Video Component Improved
+- Added useRef and useEffect for better autoplay handling
+- Added poster image fallback (fundo.png)
+- Added gradient background as additional fallback
+- Improved loading state with opacity transition
+
+### Bug Fixes
+- Fixed Radix UI Select.Item empty value errors in AddUser and videos-internos pages
+- Replaced empty string values with "none" or "all" identifiers
+
+---
+
+## Previous Changes (2025-11-28)
 
 ### Landing Page Complete Redesign
 - Modern fixed header with logo, scroll-responsive styling, and mobile menu

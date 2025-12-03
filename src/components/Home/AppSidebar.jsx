@@ -9,7 +9,6 @@ import {
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
   ChevronRightIcon,
-  BuildingOffice2Icon,
   AcademicCapIcon
 } from "@heroicons/react/24/outline";
 
@@ -47,7 +46,6 @@ export function AppSidebar() {
     { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
     { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon },
     { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon },
-    { title: "Setores", url: "/admin/setores", icon: BuildingOffice2Icon },
     { title: "Usuários", url: "/admin/user", icon: UsersIcon },
   ];
 

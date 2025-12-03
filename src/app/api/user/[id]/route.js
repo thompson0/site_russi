@@ -31,12 +31,16 @@ export async function PUT(req, context) {
   const { params } = await context 
 
   try {
-    const { nome, email, senha, permissao } = await req.json()
+    const { nome, email, senha, permissao, role, setor_id } = await req.json()
     const data = {}
 
     if (nome) data.nome = nome
     if (email) data.email = email
     if (permissao) data.permissao = permissao
+    if (role) data.role = role
+    if (setor_id !== undefined) {
+      data.setor_id = setor_id === null ? null : parseInt(setor_id)
+    }
     if (senha && senha.trim() !== "") {
       const hash = await bcrypt.hash(senha, 10)
       data.senha = hash
