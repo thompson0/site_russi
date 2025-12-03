@@ -178,6 +178,36 @@ The application uses JWT-based authentication with:
 
 ## Recent Changes (2025-12-03)
 
+### Portal Interno & Dashboard Unificado
+- Todos os usuários agora são redirecionados para `/interno` após login
+- Menu de navegação mostra opções baseadas no cargo do usuário:
+  - **Instalador**: Início, Treinamentos, Recursos & RH
+  - **Vendedor Interno**: + Catálogo Digital
+  - **Supervisor/Admin**: + Administração
+- Catálogo Digital oculto para instaladores conforme regra de negócio
+
+### Central de Suporte (Recursos & RH)
+- FAQ com 8 perguntas frequentes (dados fixos no código)
+- 4 Manuais pré-definidos (Manual do Colaborador, Sistema ERP, Segurança, Instalação)
+- 6 Contatos de departamentos com ramais, telefones e emails
+- Apenas vídeos de RH são gerenciados via admin (banco de dados)
+
+### Correções de Autenticação
+- Alterado de JWT_SECRET para SESSION_SECRET em todo o sistema
+- Token JWT com expiração de 8 horas
+- Cookie com secure=true em produção e maxAge de 8 horas
+
+### Estrutura de Dados Fixos vs Dinâmicos
+| Seção | Tipo | Gerenciamento |
+|-------|------|---------------|
+| FAQ | Fixo | Código fonte |
+| Manuais | Fixo | Código fonte |
+| Contatos | Fixo | Código fonte |
+| Vídeos RH | Dinâmico | Admin Panel |
+| Vídeos Treinamento | Dinâmico | Admin Panel |
+
+### Previous Changes
+
 ### Sector Management Removed
 - Removed admin setores page and create/update/delete API routes
 - Setores API now only supports GET (read-only list)
