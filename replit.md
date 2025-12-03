@@ -37,32 +37,46 @@ The application uses the following main models:
 
 ## Setup Instructions
 
-### 1. Install Dependencies
+### Replit Environment (Automated)
+The project is now fully configured for Replit:
+- ✅ PostgreSQL database created and connected
+- ✅ Environment variables configured (`DATABASE_URL`, `DIRECT_URL`)
+- ✅ Dependencies installed
+- ✅ Prisma client generated
+- ✅ Database schema synced
+- ✅ Development workflow running on port 5000
+- ✅ Deployment configuration set up
+
+The application is ready to use! Just click the webview to see it running.
+
+### Manual Setup (Other Environments)
+
+#### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Configure Database
-You need to provide PostgreSQL database credentials. Set the following environment variables:
+#### 2. Configure Database
+Set the following environment variables:
 - `DATABASE_URL` - Your PostgreSQL connection string
 - `DIRECT_URL` - Direct connection string for migrations
 
-### 3. Generate Prisma Client
+#### 3. Generate Prisma Client
 ```bash
 npm run prisma:generate
 ```
 
-### 4. Run Database Migrations (if needed)
+#### 4. Run Database Migrations
 ```bash
 npx prisma db push
 ```
 
-### 5. Start Development Server
+#### 5. Start Development Server
 ```bash
 npm run dev
 ```
 
-The application will be available at http://localhost:5000
+The application will be available at http://0.0.0.0:5000
 
 ## Available Scripts
 - `npm run dev` - Start development server on port 5000
