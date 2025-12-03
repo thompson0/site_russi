@@ -185,6 +185,13 @@ exports.Prisma.ProdutosScalarFieldEnum = {
   data_criacao: 'data_criacao'
 };
 
+exports.Prisma.SetoresScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  data_criacao: 'data_criacao'
+};
+
 exports.Prisma.UsuariosScalarFieldEnum = {
   id: 'id',
   username: 'username',
@@ -194,7 +201,35 @@ exports.Prisma.UsuariosScalarFieldEnum = {
   permissao: 'permissao',
   cpf: 'cpf',
   telefone: 'telefone',
-  trocar_senha: 'trocar_senha'
+  trocar_senha: 'trocar_senha',
+  role: 'role',
+  setor_id: 'setor_id',
+  avatar_url: 'avatar_url',
+  ultimo_acesso: 'ultimo_acesso'
+};
+
+exports.Prisma.Videos_internosScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  url: 'url',
+  thumbnail: 'thumbnail',
+  setor_id: 'setor_id',
+  criado_por: 'criado_por',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  data_criacao: 'data_criacao'
+};
+
+exports.Prisma.Videos_rh_procedimentosScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  url: 'url',
+  categoria: 'categoria',
+  ordem: 'ordem',
+  ativo: 'ativo',
+  data_criacao: 'data_criacao'
 };
 
 exports.Prisma.VideosScalarFieldEnum = {
@@ -237,7 +272,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.UserRole = exports.$Enums.UserRole = {
+  admin: 'admin',
+  supervisor: 'supervisor',
+  vendedor_interno: 'vendedor_interno',
+  instalador: 'instalador'
+};
 
 exports.Prisma.ModelName = {
   carros: 'carros',
@@ -248,7 +288,10 @@ exports.Prisma.ModelName = {
   montadoras: 'montadoras',
   produto_fotos: 'produto_fotos',
   produtos: 'produtos',
+  setores: 'setores',
   usuarios: 'usuarios',
+  videos_internos: 'videos_internos',
+  videos_rh_procedimentos: 'videos_rh_procedimentos',
   videos: 'videos',
   videos_assistidos: 'videos_assistidos',
   videos_instalador: 'videos_instalador',

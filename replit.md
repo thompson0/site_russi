@@ -19,11 +19,17 @@ This is a Next.js 15 application for Russi Acessórios, a Brazilian automotive a
 
 ## Database Schema
 The application uses the following main models:
-- `usuarios` - User accounts with roles and permissions
+- `usuarios` - User accounts with roles (admin, supervisor, vendedor_interno, instalador), sector assignments, and permissions
+- `setores` - Departments/sectors for organizing users and training content
+- `videos_internos` - Internal training videos with sector-based access control
+- `videos_rh_procedimentos` - HR procedure videos accessible to all authenticated users
 - `montadoras` - Car manufacturers
 - `carros` - Vehicle models
 - `produtos` - Product catalog
-- `videos` - Video tutorials
+- `videos` - Public video tutorials
+- `contatos` - Department contacts and extension numbers
+- `duvidas` - Frequently asked questions
+- `manuais` - Training manuals and documentation
 - `carro_produtos` - Many-to-many relation between cars and products
 
 ## Environment Variables Required
@@ -103,16 +109,38 @@ The project is configured for Replit autoscale deployment:
 - `/login` - User login
 - `/catalogo/carros` - Car catalog
 - `/catalogo/produtos` - Product catalog
-- `/visitante/*` - Visitor-accessible pages
-- `/admin/*` - Admin dashboard (requires authentication)
+- `/visitante/*` - Visitor-accessible pages (public videos, product QR codes)
+- `/interno` - Internal employee portal (requires authentication)
+- `/interno/treinamentos` - Sector-based training videos
+- `/interno/recursos` - HR procedures, manuals, FAQ, contacts
+- `/admin/*` - Admin dashboard (requires admin or supervisor role)
+- `/admin/setores` - Sector management (admin only)
+- `/admin/videos-internos` - Internal training video management
+- `/admin/user` - User management with role-based permissions
 - `/user/*` - User profile pages (requires authentication)
+
+## User Roles & Permissions
+
+### Role Types
+1. **admin** - Full system access, can manage all users and content
+2. **supervisor** - Can manage vendedor_interno users, add videos for their sector, access digital catalog
+3. **vendedor_interno** - Access to sector training videos, digital catalog, edit own profile
+4. **instalador** - Access to sector training videos only
+
+### Common Access (All Authenticated Users)
+- HR procedure videos
+- System usage guides
+- Training manuals
+- FAQ section
+- Department extension list and contacts
 
 ## Authentication Flow
 The application uses JWT-based authentication with:
-- Cookie-based token storage
-- CSRF token protection
-- Middleware protection for `/admin/*` and `/user/*` routes
+- Cookie-based token storage with role and sector_id
+- Next.js middleware for route protection based on roles
+- Sector-based video access control
 - Automatic redirect to `/login` for unauthenticated users
+- Redirect to `/interno` for non-admin users accessing admin routes
 
 ## Recent Changes (2025-11-28)
 

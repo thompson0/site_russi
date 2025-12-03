@@ -54,10 +54,25 @@ export type produto_fotos = $Result.DefaultSelection<Prisma.$produto_fotosPayloa
  */
 export type produtos = $Result.DefaultSelection<Prisma.$produtosPayload>
 /**
+ * Model setores
+ * 
+ */
+export type setores = $Result.DefaultSelection<Prisma.$setoresPayload>
+/**
  * Model usuarios
- * The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+ * 
  */
 export type usuarios = $Result.DefaultSelection<Prisma.$usuariosPayload>
+/**
+ * Model videos_internos
+ * 
+ */
+export type videos_internos = $Result.DefaultSelection<Prisma.$videos_internosPayload>
+/**
+ * Model videos_rh_procedimentos
+ * 
+ */
+export type videos_rh_procedimentos = $Result.DefaultSelection<Prisma.$videos_rh_procedimentosPayload>
 /**
  * Model videos
  * The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -78,6 +93,25 @@ export type videos_instalador = $Result.DefaultSelection<Prisma.$videos_instalad
  * The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
  */
 export type carro_produtos = $Result.DefaultSelection<Prisma.$carro_produtosPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserRole: {
+  admin: 'admin',
+  supervisor: 'supervisor',
+  vendedor_interno: 'vendedor_interno',
+  instalador: 'instalador'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+}
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -278,6 +312,16 @@ export class PrismaClient<
   get produtos(): Prisma.produtosDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.setores`: Exposes CRUD operations for the **setores** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Setores
+    * const setores = await prisma.setores.findMany()
+    * ```
+    */
+  get setores(): Prisma.setoresDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.usuarios`: Exposes CRUD operations for the **usuarios** model.
     * Example usage:
     * ```ts
@@ -286,6 +330,26 @@ export class PrismaClient<
     * ```
     */
   get usuarios(): Prisma.usuariosDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videos_internos`: Exposes CRUD operations for the **videos_internos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videos_internos
+    * const videos_internos = await prisma.videos_internos.findMany()
+    * ```
+    */
+  get videos_internos(): Prisma.videos_internosDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videos_rh_procedimentos`: Exposes CRUD operations for the **videos_rh_procedimentos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Videos_rh_procedimentos
+    * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findMany()
+    * ```
+    */
+  get videos_rh_procedimentos(): Prisma.videos_rh_procedimentosDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.videos`: Exposes CRUD operations for the **videos** model.
@@ -774,7 +838,10 @@ export namespace Prisma {
     montadoras: 'montadoras',
     produto_fotos: 'produto_fotos',
     produtos: 'produtos',
+    setores: 'setores',
     usuarios: 'usuarios',
+    videos_internos: 'videos_internos',
+    videos_rh_procedimentos: 'videos_rh_procedimentos',
     videos: 'videos',
     videos_assistidos: 'videos_assistidos',
     videos_instalador: 'videos_instalador',
@@ -797,7 +864,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "carros" | "categorias" | "contatos" | "duvidas" | "manuais" | "montadoras" | "produto_fotos" | "produtos" | "usuarios" | "videos" | "videos_assistidos" | "videos_instalador" | "carro_produtos"
+      modelProps: "carros" | "categorias" | "contatos" | "duvidas" | "manuais" | "montadoras" | "produto_fotos" | "produtos" | "setores" | "usuarios" | "videos_internos" | "videos_rh_procedimentos" | "videos" | "videos_assistidos" | "videos_instalador" | "carro_produtos"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1393,6 +1460,80 @@ export namespace Prisma {
           }
         }
       }
+      setores: {
+        payload: Prisma.$setoresPayload<ExtArgs>
+        fields: Prisma.setoresFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.setoresFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.setoresFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          findFirst: {
+            args: Prisma.setoresFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.setoresFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          findMany: {
+            args: Prisma.setoresFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>[]
+          }
+          create: {
+            args: Prisma.setoresCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          createMany: {
+            args: Prisma.setoresCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.setoresCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>[]
+          }
+          delete: {
+            args: Prisma.setoresDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          update: {
+            args: Prisma.setoresUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          deleteMany: {
+            args: Prisma.setoresDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.setoresUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.setoresUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>[]
+          }
+          upsert: {
+            args: Prisma.setoresUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$setoresPayload>
+          }
+          aggregate: {
+            args: Prisma.SetoresAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSetores>
+          }
+          groupBy: {
+            args: Prisma.setoresGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SetoresGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.setoresCountArgs<ExtArgs>
+            result: $Utils.Optional<SetoresCountAggregateOutputType> | number
+          }
+        }
+      }
       usuarios: {
         payload: Prisma.$usuariosPayload<ExtArgs>
         fields: Prisma.usuariosFieldRefs
@@ -1464,6 +1605,154 @@ export namespace Prisma {
           count: {
             args: Prisma.usuariosCountArgs<ExtArgs>
             result: $Utils.Optional<UsuariosCountAggregateOutputType> | number
+          }
+        }
+      }
+      videos_internos: {
+        payload: Prisma.$videos_internosPayload<ExtArgs>
+        fields: Prisma.videos_internosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.videos_internosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.videos_internosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          findFirst: {
+            args: Prisma.videos_internosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.videos_internosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          findMany: {
+            args: Prisma.videos_internosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>[]
+          }
+          create: {
+            args: Prisma.videos_internosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          createMany: {
+            args: Prisma.videos_internosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.videos_internosCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>[]
+          }
+          delete: {
+            args: Prisma.videos_internosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          update: {
+            args: Prisma.videos_internosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          deleteMany: {
+            args: Prisma.videos_internosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.videos_internosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.videos_internosUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>[]
+          }
+          upsert: {
+            args: Prisma.videos_internosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_internosPayload>
+          }
+          aggregate: {
+            args: Prisma.Videos_internosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideos_internos>
+          }
+          groupBy: {
+            args: Prisma.videos_internosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Videos_internosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.videos_internosCountArgs<ExtArgs>
+            result: $Utils.Optional<Videos_internosCountAggregateOutputType> | number
+          }
+        }
+      }
+      videos_rh_procedimentos: {
+        payload: Prisma.$videos_rh_procedimentosPayload<ExtArgs>
+        fields: Prisma.videos_rh_procedimentosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.videos_rh_procedimentosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.videos_rh_procedimentosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          findFirst: {
+            args: Prisma.videos_rh_procedimentosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.videos_rh_procedimentosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          findMany: {
+            args: Prisma.videos_rh_procedimentosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>[]
+          }
+          create: {
+            args: Prisma.videos_rh_procedimentosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          createMany: {
+            args: Prisma.videos_rh_procedimentosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.videos_rh_procedimentosCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>[]
+          }
+          delete: {
+            args: Prisma.videos_rh_procedimentosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          update: {
+            args: Prisma.videos_rh_procedimentosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          deleteMany: {
+            args: Prisma.videos_rh_procedimentosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.videos_rh_procedimentosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.videos_rh_procedimentosUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>[]
+          }
+          upsert: {
+            args: Prisma.videos_rh_procedimentosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$videos_rh_procedimentosPayload>
+          }
+          aggregate: {
+            args: Prisma.Videos_rh_procedimentosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideos_rh_procedimentos>
+          }
+          groupBy: {
+            args: Prisma.videos_rh_procedimentosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Videos_rh_procedimentosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.videos_rh_procedimentosCountArgs<ExtArgs>
+            result: $Utils.Optional<Videos_rh_procedimentosCountAggregateOutputType> | number
           }
         }
       }
@@ -1867,7 +2156,10 @@ export namespace Prisma {
     montadoras?: montadorasOmit
     produto_fotos?: produto_fotosOmit
     produtos?: produtosOmit
+    setores?: setoresOmit
     usuarios?: usuariosOmit
+    videos_internos?: videos_internosOmit
+    videos_rh_procedimentos?: videos_rh_procedimentosOmit
     videos?: videosOmit
     videos_assistidos?: videos_assistidosOmit
     videos_instalador?: videos_instaladorOmit
@@ -2037,6 +2329,77 @@ export namespace Prisma {
    */
   export type ProdutosCountOutputTypeCountCarrosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: carro_produtosWhereInput
+  }
+
+
+  /**
+   * Count Type SetoresCountOutputType
+   */
+
+  export type SetoresCountOutputType = {
+    usuarios: number
+    videos_internos: number
+  }
+
+  export type SetoresCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuarios?: boolean | SetoresCountOutputTypeCountUsuariosArgs
+    videos_internos?: boolean | SetoresCountOutputTypeCountVideos_internosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SetoresCountOutputType without action
+   */
+  export type SetoresCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SetoresCountOutputType
+     */
+    select?: SetoresCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SetoresCountOutputType without action
+   */
+  export type SetoresCountOutputTypeCountUsuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usuariosWhereInput
+  }
+
+  /**
+   * SetoresCountOutputType without action
+   */
+  export type SetoresCountOutputTypeCountVideos_internosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videos_internosWhereInput
+  }
+
+
+  /**
+   * Count Type UsuariosCountOutputType
+   */
+
+  export type UsuariosCountOutputType = {
+    videos_criados: number
+  }
+
+  export type UsuariosCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    videos_criados?: boolean | UsuariosCountOutputTypeCountVideos_criadosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UsuariosCountOutputType without action
+   */
+  export type UsuariosCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuariosCountOutputType
+     */
+    select?: UsuariosCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UsuariosCountOutputType without action
+   */
+  export type UsuariosCountOutputTypeCountVideos_criadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videos_internosWhereInput
   }
 
 
@@ -10588,6 +10951,1125 @@ export namespace Prisma {
 
 
   /**
+   * Model setores
+   */
+
+  export type AggregateSetores = {
+    _count: SetoresCountAggregateOutputType | null
+    _avg: SetoresAvgAggregateOutputType | null
+    _sum: SetoresSumAggregateOutputType | null
+    _min: SetoresMinAggregateOutputType | null
+    _max: SetoresMaxAggregateOutputType | null
+  }
+
+  export type SetoresAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type SetoresSumAggregateOutputType = {
+    id: bigint | null
+  }
+
+  export type SetoresMinAggregateOutputType = {
+    id: bigint | null
+    nome: string | null
+    descricao: string | null
+    data_criacao: Date | null
+  }
+
+  export type SetoresMaxAggregateOutputType = {
+    id: bigint | null
+    nome: string | null
+    descricao: string | null
+    data_criacao: Date | null
+  }
+
+  export type SetoresCountAggregateOutputType = {
+    id: number
+    nome: number
+    descricao: number
+    data_criacao: number
+    _all: number
+  }
+
+
+  export type SetoresAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type SetoresSumAggregateInputType = {
+    id?: true
+  }
+
+  export type SetoresMinAggregateInputType = {
+    id?: true
+    nome?: true
+    descricao?: true
+    data_criacao?: true
+  }
+
+  export type SetoresMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    descricao?: true
+    data_criacao?: true
+  }
+
+  export type SetoresCountAggregateInputType = {
+    id?: true
+    nome?: true
+    descricao?: true
+    data_criacao?: true
+    _all?: true
+  }
+
+  export type SetoresAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which setores to aggregate.
+     */
+    where?: setoresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of setores to fetch.
+     */
+    orderBy?: setoresOrderByWithRelationInput | setoresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: setoresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` setores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` setores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned setores
+    **/
+    _count?: true | SetoresCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SetoresAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SetoresSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SetoresMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SetoresMaxAggregateInputType
+  }
+
+  export type GetSetoresAggregateType<T extends SetoresAggregateArgs> = {
+        [P in keyof T & keyof AggregateSetores]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSetores[P]>
+      : GetScalarType<T[P], AggregateSetores[P]>
+  }
+
+
+
+
+  export type setoresGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: setoresWhereInput
+    orderBy?: setoresOrderByWithAggregationInput | setoresOrderByWithAggregationInput[]
+    by: SetoresScalarFieldEnum[] | SetoresScalarFieldEnum
+    having?: setoresScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SetoresCountAggregateInputType | true
+    _avg?: SetoresAvgAggregateInputType
+    _sum?: SetoresSumAggregateInputType
+    _min?: SetoresMinAggregateInputType
+    _max?: SetoresMaxAggregateInputType
+  }
+
+  export type SetoresGroupByOutputType = {
+    id: bigint
+    nome: string
+    descricao: string | null
+    data_criacao: Date
+    _count: SetoresCountAggregateOutputType | null
+    _avg: SetoresAvgAggregateOutputType | null
+    _sum: SetoresSumAggregateOutputType | null
+    _min: SetoresMinAggregateOutputType | null
+    _max: SetoresMaxAggregateOutputType | null
+  }
+
+  type GetSetoresGroupByPayload<T extends setoresGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SetoresGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SetoresGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SetoresGroupByOutputType[P]>
+            : GetScalarType<T[P], SetoresGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type setoresSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    descricao?: boolean
+    data_criacao?: boolean
+    usuarios?: boolean | setores$usuariosArgs<ExtArgs>
+    videos_internos?: boolean | setores$videos_internosArgs<ExtArgs>
+    _count?: boolean | SetoresCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["setores"]>
+
+  export type setoresSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    descricao?: boolean
+    data_criacao?: boolean
+  }, ExtArgs["result"]["setores"]>
+
+  export type setoresSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    descricao?: boolean
+    data_criacao?: boolean
+  }, ExtArgs["result"]["setores"]>
+
+  export type setoresSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    descricao?: boolean
+    data_criacao?: boolean
+  }
+
+  export type setoresOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "descricao" | "data_criacao", ExtArgs["result"]["setores"]>
+  export type setoresInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuarios?: boolean | setores$usuariosArgs<ExtArgs>
+    videos_internos?: boolean | setores$videos_internosArgs<ExtArgs>
+    _count?: boolean | SetoresCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type setoresIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type setoresIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $setoresPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "setores"
+    objects: {
+      usuarios: Prisma.$usuariosPayload<ExtArgs>[]
+      videos_internos: Prisma.$videos_internosPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      nome: string
+      descricao: string | null
+      data_criacao: Date
+    }, ExtArgs["result"]["setores"]>
+    composites: {}
+  }
+
+  type setoresGetPayload<S extends boolean | null | undefined | setoresDefaultArgs> = $Result.GetResult<Prisma.$setoresPayload, S>
+
+  type setoresCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<setoresFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SetoresCountAggregateInputType | true
+    }
+
+  export interface setoresDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['setores'], meta: { name: 'setores' } }
+    /**
+     * Find zero or one Setores that matches the filter.
+     * @param {setoresFindUniqueArgs} args - Arguments to find a Setores
+     * @example
+     * // Get one Setores
+     * const setores = await prisma.setores.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends setoresFindUniqueArgs>(args: SelectSubset<T, setoresFindUniqueArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Setores that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {setoresFindUniqueOrThrowArgs} args - Arguments to find a Setores
+     * @example
+     * // Get one Setores
+     * const setores = await prisma.setores.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends setoresFindUniqueOrThrowArgs>(args: SelectSubset<T, setoresFindUniqueOrThrowArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Setores that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresFindFirstArgs} args - Arguments to find a Setores
+     * @example
+     * // Get one Setores
+     * const setores = await prisma.setores.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends setoresFindFirstArgs>(args?: SelectSubset<T, setoresFindFirstArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Setores that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresFindFirstOrThrowArgs} args - Arguments to find a Setores
+     * @example
+     * // Get one Setores
+     * const setores = await prisma.setores.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends setoresFindFirstOrThrowArgs>(args?: SelectSubset<T, setoresFindFirstOrThrowArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Setores that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Setores
+     * const setores = await prisma.setores.findMany()
+     * 
+     * // Get first 10 Setores
+     * const setores = await prisma.setores.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const setoresWithIdOnly = await prisma.setores.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends setoresFindManyArgs>(args?: SelectSubset<T, setoresFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Setores.
+     * @param {setoresCreateArgs} args - Arguments to create a Setores.
+     * @example
+     * // Create one Setores
+     * const Setores = await prisma.setores.create({
+     *   data: {
+     *     // ... data to create a Setores
+     *   }
+     * })
+     * 
+     */
+    create<T extends setoresCreateArgs>(args: SelectSubset<T, setoresCreateArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Setores.
+     * @param {setoresCreateManyArgs} args - Arguments to create many Setores.
+     * @example
+     * // Create many Setores
+     * const setores = await prisma.setores.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends setoresCreateManyArgs>(args?: SelectSubset<T, setoresCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Setores and returns the data saved in the database.
+     * @param {setoresCreateManyAndReturnArgs} args - Arguments to create many Setores.
+     * @example
+     * // Create many Setores
+     * const setores = await prisma.setores.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Setores and only return the `id`
+     * const setoresWithIdOnly = await prisma.setores.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends setoresCreateManyAndReturnArgs>(args?: SelectSubset<T, setoresCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Setores.
+     * @param {setoresDeleteArgs} args - Arguments to delete one Setores.
+     * @example
+     * // Delete one Setores
+     * const Setores = await prisma.setores.delete({
+     *   where: {
+     *     // ... filter to delete one Setores
+     *   }
+     * })
+     * 
+     */
+    delete<T extends setoresDeleteArgs>(args: SelectSubset<T, setoresDeleteArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Setores.
+     * @param {setoresUpdateArgs} args - Arguments to update one Setores.
+     * @example
+     * // Update one Setores
+     * const setores = await prisma.setores.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends setoresUpdateArgs>(args: SelectSubset<T, setoresUpdateArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Setores.
+     * @param {setoresDeleteManyArgs} args - Arguments to filter Setores to delete.
+     * @example
+     * // Delete a few Setores
+     * const { count } = await prisma.setores.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends setoresDeleteManyArgs>(args?: SelectSubset<T, setoresDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Setores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Setores
+     * const setores = await prisma.setores.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends setoresUpdateManyArgs>(args: SelectSubset<T, setoresUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Setores and returns the data updated in the database.
+     * @param {setoresUpdateManyAndReturnArgs} args - Arguments to update many Setores.
+     * @example
+     * // Update many Setores
+     * const setores = await prisma.setores.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Setores and only return the `id`
+     * const setoresWithIdOnly = await prisma.setores.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends setoresUpdateManyAndReturnArgs>(args: SelectSubset<T, setoresUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Setores.
+     * @param {setoresUpsertArgs} args - Arguments to update or create a Setores.
+     * @example
+     * // Update or create a Setores
+     * const setores = await prisma.setores.upsert({
+     *   create: {
+     *     // ... data to create a Setores
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Setores we want to update
+     *   }
+     * })
+     */
+    upsert<T extends setoresUpsertArgs>(args: SelectSubset<T, setoresUpsertArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Setores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresCountArgs} args - Arguments to filter Setores to count.
+     * @example
+     * // Count the number of Setores
+     * const count = await prisma.setores.count({
+     *   where: {
+     *     // ... the filter for the Setores we want to count
+     *   }
+     * })
+    **/
+    count<T extends setoresCountArgs>(
+      args?: Subset<T, setoresCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SetoresCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Setores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SetoresAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SetoresAggregateArgs>(args: Subset<T, SetoresAggregateArgs>): Prisma.PrismaPromise<GetSetoresAggregateType<T>>
+
+    /**
+     * Group by Setores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {setoresGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends setoresGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: setoresGroupByArgs['orderBy'] }
+        : { orderBy?: setoresGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, setoresGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSetoresGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the setores model
+   */
+  readonly fields: setoresFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for setores.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__setoresClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuarios<T extends setores$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, setores$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuariosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    videos_internos<T extends setores$videos_internosArgs<ExtArgs> = {}>(args?: Subset<T, setores$videos_internosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the setores model
+   */
+  interface setoresFieldRefs {
+    readonly id: FieldRef<"setores", 'BigInt'>
+    readonly nome: FieldRef<"setores", 'String'>
+    readonly descricao: FieldRef<"setores", 'String'>
+    readonly data_criacao: FieldRef<"setores", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * setores findUnique
+   */
+  export type setoresFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter, which setores to fetch.
+     */
+    where: setoresWhereUniqueInput
+  }
+
+  /**
+   * setores findUniqueOrThrow
+   */
+  export type setoresFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter, which setores to fetch.
+     */
+    where: setoresWhereUniqueInput
+  }
+
+  /**
+   * setores findFirst
+   */
+  export type setoresFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter, which setores to fetch.
+     */
+    where?: setoresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of setores to fetch.
+     */
+    orderBy?: setoresOrderByWithRelationInput | setoresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for setores.
+     */
+    cursor?: setoresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` setores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` setores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of setores.
+     */
+    distinct?: SetoresScalarFieldEnum | SetoresScalarFieldEnum[]
+  }
+
+  /**
+   * setores findFirstOrThrow
+   */
+  export type setoresFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter, which setores to fetch.
+     */
+    where?: setoresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of setores to fetch.
+     */
+    orderBy?: setoresOrderByWithRelationInput | setoresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for setores.
+     */
+    cursor?: setoresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` setores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` setores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of setores.
+     */
+    distinct?: SetoresScalarFieldEnum | SetoresScalarFieldEnum[]
+  }
+
+  /**
+   * setores findMany
+   */
+  export type setoresFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter, which setores to fetch.
+     */
+    where?: setoresWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of setores to fetch.
+     */
+    orderBy?: setoresOrderByWithRelationInput | setoresOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing setores.
+     */
+    cursor?: setoresWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` setores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` setores.
+     */
+    skip?: number
+    distinct?: SetoresScalarFieldEnum | SetoresScalarFieldEnum[]
+  }
+
+  /**
+   * setores create
+   */
+  export type setoresCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * The data needed to create a setores.
+     */
+    data: XOR<setoresCreateInput, setoresUncheckedCreateInput>
+  }
+
+  /**
+   * setores createMany
+   */
+  export type setoresCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many setores.
+     */
+    data: setoresCreateManyInput | setoresCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * setores createManyAndReturn
+   */
+  export type setoresCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * The data used to create many setores.
+     */
+    data: setoresCreateManyInput | setoresCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * setores update
+   */
+  export type setoresUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * The data needed to update a setores.
+     */
+    data: XOR<setoresUpdateInput, setoresUncheckedUpdateInput>
+    /**
+     * Choose, which setores to update.
+     */
+    where: setoresWhereUniqueInput
+  }
+
+  /**
+   * setores updateMany
+   */
+  export type setoresUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update setores.
+     */
+    data: XOR<setoresUpdateManyMutationInput, setoresUncheckedUpdateManyInput>
+    /**
+     * Filter which setores to update
+     */
+    where?: setoresWhereInput
+    /**
+     * Limit how many setores to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * setores updateManyAndReturn
+   */
+  export type setoresUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * The data used to update setores.
+     */
+    data: XOR<setoresUpdateManyMutationInput, setoresUncheckedUpdateManyInput>
+    /**
+     * Filter which setores to update
+     */
+    where?: setoresWhereInput
+    /**
+     * Limit how many setores to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * setores upsert
+   */
+  export type setoresUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * The filter to search for the setores to update in case it exists.
+     */
+    where: setoresWhereUniqueInput
+    /**
+     * In case the setores found by the `where` argument doesn't exist, create a new setores with this data.
+     */
+    create: XOR<setoresCreateInput, setoresUncheckedCreateInput>
+    /**
+     * In case the setores was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<setoresUpdateInput, setoresUncheckedUpdateInput>
+  }
+
+  /**
+   * setores delete
+   */
+  export type setoresDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    /**
+     * Filter which setores to delete.
+     */
+    where: setoresWhereUniqueInput
+  }
+
+  /**
+   * setores deleteMany
+   */
+  export type setoresDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which setores to delete
+     */
+    where?: setoresWhereInput
+    /**
+     * Limit how many setores to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * setores.usuarios
+   */
+  export type setores$usuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usuarios
+     */
+    select?: usuariosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usuarios
+     */
+    omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    where?: usuariosWhereInput
+    orderBy?: usuariosOrderByWithRelationInput | usuariosOrderByWithRelationInput[]
+    cursor?: usuariosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsuariosScalarFieldEnum | UsuariosScalarFieldEnum[]
+  }
+
+  /**
+   * setores.videos_internos
+   */
+  export type setores$videos_internosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    where?: videos_internosWhereInput
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    cursor?: videos_internosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Videos_internosScalarFieldEnum | Videos_internosScalarFieldEnum[]
+  }
+
+  /**
+   * setores without action
+   */
+  export type setoresDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model usuarios
    */
 
@@ -10602,11 +12084,13 @@ export namespace Prisma {
   export type UsuariosAvgAggregateOutputType = {
     id: number | null
     trocar_senha: number | null
+    setor_id: number | null
   }
 
   export type UsuariosSumAggregateOutputType = {
     id: bigint | null
     trocar_senha: bigint | null
+    setor_id: bigint | null
   }
 
   export type UsuariosMinAggregateOutputType = {
@@ -10619,6 +12103,10 @@ export namespace Prisma {
     cpf: string | null
     telefone: string | null
     trocar_senha: bigint | null
+    role: $Enums.UserRole | null
+    setor_id: bigint | null
+    avatar_url: string | null
+    ultimo_acesso: Date | null
   }
 
   export type UsuariosMaxAggregateOutputType = {
@@ -10631,6 +12119,10 @@ export namespace Prisma {
     cpf: string | null
     telefone: string | null
     trocar_senha: bigint | null
+    role: $Enums.UserRole | null
+    setor_id: bigint | null
+    avatar_url: string | null
+    ultimo_acesso: Date | null
   }
 
   export type UsuariosCountAggregateOutputType = {
@@ -10643,6 +12135,10 @@ export namespace Prisma {
     cpf: number
     telefone: number
     trocar_senha: number
+    role: number
+    setor_id: number
+    avatar_url: number
+    ultimo_acesso: number
     _all: number
   }
 
@@ -10650,11 +12146,13 @@ export namespace Prisma {
   export type UsuariosAvgAggregateInputType = {
     id?: true
     trocar_senha?: true
+    setor_id?: true
   }
 
   export type UsuariosSumAggregateInputType = {
     id?: true
     trocar_senha?: true
+    setor_id?: true
   }
 
   export type UsuariosMinAggregateInputType = {
@@ -10667,6 +12165,10 @@ export namespace Prisma {
     cpf?: true
     telefone?: true
     trocar_senha?: true
+    role?: true
+    setor_id?: true
+    avatar_url?: true
+    ultimo_acesso?: true
   }
 
   export type UsuariosMaxAggregateInputType = {
@@ -10679,6 +12181,10 @@ export namespace Prisma {
     cpf?: true
     telefone?: true
     trocar_senha?: true
+    role?: true
+    setor_id?: true
+    avatar_url?: true
+    ultimo_acesso?: true
   }
 
   export type UsuariosCountAggregateInputType = {
@@ -10691,6 +12197,10 @@ export namespace Prisma {
     cpf?: true
     telefone?: true
     trocar_senha?: true
+    role?: true
+    setor_id?: true
+    avatar_url?: true
+    ultimo_acesso?: true
     _all?: true
   }
 
@@ -10790,6 +12300,10 @@ export namespace Prisma {
     cpf: string | null
     telefone: string | null
     trocar_senha: bigint | null
+    role: $Enums.UserRole
+    setor_id: bigint | null
+    avatar_url: string | null
+    ultimo_acesso: Date | null
     _count: UsuariosCountAggregateOutputType | null
     _avg: UsuariosAvgAggregateOutputType | null
     _sum: UsuariosSumAggregateOutputType | null
@@ -10821,6 +12335,13 @@ export namespace Prisma {
     cpf?: boolean
     telefone?: boolean
     trocar_senha?: boolean
+    role?: boolean
+    setor_id?: boolean
+    avatar_url?: boolean
+    ultimo_acesso?: boolean
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
+    videos_criados?: boolean | usuarios$videos_criadosArgs<ExtArgs>
+    _count?: boolean | UsuariosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
   export type usuariosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10833,6 +12354,11 @@ export namespace Prisma {
     cpf?: boolean
     telefone?: boolean
     trocar_senha?: boolean
+    role?: boolean
+    setor_id?: boolean
+    avatar_url?: boolean
+    ultimo_acesso?: boolean
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
   export type usuariosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10845,6 +12371,11 @@ export namespace Prisma {
     cpf?: boolean
     telefone?: boolean
     trocar_senha?: boolean
+    role?: boolean
+    setor_id?: boolean
+    avatar_url?: boolean
+    ultimo_acesso?: boolean
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
   export type usuariosSelectScalar = {
@@ -10857,13 +12388,31 @@ export namespace Prisma {
     cpf?: boolean
     telefone?: boolean
     trocar_senha?: boolean
+    role?: boolean
+    setor_id?: boolean
+    avatar_url?: boolean
+    ultimo_acesso?: boolean
   }
 
-  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "senha" | "nome" | "email" | "permissao" | "cpf" | "telefone" | "trocar_senha", ExtArgs["result"]["usuarios"]>
+  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "senha" | "nome" | "email" | "permissao" | "cpf" | "telefone" | "trocar_senha" | "role" | "setor_id" | "avatar_url" | "ultimo_acesso", ExtArgs["result"]["usuarios"]>
+  export type usuariosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
+    videos_criados?: boolean | usuarios$videos_criadosArgs<ExtArgs>
+    _count?: boolean | UsuariosCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type usuariosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
+  }
+  export type usuariosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | usuarios$setorArgs<ExtArgs>
+  }
 
   export type $usuariosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "usuarios"
-    objects: {}
+    objects: {
+      setor: Prisma.$setoresPayload<ExtArgs> | null
+      videos_criados: Prisma.$videos_internosPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       username: string | null
@@ -10874,6 +12423,10 @@ export namespace Prisma {
       cpf: string | null
       telefone: string | null
       trocar_senha: bigint | null
+      role: $Enums.UserRole
+      setor_id: bigint | null
+      avatar_url: string | null
+      ultimo_acesso: Date | null
     }, ExtArgs["result"]["usuarios"]>
     composites: {}
   }
@@ -11268,6 +12821,8 @@ export namespace Prisma {
    */
   export interface Prisma__usuariosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    setor<T extends usuarios$setorArgs<ExtArgs> = {}>(args?: Subset<T, usuarios$setorArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    videos_criados<T extends usuarios$videos_criadosArgs<ExtArgs> = {}>(args?: Subset<T, usuarios$videos_criadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11306,6 +12861,10 @@ export namespace Prisma {
     readonly cpf: FieldRef<"usuarios", 'String'>
     readonly telefone: FieldRef<"usuarios", 'String'>
     readonly trocar_senha: FieldRef<"usuarios", 'BigInt'>
+    readonly role: FieldRef<"usuarios", 'UserRole'>
+    readonly setor_id: FieldRef<"usuarios", 'BigInt'>
+    readonly avatar_url: FieldRef<"usuarios", 'String'>
+    readonly ultimo_acesso: FieldRef<"usuarios", 'DateTime'>
   }
     
 
@@ -11322,6 +12881,10 @@ export namespace Prisma {
      * Omit specific fields from the usuarios
      */
     omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
     /**
      * Filter, which usuarios to fetch.
      */
@@ -11341,6 +12904,10 @@ export namespace Prisma {
      */
     omit?: usuariosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    /**
      * Filter, which usuarios to fetch.
      */
     where: usuariosWhereUniqueInput
@@ -11358,6 +12925,10 @@ export namespace Prisma {
      * Omit specific fields from the usuarios
      */
     omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
     /**
      * Filter, which usuarios to fetch.
      */
@@ -11407,6 +12978,10 @@ export namespace Prisma {
      */
     omit?: usuariosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    /**
      * Filter, which usuarios to fetch.
      */
     where?: usuariosWhereInput
@@ -11455,6 +13030,10 @@ export namespace Prisma {
      */
     omit?: usuariosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    /**
      * Filter, which usuarios to fetch.
      */
     where?: usuariosWhereInput
@@ -11498,6 +13077,10 @@ export namespace Prisma {
      */
     omit?: usuariosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    /**
      * The data needed to create a usuarios.
      */
     data?: XOR<usuariosCreateInput, usuariosUncheckedCreateInput>
@@ -11531,6 +13114,10 @@ export namespace Prisma {
      */
     data: usuariosCreateManyInput | usuariosCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -11545,6 +13132,10 @@ export namespace Prisma {
      * Omit specific fields from the usuarios
      */
     omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
     /**
      * The data needed to update a usuarios.
      */
@@ -11597,6 +13188,10 @@ export namespace Prisma {
      * Limit how many usuarios to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -11611,6 +13206,10 @@ export namespace Prisma {
      * Omit specific fields from the usuarios
      */
     omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
     /**
      * The filter to search for the usuarios to update in case it exists.
      */
@@ -11638,6 +13237,10 @@ export namespace Prisma {
      */
     omit?: usuariosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    /**
      * Filter which usuarios to delete.
      */
     where: usuariosWhereUniqueInput
@@ -11658,6 +13261,49 @@ export namespace Prisma {
   }
 
   /**
+   * usuarios.setor
+   */
+  export type usuarios$setorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    where?: setoresWhereInput
+  }
+
+  /**
+   * usuarios.videos_criados
+   */
+  export type usuarios$videos_criadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    where?: videos_internosWhereInput
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    cursor?: videos_internosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Videos_internosScalarFieldEnum | Videos_internosScalarFieldEnum[]
+  }
+
+  /**
    * usuarios without action
    */
   export type usuariosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11669,6 +13315,2297 @@ export namespace Prisma {
      * Omit specific fields from the usuarios
      */
     omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model videos_internos
+   */
+
+  export type AggregateVideos_internos = {
+    _count: Videos_internosCountAggregateOutputType | null
+    _avg: Videos_internosAvgAggregateOutputType | null
+    _sum: Videos_internosSumAggregateOutputType | null
+    _min: Videos_internosMinAggregateOutputType | null
+    _max: Videos_internosMaxAggregateOutputType | null
+  }
+
+  export type Videos_internosAvgAggregateOutputType = {
+    id: number | null
+    setor_id: number | null
+    criado_por: number | null
+    ordem: number | null
+  }
+
+  export type Videos_internosSumAggregateOutputType = {
+    id: bigint | null
+    setor_id: bigint | null
+    criado_por: bigint | null
+    ordem: number | null
+  }
+
+  export type Videos_internosMinAggregateOutputType = {
+    id: bigint | null
+    titulo: string | null
+    descricao: string | null
+    url: string | null
+    thumbnail: string | null
+    setor_id: bigint | null
+    criado_por: bigint | null
+    ordem: number | null
+    ativo: boolean | null
+    data_criacao: Date | null
+  }
+
+  export type Videos_internosMaxAggregateOutputType = {
+    id: bigint | null
+    titulo: string | null
+    descricao: string | null
+    url: string | null
+    thumbnail: string | null
+    setor_id: bigint | null
+    criado_por: bigint | null
+    ordem: number | null
+    ativo: boolean | null
+    data_criacao: Date | null
+  }
+
+  export type Videos_internosCountAggregateOutputType = {
+    id: number
+    titulo: number
+    descricao: number
+    url: number
+    thumbnail: number
+    setor_id: number
+    criado_por: number
+    ordem: number
+    ativo: number
+    data_criacao: number
+    _all: number
+  }
+
+
+  export type Videos_internosAvgAggregateInputType = {
+    id?: true
+    setor_id?: true
+    criado_por?: true
+    ordem?: true
+  }
+
+  export type Videos_internosSumAggregateInputType = {
+    id?: true
+    setor_id?: true
+    criado_por?: true
+    ordem?: true
+  }
+
+  export type Videos_internosMinAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    thumbnail?: true
+    setor_id?: true
+    criado_por?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+  }
+
+  export type Videos_internosMaxAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    thumbnail?: true
+    setor_id?: true
+    criado_por?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+  }
+
+  export type Videos_internosCountAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    thumbnail?: true
+    setor_id?: true
+    criado_por?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+    _all?: true
+  }
+
+  export type Videos_internosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_internos to aggregate.
+     */
+    where?: videos_internosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_internos to fetch.
+     */
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: videos_internosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_internos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_internos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned videos_internos
+    **/
+    _count?: true | Videos_internosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Videos_internosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Videos_internosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Videos_internosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Videos_internosMaxAggregateInputType
+  }
+
+  export type GetVideos_internosAggregateType<T extends Videos_internosAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideos_internos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideos_internos[P]>
+      : GetScalarType<T[P], AggregateVideos_internos[P]>
+  }
+
+
+
+
+  export type videos_internosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videos_internosWhereInput
+    orderBy?: videos_internosOrderByWithAggregationInput | videos_internosOrderByWithAggregationInput[]
+    by: Videos_internosScalarFieldEnum[] | Videos_internosScalarFieldEnum
+    having?: videos_internosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Videos_internosCountAggregateInputType | true
+    _avg?: Videos_internosAvgAggregateInputType
+    _sum?: Videos_internosSumAggregateInputType
+    _min?: Videos_internosMinAggregateInputType
+    _max?: Videos_internosMaxAggregateInputType
+  }
+
+  export type Videos_internosGroupByOutputType = {
+    id: bigint
+    titulo: string
+    descricao: string | null
+    url: string
+    thumbnail: string | null
+    setor_id: bigint | null
+    criado_por: bigint | null
+    ordem: number
+    ativo: boolean
+    data_criacao: Date
+    _count: Videos_internosCountAggregateOutputType | null
+    _avg: Videos_internosAvgAggregateOutputType | null
+    _sum: Videos_internosSumAggregateOutputType | null
+    _min: Videos_internosMinAggregateOutputType | null
+    _max: Videos_internosMaxAggregateOutputType | null
+  }
+
+  type GetVideos_internosGroupByPayload<T extends videos_internosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Videos_internosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Videos_internosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Videos_internosGroupByOutputType[P]>
+            : GetScalarType<T[P], Videos_internosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type videos_internosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    thumbnail?: boolean
+    setor_id?: boolean
+    criado_por?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }, ExtArgs["result"]["videos_internos"]>
+
+  export type videos_internosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    thumbnail?: boolean
+    setor_id?: boolean
+    criado_por?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }, ExtArgs["result"]["videos_internos"]>
+
+  export type videos_internosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    thumbnail?: boolean
+    setor_id?: boolean
+    criado_por?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }, ExtArgs["result"]["videos_internos"]>
+
+  export type videos_internosSelectScalar = {
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    thumbnail?: boolean
+    setor_id?: boolean
+    criado_por?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+  }
+
+  export type videos_internosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "thumbnail" | "setor_id" | "criado_por" | "ordem" | "ativo" | "data_criacao", ExtArgs["result"]["videos_internos"]>
+  export type videos_internosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }
+  export type videos_internosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }
+  export type videos_internosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    setor?: boolean | videos_internos$setorArgs<ExtArgs>
+    criador?: boolean | videos_internos$criadorArgs<ExtArgs>
+  }
+
+  export type $videos_internosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "videos_internos"
+    objects: {
+      setor: Prisma.$setoresPayload<ExtArgs> | null
+      criador: Prisma.$usuariosPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      titulo: string
+      descricao: string | null
+      url: string
+      thumbnail: string | null
+      setor_id: bigint | null
+      criado_por: bigint | null
+      ordem: number
+      ativo: boolean
+      data_criacao: Date
+    }, ExtArgs["result"]["videos_internos"]>
+    composites: {}
+  }
+
+  type videos_internosGetPayload<S extends boolean | null | undefined | videos_internosDefaultArgs> = $Result.GetResult<Prisma.$videos_internosPayload, S>
+
+  type videos_internosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<videos_internosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Videos_internosCountAggregateInputType | true
+    }
+
+  export interface videos_internosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['videos_internos'], meta: { name: 'videos_internos' } }
+    /**
+     * Find zero or one Videos_internos that matches the filter.
+     * @param {videos_internosFindUniqueArgs} args - Arguments to find a Videos_internos
+     * @example
+     * // Get one Videos_internos
+     * const videos_internos = await prisma.videos_internos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends videos_internosFindUniqueArgs>(args: SelectSubset<T, videos_internosFindUniqueArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Videos_internos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {videos_internosFindUniqueOrThrowArgs} args - Arguments to find a Videos_internos
+     * @example
+     * // Get one Videos_internos
+     * const videos_internos = await prisma.videos_internos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends videos_internosFindUniqueOrThrowArgs>(args: SelectSubset<T, videos_internosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos_internos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosFindFirstArgs} args - Arguments to find a Videos_internos
+     * @example
+     * // Get one Videos_internos
+     * const videos_internos = await prisma.videos_internos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends videos_internosFindFirstArgs>(args?: SelectSubset<T, videos_internosFindFirstArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos_internos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosFindFirstOrThrowArgs} args - Arguments to find a Videos_internos
+     * @example
+     * // Get one Videos_internos
+     * const videos_internos = await prisma.videos_internos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends videos_internosFindFirstOrThrowArgs>(args?: SelectSubset<T, videos_internosFindFirstOrThrowArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Videos_internos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videos_internos
+     * const videos_internos = await prisma.videos_internos.findMany()
+     * 
+     * // Get first 10 Videos_internos
+     * const videos_internos = await prisma.videos_internos.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videos_internosWithIdOnly = await prisma.videos_internos.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends videos_internosFindManyArgs>(args?: SelectSubset<T, videos_internosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Videos_internos.
+     * @param {videos_internosCreateArgs} args - Arguments to create a Videos_internos.
+     * @example
+     * // Create one Videos_internos
+     * const Videos_internos = await prisma.videos_internos.create({
+     *   data: {
+     *     // ... data to create a Videos_internos
+     *   }
+     * })
+     * 
+     */
+    create<T extends videos_internosCreateArgs>(args: SelectSubset<T, videos_internosCreateArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Videos_internos.
+     * @param {videos_internosCreateManyArgs} args - Arguments to create many Videos_internos.
+     * @example
+     * // Create many Videos_internos
+     * const videos_internos = await prisma.videos_internos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends videos_internosCreateManyArgs>(args?: SelectSubset<T, videos_internosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Videos_internos and returns the data saved in the database.
+     * @param {videos_internosCreateManyAndReturnArgs} args - Arguments to create many Videos_internos.
+     * @example
+     * // Create many Videos_internos
+     * const videos_internos = await prisma.videos_internos.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Videos_internos and only return the `id`
+     * const videos_internosWithIdOnly = await prisma.videos_internos.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends videos_internosCreateManyAndReturnArgs>(args?: SelectSubset<T, videos_internosCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Videos_internos.
+     * @param {videos_internosDeleteArgs} args - Arguments to delete one Videos_internos.
+     * @example
+     * // Delete one Videos_internos
+     * const Videos_internos = await prisma.videos_internos.delete({
+     *   where: {
+     *     // ... filter to delete one Videos_internos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends videos_internosDeleteArgs>(args: SelectSubset<T, videos_internosDeleteArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Videos_internos.
+     * @param {videos_internosUpdateArgs} args - Arguments to update one Videos_internos.
+     * @example
+     * // Update one Videos_internos
+     * const videos_internos = await prisma.videos_internos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends videos_internosUpdateArgs>(args: SelectSubset<T, videos_internosUpdateArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Videos_internos.
+     * @param {videos_internosDeleteManyArgs} args - Arguments to filter Videos_internos to delete.
+     * @example
+     * // Delete a few Videos_internos
+     * const { count } = await prisma.videos_internos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends videos_internosDeleteManyArgs>(args?: SelectSubset<T, videos_internosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos_internos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videos_internos
+     * const videos_internos = await prisma.videos_internos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends videos_internosUpdateManyArgs>(args: SelectSubset<T, videos_internosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos_internos and returns the data updated in the database.
+     * @param {videos_internosUpdateManyAndReturnArgs} args - Arguments to update many Videos_internos.
+     * @example
+     * // Update many Videos_internos
+     * const videos_internos = await prisma.videos_internos.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Videos_internos and only return the `id`
+     * const videos_internosWithIdOnly = await prisma.videos_internos.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends videos_internosUpdateManyAndReturnArgs>(args: SelectSubset<T, videos_internosUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Videos_internos.
+     * @param {videos_internosUpsertArgs} args - Arguments to update or create a Videos_internos.
+     * @example
+     * // Update or create a Videos_internos
+     * const videos_internos = await prisma.videos_internos.upsert({
+     *   create: {
+     *     // ... data to create a Videos_internos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Videos_internos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends videos_internosUpsertArgs>(args: SelectSubset<T, videos_internosUpsertArgs<ExtArgs>>): Prisma__videos_internosClient<$Result.GetResult<Prisma.$videos_internosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Videos_internos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosCountArgs} args - Arguments to filter Videos_internos to count.
+     * @example
+     * // Count the number of Videos_internos
+     * const count = await prisma.videos_internos.count({
+     *   where: {
+     *     // ... the filter for the Videos_internos we want to count
+     *   }
+     * })
+    **/
+    count<T extends videos_internosCountArgs>(
+      args?: Subset<T, videos_internosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Videos_internosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Videos_internos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Videos_internosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Videos_internosAggregateArgs>(args: Subset<T, Videos_internosAggregateArgs>): Prisma.PrismaPromise<GetVideos_internosAggregateType<T>>
+
+    /**
+     * Group by Videos_internos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_internosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends videos_internosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: videos_internosGroupByArgs['orderBy'] }
+        : { orderBy?: videos_internosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, videos_internosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideos_internosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the videos_internos model
+   */
+  readonly fields: videos_internosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for videos_internos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__videos_internosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    setor<T extends videos_internos$setorArgs<ExtArgs> = {}>(args?: Subset<T, videos_internos$setorArgs<ExtArgs>>): Prisma__setoresClient<$Result.GetResult<Prisma.$setoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    criador<T extends videos_internos$criadorArgs<ExtArgs> = {}>(args?: Subset<T, videos_internos$criadorArgs<ExtArgs>>): Prisma__usuariosClient<$Result.GetResult<Prisma.$usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the videos_internos model
+   */
+  interface videos_internosFieldRefs {
+    readonly id: FieldRef<"videos_internos", 'BigInt'>
+    readonly titulo: FieldRef<"videos_internos", 'String'>
+    readonly descricao: FieldRef<"videos_internos", 'String'>
+    readonly url: FieldRef<"videos_internos", 'String'>
+    readonly thumbnail: FieldRef<"videos_internos", 'String'>
+    readonly setor_id: FieldRef<"videos_internos", 'BigInt'>
+    readonly criado_por: FieldRef<"videos_internos", 'BigInt'>
+    readonly ordem: FieldRef<"videos_internos", 'Int'>
+    readonly ativo: FieldRef<"videos_internos", 'Boolean'>
+    readonly data_criacao: FieldRef<"videos_internos", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * videos_internos findUnique
+   */
+  export type videos_internosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_internos to fetch.
+     */
+    where: videos_internosWhereUniqueInput
+  }
+
+  /**
+   * videos_internos findUniqueOrThrow
+   */
+  export type videos_internosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_internos to fetch.
+     */
+    where: videos_internosWhereUniqueInput
+  }
+
+  /**
+   * videos_internos findFirst
+   */
+  export type videos_internosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_internos to fetch.
+     */
+    where?: videos_internosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_internos to fetch.
+     */
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_internos.
+     */
+    cursor?: videos_internosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_internos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_internos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_internos.
+     */
+    distinct?: Videos_internosScalarFieldEnum | Videos_internosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_internos findFirstOrThrow
+   */
+  export type videos_internosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_internos to fetch.
+     */
+    where?: videos_internosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_internos to fetch.
+     */
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_internos.
+     */
+    cursor?: videos_internosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_internos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_internos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_internos.
+     */
+    distinct?: Videos_internosScalarFieldEnum | Videos_internosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_internos findMany
+   */
+  export type videos_internosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter, which videos_internos to fetch.
+     */
+    where?: videos_internosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_internos to fetch.
+     */
+    orderBy?: videos_internosOrderByWithRelationInput | videos_internosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing videos_internos.
+     */
+    cursor?: videos_internosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_internos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_internos.
+     */
+    skip?: number
+    distinct?: Videos_internosScalarFieldEnum | Videos_internosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_internos create
+   */
+  export type videos_internosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * The data needed to create a videos_internos.
+     */
+    data: XOR<videos_internosCreateInput, videos_internosUncheckedCreateInput>
+  }
+
+  /**
+   * videos_internos createMany
+   */
+  export type videos_internosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many videos_internos.
+     */
+    data: videos_internosCreateManyInput | videos_internosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * videos_internos createManyAndReturn
+   */
+  export type videos_internosCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * The data used to create many videos_internos.
+     */
+    data: videos_internosCreateManyInput | videos_internosCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * videos_internos update
+   */
+  export type videos_internosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * The data needed to update a videos_internos.
+     */
+    data: XOR<videos_internosUpdateInput, videos_internosUncheckedUpdateInput>
+    /**
+     * Choose, which videos_internos to update.
+     */
+    where: videos_internosWhereUniqueInput
+  }
+
+  /**
+   * videos_internos updateMany
+   */
+  export type videos_internosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update videos_internos.
+     */
+    data: XOR<videos_internosUpdateManyMutationInput, videos_internosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos_internos to update
+     */
+    where?: videos_internosWhereInput
+    /**
+     * Limit how many videos_internos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos_internos updateManyAndReturn
+   */
+  export type videos_internosUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * The data used to update videos_internos.
+     */
+    data: XOR<videos_internosUpdateManyMutationInput, videos_internosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos_internos to update
+     */
+    where?: videos_internosWhereInput
+    /**
+     * Limit how many videos_internos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * videos_internos upsert
+   */
+  export type videos_internosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * The filter to search for the videos_internos to update in case it exists.
+     */
+    where: videos_internosWhereUniqueInput
+    /**
+     * In case the videos_internos found by the `where` argument doesn't exist, create a new videos_internos with this data.
+     */
+    create: XOR<videos_internosCreateInput, videos_internosUncheckedCreateInput>
+    /**
+     * In case the videos_internos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<videos_internosUpdateInput, videos_internosUncheckedUpdateInput>
+  }
+
+  /**
+   * videos_internos delete
+   */
+  export type videos_internosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+    /**
+     * Filter which videos_internos to delete.
+     */
+    where: videos_internosWhereUniqueInput
+  }
+
+  /**
+   * videos_internos deleteMany
+   */
+  export type videos_internosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_internos to delete
+     */
+    where?: videos_internosWhereInput
+    /**
+     * Limit how many videos_internos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos_internos.setor
+   */
+  export type videos_internos$setorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the setores
+     */
+    select?: setoresSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the setores
+     */
+    omit?: setoresOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: setoresInclude<ExtArgs> | null
+    where?: setoresWhereInput
+  }
+
+  /**
+   * videos_internos.criador
+   */
+  export type videos_internos$criadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usuarios
+     */
+    select?: usuariosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usuarios
+     */
+    omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    where?: usuariosWhereInput
+  }
+
+  /**
+   * videos_internos without action
+   */
+  export type videos_internosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_internos
+     */
+    select?: videos_internosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_internos
+     */
+    omit?: videos_internosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: videos_internosInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model videos_rh_procedimentos
+   */
+
+  export type AggregateVideos_rh_procedimentos = {
+    _count: Videos_rh_procedimentosCountAggregateOutputType | null
+    _avg: Videos_rh_procedimentosAvgAggregateOutputType | null
+    _sum: Videos_rh_procedimentosSumAggregateOutputType | null
+    _min: Videos_rh_procedimentosMinAggregateOutputType | null
+    _max: Videos_rh_procedimentosMaxAggregateOutputType | null
+  }
+
+  export type Videos_rh_procedimentosAvgAggregateOutputType = {
+    id: number | null
+    ordem: number | null
+  }
+
+  export type Videos_rh_procedimentosSumAggregateOutputType = {
+    id: bigint | null
+    ordem: number | null
+  }
+
+  export type Videos_rh_procedimentosMinAggregateOutputType = {
+    id: bigint | null
+    titulo: string | null
+    descricao: string | null
+    url: string | null
+    categoria: string | null
+    ordem: number | null
+    ativo: boolean | null
+    data_criacao: Date | null
+  }
+
+  export type Videos_rh_procedimentosMaxAggregateOutputType = {
+    id: bigint | null
+    titulo: string | null
+    descricao: string | null
+    url: string | null
+    categoria: string | null
+    ordem: number | null
+    ativo: boolean | null
+    data_criacao: Date | null
+  }
+
+  export type Videos_rh_procedimentosCountAggregateOutputType = {
+    id: number
+    titulo: number
+    descricao: number
+    url: number
+    categoria: number
+    ordem: number
+    ativo: number
+    data_criacao: number
+    _all: number
+  }
+
+
+  export type Videos_rh_procedimentosAvgAggregateInputType = {
+    id?: true
+    ordem?: true
+  }
+
+  export type Videos_rh_procedimentosSumAggregateInputType = {
+    id?: true
+    ordem?: true
+  }
+
+  export type Videos_rh_procedimentosMinAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    categoria?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+  }
+
+  export type Videos_rh_procedimentosMaxAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    categoria?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+  }
+
+  export type Videos_rh_procedimentosCountAggregateInputType = {
+    id?: true
+    titulo?: true
+    descricao?: true
+    url?: true
+    categoria?: true
+    ordem?: true
+    ativo?: true
+    data_criacao?: true
+    _all?: true
+  }
+
+  export type Videos_rh_procedimentosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_rh_procedimentos to aggregate.
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_rh_procedimentos to fetch.
+     */
+    orderBy?: videos_rh_procedimentosOrderByWithRelationInput | videos_rh_procedimentosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: videos_rh_procedimentosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_rh_procedimentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_rh_procedimentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned videos_rh_procedimentos
+    **/
+    _count?: true | Videos_rh_procedimentosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Videos_rh_procedimentosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Videos_rh_procedimentosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Videos_rh_procedimentosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Videos_rh_procedimentosMaxAggregateInputType
+  }
+
+  export type GetVideos_rh_procedimentosAggregateType<T extends Videos_rh_procedimentosAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideos_rh_procedimentos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideos_rh_procedimentos[P]>
+      : GetScalarType<T[P], AggregateVideos_rh_procedimentos[P]>
+  }
+
+
+
+
+  export type videos_rh_procedimentosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: videos_rh_procedimentosWhereInput
+    orderBy?: videos_rh_procedimentosOrderByWithAggregationInput | videos_rh_procedimentosOrderByWithAggregationInput[]
+    by: Videos_rh_procedimentosScalarFieldEnum[] | Videos_rh_procedimentosScalarFieldEnum
+    having?: videos_rh_procedimentosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Videos_rh_procedimentosCountAggregateInputType | true
+    _avg?: Videos_rh_procedimentosAvgAggregateInputType
+    _sum?: Videos_rh_procedimentosSumAggregateInputType
+    _min?: Videos_rh_procedimentosMinAggregateInputType
+    _max?: Videos_rh_procedimentosMaxAggregateInputType
+  }
+
+  export type Videos_rh_procedimentosGroupByOutputType = {
+    id: bigint
+    titulo: string
+    descricao: string | null
+    url: string
+    categoria: string | null
+    ordem: number
+    ativo: boolean
+    data_criacao: Date
+    _count: Videos_rh_procedimentosCountAggregateOutputType | null
+    _avg: Videos_rh_procedimentosAvgAggregateOutputType | null
+    _sum: Videos_rh_procedimentosSumAggregateOutputType | null
+    _min: Videos_rh_procedimentosMinAggregateOutputType | null
+    _max: Videos_rh_procedimentosMaxAggregateOutputType | null
+  }
+
+  type GetVideos_rh_procedimentosGroupByPayload<T extends videos_rh_procedimentosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Videos_rh_procedimentosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Videos_rh_procedimentosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Videos_rh_procedimentosGroupByOutputType[P]>
+            : GetScalarType<T[P], Videos_rh_procedimentosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type videos_rh_procedimentosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    categoria?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+  }, ExtArgs["result"]["videos_rh_procedimentos"]>
+
+  export type videos_rh_procedimentosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    categoria?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+  }, ExtArgs["result"]["videos_rh_procedimentos"]>
+
+  export type videos_rh_procedimentosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    categoria?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+  }, ExtArgs["result"]["videos_rh_procedimentos"]>
+
+  export type videos_rh_procedimentosSelectScalar = {
+    id?: boolean
+    titulo?: boolean
+    descricao?: boolean
+    url?: boolean
+    categoria?: boolean
+    ordem?: boolean
+    ativo?: boolean
+    data_criacao?: boolean
+  }
+
+  export type videos_rh_procedimentosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "categoria" | "ordem" | "ativo" | "data_criacao", ExtArgs["result"]["videos_rh_procedimentos"]>
+
+  export type $videos_rh_procedimentosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "videos_rh_procedimentos"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      titulo: string
+      descricao: string | null
+      url: string
+      categoria: string | null
+      ordem: number
+      ativo: boolean
+      data_criacao: Date
+    }, ExtArgs["result"]["videos_rh_procedimentos"]>
+    composites: {}
+  }
+
+  type videos_rh_procedimentosGetPayload<S extends boolean | null | undefined | videos_rh_procedimentosDefaultArgs> = $Result.GetResult<Prisma.$videos_rh_procedimentosPayload, S>
+
+  type videos_rh_procedimentosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<videos_rh_procedimentosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Videos_rh_procedimentosCountAggregateInputType | true
+    }
+
+  export interface videos_rh_procedimentosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['videos_rh_procedimentos'], meta: { name: 'videos_rh_procedimentos' } }
+    /**
+     * Find zero or one Videos_rh_procedimentos that matches the filter.
+     * @param {videos_rh_procedimentosFindUniqueArgs} args - Arguments to find a Videos_rh_procedimentos
+     * @example
+     * // Get one Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends videos_rh_procedimentosFindUniqueArgs>(args: SelectSubset<T, videos_rh_procedimentosFindUniqueArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Videos_rh_procedimentos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {videos_rh_procedimentosFindUniqueOrThrowArgs} args - Arguments to find a Videos_rh_procedimentos
+     * @example
+     * // Get one Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends videos_rh_procedimentosFindUniqueOrThrowArgs>(args: SelectSubset<T, videos_rh_procedimentosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos_rh_procedimentos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosFindFirstArgs} args - Arguments to find a Videos_rh_procedimentos
+     * @example
+     * // Get one Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends videos_rh_procedimentosFindFirstArgs>(args?: SelectSubset<T, videos_rh_procedimentosFindFirstArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Videos_rh_procedimentos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosFindFirstOrThrowArgs} args - Arguments to find a Videos_rh_procedimentos
+     * @example
+     * // Get one Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends videos_rh_procedimentosFindFirstOrThrowArgs>(args?: SelectSubset<T, videos_rh_procedimentosFindFirstOrThrowArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Videos_rh_procedimentos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findMany()
+     * 
+     * // Get first 10 Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videos_rh_procedimentosWithIdOnly = await prisma.videos_rh_procedimentos.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends videos_rh_procedimentosFindManyArgs>(args?: SelectSubset<T, videos_rh_procedimentosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosCreateArgs} args - Arguments to create a Videos_rh_procedimentos.
+     * @example
+     * // Create one Videos_rh_procedimentos
+     * const Videos_rh_procedimentos = await prisma.videos_rh_procedimentos.create({
+     *   data: {
+     *     // ... data to create a Videos_rh_procedimentos
+     *   }
+     * })
+     * 
+     */
+    create<T extends videos_rh_procedimentosCreateArgs>(args: SelectSubset<T, videos_rh_procedimentosCreateArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosCreateManyArgs} args - Arguments to create many Videos_rh_procedimentos.
+     * @example
+     * // Create many Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends videos_rh_procedimentosCreateManyArgs>(args?: SelectSubset<T, videos_rh_procedimentosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Videos_rh_procedimentos and returns the data saved in the database.
+     * @param {videos_rh_procedimentosCreateManyAndReturnArgs} args - Arguments to create many Videos_rh_procedimentos.
+     * @example
+     * // Create many Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Videos_rh_procedimentos and only return the `id`
+     * const videos_rh_procedimentosWithIdOnly = await prisma.videos_rh_procedimentos.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends videos_rh_procedimentosCreateManyAndReturnArgs>(args?: SelectSubset<T, videos_rh_procedimentosCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosDeleteArgs} args - Arguments to delete one Videos_rh_procedimentos.
+     * @example
+     * // Delete one Videos_rh_procedimentos
+     * const Videos_rh_procedimentos = await prisma.videos_rh_procedimentos.delete({
+     *   where: {
+     *     // ... filter to delete one Videos_rh_procedimentos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends videos_rh_procedimentosDeleteArgs>(args: SelectSubset<T, videos_rh_procedimentosDeleteArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosUpdateArgs} args - Arguments to update one Videos_rh_procedimentos.
+     * @example
+     * // Update one Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends videos_rh_procedimentosUpdateArgs>(args: SelectSubset<T, videos_rh_procedimentosUpdateArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosDeleteManyArgs} args - Arguments to filter Videos_rh_procedimentos to delete.
+     * @example
+     * // Delete a few Videos_rh_procedimentos
+     * const { count } = await prisma.videos_rh_procedimentos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends videos_rh_procedimentosDeleteManyArgs>(args?: SelectSubset<T, videos_rh_procedimentosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos_rh_procedimentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends videos_rh_procedimentosUpdateManyArgs>(args: SelectSubset<T, videos_rh_procedimentosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Videos_rh_procedimentos and returns the data updated in the database.
+     * @param {videos_rh_procedimentosUpdateManyAndReturnArgs} args - Arguments to update many Videos_rh_procedimentos.
+     * @example
+     * // Update many Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Videos_rh_procedimentos and only return the `id`
+     * const videos_rh_procedimentosWithIdOnly = await prisma.videos_rh_procedimentos.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends videos_rh_procedimentosUpdateManyAndReturnArgs>(args: SelectSubset<T, videos_rh_procedimentosUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Videos_rh_procedimentos.
+     * @param {videos_rh_procedimentosUpsertArgs} args - Arguments to update or create a Videos_rh_procedimentos.
+     * @example
+     * // Update or create a Videos_rh_procedimentos
+     * const videos_rh_procedimentos = await prisma.videos_rh_procedimentos.upsert({
+     *   create: {
+     *     // ... data to create a Videos_rh_procedimentos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Videos_rh_procedimentos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends videos_rh_procedimentosUpsertArgs>(args: SelectSubset<T, videos_rh_procedimentosUpsertArgs<ExtArgs>>): Prisma__videos_rh_procedimentosClient<$Result.GetResult<Prisma.$videos_rh_procedimentosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Videos_rh_procedimentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosCountArgs} args - Arguments to filter Videos_rh_procedimentos to count.
+     * @example
+     * // Count the number of Videos_rh_procedimentos
+     * const count = await prisma.videos_rh_procedimentos.count({
+     *   where: {
+     *     // ... the filter for the Videos_rh_procedimentos we want to count
+     *   }
+     * })
+    **/
+    count<T extends videos_rh_procedimentosCountArgs>(
+      args?: Subset<T, videos_rh_procedimentosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Videos_rh_procedimentosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Videos_rh_procedimentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Videos_rh_procedimentosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Videos_rh_procedimentosAggregateArgs>(args: Subset<T, Videos_rh_procedimentosAggregateArgs>): Prisma.PrismaPromise<GetVideos_rh_procedimentosAggregateType<T>>
+
+    /**
+     * Group by Videos_rh_procedimentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {videos_rh_procedimentosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends videos_rh_procedimentosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: videos_rh_procedimentosGroupByArgs['orderBy'] }
+        : { orderBy?: videos_rh_procedimentosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, videos_rh_procedimentosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideos_rh_procedimentosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the videos_rh_procedimentos model
+   */
+  readonly fields: videos_rh_procedimentosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for videos_rh_procedimentos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__videos_rh_procedimentosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the videos_rh_procedimentos model
+   */
+  interface videos_rh_procedimentosFieldRefs {
+    readonly id: FieldRef<"videos_rh_procedimentos", 'BigInt'>
+    readonly titulo: FieldRef<"videos_rh_procedimentos", 'String'>
+    readonly descricao: FieldRef<"videos_rh_procedimentos", 'String'>
+    readonly url: FieldRef<"videos_rh_procedimentos", 'String'>
+    readonly categoria: FieldRef<"videos_rh_procedimentos", 'String'>
+    readonly ordem: FieldRef<"videos_rh_procedimentos", 'Int'>
+    readonly ativo: FieldRef<"videos_rh_procedimentos", 'Boolean'>
+    readonly data_criacao: FieldRef<"videos_rh_procedimentos", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * videos_rh_procedimentos findUnique
+   */
+  export type videos_rh_procedimentosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter, which videos_rh_procedimentos to fetch.
+     */
+    where: videos_rh_procedimentosWhereUniqueInput
+  }
+
+  /**
+   * videos_rh_procedimentos findUniqueOrThrow
+   */
+  export type videos_rh_procedimentosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter, which videos_rh_procedimentos to fetch.
+     */
+    where: videos_rh_procedimentosWhereUniqueInput
+  }
+
+  /**
+   * videos_rh_procedimentos findFirst
+   */
+  export type videos_rh_procedimentosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter, which videos_rh_procedimentos to fetch.
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_rh_procedimentos to fetch.
+     */
+    orderBy?: videos_rh_procedimentosOrderByWithRelationInput | videos_rh_procedimentosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_rh_procedimentos.
+     */
+    cursor?: videos_rh_procedimentosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_rh_procedimentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_rh_procedimentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_rh_procedimentos.
+     */
+    distinct?: Videos_rh_procedimentosScalarFieldEnum | Videos_rh_procedimentosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_rh_procedimentos findFirstOrThrow
+   */
+  export type videos_rh_procedimentosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter, which videos_rh_procedimentos to fetch.
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_rh_procedimentos to fetch.
+     */
+    orderBy?: videos_rh_procedimentosOrderByWithRelationInput | videos_rh_procedimentosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for videos_rh_procedimentos.
+     */
+    cursor?: videos_rh_procedimentosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_rh_procedimentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_rh_procedimentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of videos_rh_procedimentos.
+     */
+    distinct?: Videos_rh_procedimentosScalarFieldEnum | Videos_rh_procedimentosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_rh_procedimentos findMany
+   */
+  export type videos_rh_procedimentosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter, which videos_rh_procedimentos to fetch.
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of videos_rh_procedimentos to fetch.
+     */
+    orderBy?: videos_rh_procedimentosOrderByWithRelationInput | videos_rh_procedimentosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing videos_rh_procedimentos.
+     */
+    cursor?: videos_rh_procedimentosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` videos_rh_procedimentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` videos_rh_procedimentos.
+     */
+    skip?: number
+    distinct?: Videos_rh_procedimentosScalarFieldEnum | Videos_rh_procedimentosScalarFieldEnum[]
+  }
+
+  /**
+   * videos_rh_procedimentos create
+   */
+  export type videos_rh_procedimentosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * The data needed to create a videos_rh_procedimentos.
+     */
+    data: XOR<videos_rh_procedimentosCreateInput, videos_rh_procedimentosUncheckedCreateInput>
+  }
+
+  /**
+   * videos_rh_procedimentos createMany
+   */
+  export type videos_rh_procedimentosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many videos_rh_procedimentos.
+     */
+    data: videos_rh_procedimentosCreateManyInput | videos_rh_procedimentosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * videos_rh_procedimentos createManyAndReturn
+   */
+  export type videos_rh_procedimentosCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * The data used to create many videos_rh_procedimentos.
+     */
+    data: videos_rh_procedimentosCreateManyInput | videos_rh_procedimentosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * videos_rh_procedimentos update
+   */
+  export type videos_rh_procedimentosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * The data needed to update a videos_rh_procedimentos.
+     */
+    data: XOR<videos_rh_procedimentosUpdateInput, videos_rh_procedimentosUncheckedUpdateInput>
+    /**
+     * Choose, which videos_rh_procedimentos to update.
+     */
+    where: videos_rh_procedimentosWhereUniqueInput
+  }
+
+  /**
+   * videos_rh_procedimentos updateMany
+   */
+  export type videos_rh_procedimentosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update videos_rh_procedimentos.
+     */
+    data: XOR<videos_rh_procedimentosUpdateManyMutationInput, videos_rh_procedimentosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos_rh_procedimentos to update
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * Limit how many videos_rh_procedimentos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos_rh_procedimentos updateManyAndReturn
+   */
+  export type videos_rh_procedimentosUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * The data used to update videos_rh_procedimentos.
+     */
+    data: XOR<videos_rh_procedimentosUpdateManyMutationInput, videos_rh_procedimentosUncheckedUpdateManyInput>
+    /**
+     * Filter which videos_rh_procedimentos to update
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * Limit how many videos_rh_procedimentos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos_rh_procedimentos upsert
+   */
+  export type videos_rh_procedimentosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * The filter to search for the videos_rh_procedimentos to update in case it exists.
+     */
+    where: videos_rh_procedimentosWhereUniqueInput
+    /**
+     * In case the videos_rh_procedimentos found by the `where` argument doesn't exist, create a new videos_rh_procedimentos with this data.
+     */
+    create: XOR<videos_rh_procedimentosCreateInput, videos_rh_procedimentosUncheckedCreateInput>
+    /**
+     * In case the videos_rh_procedimentos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<videos_rh_procedimentosUpdateInput, videos_rh_procedimentosUncheckedUpdateInput>
+  }
+
+  /**
+   * videos_rh_procedimentos delete
+   */
+  export type videos_rh_procedimentosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
+    /**
+     * Filter which videos_rh_procedimentos to delete.
+     */
+    where: videos_rh_procedimentosWhereUniqueInput
+  }
+
+  /**
+   * videos_rh_procedimentos deleteMany
+   */
+  export type videos_rh_procedimentosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which videos_rh_procedimentos to delete
+     */
+    where?: videos_rh_procedimentosWhereInput
+    /**
+     * Limit how many videos_rh_procedimentos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * videos_rh_procedimentos without action
+   */
+  export type videos_rh_procedimentosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the videos_rh_procedimentos
+     */
+    select?: videos_rh_procedimentosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the videos_rh_procedimentos
+     */
+    omit?: videos_rh_procedimentosOmit<ExtArgs> | null
   }
 
 
@@ -15896,6 +19833,16 @@ export namespace Prisma {
   export type ProdutosScalarFieldEnum = (typeof ProdutosScalarFieldEnum)[keyof typeof ProdutosScalarFieldEnum]
 
 
+  export const SetoresScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    descricao: 'descricao',
+    data_criacao: 'data_criacao'
+  };
+
+  export type SetoresScalarFieldEnum = (typeof SetoresScalarFieldEnum)[keyof typeof SetoresScalarFieldEnum]
+
+
   export const UsuariosScalarFieldEnum: {
     id: 'id',
     username: 'username',
@@ -15905,10 +19852,44 @@ export namespace Prisma {
     permissao: 'permissao',
     cpf: 'cpf',
     telefone: 'telefone',
-    trocar_senha: 'trocar_senha'
+    trocar_senha: 'trocar_senha',
+    role: 'role',
+    setor_id: 'setor_id',
+    avatar_url: 'avatar_url',
+    ultimo_acesso: 'ultimo_acesso'
   };
 
   export type UsuariosScalarFieldEnum = (typeof UsuariosScalarFieldEnum)[keyof typeof UsuariosScalarFieldEnum]
+
+
+  export const Videos_internosScalarFieldEnum: {
+    id: 'id',
+    titulo: 'titulo',
+    descricao: 'descricao',
+    url: 'url',
+    thumbnail: 'thumbnail',
+    setor_id: 'setor_id',
+    criado_por: 'criado_por',
+    ordem: 'ordem',
+    ativo: 'ativo',
+    data_criacao: 'data_criacao'
+  };
+
+  export type Videos_internosScalarFieldEnum = (typeof Videos_internosScalarFieldEnum)[keyof typeof Videos_internosScalarFieldEnum]
+
+
+  export const Videos_rh_procedimentosScalarFieldEnum: {
+    id: 'id',
+    titulo: 'titulo',
+    descricao: 'descricao',
+    url: 'url',
+    categoria: 'categoria',
+    ordem: 'ordem',
+    ativo: 'ativo',
+    data_criacao: 'data_criacao'
+  };
+
+  export type Videos_rh_procedimentosScalarFieldEnum = (typeof Videos_rh_procedimentosScalarFieldEnum)[keyof typeof Videos_rh_procedimentosScalarFieldEnum]
 
 
   export const VideosScalarFieldEnum: {
@@ -16031,6 +20012,27 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -16501,6 +20503,61 @@ export namespace Prisma {
     data_criacao?: DateTimeWithAggregatesFilter<"produtos"> | Date | string
   }
 
+  export type setoresWhereInput = {
+    AND?: setoresWhereInput | setoresWhereInput[]
+    OR?: setoresWhereInput[]
+    NOT?: setoresWhereInput | setoresWhereInput[]
+    id?: BigIntFilter<"setores"> | bigint | number
+    nome?: StringFilter<"setores"> | string
+    descricao?: StringNullableFilter<"setores"> | string | null
+    data_criacao?: DateTimeFilter<"setores"> | Date | string
+    usuarios?: UsuariosListRelationFilter
+    videos_internos?: Videos_internosListRelationFilter
+  }
+
+  export type setoresOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
+    usuarios?: usuariosOrderByRelationAggregateInput
+    videos_internos?: videos_internosOrderByRelationAggregateInput
+  }
+
+  export type setoresWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: setoresWhereInput | setoresWhereInput[]
+    OR?: setoresWhereInput[]
+    NOT?: setoresWhereInput | setoresWhereInput[]
+    nome?: StringFilter<"setores"> | string
+    descricao?: StringNullableFilter<"setores"> | string | null
+    data_criacao?: DateTimeFilter<"setores"> | Date | string
+    usuarios?: UsuariosListRelationFilter
+    videos_internos?: Videos_internosListRelationFilter
+  }, "id" | "id">
+
+  export type setoresOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    data_criacao?: SortOrder
+    _count?: setoresCountOrderByAggregateInput
+    _avg?: setoresAvgOrderByAggregateInput
+    _max?: setoresMaxOrderByAggregateInput
+    _min?: setoresMinOrderByAggregateInput
+    _sum?: setoresSumOrderByAggregateInput
+  }
+
+  export type setoresScalarWhereWithAggregatesInput = {
+    AND?: setoresScalarWhereWithAggregatesInput | setoresScalarWhereWithAggregatesInput[]
+    OR?: setoresScalarWhereWithAggregatesInput[]
+    NOT?: setoresScalarWhereWithAggregatesInput | setoresScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"setores"> | bigint | number
+    nome?: StringWithAggregatesFilter<"setores"> | string
+    descricao?: StringNullableWithAggregatesFilter<"setores"> | string | null
+    data_criacao?: DateTimeWithAggregatesFilter<"setores"> | Date | string
+  }
+
   export type usuariosWhereInput = {
     AND?: usuariosWhereInput | usuariosWhereInput[]
     OR?: usuariosWhereInput[]
@@ -16514,6 +20571,12 @@ export namespace Prisma {
     cpf?: StringNullableFilter<"usuarios"> | string | null
     telefone?: StringNullableFilter<"usuarios"> | string | null
     trocar_senha?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    role?: EnumUserRoleFilter<"usuarios"> | $Enums.UserRole
+    setor_id?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    avatar_url?: StringNullableFilter<"usuarios"> | string | null
+    ultimo_acesso?: DateTimeNullableFilter<"usuarios"> | Date | string | null
+    setor?: XOR<SetoresNullableScalarRelationFilter, setoresWhereInput> | null
+    videos_criados?: Videos_internosListRelationFilter
   }
 
   export type usuariosOrderByWithRelationInput = {
@@ -16526,6 +20589,12 @@ export namespace Prisma {
     cpf?: SortOrderInput | SortOrder
     telefone?: SortOrderInput | SortOrder
     trocar_senha?: SortOrderInput | SortOrder
+    role?: SortOrder
+    setor_id?: SortOrderInput | SortOrder
+    avatar_url?: SortOrderInput | SortOrder
+    ultimo_acesso?: SortOrderInput | SortOrder
+    setor?: setoresOrderByWithRelationInput
+    videos_criados?: videos_internosOrderByRelationAggregateInput
   }
 
   export type usuariosWhereUniqueInput = Prisma.AtLeast<{
@@ -16541,6 +20610,12 @@ export namespace Prisma {
     cpf?: StringNullableFilter<"usuarios"> | string | null
     telefone?: StringNullableFilter<"usuarios"> | string | null
     trocar_senha?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    role?: EnumUserRoleFilter<"usuarios"> | $Enums.UserRole
+    setor_id?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    avatar_url?: StringNullableFilter<"usuarios"> | string | null
+    ultimo_acesso?: DateTimeNullableFilter<"usuarios"> | Date | string | null
+    setor?: XOR<SetoresNullableScalarRelationFilter, setoresWhereInput> | null
+    videos_criados?: Videos_internosListRelationFilter
   }, "id" | "id" | "email">
 
   export type usuariosOrderByWithAggregationInput = {
@@ -16553,6 +20628,10 @@ export namespace Prisma {
     cpf?: SortOrderInput | SortOrder
     telefone?: SortOrderInput | SortOrder
     trocar_senha?: SortOrderInput | SortOrder
+    role?: SortOrder
+    setor_id?: SortOrderInput | SortOrder
+    avatar_url?: SortOrderInput | SortOrder
+    ultimo_acesso?: SortOrderInput | SortOrder
     _count?: usuariosCountOrderByAggregateInput
     _avg?: usuariosAvgOrderByAggregateInput
     _max?: usuariosMaxOrderByAggregateInput
@@ -16573,6 +20652,164 @@ export namespace Prisma {
     cpf?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
     telefone?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
     trocar_senha?: BigIntNullableWithAggregatesFilter<"usuarios"> | bigint | number | null
+    role?: EnumUserRoleWithAggregatesFilter<"usuarios"> | $Enums.UserRole
+    setor_id?: BigIntNullableWithAggregatesFilter<"usuarios"> | bigint | number | null
+    avatar_url?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
+    ultimo_acesso?: DateTimeNullableWithAggregatesFilter<"usuarios"> | Date | string | null
+  }
+
+  export type videos_internosWhereInput = {
+    AND?: videos_internosWhereInput | videos_internosWhereInput[]
+    OR?: videos_internosWhereInput[]
+    NOT?: videos_internosWhereInput | videos_internosWhereInput[]
+    id?: BigIntFilter<"videos_internos"> | bigint | number
+    titulo?: StringFilter<"videos_internos"> | string
+    descricao?: StringNullableFilter<"videos_internos"> | string | null
+    url?: StringFilter<"videos_internos"> | string
+    thumbnail?: StringNullableFilter<"videos_internos"> | string | null
+    setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    ordem?: IntFilter<"videos_internos"> | number
+    ativo?: BoolFilter<"videos_internos"> | boolean
+    data_criacao?: DateTimeFilter<"videos_internos"> | Date | string
+    setor?: XOR<SetoresNullableScalarRelationFilter, setoresWhereInput> | null
+    criador?: XOR<UsuariosNullableScalarRelationFilter, usuariosWhereInput> | null
+  }
+
+  export type videos_internosOrderByWithRelationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    url?: SortOrder
+    thumbnail?: SortOrderInput | SortOrder
+    setor_id?: SortOrderInput | SortOrder
+    criado_por?: SortOrderInput | SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+    setor?: setoresOrderByWithRelationInput
+    criador?: usuariosOrderByWithRelationInput
+  }
+
+  export type videos_internosWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: videos_internosWhereInput | videos_internosWhereInput[]
+    OR?: videos_internosWhereInput[]
+    NOT?: videos_internosWhereInput | videos_internosWhereInput[]
+    titulo?: StringFilter<"videos_internos"> | string
+    descricao?: StringNullableFilter<"videos_internos"> | string | null
+    url?: StringFilter<"videos_internos"> | string
+    thumbnail?: StringNullableFilter<"videos_internos"> | string | null
+    setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    ordem?: IntFilter<"videos_internos"> | number
+    ativo?: BoolFilter<"videos_internos"> | boolean
+    data_criacao?: DateTimeFilter<"videos_internos"> | Date | string
+    setor?: XOR<SetoresNullableScalarRelationFilter, setoresWhereInput> | null
+    criador?: XOR<UsuariosNullableScalarRelationFilter, usuariosWhereInput> | null
+  }, "id" | "id">
+
+  export type videos_internosOrderByWithAggregationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    url?: SortOrder
+    thumbnail?: SortOrderInput | SortOrder
+    setor_id?: SortOrderInput | SortOrder
+    criado_por?: SortOrderInput | SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+    _count?: videos_internosCountOrderByAggregateInput
+    _avg?: videos_internosAvgOrderByAggregateInput
+    _max?: videos_internosMaxOrderByAggregateInput
+    _min?: videos_internosMinOrderByAggregateInput
+    _sum?: videos_internosSumOrderByAggregateInput
+  }
+
+  export type videos_internosScalarWhereWithAggregatesInput = {
+    AND?: videos_internosScalarWhereWithAggregatesInput | videos_internosScalarWhereWithAggregatesInput[]
+    OR?: videos_internosScalarWhereWithAggregatesInput[]
+    NOT?: videos_internosScalarWhereWithAggregatesInput | videos_internosScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"videos_internos"> | bigint | number
+    titulo?: StringWithAggregatesFilter<"videos_internos"> | string
+    descricao?: StringNullableWithAggregatesFilter<"videos_internos"> | string | null
+    url?: StringWithAggregatesFilter<"videos_internos"> | string
+    thumbnail?: StringNullableWithAggregatesFilter<"videos_internos"> | string | null
+    setor_id?: BigIntNullableWithAggregatesFilter<"videos_internos"> | bigint | number | null
+    criado_por?: BigIntNullableWithAggregatesFilter<"videos_internos"> | bigint | number | null
+    ordem?: IntWithAggregatesFilter<"videos_internos"> | number
+    ativo?: BoolWithAggregatesFilter<"videos_internos"> | boolean
+    data_criacao?: DateTimeWithAggregatesFilter<"videos_internos"> | Date | string
+  }
+
+  export type videos_rh_procedimentosWhereInput = {
+    AND?: videos_rh_procedimentosWhereInput | videos_rh_procedimentosWhereInput[]
+    OR?: videos_rh_procedimentosWhereInput[]
+    NOT?: videos_rh_procedimentosWhereInput | videos_rh_procedimentosWhereInput[]
+    id?: BigIntFilter<"videos_rh_procedimentos"> | bigint | number
+    titulo?: StringFilter<"videos_rh_procedimentos"> | string
+    descricao?: StringNullableFilter<"videos_rh_procedimentos"> | string | null
+    url?: StringFilter<"videos_rh_procedimentos"> | string
+    categoria?: StringNullableFilter<"videos_rh_procedimentos"> | string | null
+    ordem?: IntFilter<"videos_rh_procedimentos"> | number
+    ativo?: BoolFilter<"videos_rh_procedimentos"> | boolean
+    data_criacao?: DateTimeFilter<"videos_rh_procedimentos"> | Date | string
+  }
+
+  export type videos_rh_procedimentosOrderByWithRelationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    url?: SortOrder
+    categoria?: SortOrderInput | SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_rh_procedimentosWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: videos_rh_procedimentosWhereInput | videos_rh_procedimentosWhereInput[]
+    OR?: videos_rh_procedimentosWhereInput[]
+    NOT?: videos_rh_procedimentosWhereInput | videos_rh_procedimentosWhereInput[]
+    titulo?: StringFilter<"videos_rh_procedimentos"> | string
+    descricao?: StringNullableFilter<"videos_rh_procedimentos"> | string | null
+    url?: StringFilter<"videos_rh_procedimentos"> | string
+    categoria?: StringNullableFilter<"videos_rh_procedimentos"> | string | null
+    ordem?: IntFilter<"videos_rh_procedimentos"> | number
+    ativo?: BoolFilter<"videos_rh_procedimentos"> | boolean
+    data_criacao?: DateTimeFilter<"videos_rh_procedimentos"> | Date | string
+  }, "id" | "id">
+
+  export type videos_rh_procedimentosOrderByWithAggregationInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrderInput | SortOrder
+    url?: SortOrder
+    categoria?: SortOrderInput | SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+    _count?: videos_rh_procedimentosCountOrderByAggregateInput
+    _avg?: videos_rh_procedimentosAvgOrderByAggregateInput
+    _max?: videos_rh_procedimentosMaxOrderByAggregateInput
+    _min?: videos_rh_procedimentosMinOrderByAggregateInput
+    _sum?: videos_rh_procedimentosSumOrderByAggregateInput
+  }
+
+  export type videos_rh_procedimentosScalarWhereWithAggregatesInput = {
+    AND?: videos_rh_procedimentosScalarWhereWithAggregatesInput | videos_rh_procedimentosScalarWhereWithAggregatesInput[]
+    OR?: videos_rh_procedimentosScalarWhereWithAggregatesInput[]
+    NOT?: videos_rh_procedimentosScalarWhereWithAggregatesInput | videos_rh_procedimentosScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"videos_rh_procedimentos"> | bigint | number
+    titulo?: StringWithAggregatesFilter<"videos_rh_procedimentos"> | string
+    descricao?: StringNullableWithAggregatesFilter<"videos_rh_procedimentos"> | string | null
+    url?: StringWithAggregatesFilter<"videos_rh_procedimentos"> | string
+    categoria?: StringNullableWithAggregatesFilter<"videos_rh_procedimentos"> | string | null
+    ordem?: IntWithAggregatesFilter<"videos_rh_procedimentos"> | number
+    ativo?: BoolWithAggregatesFilter<"videos_rh_procedimentos"> | boolean
+    data_criacao?: DateTimeWithAggregatesFilter<"videos_rh_procedimentos"> | Date | string
   }
 
   export type videosWhereInput = {
@@ -17234,6 +21471,63 @@ export namespace Prisma {
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type setoresCreateInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    usuarios?: usuariosCreateNestedManyWithoutSetorInput
+    videos_internos?: videos_internosCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresUncheckedCreateInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    usuarios?: usuariosUncheckedCreateNestedManyWithoutSetorInput
+    videos_internos?: videos_internosUncheckedCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: usuariosUpdateManyWithoutSetorNestedInput
+    videos_internos?: videos_internosUpdateManyWithoutSetorNestedInput
+  }
+
+  export type setoresUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: usuariosUncheckedUpdateManyWithoutSetorNestedInput
+    videos_internos?: videos_internosUncheckedUpdateManyWithoutSetorNestedInput
+  }
+
+  export type setoresCreateManyInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+  }
+
+  export type setoresUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type setoresUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type usuariosCreateInput = {
     id?: bigint | number
     username?: string | null
@@ -17244,6 +21538,11 @@ export namespace Prisma {
     cpf?: string | null
     telefone?: string | null
     trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+    setor?: setoresCreateNestedOneWithoutUsuariosInput
+    videos_criados?: videos_internosCreateNestedManyWithoutCriadorInput
   }
 
   export type usuariosUncheckedCreateInput = {
@@ -17256,6 +21555,11 @@ export namespace Prisma {
     cpf?: string | null
     telefone?: string | null
     trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    setor_id?: bigint | number | null
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+    videos_criados?: videos_internosUncheckedCreateNestedManyWithoutCriadorInput
   }
 
   export type usuariosUpdateInput = {
@@ -17268,6 +21572,11 @@ export namespace Prisma {
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    setor?: setoresUpdateOneWithoutUsuariosNestedInput
+    videos_criados?: videos_internosUpdateManyWithoutCriadorNestedInput
   }
 
   export type usuariosUncheckedUpdateInput = {
@@ -17280,6 +21589,11 @@ export namespace Prisma {
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videos_criados?: videos_internosUncheckedUpdateManyWithoutCriadorNestedInput
   }
 
   export type usuariosCreateManyInput = {
@@ -17292,6 +21606,10 @@ export namespace Prisma {
     cpf?: string | null
     telefone?: string | null
     trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    setor_id?: bigint | number | null
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
   }
 
   export type usuariosUpdateManyMutationInput = {
@@ -17304,6 +21622,9 @@ export namespace Prisma {
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type usuariosUncheckedUpdateManyInput = {
@@ -17316,6 +21637,176 @@ export namespace Prisma {
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videos_internosCreateInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+    setor?: setoresCreateNestedOneWithoutVideos_internosInput
+    criador?: usuariosCreateNestedOneWithoutVideos_criadosInput
+  }
+
+  export type videos_internosUncheckedCreateInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    setor_id?: bigint | number | null
+    criado_por?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_internosUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    setor?: setoresUpdateOneWithoutVideos_internosNestedInput
+    criador?: usuariosUpdateOneWithoutVideos_criadosNestedInput
+  }
+
+  export type videos_internosUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_internosCreateManyInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    setor_id?: bigint | number | null
+    criado_por?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_internosUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_internosUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_rh_procedimentosCreateInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    categoria?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_rh_procedimentosUncheckedCreateInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    categoria?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_rh_procedimentosUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_rh_procedimentosUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_rh_procedimentosCreateManyInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    categoria?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_rh_procedimentosUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_rh_procedimentosUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type videosCreateInput = {
@@ -17950,6 +22441,111 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type UsuariosListRelationFilter = {
+    every?: usuariosWhereInput
+    some?: usuariosWhereInput
+    none?: usuariosWhereInput
+  }
+
+  export type Videos_internosListRelationFilter = {
+    every?: videos_internosWhereInput
+    some?: videos_internosWhereInput
+    none?: videos_internosWhereInput
+  }
+
+  export type usuariosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type videos_internosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type setoresCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    descricao?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type setoresAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type setoresMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    descricao?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type setoresMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    descricao?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type setoresSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SetoresNullableScalarRelationFilter = {
+    is?: setoresWhereInput | null
+    isNot?: setoresWhereInput | null
+  }
+
   export type usuariosCountOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
@@ -17960,11 +22556,16 @@ export namespace Prisma {
     cpf?: SortOrder
     telefone?: SortOrder
     trocar_senha?: SortOrder
+    role?: SortOrder
+    setor_id?: SortOrder
+    avatar_url?: SortOrder
+    ultimo_acesso?: SortOrder
   }
 
   export type usuariosAvgOrderByAggregateInput = {
     id?: SortOrder
     trocar_senha?: SortOrder
+    setor_id?: SortOrder
   }
 
   export type usuariosMaxOrderByAggregateInput = {
@@ -17977,6 +22578,10 @@ export namespace Prisma {
     cpf?: SortOrder
     telefone?: SortOrder
     trocar_senha?: SortOrder
+    role?: SortOrder
+    setor_id?: SortOrder
+    avatar_url?: SortOrder
+    ultimo_acesso?: SortOrder
   }
 
   export type usuariosMinOrderByAggregateInput = {
@@ -17989,11 +22594,181 @@ export namespace Prisma {
     cpf?: SortOrder
     telefone?: SortOrder
     trocar_senha?: SortOrder
+    role?: SortOrder
+    setor_id?: SortOrder
+    avatar_url?: SortOrder
+    ultimo_acesso?: SortOrder
   }
 
   export type usuariosSumOrderByAggregateInput = {
     id?: SortOrder
     trocar_senha?: SortOrder
+    setor_id?: SortOrder
+  }
+
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type UsuariosNullableScalarRelationFilter = {
+    is?: usuariosWhereInput | null
+    isNot?: usuariosWhereInput | null
+  }
+
+  export type videos_internosCountOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    thumbnail?: SortOrder
+    setor_id?: SortOrder
+    criado_por?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_internosAvgOrderByAggregateInput = {
+    id?: SortOrder
+    setor_id?: SortOrder
+    criado_por?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type videos_internosMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    thumbnail?: SortOrder
+    setor_id?: SortOrder
+    criado_por?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_internosMinOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    thumbnail?: SortOrder
+    setor_id?: SortOrder
+    criado_por?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_internosSumOrderByAggregateInput = {
+    id?: SortOrder
+    setor_id?: SortOrder
+    criado_por?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type videos_rh_procedimentosCountOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    categoria?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_rh_procedimentosAvgOrderByAggregateInput = {
+    id?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type videos_rh_procedimentosMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    categoria?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_rh_procedimentosMinOrderByAggregateInput = {
+    id?: SortOrder
+    titulo?: SortOrder
+    descricao?: SortOrder
+    url?: SortOrder
+    categoria?: SortOrder
+    ordem?: SortOrder
+    ativo?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type videos_rh_procedimentosSumOrderByAggregateInput = {
+    id?: SortOrder
+    ordem?: SortOrder
   }
 
   export type videosCountOrderByAggregateInput = {
@@ -18023,17 +22798,6 @@ export namespace Prisma {
 
   export type videosSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type videos_assistidosCountOrderByAggregateInput = {
@@ -18067,20 +22831,6 @@ export namespace Prisma {
     id?: SortOrder
     usuario_id?: SortOrder
     video_id?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type videos_instaladorCountOrderByAggregateInput = {
@@ -18326,8 +23076,202 @@ export namespace Prisma {
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
   }
 
+  export type usuariosCreateNestedManyWithoutSetorInput = {
+    create?: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput> | usuariosCreateWithoutSetorInput[] | usuariosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutSetorInput | usuariosCreateOrConnectWithoutSetorInput[]
+    createMany?: usuariosCreateManySetorInputEnvelope
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+  }
+
+  export type videos_internosCreateNestedManyWithoutSetorInput = {
+    create?: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput> | videos_internosCreateWithoutSetorInput[] | videos_internosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutSetorInput | videos_internosCreateOrConnectWithoutSetorInput[]
+    createMany?: videos_internosCreateManySetorInputEnvelope
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+  }
+
+  export type usuariosUncheckedCreateNestedManyWithoutSetorInput = {
+    create?: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput> | usuariosCreateWithoutSetorInput[] | usuariosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutSetorInput | usuariosCreateOrConnectWithoutSetorInput[]
+    createMany?: usuariosCreateManySetorInputEnvelope
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+  }
+
+  export type videos_internosUncheckedCreateNestedManyWithoutSetorInput = {
+    create?: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput> | videos_internosCreateWithoutSetorInput[] | videos_internosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutSetorInput | videos_internosCreateOrConnectWithoutSetorInput[]
+    createMany?: videos_internosCreateManySetorInputEnvelope
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type usuariosUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput> | usuariosCreateWithoutSetorInput[] | usuariosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutSetorInput | usuariosCreateOrConnectWithoutSetorInput[]
+    upsert?: usuariosUpsertWithWhereUniqueWithoutSetorInput | usuariosUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: usuariosCreateManySetorInputEnvelope
+    set?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    disconnect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    delete?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    update?: usuariosUpdateWithWhereUniqueWithoutSetorInput | usuariosUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: usuariosUpdateManyWithWhereWithoutSetorInput | usuariosUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+  }
+
+  export type videos_internosUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput> | videos_internosCreateWithoutSetorInput[] | videos_internosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutSetorInput | videos_internosCreateOrConnectWithoutSetorInput[]
+    upsert?: videos_internosUpsertWithWhereUniqueWithoutSetorInput | videos_internosUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: videos_internosCreateManySetorInputEnvelope
+    set?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    disconnect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    delete?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    update?: videos_internosUpdateWithWhereUniqueWithoutSetorInput | videos_internosUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: videos_internosUpdateManyWithWhereWithoutSetorInput | videos_internosUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+  }
+
+  export type usuariosUncheckedUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput> | usuariosCreateWithoutSetorInput[] | usuariosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutSetorInput | usuariosCreateOrConnectWithoutSetorInput[]
+    upsert?: usuariosUpsertWithWhereUniqueWithoutSetorInput | usuariosUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: usuariosCreateManySetorInputEnvelope
+    set?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    disconnect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    delete?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    update?: usuariosUpdateWithWhereUniqueWithoutSetorInput | usuariosUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: usuariosUpdateManyWithWhereWithoutSetorInput | usuariosUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+  }
+
+  export type videos_internosUncheckedUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput> | videos_internosCreateWithoutSetorInput[] | videos_internosUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutSetorInput | videos_internosCreateOrConnectWithoutSetorInput[]
+    upsert?: videos_internosUpsertWithWhereUniqueWithoutSetorInput | videos_internosUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: videos_internosCreateManySetorInputEnvelope
+    set?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    disconnect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    delete?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    update?: videos_internosUpdateWithWhereUniqueWithoutSetorInput | videos_internosUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: videos_internosUpdateManyWithWhereWithoutSetorInput | videos_internosUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+  }
+
+  export type setoresCreateNestedOneWithoutUsuariosInput = {
+    create?: XOR<setoresCreateWithoutUsuariosInput, setoresUncheckedCreateWithoutUsuariosInput>
+    connectOrCreate?: setoresCreateOrConnectWithoutUsuariosInput
+    connect?: setoresWhereUniqueInput
+  }
+
+  export type videos_internosCreateNestedManyWithoutCriadorInput = {
+    create?: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput> | videos_internosCreateWithoutCriadorInput[] | videos_internosUncheckedCreateWithoutCriadorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutCriadorInput | videos_internosCreateOrConnectWithoutCriadorInput[]
+    createMany?: videos_internosCreateManyCriadorInputEnvelope
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+  }
+
+  export type videos_internosUncheckedCreateNestedManyWithoutCriadorInput = {
+    create?: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput> | videos_internosCreateWithoutCriadorInput[] | videos_internosUncheckedCreateWithoutCriadorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutCriadorInput | videos_internosCreateOrConnectWithoutCriadorInput[]
+    createMany?: videos_internosCreateManyCriadorInputEnvelope
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+  }
+
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type setoresUpdateOneWithoutUsuariosNestedInput = {
+    create?: XOR<setoresCreateWithoutUsuariosInput, setoresUncheckedCreateWithoutUsuariosInput>
+    connectOrCreate?: setoresCreateOrConnectWithoutUsuariosInput
+    upsert?: setoresUpsertWithoutUsuariosInput
+    disconnect?: setoresWhereInput | boolean
+    delete?: setoresWhereInput | boolean
+    connect?: setoresWhereUniqueInput
+    update?: XOR<XOR<setoresUpdateToOneWithWhereWithoutUsuariosInput, setoresUpdateWithoutUsuariosInput>, setoresUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type videos_internosUpdateManyWithoutCriadorNestedInput = {
+    create?: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput> | videos_internosCreateWithoutCriadorInput[] | videos_internosUncheckedCreateWithoutCriadorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutCriadorInput | videos_internosCreateOrConnectWithoutCriadorInput[]
+    upsert?: videos_internosUpsertWithWhereUniqueWithoutCriadorInput | videos_internosUpsertWithWhereUniqueWithoutCriadorInput[]
+    createMany?: videos_internosCreateManyCriadorInputEnvelope
+    set?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    disconnect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    delete?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    update?: videos_internosUpdateWithWhereUniqueWithoutCriadorInput | videos_internosUpdateWithWhereUniqueWithoutCriadorInput[]
+    updateMany?: videos_internosUpdateManyWithWhereWithoutCriadorInput | videos_internosUpdateManyWithWhereWithoutCriadorInput[]
+    deleteMany?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+  }
+
+  export type videos_internosUncheckedUpdateManyWithoutCriadorNestedInput = {
+    create?: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput> | videos_internosCreateWithoutCriadorInput[] | videos_internosUncheckedCreateWithoutCriadorInput[]
+    connectOrCreate?: videos_internosCreateOrConnectWithoutCriadorInput | videos_internosCreateOrConnectWithoutCriadorInput[]
+    upsert?: videos_internosUpsertWithWhereUniqueWithoutCriadorInput | videos_internosUpsertWithWhereUniqueWithoutCriadorInput[]
+    createMany?: videos_internosCreateManyCriadorInputEnvelope
+    set?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    disconnect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    delete?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
+    update?: videos_internosUpdateWithWhereUniqueWithoutCriadorInput | videos_internosUpdateWithWhereUniqueWithoutCriadorInput[]
+    updateMany?: videos_internosUpdateManyWithWhereWithoutCriadorInput | videos_internosUpdateManyWithWhereWithoutCriadorInput[]
+    deleteMany?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+  }
+
+  export type setoresCreateNestedOneWithoutVideos_internosInput = {
+    create?: XOR<setoresCreateWithoutVideos_internosInput, setoresUncheckedCreateWithoutVideos_internosInput>
+    connectOrCreate?: setoresCreateOrConnectWithoutVideos_internosInput
+    connect?: setoresWhereUniqueInput
+  }
+
+  export type usuariosCreateNestedOneWithoutVideos_criadosInput = {
+    create?: XOR<usuariosCreateWithoutVideos_criadosInput, usuariosUncheckedCreateWithoutVideos_criadosInput>
+    connectOrCreate?: usuariosCreateOrConnectWithoutVideos_criadosInput
+    connect?: usuariosWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type setoresUpdateOneWithoutVideos_internosNestedInput = {
+    create?: XOR<setoresCreateWithoutVideos_internosInput, setoresUncheckedCreateWithoutVideos_internosInput>
+    connectOrCreate?: setoresCreateOrConnectWithoutVideos_internosInput
+    upsert?: setoresUpsertWithoutVideos_internosInput
+    disconnect?: setoresWhereInput | boolean
+    delete?: setoresWhereInput | boolean
+    connect?: setoresWhereUniqueInput
+    update?: XOR<XOR<setoresUpdateToOneWithWhereWithoutVideos_internosInput, setoresUpdateWithoutVideos_internosInput>, setoresUncheckedUpdateWithoutVideos_internosInput>
+  }
+
+  export type usuariosUpdateOneWithoutVideos_criadosNestedInput = {
+    create?: XOR<usuariosCreateWithoutVideos_criadosInput, usuariosUncheckedCreateWithoutVideos_criadosInput>
+    connectOrCreate?: usuariosCreateOrConnectWithoutVideos_criadosInput
+    upsert?: usuariosUpsertWithoutVideos_criadosInput
+    disconnect?: usuariosWhereInput | boolean
+    delete?: usuariosWhereInput | boolean
+    connect?: usuariosWhereUniqueInput
+    update?: XOR<XOR<usuariosUpdateToOneWithWhereWithoutVideos_criadosInput, usuariosUpdateWithoutVideos_criadosInput>, usuariosUncheckedUpdateWithoutVideos_criadosInput>
   }
 
   export type carrosCreateNestedOneWithoutProdutosInput = {
@@ -18528,6 +23472,44 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -18537,6 +23519,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18551,6 +23543,35 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type carro_produtosCreateWithoutCarroInput = {
@@ -18732,6 +23753,375 @@ export namespace Prisma {
   export type carro_produtosUpdateManyWithWhereWithoutProdutoInput = {
     where: carro_produtosScalarWhereInput
     data: XOR<carro_produtosUpdateManyMutationInput, carro_produtosUncheckedUpdateManyWithoutProdutoInput>
+  }
+
+  export type usuariosCreateWithoutSetorInput = {
+    id?: bigint | number
+    username?: string | null
+    senha?: string | null
+    nome?: string | null
+    email?: string | null
+    permissao?: string | null
+    cpf?: string | null
+    telefone?: string | null
+    trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+    videos_criados?: videos_internosCreateNestedManyWithoutCriadorInput
+  }
+
+  export type usuariosUncheckedCreateWithoutSetorInput = {
+    id?: bigint | number
+    username?: string | null
+    senha?: string | null
+    nome?: string | null
+    email?: string | null
+    permissao?: string | null
+    cpf?: string | null
+    telefone?: string | null
+    trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+    videos_criados?: videos_internosUncheckedCreateNestedManyWithoutCriadorInput
+  }
+
+  export type usuariosCreateOrConnectWithoutSetorInput = {
+    where: usuariosWhereUniqueInput
+    create: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput>
+  }
+
+  export type usuariosCreateManySetorInputEnvelope = {
+    data: usuariosCreateManySetorInput | usuariosCreateManySetorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type videos_internosCreateWithoutSetorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+    criador?: usuariosCreateNestedOneWithoutVideos_criadosInput
+  }
+
+  export type videos_internosUncheckedCreateWithoutSetorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    criado_por?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_internosCreateOrConnectWithoutSetorInput = {
+    where: videos_internosWhereUniqueInput
+    create: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput>
+  }
+
+  export type videos_internosCreateManySetorInputEnvelope = {
+    data: videos_internosCreateManySetorInput | videos_internosCreateManySetorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usuariosUpsertWithWhereUniqueWithoutSetorInput = {
+    where: usuariosWhereUniqueInput
+    update: XOR<usuariosUpdateWithoutSetorInput, usuariosUncheckedUpdateWithoutSetorInput>
+    create: XOR<usuariosCreateWithoutSetorInput, usuariosUncheckedCreateWithoutSetorInput>
+  }
+
+  export type usuariosUpdateWithWhereUniqueWithoutSetorInput = {
+    where: usuariosWhereUniqueInput
+    data: XOR<usuariosUpdateWithoutSetorInput, usuariosUncheckedUpdateWithoutSetorInput>
+  }
+
+  export type usuariosUpdateManyWithWhereWithoutSetorInput = {
+    where: usuariosScalarWhereInput
+    data: XOR<usuariosUpdateManyMutationInput, usuariosUncheckedUpdateManyWithoutSetorInput>
+  }
+
+  export type usuariosScalarWhereInput = {
+    AND?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+    OR?: usuariosScalarWhereInput[]
+    NOT?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+    id?: BigIntFilter<"usuarios"> | bigint | number
+    username?: StringNullableFilter<"usuarios"> | string | null
+    senha?: StringNullableFilter<"usuarios"> | string | null
+    nome?: StringNullableFilter<"usuarios"> | string | null
+    email?: StringNullableFilter<"usuarios"> | string | null
+    permissao?: StringNullableFilter<"usuarios"> | string | null
+    cpf?: StringNullableFilter<"usuarios"> | string | null
+    telefone?: StringNullableFilter<"usuarios"> | string | null
+    trocar_senha?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    role?: EnumUserRoleFilter<"usuarios"> | $Enums.UserRole
+    setor_id?: BigIntNullableFilter<"usuarios"> | bigint | number | null
+    avatar_url?: StringNullableFilter<"usuarios"> | string | null
+    ultimo_acesso?: DateTimeNullableFilter<"usuarios"> | Date | string | null
+  }
+
+  export type videos_internosUpsertWithWhereUniqueWithoutSetorInput = {
+    where: videos_internosWhereUniqueInput
+    update: XOR<videos_internosUpdateWithoutSetorInput, videos_internosUncheckedUpdateWithoutSetorInput>
+    create: XOR<videos_internosCreateWithoutSetorInput, videos_internosUncheckedCreateWithoutSetorInput>
+  }
+
+  export type videos_internosUpdateWithWhereUniqueWithoutSetorInput = {
+    where: videos_internosWhereUniqueInput
+    data: XOR<videos_internosUpdateWithoutSetorInput, videos_internosUncheckedUpdateWithoutSetorInput>
+  }
+
+  export type videos_internosUpdateManyWithWhereWithoutSetorInput = {
+    where: videos_internosScalarWhereInput
+    data: XOR<videos_internosUpdateManyMutationInput, videos_internosUncheckedUpdateManyWithoutSetorInput>
+  }
+
+  export type videos_internosScalarWhereInput = {
+    AND?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+    OR?: videos_internosScalarWhereInput[]
+    NOT?: videos_internosScalarWhereInput | videos_internosScalarWhereInput[]
+    id?: BigIntFilter<"videos_internos"> | bigint | number
+    titulo?: StringFilter<"videos_internos"> | string
+    descricao?: StringNullableFilter<"videos_internos"> | string | null
+    url?: StringFilter<"videos_internos"> | string
+    thumbnail?: StringNullableFilter<"videos_internos"> | string | null
+    setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    ordem?: IntFilter<"videos_internos"> | number
+    ativo?: BoolFilter<"videos_internos"> | boolean
+    data_criacao?: DateTimeFilter<"videos_internos"> | Date | string
+  }
+
+  export type setoresCreateWithoutUsuariosInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    videos_internos?: videos_internosCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresUncheckedCreateWithoutUsuariosInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    videos_internos?: videos_internosUncheckedCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresCreateOrConnectWithoutUsuariosInput = {
+    where: setoresWhereUniqueInput
+    create: XOR<setoresCreateWithoutUsuariosInput, setoresUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type videos_internosCreateWithoutCriadorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+    setor?: setoresCreateNestedOneWithoutVideos_internosInput
+  }
+
+  export type videos_internosUncheckedCreateWithoutCriadorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    setor_id?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_internosCreateOrConnectWithoutCriadorInput = {
+    where: videos_internosWhereUniqueInput
+    create: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput>
+  }
+
+  export type videos_internosCreateManyCriadorInputEnvelope = {
+    data: videos_internosCreateManyCriadorInput | videos_internosCreateManyCriadorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type setoresUpsertWithoutUsuariosInput = {
+    update: XOR<setoresUpdateWithoutUsuariosInput, setoresUncheckedUpdateWithoutUsuariosInput>
+    create: XOR<setoresCreateWithoutUsuariosInput, setoresUncheckedCreateWithoutUsuariosInput>
+    where?: setoresWhereInput
+  }
+
+  export type setoresUpdateToOneWithWhereWithoutUsuariosInput = {
+    where?: setoresWhereInput
+    data: XOR<setoresUpdateWithoutUsuariosInput, setoresUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type setoresUpdateWithoutUsuariosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos_internos?: videos_internosUpdateManyWithoutSetorNestedInput
+  }
+
+  export type setoresUncheckedUpdateWithoutUsuariosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos_internos?: videos_internosUncheckedUpdateManyWithoutSetorNestedInput
+  }
+
+  export type videos_internosUpsertWithWhereUniqueWithoutCriadorInput = {
+    where: videos_internosWhereUniqueInput
+    update: XOR<videos_internosUpdateWithoutCriadorInput, videos_internosUncheckedUpdateWithoutCriadorInput>
+    create: XOR<videos_internosCreateWithoutCriadorInput, videos_internosUncheckedCreateWithoutCriadorInput>
+  }
+
+  export type videos_internosUpdateWithWhereUniqueWithoutCriadorInput = {
+    where: videos_internosWhereUniqueInput
+    data: XOR<videos_internosUpdateWithoutCriadorInput, videos_internosUncheckedUpdateWithoutCriadorInput>
+  }
+
+  export type videos_internosUpdateManyWithWhereWithoutCriadorInput = {
+    where: videos_internosScalarWhereInput
+    data: XOR<videos_internosUpdateManyMutationInput, videos_internosUncheckedUpdateManyWithoutCriadorInput>
+  }
+
+  export type setoresCreateWithoutVideos_internosInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    usuarios?: usuariosCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresUncheckedCreateWithoutVideos_internosInput = {
+    id?: bigint | number
+    nome: string
+    descricao?: string | null
+    data_criacao?: Date | string
+    usuarios?: usuariosUncheckedCreateNestedManyWithoutSetorInput
+  }
+
+  export type setoresCreateOrConnectWithoutVideos_internosInput = {
+    where: setoresWhereUniqueInput
+    create: XOR<setoresCreateWithoutVideos_internosInput, setoresUncheckedCreateWithoutVideos_internosInput>
+  }
+
+  export type usuariosCreateWithoutVideos_criadosInput = {
+    id?: bigint | number
+    username?: string | null
+    senha?: string | null
+    nome?: string | null
+    email?: string | null
+    permissao?: string | null
+    cpf?: string | null
+    telefone?: string | null
+    trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+    setor?: setoresCreateNestedOneWithoutUsuariosInput
+  }
+
+  export type usuariosUncheckedCreateWithoutVideos_criadosInput = {
+    id?: bigint | number
+    username?: string | null
+    senha?: string | null
+    nome?: string | null
+    email?: string | null
+    permissao?: string | null
+    cpf?: string | null
+    telefone?: string | null
+    trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    setor_id?: bigint | number | null
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+  }
+
+  export type usuariosCreateOrConnectWithoutVideos_criadosInput = {
+    where: usuariosWhereUniqueInput
+    create: XOR<usuariosCreateWithoutVideos_criadosInput, usuariosUncheckedCreateWithoutVideos_criadosInput>
+  }
+
+  export type setoresUpsertWithoutVideos_internosInput = {
+    update: XOR<setoresUpdateWithoutVideos_internosInput, setoresUncheckedUpdateWithoutVideos_internosInput>
+    create: XOR<setoresCreateWithoutVideos_internosInput, setoresUncheckedCreateWithoutVideos_internosInput>
+    where?: setoresWhereInput
+  }
+
+  export type setoresUpdateToOneWithWhereWithoutVideos_internosInput = {
+    where?: setoresWhereInput
+    data: XOR<setoresUpdateWithoutVideos_internosInput, setoresUncheckedUpdateWithoutVideos_internosInput>
+  }
+
+  export type setoresUpdateWithoutVideos_internosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: usuariosUpdateManyWithoutSetorNestedInput
+  }
+
+  export type setoresUncheckedUpdateWithoutVideos_internosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: usuariosUncheckedUpdateManyWithoutSetorNestedInput
+  }
+
+  export type usuariosUpsertWithoutVideos_criadosInput = {
+    update: XOR<usuariosUpdateWithoutVideos_criadosInput, usuariosUncheckedUpdateWithoutVideos_criadosInput>
+    create: XOR<usuariosCreateWithoutVideos_criadosInput, usuariosUncheckedCreateWithoutVideos_criadosInput>
+    where?: usuariosWhereInput
+  }
+
+  export type usuariosUpdateToOneWithWhereWithoutVideos_criadosInput = {
+    where?: usuariosWhereInput
+    data: XOR<usuariosUpdateWithoutVideos_criadosInput, usuariosUncheckedUpdateWithoutVideos_criadosInput>
+  }
+
+  export type usuariosUpdateWithoutVideos_criadosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    permissao?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    setor?: setoresUpdateOneWithoutUsuariosNestedInput
+  }
+
+  export type usuariosUncheckedUpdateWithoutVideos_criadosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    permissao?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type carrosCreateWithoutProdutosInput = {
@@ -18930,6 +24320,164 @@ export namespace Prisma {
 
   export type carro_produtosUncheckedUpdateManyWithoutProdutoInput = {
     carro_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type usuariosCreateManySetorInput = {
+    id?: bigint | number
+    username?: string | null
+    senha?: string | null
+    nome?: string | null
+    email?: string | null
+    permissao?: string | null
+    cpf?: string | null
+    telefone?: string | null
+    trocar_senha?: bigint | number | null
+    role?: $Enums.UserRole
+    avatar_url?: string | null
+    ultimo_acesso?: Date | string | null
+  }
+
+  export type videos_internosCreateManySetorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    criado_por?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type usuariosUpdateWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    permissao?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videos_criados?: videos_internosUpdateManyWithoutCriadorNestedInput
+  }
+
+  export type usuariosUncheckedUpdateWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    permissao?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    videos_criados?: videos_internosUncheckedUpdateManyWithoutCriadorNestedInput
+  }
+
+  export type usuariosUncheckedUpdateManyWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    permissao?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    trocar_senha?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar_url?: NullableStringFieldUpdateOperationsInput | string | null
+    ultimo_acesso?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type videos_internosUpdateWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    criador?: usuariosUpdateOneWithoutVideos_criadosNestedInput
+  }
+
+  export type videos_internosUncheckedUpdateWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_internosUncheckedUpdateManyWithoutSetorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_internosCreateManyCriadorInput = {
+    id?: bigint | number
+    titulo: string
+    descricao?: string | null
+    url: string
+    thumbnail?: string | null
+    setor_id?: bigint | number | null
+    ordem?: number
+    ativo?: boolean
+    data_criacao?: Date | string
+  }
+
+  export type videos_internosUpdateWithoutCriadorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    setor?: setoresUpdateOneWithoutVideos_internosNestedInput
+  }
+
+  export type videos_internosUncheckedUpdateWithoutCriadorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type videos_internosUncheckedUpdateManyWithoutCriadorInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ordem?: IntFieldUpdateOperationsInput | number
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

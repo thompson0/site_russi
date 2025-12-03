@@ -8,7 +8,9 @@ import {
   UsersIcon,
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  BuildingOffice2Icon,
+  AcademicCapIcon
 } from "@heroicons/react/24/outline";
 
 import { Car } from "lucide-react";
@@ -43,8 +45,10 @@ export function AppSidebar() {
     { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon },
     { title: "Carros", url: "/admin/catalogo/carros", icon: Car },
     { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
-    { title: "Vídeos", url: "/admin/videos", icon: PlayCircleIcon },
-    { title: "Perfil", url: "/admin/user", icon: UsersIcon },
+    { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon },
+    { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon },
+    { title: "Setores", url: "/admin/setores", icon: BuildingOffice2Icon },
+    { title: "Usuários", url: "/admin/user", icon: UsersIcon },
   ];
 
   const bottomItems = [

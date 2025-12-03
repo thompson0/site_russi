@@ -13,6 +13,9 @@ export const getUserFromCookie = cache(async function getUserFromCookie() {
     const decoded = verifyToken(token, process.env.JWT_SECRET);
     const user = await prisma.usuarios.findUnique({
       where: { id: decoded.id },
+      include: {
+        setor: true,
+      },
     });
     return user;
   } catch (err) {
@@ -20,3 +23,30 @@ export const getUserFromCookie = cache(async function getUserFromCookie() {
     return null;
   }
 });
+
+export function hasRole(user, allowedRoles) {
+  if (!user || !user.role) return false;
+  return allowedRoles.includes(user.role);
+}
+
+export function canManageUser(currentUser, targetUserRole) {
+  if (!currentUser) return false;
+  
+  if (currentUser.role === 'admin') return true;
+  
+  if (currentUser.role === 'supervisor' && targetUserRole === 'vendedor_interno') {
+    return true;
+  }
+  
+  return false;
+}
+
+export function canAccessSectorVideos(user, videoSetorId) {
+  if (!user) return false;
+  
+  if (user.role === 'admin') return true;
+  
+  if (!videoSetorId) return true;
+  
+  return user.setor_id === videoSetorId;
+}

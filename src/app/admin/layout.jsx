@@ -7,6 +7,8 @@ import NavBar from "@/components/Login/NavBar";
 
 export const dynamic = "force-dynamic";
 
+const ALLOWED_ADMIN_ROLES = ['admin', 'supervisor'];
+
 export default async function AdminLayout({ children }) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
@@ -15,7 +17,9 @@ export default async function AdminLayout({ children }) {
 
     const decoded = verifyToken(token);
     if (!decoded) redirect("/login");
-    if (decoded.permissao !== "admin") redirect("/user");
+    
+    const hasAdminAccess = decoded.permissao === "admin" || ALLOWED_ADMIN_ROLES.includes(decoded.role);
+    if (!hasAdminAccess) redirect("/interno");
 
     return (
         <div className="min-h-screen bg-background">

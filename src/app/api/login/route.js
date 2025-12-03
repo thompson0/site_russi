@@ -9,6 +9,9 @@ export async function POST(req) {
 
   const user = await prisma.usuarios.findUnique({
     where: { email },
+    include: {
+      setor: true,
+    },
   });
 
   if (!user) {
@@ -58,7 +61,17 @@ export async function POST(req) {
     });
   }
 
-  const token = signToken({ id: Number(user.id), permissao: user.permissao });
+  await prisma.usuarios.update({
+    where: { id: user.id },
+    data: { ultimo_acesso: new Date() },
+  });
+
+  const token = signToken({ 
+    id: Number(user.id), 
+    permissao: user.permissao,
+    role: user.role,
+    setor_id: user.setor_id ? Number(user.setor_id) : null,
+  });
 
   const cookie = serialize("token", token, {
     httpOnly: true,
@@ -69,7 +82,13 @@ export async function POST(req) {
   });
 
   return new Response(
-    JSON.stringify({ message: "Login feito com sucesso", permissao: user.permissao }),
+    JSON.stringify({ 
+      message: "Login feito com sucesso", 
+      permissao: user.permissao,
+      role: user.role,
+      setor: user.setor?.nome || null,
+      nome: user.nome,
+    }),
     {
       status: 200,
       headers: {

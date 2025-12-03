@@ -1,12 +1,25 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { getUserFromCookie, hasRole, canManageUser } from "@/lib/auth";
 
 export async function POST(req) {
   try {
-    const { nome, email, senha, permissao } = await req.json();
+    const currentUser = await getUserFromCookie();
+    
+    if (!currentUser || !hasRole(currentUser, ['admin', 'supervisor'])) {
+      return new Response("Sem permissão", { status: 403 });
+    }
+
+    const { nome, email, senha, permissao, role, setor_id } = await req.json();
 
     if (!nome || !email || !senha) {
       return new Response("Campos obrigatórios ausentes", { status: 400 });
+    }
+
+    const targetRole = role || 'vendedor_interno';
+
+    if (!canManageUser(currentUser, targetRole)) {
+      return new Response("Sem permissão para criar usuário com este cargo", { status: 403 });
     }
 
     const existing = await prisma.usuarios.findFirst({ where: { email } });
@@ -16,7 +29,17 @@ export async function POST(req) {
 
     const senhaHash = await bcrypt.hash(senha, 10);
     const novo = await prisma.usuarios.create({
-      data: { nome, email, senha: senhaHash, permissao: permissao || "user" },
+      data: { 
+        nome, 
+        email, 
+        senha: senhaHash, 
+        permissao: permissao || "user",
+        role: targetRole,
+        setor_id: setor_id ? BigInt(setor_id) : null,
+      },
+      include: {
+        setor: true,
+      },
     });
 
     const safe = JSON.parse(
