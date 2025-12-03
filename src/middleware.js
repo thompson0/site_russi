@@ -3,17 +3,16 @@ import { jwtVerify } from "jose";
 
 const ROLE_ROUTES = {
   '/admin/usuarios': ['admin', 'supervisor'],
-  '/admin/setores': ['admin'],
   '/admin/videos-internos': ['admin', 'supervisor'],
   '/admin/rh': ['admin'],
-  '/admin': ['admin', 'supervisor', 'vendedor_interno', 'instalador'],
+  '/admin': ['admin', 'supervisor'],
   '/user': ['admin', 'supervisor', 'vendedor_interno', 'instalador'],
   '/interno': ['admin', 'supervisor', 'vendedor_interno', 'instalador'],
 };
 
 async function verifyJWT(token) {
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+    const secret = new TextEncoder().encode(process.env.SESSION_SECRET);
     const { payload } = await jwtVerify(token, secret);
     return payload;
   } catch (error) {

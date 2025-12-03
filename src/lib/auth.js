@@ -10,7 +10,7 @@ export const getUserFromCookie = cache(async function getUserFromCookie() {
   if (!token) return null;
 
   try {
-    const decoded = verifyToken(token, process.env.JWT_SECRET);
+    const decoded = verifyToken(token);
     const user = await prisma.usuarios.findUnique({
       where: { id: decoded.id },
       include: {
