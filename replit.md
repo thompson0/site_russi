@@ -122,16 +122,8 @@ npm run db:reset
 ### Seed Data Included
 - **4 Setores**: Comercial, Instalação, Administrativo, Logística
 - **5 Usuários**: 1 admin, 2 supervisors, 1 vendedor, 1 instalador
-- **8 Montadoras**: Chevrolet, Fiat, Volkswagen, Ford, Toyota, Honda, Hyundai, Jeep
-- **8 Carros**: Sample vehicles from each manufacturer
-- **10 Produtos**: Sample automotive accessories
-- **18 Associações**: Product-vehicle relationships
-- **5 Contatos**: Department contacts with phone/email
-- **5 FAQs**: Frequently asked questions
-- **4 Manuais**: Training and procedure manuals
-- **3 Vídeos RH**: HR procedure videos
-- **4 Vídeos Internos**: Internal training videos per sector
-- **2 Vídeos Públicos**: Public promotional videos
+
+**Nota**: Montadoras, carros, produtos e outros dados devem ser gerenciados pelo painel admin.
 
 ## Deployment
 The project is configured for Replit autoscale deployment:
