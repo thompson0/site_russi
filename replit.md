@@ -192,7 +192,15 @@ The application uses JWT-based authentication with:
 
 ## Recent Changes (2025-12-04)
 
-### Catalog Read-Only Access for Vendedor and Supervisor (NEW)
+### Catalog Routes Fix for Vendedor and Supervisor (LATEST)
+- Criadas novas rotas de catálogo acessíveis para vendedores e supervisores:
+  - `/catalogo/produtos/[carroId]` - Lista produtos de um carro específico
+  - `/catalogo/produto/[id]` - Detalhes de um produto individual
+- Links atualizados para direcionar para rotas públicas em vez de rotas admin
+- Componentes AllCarros e ProdutoCard agora usam `/catalogo/*` em vez de `/admin/*`
+- SAC adicionado às rotas públicas no middleware
+
+### Catalog Read-Only Access for Vendedor and Supervisor
 - Vendedor e Supervisor agora têm acesso **somente leitura** ao catálogo (Montadoras, Carros, Produtos)
 - Apenas Admin pode criar, editar ou excluir itens do catálogo
 - Botões de adicionar, editar e excluir são ocultados para usuários não-admin
