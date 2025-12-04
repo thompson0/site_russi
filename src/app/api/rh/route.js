@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getUserFromCookie, hasRole } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(request) {
   try {
     const user = await getUserFromCookie();
     
@@ -9,12 +9,26 @@ export async function GET() {
       return Response.json({ error: "Não autenticado" }, { status: 401 });
     }
 
+    const url = new URL(request.url);
+    const showAll = url.searchParams.get('all') === 'true';
+    const isAdmin = user.role === 'admin';
+
     const videos = await prisma.videos_rh_procedimentos.findMany({
-      where: { ativo: true },
+      where: showAll && isAdmin ? {} : { ativo: true },
       orderBy: [{ categoria: 'asc' }, { ordem: 'asc' }],
     });
 
-    return Response.json(videos);
+    const formattedVideos = videos.map(v => ({
+      id: Number(v.id),
+      titulo: v.titulo,
+      descricao: v.descricao,
+      url: v.url,
+      categoria: v.categoria,
+      ordem: v.ordem,
+      ativo: v.ativo,
+    }));
+
+    return Response.json(formattedVideos);
   } catch (error) {
     console.error("Erro ao buscar vídeos RH:", error);
     return Response.json({ error: "Erro ao buscar vídeos" }, { status: 500 });
@@ -45,7 +59,15 @@ export async function POST(request) {
       },
     });
 
-    return Response.json(video, { status: 201 });
+    return Response.json({
+      id: Number(video.id),
+      titulo: video.titulo,
+      descricao: video.descricao,
+      url: video.url,
+      categoria: video.categoria,
+      ordem: video.ordem,
+      ativo: video.ativo,
+    }, { status: 201 });
   } catch (error) {
     console.error("Erro ao criar vídeo RH:", error);
     return Response.json({ error: "Erro ao criar vídeo" }, { status: 500 });

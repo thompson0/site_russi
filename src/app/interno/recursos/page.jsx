@@ -63,84 +63,6 @@ const STATIC_FAQ = [
   }
 ];
 
-const STATIC_MANUAIS = [
-  {
-    id: 1,
-    titulo: "Manual do Colaborador",
-    descricao: "Guia completo com todas as políticas, procedimentos e informações importantes para colaboradores da Russi Acessórios.",
-    conteudo: "Este manual contém informações sobre código de conduta, políticas de RH, benefícios, procedimentos internos e orientações gerais."
-  },
-  {
-    id: 2,
-    titulo: "Guia de Uso do Sistema ERP",
-    descricao: "Instruções para utilização do sistema de gestão empresarial utilizado na empresa.",
-    conteudo: "Aprenda a navegar pelo sistema, realizar consultas, emitir relatórios e executar as principais operações do dia a dia."
-  },
-  {
-    id: 3,
-    titulo: "Procedimentos de Segurança",
-    descricao: "Normas e procedimentos de segurança do trabalho aplicáveis a todos os setores.",
-    conteudo: "Orientações sobre uso de EPIs, procedimentos de emergência, prevenção de acidentes e boas práticas de segurança."
-  },
-  {
-    id: 4,
-    titulo: "Manual de Instalação de Acessórios",
-    descricao: "Guia técnico com procedimentos padrão para instalação de acessórios automotivos.",
-    conteudo: "Procedimentos técnicos, ferramentas necessárias, cuidados especiais e dicas para instalação correta de cada tipo de acessório."
-  }
-];
-
-const STATIC_CONTATOS = [
-  {
-    id: 1,
-    departamento: "Recursos Humanos",
-    colaborador: "Departamento de RH",
-    ramal: "201",
-    telefone: "(11) 1234-5678",
-    email: "rh@russi.com.br"
-  },
-  {
-    id: 2,
-    departamento: "Comercial",
-    colaborador: "Equipe Comercial",
-    ramal: "202",
-    telefone: "(11) 1234-5679",
-    email: "comercial@russi.com.br"
-  },
-  {
-    id: 3,
-    departamento: "Instalação",
-    colaborador: "Coordenação de Instalação",
-    ramal: "203",
-    telefone: "(11) 1234-5680",
-    email: "instalacao@russi.com.br"
-  },
-  {
-    id: 4,
-    departamento: "Administrativo",
-    colaborador: "Departamento Administrativo",
-    ramal: "204",
-    telefone: "(11) 1234-5681",
-    email: "administrativo@russi.com.br"
-  },
-  {
-    id: 5,
-    departamento: "TI / Suporte",
-    colaborador: "Equipe de Tecnologia",
-    ramal: "205",
-    telefone: "(11) 1234-5682",
-    email: "ti@russi.com.br"
-  },
-  {
-    id: 6,
-    departamento: "Logística",
-    colaborador: "Coordenação Logística",
-    ramal: "206",
-    telefone: "(11) 1234-5683",
-    email: "logistica@russi.com.br"
-  }
-];
-
 function QuickAccessCard({ icon: Icon, title, description, color, onClick, count }) {
   const colorClasses = {
     purple: "from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600",
@@ -382,20 +304,29 @@ function EmptyState({ icon: Icon, title, description }) {
 export default function RecursosPage() {
   const [activeSection, setActiveSection] = useState(null);
   const [rhVideos, setRhVideos] = useState([]);
+  const [manuais, setManuais] = useState([]);
+  const [contatos, setContatos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchVideos() {
+    async function fetchData() {
       try {
-        const rhRes = await fetch("/api/rh");
+        const [rhRes, manuaisRes, contatosRes] = await Promise.all([
+          fetch("/api/rh"),
+          fetch("/api/manuais"),
+          fetch("/api/contatos")
+        ]);
+
         if (rhRes.ok) setRhVideos(await rhRes.json());
+        if (manuaisRes.ok) setManuais(await manuaisRes.json());
+        if (contatosRes.ok) setContatos(await contatosRes.json());
       } catch (error) {
-        console.error("Erro ao buscar vídeos:", error);
+        console.error("Erro ao buscar dados:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchVideos();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -454,7 +385,7 @@ export default function RecursosPage() {
             description="Documentação de treinamento e guias do sistema"
             color="green"
             onClick={() => setActiveSection("manuais")}
-            count={STATIC_MANUAIS.length}
+            count={manuais.length}
           />
           <QuickAccessCard
             icon={HelpCircle}
@@ -470,7 +401,7 @@ export default function RecursosPage() {
             description="Lista completa dos departamentos e contatos"
             color="orange"
             onClick={() => setActiveSection("contatos")}
-            count={STATIC_CONTATOS.length}
+            count={contatos.length}
           />
         </div>
       )}
@@ -519,11 +450,19 @@ export default function RecursosPage() {
             subtitle="Documentação de treinamento e guias técnicos"
             color="green"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {STATIC_MANUAIS.map((manual) => (
-              <ManualCard key={manual.id} manual={manual} />
-            ))}
-          </div>
+          {manuais.length === 0 ? (
+            <EmptyState 
+              icon={FileText}
+              title="Nenhum manual disponível"
+              description="Os manuais e apostilas serão adicionados em breve."
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {manuais.map((manual) => (
+                <ManualCard key={manual.id} manual={manual} />
+              ))}
+            </div>
+          )}
         </section>
       )}
 
@@ -551,11 +490,19 @@ export default function RecursosPage() {
             subtitle="Lista completa dos departamentos"
             color="orange"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STATIC_CONTATOS.map((contato) => (
-              <ContatoCard key={contato.id} contato={contato} />
-            ))}
-          </div>
+          {contatos.length === 0 ? (
+            <EmptyState 
+              icon={Phone}
+              title="Nenhum contato disponível"
+              description="Os contatos dos departamentos serão adicionados em breve."
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {contatos.map((contato) => (
+                <ContatoCard key={contato.id} contato={contato} />
+              ))}
+            </div>
+          )}
         </section>
       )}
 

@@ -9,7 +9,9 @@ import {
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
   ChevronRightIcon,
-  AcademicCapIcon
+  AcademicCapIcon,
+  PhoneIcon,
+  DocumentTextIcon
 } from "@heroicons/react/24/outline";
 
 import { Car } from "lucide-react";
@@ -46,6 +48,8 @@ export function AppSidebar() {
     { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
     { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon },
     { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon },
+    { title: "RH e Materiais", url: "/admin/rh", icon: DocumentTextIcon },
+    { title: "Ramais", url: "/admin/ramais", icon: PhoneIcon },
     { title: "Usuários", url: "/admin/user", icon: UsersIcon },
   ];
 
