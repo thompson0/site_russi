@@ -2,38 +2,38 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET() {
   try {
     const montadoras = await prisma.montadoras.findMany({
-      select: { id: true, nome: true, logo_url: true },
       orderBy: { nome: 'asc' },
     });
 
-    const montadorasComBase64 = montadoras.map((m) => {
+    const montadorasFormatadas = montadoras.map((m) => {
       let logo = m.logo_url;
 
       if (m.logo_url && Buffer.isBuffer(m.logo_url)) {
-        logo = m.logo_url.toString("base64");
+        logo = `data:image/png;base64,${m.logo_url.toString("base64")}`;
       }
 
       return {
-        id: m.id,
+        id: Number(m.id),
         nome: m.nome,
-        logo_url: logo,
+        logo_url: logo || null,
       };
     });
 
     return new Response(
-      JSON.stringify(
-        montadorasComBase64,
-        (_, v) => (typeof v === "bigint" ? Number(v) : v)
-      ),
+      JSON.stringify(montadorasFormatadas),
       {
+        status: 200,
         headers: {
-          "Cache-Control": "no-store",
           "Content-Type": "application/json",
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          "Pragma": "no-cache",
+          "Expires": "0",
         },
       }
     );
