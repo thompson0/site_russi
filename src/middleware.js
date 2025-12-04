@@ -5,14 +5,7 @@ const ROLE_ROUTES = {
   '/admin/usuarios': ['admin', 'supervisor'],
   '/admin/videos-internos': ['admin', 'supervisor'],
   '/admin/rh': ['admin'],
-  '/admin/ramais': ['admin'],
-  '/admin/videos': ['admin'],
-  '/admin/user': ['admin', 'supervisor'],
-  '/admin/montadoras': ['admin', 'supervisor', 'vendedor_interno'],
-  '/admin/catalogo': ['admin', 'supervisor', 'vendedor_interno'],
-  '/admin/produtos': ['admin', 'supervisor', 'vendedor_interno'],
-  '/admin/produto': ['admin', 'supervisor', 'vendedor_interno'],
-  '/admin': ['admin', 'supervisor', 'vendedor_interno'],
+  '/admin': ['admin', 'supervisor'],
   '/user': ['admin', 'supervisor', 'vendedor_interno', 'instalador'],
   '/interno': ['admin', 'supervisor', 'vendedor_interno', 'instalador'],
 };
@@ -66,9 +59,7 @@ export async function middleware(request) {
         if (userRole === 'instalador') {
           return NextResponse.redirect(new URL('/interno/treinamentos', request.url));
         } else if (userRole === 'vendedor_interno') {
-          return NextResponse.redirect(new URL('/admin', request.url));
-        } else if (userRole === 'supervisor') {
-          return NextResponse.redirect(new URL('/admin', request.url));
+          return NextResponse.redirect(new URL('/interno', request.url));
         }
         return NextResponse.redirect(new URL('/login', request.url));
       }
