@@ -31,6 +31,7 @@ export default function VideosInternosPage() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [editingVideo, setEditingVideo] = useState(null);
+  const [filterSetor, setFilterSetor] = useState("all");
   const [form, setForm] = useState({ 
     titulo: "", 
     descricao: "", 
@@ -45,7 +46,7 @@ export default function VideosInternosPage() {
   async function fetchData() {
     try {
       const [videosRes, setoresRes] = await Promise.all([
-        fetch("/api/videos-internos"),
+        fetch("/api/videos-internos?all=true"),
         fetch("/api/setores"),
       ]);
 
@@ -62,8 +63,17 @@ export default function VideosInternosPage() {
     fetchData();
   }, []);
 
+  const filteredVideos = filterSetor === "all" 
+    ? videos 
+    : videos.filter(v => v.setor_id?.toString() === filterSetor);
+
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    if (!form.setor_id) {
+      alert("Por favor, selecione um setor para o vídeo.");
+      return;
+    }
     
     const url = editingVideo ? `/api/videos-internos/${editingVideo.id}` : "/api/videos-internos";
     const method = editingVideo ? "PUT" : "POST";
@@ -72,7 +82,7 @@ export default function VideosInternosPage() {
       method,
       body: JSON.stringify({
         ...form,
-        setor_id: form.setor_id || null,
+        setor_id: form.setor_id,
       }),
     }, {
       refresh: false,
@@ -153,14 +163,36 @@ export default function VideosInternosPage() {
   return (
     <div className="p-6">
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <GraduationCap className="w-6 h-6" />
-            Vídeos de Treinamento Interno
-          </CardTitle>
-          <Button onClick={openCreateDialog} size="icon">
-            <PlusSquare />
-          </Button>
+        <CardHeader className="flex flex-col gap-4">
+          <div className="flex flex-row items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <GraduationCap className="w-6 h-6" />
+              Vídeos de Treinamento Interno
+            </CardTitle>
+            <Button onClick={openCreateDialog} size="icon">
+              <PlusSquare />
+            </Button>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <Label className="text-sm font-medium">Filtrar por setor:</Label>
+            <Select value={filterSetor} onValueChange={setFilterSetor}>
+              <SelectTrigger className="w-[200px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos os setores</SelectItem>
+                {setores.map((setor) => (
+                  <SelectItem key={setor.id} value={setor.id.toString()}>
+                    {setor.nome}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <span className="text-sm text-muted-foreground">
+              {filteredVideos.length} vídeo(s)
+            </span>
+          </div>
         </CardHeader>
 
         <CardContent>
@@ -168,13 +200,13 @@ export default function VideosInternosPage() {
             <div className="flex items-center justify-center py-8">
               <div className="w-8 h-8 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
             </div>
-          ) : videos.length === 0 ? (
+          ) : filteredVideos.length === 0 ? (
             <p className="text-center text-muted-foreground py-8">
-              Nenhum vídeo cadastrado
+              {filterSetor === "all" ? "Nenhum vídeo cadastrado" : "Nenhum vídeo para este setor"}
             </p>
           ) : (
             <div className="grid gap-4">
-              {videos.map((video) => (
+              {filteredVideos.map((video) => (
                 <div
                   key={video.id}
                   className={`flex items-center justify-between p-4 border rounded-lg ${!video.ativo ? 'opacity-50' : ''}`}
@@ -286,16 +318,16 @@ export default function VideosInternosPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="setor">Setor</Label>
+              <Label htmlFor="setor">Setor *</Label>
               <Select
-                value={form.setor_id || "all"}
-                onValueChange={(value) => setForm({ ...form, setor_id: value === "all" ? "" : value })}
+                value={form.setor_id || ""}
+                onValueChange={(value) => setForm({ ...form, setor_id: value })}
+                required
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione o setor (opcional)" />
+                <SelectTrigger className={!form.setor_id ? "border-red-500/50" : ""}>
+                  <SelectValue placeholder="Selecione o setor (obrigatório)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Todos os setores</SelectItem>
                   {setores.map((setor) => (
                     <SelectItem key={setor.id} value={setor.id.toString()}>
                       {setor.nome}
@@ -303,6 +335,9 @@ export default function VideosInternosPage() {
                   ))}
                 </SelectContent>
               </Select>
+              {!form.setor_id && (
+                <p className="text-xs text-red-500">Selecione um setor para o vídeo</p>
+              )}
             </div>
 
             <div className="grid grid-cols-2 gap-4">

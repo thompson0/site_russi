@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getUserFromCookie, hasRole, canAccessSectorVideos } from "@/lib/auth";
+import { getUserFromCookie, hasRole } from "@/lib/auth";
 
 export async function GET(request) {
   try {
@@ -11,24 +11,34 @@ export async function GET(request) {
 
     const { searchParams } = new URL(request.url);
     const setorId = searchParams.get('setor_id');
+    const showAll = searchParams.get('all') === 'true';
 
-    let whereClause = { ativo: true };
+    let whereClause = {};
 
     if (user.role === 'admin') {
-      if (setorId) {
+      if (!showAll) {
+        whereClause.ativo = true;
+      }
+      if (setorId && setorId !== 'all') {
         whereClause.setor_id = BigInt(setorId);
       }
+    } else if (user.role === 'supervisor') {
+      whereClause.ativo = true;
+      if (user.setor_id) {
+        whereClause.setor_id = user.setor_id;
+      }
     } else {
+      whereClause.ativo = true;
       if (user.setor_id) {
         whereClause.setor_id = user.setor_id;
       } else {
-        whereClause.setor_id = null;
+        return Response.json([]);
       }
     }
 
     const videos = await prisma.videos_internos.findMany({
       where: whereClause,
-      orderBy: [{ ordem: 'asc' }, { data_criacao: 'desc' }],
+      orderBy: [{ setor_id: 'asc' }, { ordem: 'asc' }, { data_criacao: 'desc' }],
       include: {
         setor: {
           select: { id: true, nome: true },
@@ -39,7 +49,21 @@ export async function GET(request) {
       },
     });
 
-    return Response.json(videos);
+    const formattedVideos = videos.map(v => ({
+      id: Number(v.id),
+      titulo: v.titulo,
+      descricao: v.descricao,
+      url: v.url,
+      thumbnail: v.thumbnail,
+      setor_id: v.setor_id ? Number(v.setor_id) : null,
+      setor: v.setor ? { id: Number(v.setor.id), nome: v.setor.nome } : null,
+      criador: v.criador ? { id: Number(v.criador.id), nome: v.criador.nome } : null,
+      ordem: v.ordem,
+      ativo: v.ativo,
+      data_criacao: v.data_criacao,
+    }));
+
+    return Response.json(formattedVideos);
   } catch (error) {
     console.error("Erro ao buscar vídeos internos:", error);
     return Response.json({ error: "Erro ao buscar vídeos" }, { status: 500 });
@@ -60,7 +84,11 @@ export async function POST(request) {
       return Response.json({ error: "Título e URL são obrigatórios" }, { status: 400 });
     }
 
-    let targetSetorId = setor_id ? BigInt(setor_id) : null;
+    if (!setor_id) {
+      return Response.json({ error: "Setor é obrigatório" }, { status: 400 });
+    }
+
+    let targetSetorId = BigInt(setor_id);
 
     if (user.role === 'supervisor' && user.setor_id) {
       targetSetorId = user.setor_id;
@@ -84,7 +112,18 @@ export async function POST(request) {
       },
     });
 
-    return Response.json(video, { status: 201 });
+    return Response.json({
+      id: Number(video.id),
+      titulo: video.titulo,
+      descricao: video.descricao,
+      url: video.url,
+      thumbnail: video.thumbnail,
+      setor_id: video.setor_id ? Number(video.setor_id) : null,
+      setor: video.setor ? { id: Number(video.setor.id), nome: video.setor.nome } : null,
+      criador: video.criador ? { id: Number(video.criador.id), nome: video.criador.nome } : null,
+      ordem: video.ordem,
+      ativo: video.ativo,
+    }, { status: 201 });
   } catch (error) {
     console.error("Erro ao criar vídeo interno:", error);
     return Response.json({ error: "Erro ao criar vídeo" }, { status: 500 });

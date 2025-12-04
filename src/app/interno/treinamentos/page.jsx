@@ -196,7 +196,11 @@ export default function TreinamentosPage() {
             Nenhum treinamento encontrado
           </h3>
           <p className="text-slate-400">
-            {searchTerm ? "Tente buscar por outros termos" : "Não há vídeos de treinamento disponíveis para seu setor"}
+            {searchTerm 
+              ? "Tente buscar por outros termos" 
+              : videos.length === 0 
+                ? "Você ainda não possui um setor atribuído ou não há vídeos disponíveis para seu setor. Entre em contato com o RH."
+                : "Não há vídeos de treinamento correspondentes à sua busca"}
           </p>
         </div>
       ) : (
