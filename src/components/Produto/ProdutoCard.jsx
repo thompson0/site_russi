@@ -74,7 +74,7 @@ export default function ProdutoCard({ carroId }) {
             key={p.id}
             className="group flex flex-col justify-between hover:shadow-lg transition-all duration-300"
           >
-            <Link href={`/admin/produto/${p.id}`}>
+            <Link href={`/catalogo/produto/${p.id}`}>
               <CardHeader className="flex items-center justify-center h-48 cursor-pointer">
                 <img
                   src={p.foto_url || "/placeholder.png"}

@@ -93,7 +93,7 @@ export default function AllCarros() {
         {carros.map((carro) => (
           <Card key={carro.id} className="group overflow-hidden transition-all hover:shadow-lg">
 
-            <Link href={`/admin/produtos/${carro.id}`}>
+            <Link href={`/catalogo/produtos/${carro.id}`}>
               <CardHeader className="flex items-center justify-center h-48 bg-gray-50 cursor-pointer">
                 <img
                   src={carro.foto_url || "/placeholder.png"}
