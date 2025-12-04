@@ -47,7 +47,7 @@ export default async function InternoPage() {
 
   if (user.role !== 'instalador') {
     quickLinks.push({
-      href: "/catalogo/carros",
+      href: "/catalogo/montadoras",
       label: "Catálogo Digital",
       description: "Produtos e acessórios",
       icon: FileText,
