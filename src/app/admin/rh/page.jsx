@@ -419,6 +419,30 @@ export default function RHAdminPage() {
   const [editingVideo, setEditingVideo] = useState(null);
   const [editingManual, setEditingManual] = useState(null);
 
+  const fetchVideos = async (adminMode = false) => {
+    try {
+      const res = await fetch(`/api/rh${adminMode ? '?all=true' : ''}`);
+      if (res.ok) {
+        const data = await res.json();
+        setVideos(Array.isArray(data) ? data : []);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar vídeos:", error);
+    }
+  };
+
+  const fetchManuais = async () => {
+    try {
+      const res = await fetch("/api/manuais");
+      if (res.ok) {
+        const data = await res.json();
+        setManuais(Array.isArray(data) ? data : []);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar manuais:", error);
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -431,20 +455,10 @@ export default function RHAdminPage() {
           setIsAdmin(userIsAdmin);
         }
 
-        const [videosRes, manuaisRes] = await Promise.all([
-          fetch(`/api/rh${userIsAdmin ? '?all=true' : ''}`),
-          fetch("/api/manuais")
+        await Promise.all([
+          fetchVideos(userIsAdmin),
+          fetchManuais()
         ]);
-
-        if (videosRes.ok) {
-          const data = await videosRes.json();
-          setVideos(Array.isArray(data) ? data : []);
-        }
-        
-        if (manuaisRes.ok) {
-          const data = await manuaisRes.json();
-          setManuais(Array.isArray(data) ? data : []);
-        }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       } finally {
@@ -471,14 +485,7 @@ export default function RHAdminPage() {
         return;
       }
 
-      const saved = await res.json();
-      
-      if (editingVideo) {
-        setVideos(prev => prev.map(v => v.id === saved.id ? saved : v));
-      } else {
-        setVideos(prev => [...prev, saved]);
-      }
-
+      await fetchVideos(isAdmin);
       setVideoDialogOpen(false);
       setEditingVideo(null);
     } catch (error) {
@@ -491,7 +498,7 @@ export default function RHAdminPage() {
     try {
       const res = await fetch(`/api/rh/${id}`, { method: "DELETE" });
       if (res.ok) {
-        setVideos(prev => prev.filter(v => v.id !== id));
+        await fetchVideos(isAdmin);
       } else {
         const error = await res.json();
         alert(error.error || "Erro ao excluir vídeo");
@@ -519,14 +526,7 @@ export default function RHAdminPage() {
         return;
       }
 
-      const saved = await res.json();
-      
-      if (editingManual) {
-        setManuais(prev => prev.map(m => m.id === saved.id ? saved : m));
-      } else {
-        setManuais(prev => [...prev, saved]);
-      }
-
+      await fetchManuais();
       setManualDialogOpen(false);
       setEditingManual(null);
     } catch (error) {
@@ -539,7 +539,7 @@ export default function RHAdminPage() {
     try {
       const res = await fetch(`/api/manuais/${id}`, { method: "DELETE" });
       if (res.ok) {
-        setManuais(prev => prev.filter(m => m.id !== id));
+        await fetchManuais();
       } else {
         const error = await res.json();
         alert(error.error || "Erro ao excluir manual");

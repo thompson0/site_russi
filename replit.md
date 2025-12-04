@@ -176,7 +176,40 @@ The application uses JWT-based authentication with:
 - Automatic redirect to `/login` for unauthenticated users
 - Redirect to `/interno` for non-admin users accessing admin routes
 
-## Recent Changes (2025-12-03)
+## Recent Changes (2025-12-04)
+
+### Admin RH Management (NEW)
+- Nova página `/admin/rh` para gerenciar vídeos de procedimentos e manuais
+- Abas para alternar entre Vídeos e Manuais
+- CRUD completo para ambos (criar, editar, excluir)
+- Admin vê todos os vídeos incluindo inativos usando parâmetro `?all=true`
+
+### Admin Ramais Management (NEW)
+- Nova página `/admin/ramais` para gerenciar contatos/ramais de departamentos
+- CRUD completo com validação de campos obrigatórios
+- Cards com informações de departamento, colaborador, telefone, ramal e email
+
+### API Security Enhancement
+- Todas as rotas GET (contatos, manuais, rh) agora requerem autenticação
+- Rotas de mutação (POST/PUT/DELETE) requerem role de admin
+- Proteção contra exposição pública de dados internos
+
+### Sidebar Updates
+- Adicionado link "Materiais RH" no menu admin
+- Adicionado link "Ramais" no menu admin
+
+### Estrutura de Dados Dinâmicos (ATUALIZADO)
+| Seção | Tipo | Gerenciamento |
+|-------|------|---------------|
+| FAQ | Fixo | Código fonte |
+| Manuais | Dinâmico | Admin Panel (/admin/rh) |
+| Contatos/Ramais | Dinâmico | Admin Panel (/admin/ramais) |
+| Vídeos RH | Dinâmico | Admin Panel (/admin/rh) |
+| Vídeos Treinamento | Dinâmico | Admin Panel |
+
+---
+
+## Previous Changes (2025-12-03)
 
 ### Portal Interno & Dashboard Unificado
 - Todos os usuários agora são redirecionados para `/interno` após login
@@ -186,25 +219,10 @@ The application uses JWT-based authentication with:
   - **Supervisor/Admin**: + Administração
 - Catálogo Digital oculto para instaladores conforme regra de negócio
 
-### Central de Suporte (Recursos & RH)
-- FAQ com 8 perguntas frequentes (dados fixos no código)
-- 4 Manuais pré-definidos (Manual do Colaborador, Sistema ERP, Segurança, Instalação)
-- 6 Contatos de departamentos com ramais, telefones e emails
-- Apenas vídeos de RH são gerenciados via admin (banco de dados)
-
 ### Correções de Autenticação
 - Alterado de JWT_SECRET para SESSION_SECRET em todo o sistema
 - Token JWT com expiração de 8 horas
 - Cookie com secure=true em produção e maxAge de 8 horas
-
-### Estrutura de Dados Fixos vs Dinâmicos
-| Seção | Tipo | Gerenciamento |
-|-------|------|---------------|
-| FAQ | Fixo | Código fonte |
-| Manuais | Fixo | Código fonte |
-| Contatos | Fixo | Código fonte |
-| Vídeos RH | Dinâmico | Admin Panel |
-| Vídeos Treinamento | Dinâmico | Admin Panel |
 
 ### Previous Changes
 
