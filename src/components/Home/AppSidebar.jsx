@@ -42,10 +42,10 @@ export function AppSidebar({ userRole = "admin" }) {
   }
 
   const allItems = [
-    { title: "Dashboard", url: "/admin", icon: HomeIcon, roles: ["admin", "supervisor"] },
-    { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon, roles: ["admin"] },
-    { title: "Carros", url: "/admin/catalogo/carros", icon: Car, roles: ["admin"] },
-    { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon, roles: ["admin"] },
+    { title: "Dashboard", url: "/admin", icon: HomeIcon, roles: ["admin", "supervisor", "vendedor_interno"] },
+    { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon, roles: ["admin", "supervisor", "vendedor_interno"] },
+    { title: "Carros", url: "/admin/catalogo/carros", icon: Car, roles: ["admin", "supervisor", "vendedor_interno"] },
+    { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon, roles: ["admin", "supervisor", "vendedor_interno"] },
     { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon, roles: ["admin"] },
     { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon, roles: ["admin", "supervisor"] },
     { title: "RH e Materiais", url: "/admin/rh", icon: DocumentTextIcon, roles: ["admin"] },
