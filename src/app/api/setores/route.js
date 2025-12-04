@@ -6,7 +6,14 @@ export async function GET() {
     const setores = await prisma.setores.findMany({
       orderBy: { nome: "asc" },
     });
-    return NextResponse.json(setores);
+
+    const formattedSetores = setores.map(setor => ({
+      id: Number(setor.id),
+      nome: setor.nome,
+      descricao: setor.descricao,
+    }));
+
+    return NextResponse.json(formattedSetores);
   } catch (error) {
     console.error("Erro ao buscar setores:", error);
     return NextResponse.json(
