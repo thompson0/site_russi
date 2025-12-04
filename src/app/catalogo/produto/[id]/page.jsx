@@ -145,7 +145,8 @@ export default function CatalogoProdutoDetalhePage() {
                 </p>
                 <div className="inline-block p-4 bg-white rounded-xl shadow-md">
                   <img
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrUrl)}`}
+                    id="qr-code-image"
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrUrl)}`}
                     alt="QR Code do produto"
                     className="w-48 h-48"
                   />
@@ -153,6 +154,14 @@ export default function CatalogoProdutoDetalhePage() {
                 <p className="mt-4 text-xs text-gray-400 break-all max-w-md mx-auto">
                   {qrUrl}
                 </p>
+                <a
+                  href={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=png&data=${encodeURIComponent(qrUrl)}`}
+                  download={`qrcode-${produto.codigo}.png`}
+                  className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Baixar QR Code
+                </a>
               </div>
             )}
 

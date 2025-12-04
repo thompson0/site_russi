@@ -30,11 +30,10 @@ export default async function InternoLayout({ children }) {
   const menuItems = [
     { href: "/interno", label: "Início", icon: Home },
     { href: "/interno/treinamentos", label: "Treinamentos", icon: GraduationCap },
-    { href: "/interno/recursos", label: "Recursos & RH", icon: BookOpen },
   ];
 
   if (user.role !== 'instalador') {
-    menuItems.push({ href: "/catalogo/carros", label: "Catálogo Digital", icon: FileText });
+    menuItems.push({ href: "/catalogo/montadoras", label: "Catálogo Digital", icon: FileText });
   }
 
   if (user.role === 'admin' || user.role === 'supervisor') {
