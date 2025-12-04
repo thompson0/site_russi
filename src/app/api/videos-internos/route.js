@@ -1,6 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { getUserFromCookie, hasRole } from "@/lib/auth";
 
+const CARGO_LABELS = {
+  supervisor: "Supervisor",
+  vendedor_interno: "Vendedor Interno",
+  instalador: "Instalador",
+};
+
 export async function GET(request) {
   try {
     const user = await getUserFromCookie();
@@ -10,7 +16,7 @@ export async function GET(request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const setorId = searchParams.get('setor_id');
+    const cargoFilter = searchParams.get('cargo');
     const showAll = searchParams.get('all') === 'true';
 
     let whereClause = {};
@@ -19,30 +25,18 @@ export async function GET(request) {
       if (!showAll) {
         whereClause.ativo = true;
       }
-      if (setorId && setorId !== 'all') {
-        whereClause.setor_id = BigInt(setorId);
-      }
-    } else if (user.role === 'supervisor') {
-      whereClause.ativo = true;
-      if (user.setor_id) {
-        whereClause.setor_id = user.setor_id;
+      if (cargoFilter && cargoFilter !== 'all') {
+        whereClause.cargo = cargoFilter;
       }
     } else {
       whereClause.ativo = true;
-      if (user.setor_id) {
-        whereClause.setor_id = user.setor_id;
-      } else {
-        return Response.json([]);
-      }
+      whereClause.cargo = user.role;
     }
 
     const videos = await prisma.videos_internos.findMany({
       where: whereClause,
-      orderBy: [{ setor_id: 'asc' }, { ordem: 'asc' }, { data_criacao: 'desc' }],
+      orderBy: [{ cargo: 'asc' }, { ordem: 'asc' }, { data_criacao: 'desc' }],
       include: {
-        setor: {
-          select: { id: true, nome: true },
-        },
         criador: {
           select: { id: true, nome: true },
         },
@@ -55,8 +49,8 @@ export async function GET(request) {
       descricao: v.descricao,
       url: v.url,
       thumbnail: v.thumbnail,
-      setor_id: v.setor_id ? Number(v.setor_id) : null,
-      setor: v.setor ? { id: Number(v.setor.id), nome: v.setor.nome } : null,
+      cargo: v.cargo,
+      cargo_label: v.cargo ? CARGO_LABELS[v.cargo] : null,
       criador: v.criador ? { id: Number(v.criador.id), nome: v.criador.nome } : null,
       ordem: v.ordem,
       ativo: v.ativo,
@@ -78,20 +72,19 @@ export async function POST(request) {
       return Response.json({ error: "Sem permissão" }, { status: 403 });
     }
 
-    const { titulo, descricao, url, thumbnail, setor_id, ordem } = await request.json();
+    const { titulo, descricao, url, thumbnail, cargo, ordem } = await request.json();
 
     if (!titulo || !url) {
       return Response.json({ error: "Título e URL são obrigatórios" }, { status: 400 });
     }
 
-    if (!setor_id) {
-      return Response.json({ error: "Setor é obrigatório" }, { status: 400 });
+    if (!cargo) {
+      return Response.json({ error: "Cargo é obrigatório" }, { status: 400 });
     }
 
-    let targetSetorId = BigInt(setor_id);
-
-    if (user.role === 'supervisor' && user.setor_id) {
-      targetSetorId = user.setor_id;
+    const validCargos = ['supervisor', 'vendedor_interno', 'instalador'];
+    if (!validCargos.includes(cargo)) {
+      return Response.json({ error: "Cargo inválido" }, { status: 400 });
     }
 
     const video = await prisma.videos_internos.create({
@@ -100,12 +93,11 @@ export async function POST(request) {
         descricao,
         url,
         thumbnail,
-        setor_id: targetSetorId,
+        cargo,
         criado_por: user.id,
         ordem: ordem || 0,
       },
       include: {
-        setor: true,
         criador: {
           select: { id: true, nome: true },
         },
@@ -118,8 +110,8 @@ export async function POST(request) {
       descricao: video.descricao,
       url: video.url,
       thumbnail: video.thumbnail,
-      setor_id: video.setor_id ? Number(video.setor_id) : null,
-      setor: video.setor ? { id: Number(video.setor.id), nome: video.setor.nome } : null,
+      cargo: video.cargo,
+      cargo_label: video.cargo ? CARGO_LABELS[video.cargo] : null,
       criador: video.criador ? { id: Number(video.criador.id), nome: video.criador.nome } : null,
       ordem: video.ordem,
       ativo: video.ativo,

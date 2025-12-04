@@ -215,6 +215,7 @@ exports.Prisma.Videos_internosScalarFieldEnum = {
   url: 'url',
   thumbnail: 'thumbnail',
   setor_id: 'setor_id',
+  cargo: 'cargo',
   criado_por: 'criado_por',
   ordem: 'ordem',
   ativo: 'ativo',

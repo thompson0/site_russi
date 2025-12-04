@@ -25,19 +25,24 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { PlusSquare, Edit2, Trash2, Video, GraduationCap, Eye, EyeOff } from "lucide-react";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
 
+const CARGOS = [
+  { value: "supervisor", label: "Supervisor" },
+  { value: "vendedor_interno", label: "Vendedor Interno" },
+  { value: "instalador", label: "Instalador" },
+];
+
 export default function VideosInternosPage() {
   const [videos, setVideos] = useState([]);
-  const [setores, setSetores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [editingVideo, setEditingVideo] = useState(null);
-  const [filterSetor, setFilterSetor] = useState("all");
+  const [filterCargo, setFilterCargo] = useState("all");
   const [form, setForm] = useState({ 
     titulo: "", 
     descricao: "", 
     url: "", 
     thumbnail: "",
-    setor_id: "",
+    cargo: "",
     ordem: 0,
     ativo: true,
   });
@@ -45,13 +50,8 @@ export default function VideosInternosPage() {
 
   async function fetchData() {
     try {
-      const [videosRes, setoresRes] = await Promise.all([
-        fetch("/api/videos-internos?all=true"),
-        fetch("/api/setores"),
-      ]);
-
+      const videosRes = await fetch("/api/videos-internos?all=true");
       if (videosRes.ok) setVideos(await videosRes.json());
-      if (setoresRes.ok) setSetores(await setoresRes.json());
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     } finally {
@@ -63,15 +63,15 @@ export default function VideosInternosPage() {
     fetchData();
   }, []);
 
-  const filteredVideos = filterSetor === "all" 
+  const filteredVideos = filterCargo === "all" 
     ? videos 
-    : videos.filter(v => v.setor_id?.toString() === filterSetor);
+    : videos.filter(v => v.cargo === filterCargo);
 
   async function handleSubmit(e) {
     e.preventDefault();
     
-    if (!form.setor_id) {
-      alert("Por favor, selecione um setor para o vídeo.");
+    if (!form.cargo) {
+      alert("Por favor, selecione um cargo para o vídeo.");
       return;
     }
     
@@ -81,8 +81,13 @@ export default function VideosInternosPage() {
     const res = await secureFetch(url, {
       method,
       body: JSON.stringify({
-        ...form,
-        setor_id: form.setor_id,
+        titulo: form.titulo,
+        descricao: form.descricao,
+        url: form.url,
+        thumbnail: form.thumbnail,
+        cargo: form.cargo,
+        ordem: form.ordem,
+        ativo: form.ativo,
       }),
     }, {
       refresh: false,
@@ -135,7 +140,7 @@ export default function VideosInternosPage() {
       descricao: "", 
       url: "", 
       thumbnail: "",
-      setor_id: "",
+      cargo: "",
       ordem: 0,
       ativo: true,
     });
@@ -148,7 +153,7 @@ export default function VideosInternosPage() {
       descricao: video.descricao || "", 
       url: video.url,
       thumbnail: video.thumbnail || "",
-      setor_id: video.setor_id?.toString() || "",
+      cargo: video.cargo || "",
       ordem: video.ordem || 0,
       ativo: video.ativo,
     });
@@ -158,6 +163,11 @@ export default function VideosInternosPage() {
   function openCreateDialog() {
     resetForm();
     setOpen(true);
+  }
+
+  function getCargoLabel(cargo) {
+    const found = CARGOS.find(c => c.value === cargo);
+    return found ? found.label : cargo;
   }
 
   return (
@@ -175,16 +185,16 @@ export default function VideosInternosPage() {
           </div>
           
           <div className="flex items-center gap-4">
-            <Label className="text-sm font-medium">Filtrar por setor:</Label>
-            <Select value={filterSetor} onValueChange={setFilterSetor}>
+            <Label className="text-sm font-medium">Filtrar por cargo:</Label>
+            <Select value={filterCargo} onValueChange={setFilterCargo}>
               <SelectTrigger className="w-[200px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos os setores</SelectItem>
-                {setores.map((setor) => (
-                  <SelectItem key={setor.id} value={setor.id.toString()}>
-                    {setor.nome}
+                <SelectItem value="all">Todos os cargos</SelectItem>
+                {CARGOS.map((cargo) => (
+                  <SelectItem key={cargo.value} value={cargo.value}>
+                    {cargo.label}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -202,7 +212,7 @@ export default function VideosInternosPage() {
             </div>
           ) : filteredVideos.length === 0 ? (
             <p className="text-center text-muted-foreground py-8">
-              {filterSetor === "all" ? "Nenhum vídeo cadastrado" : "Nenhum vídeo para este setor"}
+              {filterCargo === "all" ? "Nenhum vídeo cadastrado" : "Nenhum vídeo para este cargo"}
             </p>
           ) : (
             <div className="grid gap-4">
@@ -232,9 +242,9 @@ export default function VideosInternosPage() {
                         <p className="text-sm text-muted-foreground line-clamp-1">{video.descricao}</p>
                       )}
                       <div className="flex gap-4 mt-1 text-xs text-muted-foreground">
-                        {video.setor && (
+                        {video.cargo && (
                           <span className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">
-                            {video.setor.nome}
+                            {getCargoLabel(video.cargo)}
                           </span>
                         )}
                         {video.criador && (
@@ -318,25 +328,25 @@ export default function VideosInternosPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="setor">Setor *</Label>
+              <Label htmlFor="cargo">Cargo *</Label>
               <Select
-                value={form.setor_id || ""}
-                onValueChange={(value) => setForm({ ...form, setor_id: value })}
+                value={form.cargo || ""}
+                onValueChange={(value) => setForm({ ...form, cargo: value })}
                 required
               >
-                <SelectTrigger className={!form.setor_id ? "border-red-500/50" : ""}>
-                  <SelectValue placeholder="Selecione o setor (obrigatório)" />
+                <SelectTrigger className={!form.cargo ? "border-red-500/50" : ""}>
+                  <SelectValue placeholder="Selecione o cargo (obrigatório)" />
                 </SelectTrigger>
                 <SelectContent>
-                  {setores.map((setor) => (
-                    <SelectItem key={setor.id} value={setor.id.toString()}>
-                      {setor.nome}
+                  {CARGOS.map((cargo) => (
+                    <SelectItem key={cargo.value} value={cargo.value}>
+                      {cargo.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              {!form.setor_id && (
-                <p className="text-xs text-red-500">Selecione um setor para o vídeo</p>
+              {!form.cargo && (
+                <p className="text-xs text-red-500">Selecione um cargo para o vídeo</p>
               )}
             </div>
 

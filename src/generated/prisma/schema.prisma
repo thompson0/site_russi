@@ -129,6 +129,7 @@ model videos_internos {
   url          String
   thumbnail    String?
   setor_id     BigInt?
+  cargo        UserRole?
   criado_por   BigInt?
   ordem        Int       @default(0)
   ativo        Boolean   @default(true)
