@@ -157,9 +157,23 @@ The project is configured for Replit autoscale deployment:
 
 ### Role Types
 1. **admin** - Full system access, can manage all users and content
-2. **supervisor** - Can manage vendedor_interno users, add videos for their sector, access digital catalog
-3. **vendedor_interno** - Access to sector training videos, digital catalog, edit own profile
-4. **instalador** - Access to sector training videos only
+2. **supervisor** - Read-only catalog access, can manage vendedor_interno users in their sector, can add training videos
+3. **vendedor_interno** - Read-only catalog access, sector training videos, edit own profile
+4. **instalador** - Access to sector training videos only (no catalog access)
+
+### Permissions Matrix
+
+| Feature | Admin | Supervisor | Vendedor | Instalador |
+|---------|-------|------------|----------|------------|
+| View Catalog (Montadoras/Carros/Produtos) | ✅ Full | ✅ Read-only | ✅ Read-only | ❌ |
+| Create/Edit/Delete Catalog | ✅ | ❌ | ❌ | ❌ |
+| Training Videos | ✅ All | ✅ Own role | ✅ Own role | ✅ Own role |
+| Create Training Videos | ✅ | ✅ | ❌ | ❌ |
+| User Management | ✅ All | ✅ Vendedores (same sector) | ❌ | ❌ |
+| HR Materials | ✅ Full | ✅ View | ✅ View | ✅ View |
+| Manage HR Materials | ✅ | ❌ | ❌ | ❌ |
+| Ramais | ✅ Full | ✅ View | ✅ View | ✅ View |
+| Edit Own Profile | ✅ | ✅ | ✅ | ✅ |
 
 ### Common Access (All Authenticated Users)
 - HR procedure videos
@@ -177,6 +191,13 @@ The application uses JWT-based authentication with:
 - Redirect to `/interno` for non-admin users accessing admin routes
 
 ## Recent Changes (2025-12-04)
+
+### Catalog Read-Only Access for Vendedor and Supervisor (NEW)
+- Vendedor e Supervisor agora têm acesso **somente leitura** ao catálogo (Montadoras, Carros, Produtos)
+- Apenas Admin pode criar, editar ou excluir itens do catálogo
+- Botões de adicionar, editar e excluir são ocultados para usuários não-admin
+- Proteção de API: rotas POST/PUT/DELETE de catálogo requerem role "admin"
+- Componentes atualizados: MontadoraCard, CarroCard, AllCarros, ProdutoCard, SingleProduto
 
 ### Training Videos - Sector-Based Access (NEW)
 - Seleção de setor agora é OBRIGATÓRIA ao criar vídeos de treinamento

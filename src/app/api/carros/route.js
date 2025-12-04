@@ -1,10 +1,28 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { cookies } from "next/headers"
+import { verifyToken } from "@/lib/jwt"
 
 function serializeBigInt(data) {
   return JSON.parse(
     JSON.stringify(data, (_, v) => (typeof v === "bigint" ? Number(v) : v))
   )
+}
+
+async function requireAdmin() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get("token")?.value
+
+  if (!token) {
+    return { error: "Não autorizado", status: 401 }
+  }
+
+  const decoded = verifyToken(token)
+  if (!decoded || decoded.role !== "admin") {
+    return { error: "Apenas administradores podem realizar esta ação", status: 403 }
+  }
+
+  return { user: decoded }
 }
 
 export async function GET(req) {
@@ -67,6 +85,11 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    const authResult = await requireAdmin()
+    if (authResult.error) {
+      return NextResponse.json({ error: authResult.error }, { status: authResult.status })
+    }
+
     const body = await req.json()
     const { nome, ano_de, ano_ate, versao, montadora_id, foto_url, imagem } = body
 
@@ -107,6 +130,11 @@ export async function POST(req) {
 
 export async function PUT(req) {
   try {
+    const authResult = await requireAdmin()
+    if (authResult.error) {
+      return NextResponse.json({ error: authResult.error }, { status: authResult.status })
+    }
+
     const body = await req.json()
     const { id, ...dados } = body
 
@@ -137,6 +165,11 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
   try {
+    const authResult = await requireAdmin()
+    if (authResult.error) {
+      return NextResponse.json({ error: authResult.error }, { status: authResult.status })
+    }
+
     const { searchParams } = new URL(req.url)
     const id = searchParams.get("id")
 

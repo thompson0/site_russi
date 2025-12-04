@@ -6,44 +6,67 @@ import Link from "next/link";
 import DeleteProduto from "./DeleteProduto";
 import AddProduto from "./AddProduto";
 import { useRefresh } from "@/context/RefreshContext";
+import { ProgressDemo } from "@/components/Home/ProgressDemo";
 
 export default function ProdutoCard({ carroId }) {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { refreshKey } = useRefresh();
 
   useEffect(() => {
-    async function fetchProdutos() {
+    async function fetchData() {
       try {
-        const res = await fetch(`/api/produtos/carros/${carroId}?k=${refreshKey}`);
-        if (!res.ok) throw new Error("Erro ao buscar produtos");
-        const data = await res.json();
-        setProdutos(data);
+        const [produtosRes, userRes] = await Promise.all([
+          fetch(`/api/produtos/carros/${carroId}?k=${refreshKey}`),
+          fetch("/api/me")
+        ]);
+
+        if (produtosRes.ok) {
+          const data = await produtosRes.json();
+          setProdutos(data);
+        }
+
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setIsAdmin(userData.role === "admin");
+        }
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     }
-    fetchProdutos();
+    fetchData();
   }, [carroId, refreshKey]);
 
   if (loading)
-    return <p className="text-gray-400 text-center mt-10">Carregando produtos...</p>;
+    return (
+      <div>
+        <p className="text-gray-400 text-center mt-10">Carregando produtos...</p>
+        <ProgressDemo />
+      </div>
+    );
 
   if (produtos.length === 0)
     return(
     <div className="flex flex-col justify-center mb-4">
-          <p className="text-gray-400 text-center ">Nenhum produto encontrado.</p>
-        <AddProduto carroId={carroId} />
-      </div>
+      <p className="text-gray-400 text-center">
+        {isAdmin 
+          ? 'Nenhum produto encontrado. Clique em "+" para adicionar.'
+          : 'Nenhum produto encontrado.'}
+      </p>
+      {isAdmin && <AddProduto carroId={carroId} />}
+    </div>
   )
 
    return (
     <Card className="p-4">
-      <div className="flex justify-end mb-4">
-        <AddProduto carroId={carroId} />
-      </div>
+      {isAdmin && (
+        <div className="flex justify-end mb-4">
+          <AddProduto carroId={carroId} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {produtos.map((p) => (
@@ -66,9 +89,11 @@ export default function ProdutoCard({ carroId }) {
               <p className="text-sm text-muted-foreground">Código: {p.codigo}</p>
             </CardContent>
 
-            <CardFooter className="flex justify-center">
-              <DeleteProduto produtoId={p.id} />
-            </CardFooter>
+            {isAdmin && (
+              <CardFooter className="flex justify-center">
+                <DeleteProduto produtoId={p.id} />
+              </CardFooter>
+            )}
           </Card>
         ))}
       </div>

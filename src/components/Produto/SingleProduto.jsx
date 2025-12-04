@@ -13,23 +13,33 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 export default function SingleProduto({ id, qrcode = false }) {
   const [produto, setProduto] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { refreshKey } = useRefresh();
 
   useEffect(() => {
-    async function fetchProduto() {
+    async function fetchData() {
       try {
-        const res = await fetch(`/api/produtos/${id}?k=${refreshKey}`);
-        if (!res.ok) throw new Error("Erro ao buscar produto");
-        const data = await res.json();
-        setProduto(data);
-        
+        const [produtoRes, userRes] = await Promise.all([
+          fetch(`/api/produtos/${id}?k=${refreshKey}`),
+          fetch("/api/me")
+        ]);
+
+        if (produtoRes.ok) {
+          const data = await produtoRes.json();
+          setProduto(data);
+        }
+
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setIsAdmin(userData.role === "admin");
+        }
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     }
-    fetchProduto();
+    fetchData();
   }, [id, refreshKey]);
 
   if (loading)
@@ -69,11 +79,20 @@ export default function SingleProduto({ id, qrcode = false }) {
 
         {!qrcode && (
           <CardFooter className="flex justify-between">
-            <EditProduto produto={produto} />
-            <QrCodeButton
-              url={`${baseUrl}/visitante/produto/${id}`}
-              productname={produto.nome}
-            />
+            {isAdmin ? (
+              <>
+                <EditProduto produto={produto} />
+                <QrCodeButton
+                  url={`${baseUrl}/visitante/produto/${id}`}
+                  productname={produto.nome}
+                />
+              </>
+            ) : (
+              <QrCodeButton
+                url={`${baseUrl}/visitante/produto/${id}`}
+                productname={produto.nome}
+              />
+            )}
           </CardFooter>
         )}
       </Card>
