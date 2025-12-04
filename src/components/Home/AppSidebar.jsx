@@ -60,7 +60,9 @@ export function AppSidebar() {
 
   const isActive = (url) => {
     if (url === "/admin") return pathname === "/admin";
-    return pathname.startsWith(url);
+    if (pathname === url) return true;
+    if (pathname.startsWith(url + "/")) return true;
+    return false;
   };
 
   return (
