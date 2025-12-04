@@ -178,6 +178,13 @@ The application uses JWT-based authentication with:
 
 ## Recent Changes (2025-12-04)
 
+### Training Videos - Sector-Based Access (NEW)
+- Seleção de setor agora é OBRIGATÓRIA ao criar vídeos de treinamento
+- Cada setor vê apenas os vídeos destinados ao seu setor
+- Página admin tem filtro por setor para organizar vídeos
+- Admin vê todos os vídeos incluindo inativos usando parâmetro `?all=true`
+- Usuários sem setor atribuído recebem mensagem orientando contatar o RH
+
 ### Admin RH Management (NEW)
 - Nova página `/admin/rh` para gerenciar vídeos de procedimentos e manuais
 - Abas para alternar entre Vídeos e Manuais
