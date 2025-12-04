@@ -28,7 +28,7 @@ import {
   SidebarHeader
 } from "@/components/ui/sidebar";
 
-export function AppSidebar() {
+export function AppSidebar({ userRole = "admin" }) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,17 +41,19 @@ export function AppSidebar() {
     }
   }
 
-  const topItems = [
-    { title: "Dashboard", url: "/admin", icon: HomeIcon },
-    { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon },
-    { title: "Carros", url: "/admin/catalogo/carros", icon: Car },
-    { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon },
-    { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon },
-    { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon },
-    { title: "RH e Materiais", url: "/admin/rh", icon: DocumentTextIcon },
-    { title: "Ramais", url: "/admin/ramais", icon: PhoneIcon },
-    { title: "Usuários", url: "/admin/user", icon: UsersIcon },
+  const allItems = [
+    { title: "Dashboard", url: "/admin", icon: HomeIcon, roles: ["admin", "supervisor"] },
+    { title: "Montadoras", url: "/admin/montadoras", icon: TruckIcon, roles: ["admin"] },
+    { title: "Carros", url: "/admin/catalogo/carros", icon: Car, roles: ["admin"] },
+    { title: "Produtos", url: "/admin/catalogo/produtos", icon: CubeIcon, roles: ["admin"] },
+    { title: "Vídeos Públicos", url: "/admin/videos", icon: PlayCircleIcon, roles: ["admin"] },
+    { title: "Treinamentos", url: "/admin/videos-internos", icon: AcademicCapIcon, roles: ["admin", "supervisor"] },
+    { title: "RH e Materiais", url: "/admin/rh", icon: DocumentTextIcon, roles: ["admin"] },
+    { title: "Ramais", url: "/admin/ramais", icon: PhoneIcon, roles: ["admin"] },
+    { title: "Usuários", url: "/admin/user", icon: UsersIcon, roles: ["admin", "supervisor"] },
   ];
+
+  const topItems = allItems.filter(item => item.roles.includes(userRole));
 
   const bottomItems = [
     { title: "Configurações", url: "/admin/config", icon: Cog6ToothIcon },

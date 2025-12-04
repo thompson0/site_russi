@@ -30,7 +30,7 @@ const ROLES = [
   { value: "instalador", label: "Instalador" },
 ]
 
-export default function EditUser({ id }) {
+export default function EditUser({ id, currentUserRole = "admin" }) {
   const [form, setForm] = useState({ 
     nome: "", 
     email: "", 
@@ -44,7 +44,11 @@ export default function EditUser({ id }) {
   const { triggerAlert } = useAlert()
   const { secureFetch, loading } = useSecureFetch()
 
+  const isSupervisor = currentUserRole === "supervisor"
+
   async function fetchSetores() {
+    if (isSupervisor) return;
+    
     try {
       const res = await fetch("/api/setores")
       if (res.ok) {
@@ -89,8 +93,11 @@ export default function EditUser({ id }) {
       {
         method: "PUT",
         body: JSON.stringify({
-          ...form,
-          setor_id: form.setor_id === "none" || !form.setor_id ? null : parseInt(form.setor_id),
+          nome: form.nome,
+          email: form.email,
+          senha: form.senha || undefined,
+          role: isSupervisor ? undefined : form.role,
+          setor_id: isSupervisor ? undefined : (form.setor_id === "none" || !form.setor_id ? null : parseInt(form.setor_id)),
         }),
       },
       {
@@ -154,44 +161,54 @@ export default function EditUser({ id }) {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="role">Cargo</Label>
-            <Select
-              value={form.role || "vendedor_interno"}
-              onValueChange={(value) => setForm({ ...form, role: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione o cargo" />
-              </SelectTrigger>
-              <SelectContent>
-                {ROLES.map((role) => (
-                  <SelectItem key={role.value} value={role.value}>
-                    {role.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {!isSupervisor && (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="role">Cargo</Label>
+                <Select
+                  value={form.role || "vendedor_interno"}
+                  onValueChange={(value) => setForm({ ...form, role: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o cargo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ROLES.map((role) => (
+                      <SelectItem key={role.value} value={role.value}>
+                        {role.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="setor">Setor</Label>
-            <Select
-              value={form.setor_id || "none"}
-              onValueChange={(value) => setForm({ ...form, setor_id: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione o setor" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">Nenhum</SelectItem>
-                {setores.map((setor) => (
-                  <SelectItem key={setor.id} value={setor.id.toString()}>
-                    {setor.nome}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="setor">Setor</Label>
+                <Select
+                  value={form.setor_id || "none"}
+                  onValueChange={(value) => setForm({ ...form, setor_id: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o setor" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">Nenhum</SelectItem>
+                    {setores.map((setor) => (
+                      <SelectItem key={setor.id} value={setor.id.toString()}>
+                        {setor.nome}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
+          )}
+
+          {isSupervisor && (
+            <p className="text-xs text-muted-foreground">
+              Como supervisor, você pode editar apenas nome, email e senha dos vendedores do seu setor.
+            </p>
+          )}
 
           <DialogFooter className="gap-2">
             <DialogClose asChild>

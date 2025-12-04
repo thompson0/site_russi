@@ -18,7 +18,10 @@ async function AllUsers() {
     
     let whereClause = {}
     if (currentUser?.role === 'supervisor') {
-        whereClause = { role: 'vendedor_interno' }
+        whereClause = { 
+            role: 'vendedor_interno',
+            setor_id: currentUser.setor_id || undefined,
+        }
     }
 
     const users = await prisma.usuarios.findMany({
@@ -29,49 +32,69 @@ async function AllUsers() {
         orderBy: [{ role: 'asc' }, { nome: 'asc' }],
     })
 
-    const canEdit = (userRole) => {
+    const canEdit = (userRole, userSetorId) => {
         if (currentUser?.role === 'admin') return true
-        if (currentUser?.role === 'supervisor' && userRole === 'vendedor_interno') return true
+        if (currentUser?.role === 'supervisor' && userRole === 'vendedor_interno') {
+            if (currentUser.setor_id && userSetorId) {
+                return currentUser.setor_id === userSetorId
+            }
+            return true
+        }
         return false
     }
 
     return (
         <ScrollArea className="w-full h-[500px] rounded-md border">
             <div className="p-4">
-                <h4 className="mb-4 text-sm leading-none font-medium">Usuários ({users.length})</h4>
+                <h4 className="mb-4 text-sm leading-none font-medium">
+                    Usuários ({users.length})
+                    {currentUser?.role === 'supervisor' && currentUser?.setor && (
+                        <span className="text-muted-foreground font-normal ml-2">
+                            - Setor: {currentUser.setor.nome}
+                        </span>
+                    )}
+                </h4>
 
-                {users.map((user) => {
-                    const roleInfo = ROLE_LABELS[user.role] || { label: user.role, color: "bg-gray-100 text-gray-800" }
-                    
-                    return (
-                        <React.Fragment key={user.id}>
-                            <div className="flex items-center justify-between text-sm py-2">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2">
-                                        <p className="font-medium">{user.nome}</p>
-                                        <span className={`text-xs px-2 py-0.5 rounded-full ${roleInfo.color}`}>
-                                            {roleInfo.label}
-                                        </span>
+                {users.length === 0 ? (
+                    <p className="text-muted-foreground text-sm py-4">
+                        {currentUser?.role === 'supervisor' 
+                            ? "Nenhum vendedor interno encontrado no seu setor."
+                            : "Nenhum usuário encontrado."}
+                    </p>
+                ) : (
+                    users.map((user) => {
+                        const roleInfo = ROLE_LABELS[user.role] || { label: user.role, color: "bg-gray-100 text-gray-800" }
+                        
+                        return (
+                            <React.Fragment key={user.id}>
+                                <div className="flex items-center justify-between text-sm py-2">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2">
+                                            <p className="font-medium">{user.nome}</p>
+                                            <span className={`text-xs px-2 py-0.5 rounded-full ${roleInfo.color}`}>
+                                                {roleInfo.label}
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                                        {user.setor && (
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                                Setor: {user.setor.nome}
+                                            </p>
+                                        )}
                                     </div>
-                                    <p className="text-xs text-muted-foreground">{user.email}</p>
-                                    {user.setor && (
-                                        <p className="text-xs text-muted-foreground mt-1">
-                                            Setor: {user.setor.nome}
-                                        </p>
+                                    {canEdit(user.role, user.setor_id) && (
+                                        <div className="flex gap-2 ml-4">
+                                            <DeleteUser id={user.id.toString()} />
+                                            <EditUser id={user.id.toString()} currentUserRole={currentUser?.role} />
+                                        </div>
                                     )}
                                 </div>
-                                {canEdit(user.role) && (
-                                    <div className="flex gap-2 ml-4">
-                                        <DeleteUser id={user.id.toString()} />
-                                        <EditUser id={user.id.toString()} />
-                                    </div>
-                                )}
-                            </div>
 
-                            <Separator className="my-2" />
-                        </React.Fragment>
-                    )
-                })}
+                                <Separator className="my-2" />
+                            </React.Fragment>
+                        )
+                    })
+                )}
             </div>
         </ScrollArea>
     )
