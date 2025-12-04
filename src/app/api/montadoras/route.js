@@ -1,11 +1,14 @@
 import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/jwt";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export async function GET() {
   try {
     const montadoras = await prisma.montadoras.findMany({
-      select: { id: true, nome: true, logo_url: true, },
+      select: { id: true, nome: true, logo_url: true },
+      orderBy: { nome: 'asc' },
     });
 
     const montadorasComBase64 = montadoras.map((m) => {
@@ -29,14 +32,52 @@ export async function GET() {
       ),
       {
         headers: {
-          "Cache-Control":
-            "public, max-age=60, s-maxage=3600, stale-while-revalidate=600",
+          "Cache-Control": "no-store",
           "Content-Type": "application/json",
         },
       }
     );
   } catch (error) {
-    console.error("erro:", error);
+    console.error("Erro ao buscar montadoras:", error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function POST(req) {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    if (!token) {
+      return Response.json({ error: "Não autorizado" }, { status: 401 });
+    }
+
+    const decoded = verifyToken(token);
+    if (!decoded || decoded.role !== "admin") {
+      return Response.json({ error: "Apenas administradores podem criar montadoras" }, { status: 403 });
+    }
+
+    const { nome, logo_url } = await req.json();
+
+    if (!nome || !nome.trim()) {
+      return Response.json({ error: "Nome da montadora é obrigatório" }, { status: 400 });
+    }
+
+    const novaMontadora = await prisma.montadoras.create({
+      data: {
+        nome: nome.trim(),
+        logo_url: logo_url || null,
+      },
+    });
+
+    return Response.json({
+      id: Number(novaMontadora.id),
+      nome: novaMontadora.nome,
+      logo_url: novaMontadora.logo_url,
+    }, { status: 201 });
+
+  } catch (error) {
+    console.error("Erro ao criar montadora:", error);
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
