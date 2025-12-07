@@ -160,7 +160,7 @@ export function AppSidebar() {
                             ${
                               active
                                 ? "text-white"
-                                : "text-slate-500 group-hover/item:text-gray-200"
+                                : "text-slate-500 group-hover/item:text-neutral-650"
                             }
                           `}
                         />

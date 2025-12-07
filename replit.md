@@ -116,7 +116,7 @@ npm run db:reset
 | supervisor.instalacao@russi.com.br | 123456 | Supervisor | Instalação |
 | vendedor@russi.com.br | 123456 | Vendedor Interno | Comercial |
 | instalador@russi.com.br | 123456 | Instalador | Instalação |
-
+  
 **IMPORTANT:** Change passwords after first login!
 
 ### Seed Data Included
@@ -287,3 +287,13 @@ The application uses JWT-based authentication with:
 - Custom hooks for secure fetch operations are in `src/hooks/`
 - Timeline and AspectosPositivos components include emojis and icons for visual clarity
 - All content matches the official company presentation materials provided
+### Test Users Created by Seed
+
+| Email | Password | Role | Sector |
+|-------|----------|------|--------|
+| admin@russi.com.br | 123456 | Admin | - |
+| supervisor.comercial@russi.com.br | 123456 | Supervisor | Comercial |
+| supervisor.instalacao@russi.com.br | 123456 | Supervisor | Instalação |
+| vendedor@russi.com.br | 123456 | Vendedor Interno | Comercial |
+| instalador@russi.com.br | 123456 | Instalador | Instalação |
+  
