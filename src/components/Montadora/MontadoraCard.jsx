@@ -73,9 +73,9 @@ function MontadoraCard() {
           {montadoras.map((m) => (
             <div
               key={m.id}
-              className="w-full h-80 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden bg-white group"
+              className="w-full h-80 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden"
             >
-              <Link href={`/admin/montadoras/${m.id}`} className="flex-1 flex items-center justify-center bg-gray-50">
+              <Link href={`/admin/montadoras/${m.id}`} className="flex-1 flex items-center justify-center ">
                 <img
                   src={m.logo_url || "/placeholder.png"}
                   alt={m.nome}
