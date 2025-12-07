@@ -29,12 +29,18 @@ export function hasRole(user, allowedRoles) {
   return allowedRoles.includes(user.role);
 }
 
-export function canManageUser(currentUser, targetUserRole) {
+export function canManageUser(currentUser, targetUserRole, targetSetorId = null) {
   if (!currentUser) return false;
   
   if (currentUser.role === 'admin') return true;
   
-  if (currentUser.role === 'supervisor' && targetUserRole === 'vendedor_interno') {
+  if (currentUser.role === 'supervisor') {
+    if (targetUserRole !== 'vendedor_interno') {
+      return false;
+    }
+    if (targetSetorId && currentUser.setor_id) {
+      return BigInt(targetSetorId) === currentUser.setor_id;
+    }
     return true;
   }
   
@@ -49,4 +55,17 @@ export function canAccessSectorVideos(user, videoSetorId) {
   if (!videoSetorId) return true;
   
   return user.setor_id === videoSetorId;
+}
+
+export function canAccessAdminSection(user, section) {
+  if (!user) return false;
+  
+  if (user.role === 'admin') return true;
+  
+  if (user.role === 'supervisor') {
+    const allowedSections = ['videos-internos', 'user', 'rh'];
+    return allowedSections.includes(section);
+  }
+  
+  return false;
 }

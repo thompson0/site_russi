@@ -51,9 +51,9 @@ function VideoCard({ video, onPlay }) {
           </div>
         </div>
 
-        {video.setor && (
+        {video.cargo_label && (
           <span className="absolute top-2 left-2 px-2 py-1 bg-blue-500/80 backdrop-blur-sm text-white text-xs font-medium rounded-lg">
-            {video.setor.nome}
+            {video.cargo_label}
           </span>
         )}
       </div>
@@ -108,9 +108,9 @@ function VideoModal({ video, onClose }) {
           )}
           
           <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
-            {video.setor && (
+            {video.cargo_label && (
               <span className="text-sm text-slate-500">
-                Setor: {video.setor.nome}
+                Cargo: {video.cargo_label}
               </span>
             )}
             <button
@@ -196,7 +196,11 @@ export default function TreinamentosPage() {
             Nenhum treinamento encontrado
           </h3>
           <p className="text-slate-400">
-            {searchTerm ? "Tente buscar por outros termos" : "Não há vídeos de treinamento disponíveis para seu setor"}
+            {searchTerm 
+              ? "Tente buscar por outros termos" 
+              : videos.length === 0 
+                ? "Você ainda não possui um setor atribuído ou não há vídeos disponíveis para seu setor. Entre em contato com o RH."
+                : "Não há vídeos de treinamento correspondentes à sua busca"}
           </p>
         </div>
       ) : (

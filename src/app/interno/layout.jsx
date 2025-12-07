@@ -1,6 +1,7 @@
 import { getUserFromCookie } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import LogoutButton from "@/components/LogoutButton";
 import { 
   Home, 
   Video, 
@@ -9,7 +10,6 @@ import {
   HelpCircle, 
   FileText,
   User,
-  LogOut,
   GraduationCap
 } from "lucide-react";
 
@@ -30,11 +30,10 @@ export default async function InternoLayout({ children }) {
   const menuItems = [
     { href: "/interno", label: "Início", icon: Home },
     { href: "/interno/treinamentos", label: "Treinamentos", icon: GraduationCap },
-    { href: "/interno/recursos", label: "Recursos & RH", icon: BookOpen },
   ];
 
   if (user.role !== 'instalador') {
-    menuItems.push({ href: "/catalogo/carros", label: "Catálogo Digital", icon: FileText });
+    menuItems.push({ href: "/catalogo/montadoras", label: "Catálogo Digital", icon: FileText });
   }
 
   if (user.role === 'admin' || user.role === 'supervisor') {
@@ -75,13 +74,7 @@ export default async function InternoLayout({ children }) {
                 <p className="text-sm text-white font-medium">{user.nome}</p>
                 <p className="text-xs text-slate-400">{ROLE_LABELS[user.role] || user.role}</p>
               </div>
-              <Link
-                href="/api/logout"
-                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:text-red-400 hover:bg-slate-700/50 rounded-lg transition-colors"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Sair</span>
-              </Link>
+              <LogoutButton />
             </div>
           </div>
         </div>

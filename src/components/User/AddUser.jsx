@@ -30,14 +30,18 @@ const ROLES = [
   { value: "instalador", label: "Instalador" },
 ]
 
-export default function AddUser({ currentUserRole = "admin" }) {
+export default function AddUser({ currentUser }) {
+  const currentUserRole = currentUser?.role || "admin"
+  const currentUserSetorId = currentUser?.setor_id?.toString() || currentUser?.setorId?.toString() || ""
+  const currentUserSetorNome = currentUser?.setor?.nome || currentUser?.setorNome || ""
+  
   const [form, setForm] = useState({ 
     nome: "", 
     email: "", 
     senha: "", 
     permissao: "user",
     role: "vendedor_interno",
-    setor_id: "",
+    setor_id: currentUserRole === "supervisor" ? currentUserSetorId : "",
   })
   const [open, setOpen] = useState(false)
   const [setores, setSetores] = useState([])
@@ -45,6 +49,8 @@ export default function AddUser({ currentUserRole = "admin" }) {
 
   useEffect(() => {
     async function fetchSetores() {
+      if (currentUserRole === "supervisor") return;
+      
       try {
         const res = await fetch("/api/setores")
         if (res.ok) {
@@ -58,7 +64,7 @@ export default function AddUser({ currentUserRole = "admin" }) {
     if (open) {
       fetchSetores()
     }
-  }, [open])
+  }, [open, currentUserRole])
 
   const availableRoles = currentUserRole === "supervisor" 
     ? ROLES.filter(r => r.value === "vendedor_interno")
@@ -66,14 +72,17 @@ export default function AddUser({ currentUserRole = "admin" }) {
 
   async function handleAddUser(e) {
     e.preventDefault()
+    
+    const dataToSend = {
+      ...form,
+      setor_id: currentUserRole === "supervisor" ? currentUserSetorId : (form.setor_id || null),
+    }
+    
     const res = await secureFetch(
       "/api/user/create",
       {
         method: "POST",
-        body: JSON.stringify({
-          ...form,
-          setor_id: form.setor_id || null,
-        }),
+        body: JSON.stringify(dataToSend),
       },
       {
         refresh: true,
@@ -83,7 +92,14 @@ export default function AddUser({ currentUserRole = "admin" }) {
     )
 
     if (res) {
-      setForm({ nome: "", email: "", senha: "", permissao: "user", role: "vendedor_interno", setor_id: "" })
+      setForm({ 
+        nome: "", 
+        email: "", 
+        senha: "", 
+        permissao: "user", 
+        role: "vendedor_interno", 
+        setor_id: currentUserRole === "supervisor" ? currentUserSetorId : "" 
+      })
       setOpen(false) 
     }
   }
@@ -139,41 +155,58 @@ export default function AddUser({ currentUserRole = "admin" }) {
 
           <div className="space-y-2">
             <Label htmlFor="role">Cargo</Label>
-            <Select
-              value={form.role}
-              onValueChange={(value) => setForm({ ...form, role: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione o cargo" />
-              </SelectTrigger>
-              <SelectContent>
-                {availableRoles.map((role) => (
-                  <SelectItem key={role.value} value={role.value}>
-                    {role.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {currentUserRole === "supervisor" ? (
+              <div className="px-3 py-2 border rounded-md bg-muted text-muted-foreground">
+                Vendedor Interno
+              </div>
+            ) : (
+              <Select
+                value={form.role}
+                onValueChange={(value) => setForm({ ...form, role: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione o cargo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {availableRoles.map((role) => (
+                    <SelectItem key={role.value} value={role.value}>
+                      {role.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="setor">Setor</Label>
-            <Select
-              value={form.setor_id || "none"}
-              onValueChange={(value) => setForm({ ...form, setor_id: value === "none" ? "" : value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione o setor (opcional)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">Nenhum</SelectItem>
-                {setores.map((setor) => (
-                  <SelectItem key={setor.id} value={setor.id.toString()}>
-                    {setor.nome}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {currentUserRole === "supervisor" ? (
+              <div className="px-3 py-2 border rounded-md bg-muted text-muted-foreground">
+                {currentUserSetorNome || "Seu setor"}
+              </div>
+            ) : (
+              <Select
+                value={form.setor_id || "none"}
+                onValueChange={(value) => setForm({ ...form, setor_id: value === "none" ? "" : value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione o setor (opcional)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Nenhum</SelectItem>
+                  {setores.map((setor) => (
+                    <SelectItem key={setor.id} value={setor.id.toString()}>
+                      {setor.nome}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {currentUserRole === "supervisor" && (
+              <p className="text-xs text-muted-foreground">
+                Como supervisor, você só pode criar usuários para o seu próprio setor.
+              </p>
+            )}
           </div>
 
           <DialogFooter>

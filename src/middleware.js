@@ -30,6 +30,7 @@ export async function middleware(request) {
     pathname === '/favicon.ico' ||
     pathname === '/login' ||
     pathname === '/' ||
+    pathname === '/sac' ||
     pathname.startsWith('/visitante') ||
     pathname.startsWith('/catalogo')
   ) {

@@ -17,8 +17,22 @@ export async function POST(req) {
     }
 
     const targetRole = role || 'vendedor_interno';
+    
+    if (currentUser.role === 'supervisor') {
+      if (targetRole !== 'vendedor_interno') {
+        return new Response("Supervisores só podem criar usuários do tipo Vendedor Interno", { status: 403 });
+      }
+      
+      if (!currentUser.setor_id) {
+        return new Response("Você precisa estar associado a um setor para criar usuários", { status: 403 });
+      }
+      
+      if (setor_id && BigInt(setor_id) !== currentUser.setor_id) {
+        return new Response("Você só pode criar usuários para o seu próprio setor", { status: 403 });
+      }
+    }
 
-    if (!canManageUser(currentUser, targetRole)) {
+    if (!canManageUser(currentUser, targetRole, setor_id)) {
       return new Response("Sem permissão para criar usuário com este cargo", { status: 403 });
     }
 
@@ -28,6 +42,11 @@ export async function POST(req) {
     }
 
     const senhaHash = await bcrypt.hash(senha, 10);
+    
+    const finalSetorId = currentUser.role === 'supervisor' 
+      ? currentUser.setor_id 
+      : (setor_id ? BigInt(setor_id) : null);
+
     const novo = await prisma.usuarios.create({
       data: { 
         nome, 
@@ -35,7 +54,7 @@ export async function POST(req) {
         senha: senhaHash, 
         permissao: permissao || "user",
         role: targetRole,
-        setor_id: setor_id ? BigInt(setor_id) : null,
+        setor_id: finalSetorId,
       },
       include: {
         setor: true,

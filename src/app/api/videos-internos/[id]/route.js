@@ -1,6 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { getUserFromCookie, hasRole } from "@/lib/auth";
 
+const CARGO_LABELS = {
+  supervisor: "Supervisor",
+  vendedor_interno: "Vendedor Interno",
+  instalador: "Instalador",
+};
+
 export async function GET(request, { params }) {
   try {
     const user = await getUserFromCookie();
@@ -14,7 +20,6 @@ export async function GET(request, { params }) {
     const video = await prisma.videos_internos.findUnique({
       where: { id: BigInt(id) },
       include: {
-        setor: true,
         criador: {
           select: { id: true, nome: true },
         },
@@ -25,11 +30,22 @@ export async function GET(request, { params }) {
       return Response.json({ error: "Vídeo não encontrado" }, { status: 404 });
     }
 
-    if (user.role !== 'admin' && video.setor_id && video.setor_id !== user.setor_id) {
+    if (user.role !== 'admin' && video.cargo && video.cargo !== user.role) {
       return Response.json({ error: "Sem permissão para acessar este vídeo" }, { status: 403 });
     }
 
-    return Response.json(video);
+    return Response.json({
+      id: Number(video.id),
+      titulo: video.titulo,
+      descricao: video.descricao,
+      url: video.url,
+      thumbnail: video.thumbnail,
+      cargo: video.cargo,
+      cargo_label: video.cargo ? CARGO_LABELS[video.cargo] : null,
+      criador: video.criador ? { id: Number(video.criador.id), nome: video.criador.nome } : null,
+      ordem: video.ordem,
+      ativo: video.ativo,
+    });
   } catch (error) {
     console.error("Erro ao buscar vídeo interno:", error);
     return Response.json({ error: "Erro ao buscar vídeo" }, { status: 500 });
@@ -45,7 +61,7 @@ export async function PUT(request, { params }) {
     }
 
     const { id } = await params;
-    const { titulo, descricao, url, thumbnail, setor_id, ordem, ativo } = await request.json();
+    const { titulo, descricao, url, thumbnail, cargo, ordem, ativo } = await request.json();
 
     const existingVideo = await prisma.videos_internos.findUnique({
       where: { id: BigInt(id) },
@@ -55,10 +71,13 @@ export async function PUT(request, { params }) {
       return Response.json({ error: "Vídeo não encontrado" }, { status: 404 });
     }
 
-    if (user.role === 'supervisor') {
-      if (existingVideo.setor_id !== user.setor_id) {
-        return Response.json({ error: "Sem permissão para editar este vídeo" }, { status: 403 });
-      }
+    if (user.role === 'supervisor' && existingVideo.cargo !== user.role) {
+      return Response.json({ error: "Sem permissão para editar este vídeo" }, { status: 403 });
+    }
+
+    const validCargos = ['supervisor', 'vendedor_interno', 'instalador'];
+    if (cargo && !validCargos.includes(cargo)) {
+      return Response.json({ error: "Cargo inválido" }, { status: 400 });
     }
 
     const video = await prisma.videos_internos.update({
@@ -68,19 +87,29 @@ export async function PUT(request, { params }) {
         descricao,
         url,
         thumbnail,
-        setor_id: user.role === 'admin' && setor_id !== undefined ? (setor_id ? BigInt(setor_id) : null) : undefined,
+        cargo: user.role === 'admin' ? cargo : undefined,
         ordem,
         ativo,
       },
       include: {
-        setor: true,
         criador: {
           select: { id: true, nome: true },
         },
       },
     });
 
-    return Response.json(video);
+    return Response.json({
+      id: Number(video.id),
+      titulo: video.titulo,
+      descricao: video.descricao,
+      url: video.url,
+      thumbnail: video.thumbnail,
+      cargo: video.cargo,
+      cargo_label: video.cargo ? CARGO_LABELS[video.cargo] : null,
+      criador: video.criador ? { id: Number(video.criador.id), nome: video.criador.nome } : null,
+      ordem: video.ordem,
+      ativo: video.ativo,
+    });
   } catch (error) {
     console.error("Erro ao atualizar vídeo interno:", error);
     return Response.json({ error: "Erro ao atualizar vídeo" }, { status: 500 });
@@ -105,7 +134,7 @@ export async function DELETE(request, { params }) {
       return Response.json({ error: "Vídeo não encontrado" }, { status: 404 });
     }
 
-    if (user.role === 'supervisor' && existingVideo.setor_id !== user.setor_id) {
+    if (user.role === 'supervisor' && existingVideo.cargo !== user.role) {
       return Response.json({ error: "Sem permissão para excluir este vídeo" }, { status: 403 });
     }
 

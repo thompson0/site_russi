@@ -123,17 +123,18 @@ model usuarios {
 }
 
 model videos_internos {
-  id           BigInt   @id @unique @default(autoincrement())
+  id           BigInt    @id @unique @default(autoincrement())
   titulo       String
   descricao    String?
   url          String
   thumbnail    String?
   setor_id     BigInt?
+  cargo        UserRole?
   criado_por   BigInt?
-  ordem        Int      @default(0)
-  ativo        Boolean  @default(true)
-  data_criacao DateTime @default(now()) @db.Timestamptz(6)
-  setor        setores? @relation(fields: [setor_id], references: [id])
+  ordem        Int       @default(0)
+  ativo        Boolean   @default(true)
+  data_criacao DateTime  @default(now()) @db.Timestamptz(6)
+  setor        setores?  @relation(fields: [setor_id], references: [id])
   criador      usuarios? @relation("CriadorVideo", fields: [criado_por], references: [id])
 }
 

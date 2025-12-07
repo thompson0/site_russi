@@ -13355,6 +13355,7 @@ export namespace Prisma {
     url: string | null
     thumbnail: string | null
     setor_id: bigint | null
+    cargo: $Enums.UserRole | null
     criado_por: bigint | null
     ordem: number | null
     ativo: boolean | null
@@ -13368,6 +13369,7 @@ export namespace Prisma {
     url: string | null
     thumbnail: string | null
     setor_id: bigint | null
+    cargo: $Enums.UserRole | null
     criado_por: bigint | null
     ordem: number | null
     ativo: boolean | null
@@ -13381,6 +13383,7 @@ export namespace Prisma {
     url: number
     thumbnail: number
     setor_id: number
+    cargo: number
     criado_por: number
     ordem: number
     ativo: number
@@ -13410,6 +13413,7 @@ export namespace Prisma {
     url?: true
     thumbnail?: true
     setor_id?: true
+    cargo?: true
     criado_por?: true
     ordem?: true
     ativo?: true
@@ -13423,6 +13427,7 @@ export namespace Prisma {
     url?: true
     thumbnail?: true
     setor_id?: true
+    cargo?: true
     criado_por?: true
     ordem?: true
     ativo?: true
@@ -13436,6 +13441,7 @@ export namespace Prisma {
     url?: true
     thumbnail?: true
     setor_id?: true
+    cargo?: true
     criado_por?: true
     ordem?: true
     ativo?: true
@@ -13536,6 +13542,7 @@ export namespace Prisma {
     url: string
     thumbnail: string | null
     setor_id: bigint | null
+    cargo: $Enums.UserRole | null
     criado_por: bigint | null
     ordem: number
     ativo: boolean
@@ -13568,6 +13575,7 @@ export namespace Prisma {
     url?: boolean
     thumbnail?: boolean
     setor_id?: boolean
+    cargo?: boolean
     criado_por?: boolean
     ordem?: boolean
     ativo?: boolean
@@ -13583,6 +13591,7 @@ export namespace Prisma {
     url?: boolean
     thumbnail?: boolean
     setor_id?: boolean
+    cargo?: boolean
     criado_por?: boolean
     ordem?: boolean
     ativo?: boolean
@@ -13598,6 +13607,7 @@ export namespace Prisma {
     url?: boolean
     thumbnail?: boolean
     setor_id?: boolean
+    cargo?: boolean
     criado_por?: boolean
     ordem?: boolean
     ativo?: boolean
@@ -13613,13 +13623,14 @@ export namespace Prisma {
     url?: boolean
     thumbnail?: boolean
     setor_id?: boolean
+    cargo?: boolean
     criado_por?: boolean
     ordem?: boolean
     ativo?: boolean
     data_criacao?: boolean
   }
 
-  export type videos_internosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "thumbnail" | "setor_id" | "criado_por" | "ordem" | "ativo" | "data_criacao", ExtArgs["result"]["videos_internos"]>
+  export type videos_internosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "descricao" | "url" | "thumbnail" | "setor_id" | "cargo" | "criado_por" | "ordem" | "ativo" | "data_criacao", ExtArgs["result"]["videos_internos"]>
   export type videos_internosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     setor?: boolean | videos_internos$setorArgs<ExtArgs>
     criador?: boolean | videos_internos$criadorArgs<ExtArgs>
@@ -13646,6 +13657,7 @@ export namespace Prisma {
       url: string
       thumbnail: string | null
       setor_id: bigint | null
+      cargo: $Enums.UserRole | null
       criado_por: bigint | null
       ordem: number
       ativo: boolean
@@ -14081,6 +14093,7 @@ export namespace Prisma {
     readonly url: FieldRef<"videos_internos", 'String'>
     readonly thumbnail: FieldRef<"videos_internos", 'String'>
     readonly setor_id: FieldRef<"videos_internos", 'BigInt'>
+    readonly cargo: FieldRef<"videos_internos", 'UserRole'>
     readonly criado_por: FieldRef<"videos_internos", 'BigInt'>
     readonly ordem: FieldRef<"videos_internos", 'Int'>
     readonly ativo: FieldRef<"videos_internos", 'Boolean'>
@@ -19869,6 +19882,7 @@ export namespace Prisma {
     url: 'url',
     thumbnail: 'thumbnail',
     setor_id: 'setor_id',
+    cargo: 'cargo',
     criado_por: 'criado_por',
     ordem: 'ordem',
     ativo: 'ativo',
@@ -20668,6 +20682,7 @@ export namespace Prisma {
     url?: StringFilter<"videos_internos"> | string
     thumbnail?: StringNullableFilter<"videos_internos"> | string | null
     setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    cargo?: EnumUserRoleNullableFilter<"videos_internos"> | $Enums.UserRole | null
     criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
     ordem?: IntFilter<"videos_internos"> | number
     ativo?: BoolFilter<"videos_internos"> | boolean
@@ -20683,6 +20698,7 @@ export namespace Prisma {
     url?: SortOrder
     thumbnail?: SortOrderInput | SortOrder
     setor_id?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
     criado_por?: SortOrderInput | SortOrder
     ordem?: SortOrder
     ativo?: SortOrder
@@ -20701,6 +20717,7 @@ export namespace Prisma {
     url?: StringFilter<"videos_internos"> | string
     thumbnail?: StringNullableFilter<"videos_internos"> | string | null
     setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    cargo?: EnumUserRoleNullableFilter<"videos_internos"> | $Enums.UserRole | null
     criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
     ordem?: IntFilter<"videos_internos"> | number
     ativo?: BoolFilter<"videos_internos"> | boolean
@@ -20716,6 +20733,7 @@ export namespace Prisma {
     url?: SortOrder
     thumbnail?: SortOrderInput | SortOrder
     setor_id?: SortOrderInput | SortOrder
+    cargo?: SortOrderInput | SortOrder
     criado_por?: SortOrderInput | SortOrder
     ordem?: SortOrder
     ativo?: SortOrder
@@ -20737,6 +20755,7 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"videos_internos"> | string
     thumbnail?: StringNullableWithAggregatesFilter<"videos_internos"> | string | null
     setor_id?: BigIntNullableWithAggregatesFilter<"videos_internos"> | bigint | number | null
+    cargo?: EnumUserRoleNullableWithAggregatesFilter<"videos_internos"> | $Enums.UserRole | null
     criado_por?: BigIntNullableWithAggregatesFilter<"videos_internos"> | bigint | number | null
     ordem?: IntWithAggregatesFilter<"videos_internos"> | number
     ativo?: BoolWithAggregatesFilter<"videos_internos"> | boolean
@@ -21649,6 +21668,7 @@ export namespace Prisma {
     descricao?: string | null
     url: string
     thumbnail?: string | null
+    cargo?: $Enums.UserRole | null
     ordem?: number
     ativo?: boolean
     data_criacao?: Date | string
@@ -21663,6 +21683,7 @@ export namespace Prisma {
     url: string
     thumbnail?: string | null
     setor_id?: bigint | number | null
+    cargo?: $Enums.UserRole | null
     criado_por?: bigint | number | null
     ordem?: number
     ativo?: boolean
@@ -21675,6 +21696,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21689,6 +21711,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
@@ -21702,6 +21725,7 @@ export namespace Prisma {
     url: string
     thumbnail?: string | null
     setor_id?: bigint | number | null
+    cargo?: $Enums.UserRole | null
     criado_por?: bigint | number | null
     ordem?: number
     ativo?: boolean
@@ -21714,6 +21738,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21726,6 +21751,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
@@ -22630,6 +22656,13 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type EnumUserRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUserRoleNullableFilter<$PrismaModel> | $Enums.UserRole | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -22658,6 +22691,7 @@ export namespace Prisma {
     url?: SortOrder
     thumbnail?: SortOrder
     setor_id?: SortOrder
+    cargo?: SortOrder
     criado_por?: SortOrder
     ordem?: SortOrder
     ativo?: SortOrder
@@ -22678,6 +22712,7 @@ export namespace Prisma {
     url?: SortOrder
     thumbnail?: SortOrder
     setor_id?: SortOrder
+    cargo?: SortOrder
     criado_por?: SortOrder
     ordem?: SortOrder
     ativo?: SortOrder
@@ -22691,6 +22726,7 @@ export namespace Prisma {
     url?: SortOrder
     thumbnail?: SortOrder
     setor_id?: SortOrder
+    cargo?: SortOrder
     criado_por?: SortOrder
     ordem?: SortOrder
     ativo?: SortOrder
@@ -22702,6 +22738,16 @@ export namespace Prisma {
     setor_id?: SortOrder
     criado_por?: SortOrder
     ordem?: SortOrder
+  }
+
+  export type EnumUserRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUserRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.UserRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleNullableFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -23242,6 +23288,10 @@ export namespace Prisma {
     connect?: usuariosWhereUniqueInput
   }
 
+  export type NullableEnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole | null
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -23545,9 +23595,26 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumUserRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUserRoleNullableFilter<$PrismaModel> | $Enums.UserRole | null
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumUserRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUserRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.UserRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -23803,6 +23870,7 @@ export namespace Prisma {
     descricao?: string | null
     url: string
     thumbnail?: string | null
+    cargo?: $Enums.UserRole | null
     ordem?: number
     ativo?: boolean
     data_criacao?: Date | string
@@ -23815,6 +23883,7 @@ export namespace Prisma {
     descricao?: string | null
     url: string
     thumbnail?: string | null
+    cargo?: $Enums.UserRole | null
     criado_por?: bigint | number | null
     ordem?: number
     ativo?: boolean
@@ -23892,6 +23961,7 @@ export namespace Prisma {
     url?: StringFilter<"videos_internos"> | string
     thumbnail?: StringNullableFilter<"videos_internos"> | string | null
     setor_id?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
+    cargo?: EnumUserRoleNullableFilter<"videos_internos"> | $Enums.UserRole | null
     criado_por?: BigIntNullableFilter<"videos_internos"> | bigint | number | null
     ordem?: IntFilter<"videos_internos"> | number
     ativo?: BoolFilter<"videos_internos"> | boolean
@@ -23925,6 +23995,7 @@ export namespace Prisma {
     descricao?: string | null
     url: string
     thumbnail?: string | null
+    cargo?: $Enums.UserRole | null
     ordem?: number
     ativo?: boolean
     data_criacao?: Date | string
@@ -23938,6 +24009,7 @@ export namespace Prisma {
     url: string
     thumbnail?: string | null
     setor_id?: bigint | number | null
+    cargo?: $Enums.UserRole | null
     ordem?: number
     ativo?: boolean
     data_criacao?: Date | string
@@ -24343,6 +24415,7 @@ export namespace Prisma {
     descricao?: string | null
     url: string
     thumbnail?: string | null
+    cargo?: $Enums.UserRole | null
     criado_por?: bigint | number | null
     ordem?: number
     ativo?: boolean
@@ -24402,6 +24475,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24414,6 +24488,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
@@ -24426,6 +24501,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     criado_por?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
@@ -24439,6 +24515,7 @@ export namespace Prisma {
     url: string
     thumbnail?: string | null
     setor_id?: bigint | number | null
+    cargo?: $Enums.UserRole | null
     ordem?: number
     ativo?: boolean
     data_criacao?: Date | string
@@ -24450,6 +24527,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24463,6 +24541,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24475,6 +24554,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     thumbnail?: NullableStringFieldUpdateOperationsInput | string | null
     setor_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    cargo?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
     ordem?: IntFieldUpdateOperationsInput | number
     ativo?: BoolFieldUpdateOperationsInput | boolean
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string

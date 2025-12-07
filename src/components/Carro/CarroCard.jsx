@@ -8,20 +8,30 @@ import EditCarro from "./EditCarro";
 import AddCarro from "./AddCarro";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { useRefresh } from "@/context/RefreshContext";
+
 function CarroCard({ montadoraId }) {
   const [carros, setCarros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { refreshKey } = useRefresh();
 
   useEffect(() => {
-    async function fetchCarros() {
+    async function fetchData() {
       try {
-        const res = await fetch(`/api/carros/${montadoraId}?k=${refreshKey}`);
+        const [carrosRes, userRes] = await Promise.all([
+          fetch(`/api/carros/${montadoraId}?k=${refreshKey}`),
+          fetch("/api/me")
+        ]);
 
-        if (!res.ok) throw new Error("Erro ao buscar carros");
+        if (carrosRes.ok) {
+          const data = await carrosRes.json();
+          setCarros(data);
+        }
 
-        const data = await res.json();
-        setCarros(data);
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setIsAdmin(userData.role === "admin");
+        }
       } catch (error) {
         console.error("Erro:", error);
       } finally {
@@ -29,7 +39,7 @@ function CarroCard({ montadoraId }) {
       }
     }
 
-    if (montadoraId) fetchCarros();
+    if (montadoraId) fetchData();
   }, [montadoraId, refreshKey]);
 
   function handleCreated(newCar) {
@@ -59,17 +69,23 @@ function CarroCard({ montadoraId }) {
 
   if (carros.length === 0)
     return (
-      <p className="text-gray-400 text-center mt-10 flex flex-col">
-        Nenhum carro encontrado.
-        <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />
-      </p>
+      <div className="flex flex-col gap-4">
+        <p className="text-gray-400 text-center mt-10">
+          {isAdmin 
+            ? 'Nenhum carro encontrado. Clique em "+" para adicionar.'
+            : 'Nenhum carro encontrado.'}
+        </p>
+        {isAdmin && <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />}
+      </div>
     );
 
   return (
     <Card className="flex flex-col p-6 ">
-      <div className="flex justify-end ">
-        <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />
-      </div>
+      {isAdmin && (
+        <div className="flex justify-end ">
+          <AddCarro onCreated={handleCreated} montadoraId={montadoraId} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {carros.map((carro) => (
@@ -97,10 +113,12 @@ function CarroCard({ montadoraId }) {
               </p>
             </CardContent>
             
-            <CardFooter className="flex justify-between">
-              <DeleteCarro id={carro.id} onDelete={handleDeleted} />
-              <EditCarro id={carro.id} onUpdated={handleUpdated} />
-            </CardFooter>
+            {isAdmin && (
+              <CardFooter className="flex justify-between">
+                <DeleteCarro id={carro.id} onDelete={handleDeleted} />
+                <EditCarro id={carro.id} onUpdated={handleUpdated} />
+              </CardFooter>
+            )}
           </Card>
         ))}
       </div>

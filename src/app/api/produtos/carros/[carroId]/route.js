@@ -1,4 +1,22 @@
 import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
+import { verifyToken } from "@/lib/jwt";
+
+async function requireAdmin() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get("token")?.value
+
+  if (!token) {
+    return { error: "Não autorizado", status: 401 }
+  }
+
+  const decoded = verifyToken(token)
+  if (!decoded || decoded.role !== "admin") {
+    return { error: "Apenas administradores podem realizar esta ação", status: 403 }
+  }
+
+  return { user: decoded }
+}
 
 export async function GET(req, { params }) {
   try {
@@ -35,6 +53,11 @@ export async function GET(req, { params }) {
 
 export async function POST(req, { params }) {
   try {
+    const authResult = await requireAdmin()
+    if (authResult.error) {
+      return Response.json({ error: authResult.error }, { status: authResult.status })
+    }
+
     const { carroId } = await params || {};
     let carroIdBig;
     try {
@@ -80,6 +103,11 @@ export async function POST(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
+    const authResult = await requireAdmin()
+    if (authResult.error) {
+      return Response.json({ error: authResult.error }, { status: authResult.status })
+    }
+
     const { carroId } = params || {};
     let carroIdBig;
     try {

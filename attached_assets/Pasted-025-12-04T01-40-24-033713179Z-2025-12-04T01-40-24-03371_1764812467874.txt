@@ -1,0 +1,81 @@
+025-12-04T01:40:24.033713179Z 
+2025-12-04T01:40:24.033716309Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:24.043367845Z Erro ao buscar vídeos internos: Error [PrismaClientKnownRequestError]: 
+2025-12-04T01:40:24.043407555Z Invalid `prisma.videos_internos.findMany()` invocation:
+2025-12-04T01:40:24.043412425Z 
+2025-12-04T01:40:24.043416815Z 
+2025-12-04T01:40:24.043420955Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:24.043424965Z     at hE.handleRequestError (.next/server/chunks/990.js:114:7826)
+2025-12-04T01:40:24.043429485Z     at hE.handleAndLogRequestError (.next/server/chunks/990.js:114:6886)
+2025-12-04T01:40:24.043434045Z     at hE.request (.next/server/chunks/990.js:114:6593)
+2025-12-04T01:40:24.043437895Z     at async e (.next/server/chunks/990.js:126:7513)
+2025-12-04T01:40:24.043441615Z     at async x (.next/server/app/api/videos-internos/route.js:1:3942)
+2025-12-04T01:40:24.043445515Z     at async k (.next/server/app/api/videos-internos/route.js:1:8228)
+2025-12-04T01:40:24.043450005Z     at async g (.next/server/app/api/videos-internos/route.js:1:9231) {
+2025-12-04T01:40:24.043454685Z   code: 'P2022',
+2025-12-04T01:40:24.043458895Z   clientVersion: '6.17.1',
+2025-12-04T01:40:24.043462375Z   meta: [Object]
+2025-12-04T01:40:24.043465465Z }
+2025-12-04T01:40:36.323314141Z prisma:error 
+2025-12-04T01:40:36.323376021Z Invalid `prisma.videos_internos.findMany()` invocation:
+2025-12-04T01:40:36.323383890Z 
+2025-12-04T01:40:36.323389102Z 
+2025-12-04T01:40:36.323397942Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:36.324522873Z Erro ao buscar vídeos internos: Error [PrismaClientKnownRequestError]: 
+2025-12-04T01:40:36.324538513Z Invalid `prisma.videos_internos.findMany()` invocation:
+2025-12-04T01:40:36.324543423Z 
+2025-12-04T01:40:36.324547553Z 
+2025-12-04T01:40:36.324589973Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:36.324593943Z     at hE.handleRequestError (.next/server/chunks/990.js:114:7826)
+2025-12-04T01:40:36.324596803Z     at hE.handleAndLogRequestError (.next/server/chunks/990.js:114:6886)
+2025-12-04T01:40:36.324599533Z     at hE.request (.next/server/chunks/990.js:114:6593)
+2025-12-04T01:40:36.324602133Z     at async e (.next/server/chunks/990.js:126:7513)
+2025-12-04T01:40:36.324604893Z     at async x (.next/server/app/api/videos-internos/route.js:1:3942)
+2025-12-04T01:40:36.324607593Z     at async k (.next/server/app/api/videos-internos/route.js:1:8228)
+2025-12-04T01:40:36.324610363Z     at async g (.next/server/app/api/videos-internos/route.js:1:9231) {
+2025-12-04T01:40:36.324613213Z   code: 'P2022',
+2025-12-04T01:40:36.324615833Z   clientVersion: '6.17.1',
+2025-12-04T01:40:36.324618473Z   meta: [Object]
+2025-12-04T01:40:36.324621083Z }
+2025-12-04T01:40:51.457181590Z prisma:error 
+2025-12-04T01:40:51.457216150Z Invalid `prisma.videos_internos.create()` invocation:
+2025-12-04T01:40:51.457221721Z 
+2025-12-04T01:40:51.457225910Z 
+2025-12-04T01:40:51.457230460Z The column `cargo` does not exist in the current database.
+2025-12-04T01:40:51.458832612Z Erro ao criar vídeo interno: Error [PrismaClientKnownRequestError]: 
+2025-12-04T01:40:51.458875404Z Invalid `prisma.videos_internos.create()` invocation:
+2025-12-04T01:40:51.458881103Z 
+2025-12-04T01:40:51.458885223Z 
+2025-12-04T01:40:51.458889313Z The column `cargo` does not exist in the current database.
+2025-12-04T01:40:51.458893303Z     at hE.handleRequestError (.next/server/chunks/990.js:114:7826)
+2025-12-04T01:40:51.458897213Z     at hE.handleAndLogRequestError (.next/server/chunks/990.js:114:6886)
+2025-12-04T01:40:51.458901093Z     at hE.request (.next/server/chunks/990.js:114:6593)
+2025-12-04T01:40:51.458904964Z     at async e (.next/server/chunks/990.js:126:7513)
+2025-12-04T01:40:51.458908724Z     at async y (.next/server/app/api/videos-internos/route.js:1:5053)
+2025-12-04T01:40:51.458912613Z     at async k (.next/server/app/api/videos-internos/route.js:1:8228)
+2025-12-04T01:40:51.458916433Z     at async g (.next/server/app/api/videos-internos/route.js:1:9231) {
+2025-12-04T01:40:51.458920253Z   code: 'P2022',
+2025-12-04T01:40:51.458923973Z   clientVersion: '6.17.1',
+2025-12-04T01:40:51.458927793Z   meta: [Object]
+2025-12-04T01:40:51.458931473Z }
+2025-12-04T01:40:54.326226408Z prisma:error 
+2025-12-04T01:40:54.326246948Z Invalid `prisma.videos_internos.findMany()` invocation:
+2025-12-04T01:40:54.326251878Z 
+2025-12-04T01:40:54.326256118Z 
+2025-12-04T01:40:54.326272218Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:54.326927958Z Erro ao buscar vídeos internos: Error [PrismaClientKnownRequestError]: 
+2025-12-04T01:40:54.326945418Z Invalid `prisma.videos_internos.findMany()` invocation:
+2025-12-04T01:40:54.326948369Z 
+2025-12-04T01:40:54.326950409Z 
+2025-12-04T01:40:54.326952358Z The column `videos_internos.cargo` does not exist in the current database.
+2025-12-04T01:40:54.326965529Z     at hE.handleRequestError (.next/server/chunks/990.js:114:7826)
+2025-12-04T01:40:54.326967508Z     at hE.handleAndLogRequestError (.next/server/chunks/990.js:114:6886)
+2025-12-04T01:40:54.326969538Z     at hE.request (.next/server/chunks/990.js:114:6593)
+2025-12-04T01:40:54.326971438Z     at async e (.next/server/chunks/990.js:126:7513)
+2025-12-04T01:40:54.326973468Z     at async x (.next/server/app/api/videos-internos/route.js:1:3942)
+2025-12-04T01:40:54.326975449Z     at async k (.next/server/app/api/videos-internos/route.js:1:8228)
+2025-12-04T01:40:54.326977378Z     at async g (.next/server/app/api/videos-internos/route.js:1:9231) {
+2025-12-04T01:40:54.326979338Z   code: 'P2022',
+2025-12-04T01:40:54.326981238Z   clientVersion: '6.17.1',
+2025-12-04T01:40:54.326983148Z   meta: [Object]
+2025-12-04T01:40:54.326985038Z }
