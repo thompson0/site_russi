@@ -71,19 +71,24 @@ export default function HeroSection() {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      const handleCanPlay = () => setVideoLoaded(true);
-      video.addEventListener("canplaythrough", handleCanPlay);
-      if (video.readyState >= 3) {
+      const handleLoaded = () => setVideoLoaded(true);
+      video.addEventListener("loadeddata", handleLoaded);
+      video.addEventListener("canplay", handleLoaded);
+      if (video.readyState >= 2) {
         setVideoLoaded(true);
       }
-      return () => video.removeEventListener("canplaythrough", handleCanPlay);
+      video.load();
+      return () => {
+        video.removeEventListener("loadeddata", handleLoaded);
+        video.removeEventListener("canplay", handleLoaded);
+      };
     }
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Video Background */}
-      <div className={`absolute inset-0 w-full h-full overflow-hidden transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}>
+      {/* Video Background - z-0 */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
         <video
           ref={videoRef}
           autoPlay
@@ -96,10 +101,13 @@ export default function HeroSection() {
         </video>
       </div>
       
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/70 to-slate-800/60" />
+      {/* Dark overlay - z-[1] */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/60 to-slate-800/50 z-[1]" />
       
-      <FuturisticBackground />
+      {/* FuturisticBackground - z-[2] */}
+      <div className="absolute inset-0 z-[2]">
+        <FuturisticBackground />
+      </div>
 
       <div 
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pt-24 sm:py-20 sm:pt-32"
