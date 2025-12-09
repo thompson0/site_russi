@@ -62,7 +62,13 @@ export default function VideoLoader({ children }) {
     }
   }, [videoReady, progress]);
 
-  if (!mounted || isLoading) {
+  if (!mounted) {
+    return (
+      <div className="fixed inset-0 z-50 bg-slate-900" />
+    );
+  }
+
+  if (isLoading) {
     return (
       <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900">
         <div className="relative flex flex-col items-center">
@@ -125,7 +131,24 @@ export default function VideoLoader({ children }) {
   }
 
   return (
-    <div className="animate-fadeIn">
+    <div 
+      className="opacity-0"
+      style={{
+        animation: 'smoothFadeIn 1.2s ease-out forwards',
+      }}
+    >
+      <style jsx global>{`
+        @keyframes smoothFadeIn {
+          0% {
+            opacity: 0;
+            transform: scale(1.02);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
       {children}
     </div>
   );
