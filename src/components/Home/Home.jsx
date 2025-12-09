@@ -11,6 +11,7 @@ import FloatingElements from "./FloatingElements";
 import AnimatedSection from "./AnimatedSection";
 import InteractiveCard from "./InteractiveCard";
 import BrandsCarousel from "./BrandsCarousel";
+import VideoLoader from "@/components/ui/VideoLoader";
 import { 
   BuildingOffice2Icon, 
   AcademicCapIcon, 
@@ -68,6 +69,7 @@ const diferenciais = [
 
 function HomePage() {
     return (
+        <VideoLoader>
         <div className="min-h-screen relative">
             <FloatingElements />
             <NavHome />
@@ -254,6 +256,7 @@ function HomePage() {
 
             <Footer />
         </div>
+        </VideoLoader>
     );
 }
 
