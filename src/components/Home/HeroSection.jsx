@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRightIcon, PlayIcon, TrophyIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import FuturisticBackground from "./FuturisticBackground";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function AnimatedCounter({ end, duration = 2000, suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -53,8 +53,6 @@ function AnimatedCounter({ end, duration = 2000, suffix = "" }) {
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -68,41 +66,25 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      const handleLoaded = () => setVideoLoaded(true);
-      video.addEventListener("loadeddata", handleLoaded);
-      video.addEventListener("canplay", handleLoaded);
-      if (video.readyState >= 2) {
-        setVideoLoaded(true);
-      }
-      video.load();
-      return () => {
-        video.removeEventListener("loadeddata", handleLoaded);
-        video.removeEventListener("canplay", handleLoaded);
-      };
-    }
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Video Background - z-0 */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
-        >
-          <source src="/speedmetter.mp4" type="video/mp4" />
-        </video>
+      {/* YouTube Video Background - z-0 */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] min-w-[177.78vh] min-h-[56.25vw]">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/Im_fXpxm90E?autoplay=1&mute=1&loop=1&playlist=Im_fXpxm90E&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&cc_load_policy=0&hl=pt"
+            title="Background Video"
+            className="absolute top-0 left-0 w-full h-full"
+            style={{ border: 'none' }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={false}
+            loading="lazy"
+          />
+        </div>
       </div>
       
       {/* Dark overlay - z-[1] */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/60 to-slate-800/50 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/75 via-slate-900/65 to-slate-800/55 z-[1]" />
       
       {/* FuturisticBackground - z-[2] */}
       <div className="absolute inset-0 z-[2]">
