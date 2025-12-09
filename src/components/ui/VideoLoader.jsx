@@ -1,14 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function VideoLoader({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    
+    const video = document.createElement('video');
+    video.muted = true;
+    video.preload = 'auto';
+    
+    const handleCanPlay = () => {
+      setVideoReady(true);
+    };
+
+    video.addEventListener('canplaythrough', handleCanPlay);
+    video.addEventListener('canplay', handleCanPlay);
+    video.src = '/api/video';
+    video.load();
+
+    const timeout = setTimeout(() => {
+      setVideoReady(true);
+    }, 5000);
+
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlay);
+      video.removeEventListener('canplay', handleCanPlay);
+      clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -16,23 +40,27 @@ export default function VideoLoader({ children }) {
 
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
+        const target = videoReady ? 100 : 85;
+        if (prev >= target) {
+          if (videoReady) clearInterval(interval);
+          return target;
         }
-        return prev + Math.random() * 15 + 5;
+        const increment = videoReady ? 20 : Math.random() * 10 + 3;
+        return Math.min(prev + increment, target);
       });
-    }, 200);
+    }, 150);
 
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    return () => clearInterval(interval);
+  }, [mounted, videoReady]);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
-  }, [mounted]);
+  useEffect(() => {
+    if (videoReady && progress >= 95) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [videoReady, progress]);
 
   if (!mounted || isLoading) {
     return (
@@ -74,7 +102,7 @@ export default function VideoLoader({ children }) {
           </div>
 
           <p className="text-slate-400 text-sm animate-pulse">
-            Carregando experiência...
+            {videoReady ? "Preparando..." : "Carregando experiência..."}
           </p>
 
           <div className="absolute -inset-32 pointer-events-none">
