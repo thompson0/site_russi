@@ -154,58 +154,76 @@ export default function VideoLoader({ children }) {
             </div>
           </div>
 
-          {/* Car silhouette */}
-          <div className="relative mb-6" style={{ animation: 'bounce 0.5s ease-in-out infinite' }}>
-            <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-              {/* Car body */}
+          {/* Porsche-style car silhouette */}
+          <div className="relative mb-6" style={{ animation: 'bounce 0.4s ease-in-out infinite' }}>
+            <svg width="160" height="50" viewBox="0 0 160 50" fill="none">
+              {/* Car body - Porsche 911 style */}
               <path 
-                d="M15 28 L25 28 L30 18 L45 12 L75 12 L90 18 L95 28 L105 28 L105 32 L100 35 L20 35 L15 32 Z" 
-                fill="url(#carGradient)"
-                stroke="#60a5fa"
-                strokeWidth="1"
-              />
-              {/* Windows */}
-              <path 
-                d="M35 17 L45 14 L70 14 L80 17 L75 25 L40 25 Z" 
-                fill="#1e3a5f"
-                stroke="#3b82f6"
+                d="M10 35 L18 35 L22 28 L28 24 L38 18 L55 14 L75 13 L95 14 L110 16 L125 20 L138 28 L142 35 L150 35 L150 38 L145 42 L15 42 L10 38 Z" 
+                fill="url(#porscheGradient)"
+                stroke="#94a3b8"
                 strokeWidth="0.5"
               />
+              {/* Roof line - sloping Porsche style */}
+              <path 
+                d="M55 14 L52 13 L70 11 L95 12 L105 14"
+                fill="none"
+                stroke="#cbd5e1"
+                strokeWidth="0.5"
+              />
+              {/* Rear window */}
+              <path 
+                d="M42 17 L55 13 L75 12 L78 13 L75 22 L45 22 Z" 
+                fill="#0f172a"
+                stroke="#64748b"
+                strokeWidth="0.5"
+              />
+              {/* Side window */}
+              <path 
+                d="M80 13 L95 14 L105 17 L108 22 L80 22 Z" 
+                fill="#0f172a"
+                stroke="#64748b"
+                strokeWidth="0.5"
+              />
+              {/* Door line */}
+              <line x1="78" y1="22" x2="78" y2="35" stroke="#64748b" strokeWidth="0.5" />
+              {/* Side intake */}
+              <path d="M115 25 L125 22 L128 28 L118 30 Z" fill="#1e293b" />
+              {/* Front bumper detail */}
+              <path d="M135 30 L145 32 L145 35 L138 35 Z" fill="#334155" />
+              {/* Rear spoiler */}
+              <path d="M18 25 L10 23 L8 25 L15 27 Z" fill="#475569" />
+              {/* Headlights - Porsche style round */}
+              <ellipse cx="140" cy="30" rx="4" ry="3" fill="#fef3c7" style={{ animation: 'pulse 1s ease-in-out infinite' }} />
+              <ellipse cx="140" cy="30" rx="2" ry="1.5" fill="#fbbf24" />
+              {/* Tail lights */}
+              <ellipse cx="15" cy="32" rx="3" ry="2" fill="#ef4444" style={{ animation: 'pulse 1.5s ease-in-out infinite' }} />
               {/* Front wheel */}
-              <circle cx="30" cy="32" r="8" fill="#1e293b" stroke="#475569" strokeWidth="2" />
-              <circle 
-                cx="30" 
-                cy="32" 
-                r="4" 
-                fill="#334155"
-                style={{ transformOrigin: '30px 32px', animation: 'spin 0.5s linear infinite' }}
-              />
-              {/* Wheel spokes */}
-              <g style={{ transformOrigin: '30px 32px', animation: 'spin 0.5s linear infinite' }}>
-                <line x1="30" y1="28" x2="30" y2="36" stroke="#64748b" strokeWidth="1" />
-                <line x1="26" y1="32" x2="34" y2="32" stroke="#64748b" strokeWidth="1" />
+              <circle cx="35" cy="38" r="9" fill="#0f172a" stroke="#475569" strokeWidth="2" />
+              <circle cx="35" cy="38" r="6" fill="#1e293b" />
+              <g style={{ transformOrigin: '35px 38px', animation: 'spin 0.3s linear infinite' }}>
+                <circle cx="35" cy="38" r="3" fill="#334155" stroke="#64748b" strokeWidth="0.5" />
+                <line x1="35" y1="32" x2="35" y2="35" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="35" y1="41" x2="35" y2="44" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="29" y1="38" x2="32" y2="38" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="38" y1="38" x2="41" y2="38" stroke="#94a3b8" strokeWidth="1" />
               </g>
-              {/* Back wheel */}
-              <circle cx="90" cy="32" r="8" fill="#1e293b" stroke="#475569" strokeWidth="2" />
-              <circle 
-                cx="90" 
-                cy="32" 
-                r="4" 
-                fill="#334155"
-                style={{ transformOrigin: '90px 32px', animation: 'spin 0.5s linear infinite' }}
-              />
-              {/* Wheel spokes */}
-              <g style={{ transformOrigin: '90px 32px', animation: 'spin 0.5s linear infinite' }}>
-                <line x1="90" y1="28" x2="90" y2="36" stroke="#64748b" strokeWidth="1" />
-                <line x1="86" y1="32" x2="94" y2="32" stroke="#64748b" strokeWidth="1" />
+              {/* Rear wheel */}
+              <circle cx="125" cy="38" r="9" fill="#0f172a" stroke="#475569" strokeWidth="2" />
+              <circle cx="125" cy="38" r="6" fill="#1e293b" />
+              <g style={{ transformOrigin: '125px 38px', animation: 'spin 0.3s linear infinite' }}>
+                <circle cx="125" cy="38" r="3" fill="#334155" stroke="#64748b" strokeWidth="0.5" />
+                <line x1="125" y1="32" x2="125" y2="35" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="125" y1="41" x2="125" y2="44" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="119" y1="38" x2="122" y2="38" stroke="#94a3b8" strokeWidth="1" />
+                <line x1="128" y1="38" x2="131" y2="38" stroke="#94a3b8" strokeWidth="1" />
               </g>
-              {/* Headlight */}
-              <ellipse cx="100" cy="26" rx="3" ry="2" fill="#fbbf24" style={{ animation: 'pulse 1s ease-in-out infinite' }} />
-              {/* Gradient definition */}
+              {/* Gradient definitions */}
               <defs>
-                <linearGradient id="carGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#1e40af" />
+                <linearGradient id="porscheGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#e2e8f0" />
+                  <stop offset="50%" stopColor="#94a3b8" />
+                  <stop offset="100%" stopColor="#64748b" />
                 </linearGradient>
               </defs>
             </svg>
@@ -264,18 +282,16 @@ export default function VideoLoader({ children }) {
     <div 
       className="opacity-0"
       style={{
-        animation: 'smoothFadeIn 1.2s ease-out forwards',
+        animation: 'smoothFadeIn 1s ease-out forwards',
       }}
     >
       <style jsx global>{`
         @keyframes smoothFadeIn {
           0% {
             opacity: 0;
-            transform: scale(1.02);
           }
           100% {
             opacity: 1;
-            transform: scale(1);
           }
         }
       `}</style>
