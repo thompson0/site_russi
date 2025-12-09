@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["yt-dlp"]
 
 [userenv]
 
@@ -47,7 +48,7 @@ localPort = 36293
 externalPort = 3002
 
 [[ports]]
-localPort = 45101
+localPort = 38429
 externalPort = 3001
 
 [deployment]
