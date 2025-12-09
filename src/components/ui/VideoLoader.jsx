@@ -154,60 +154,13 @@ export default function VideoLoader({ children }) {
             </div>
           </div>
 
-          {/* Animated car GIF */}
-          <div className="relative mb-6">
-            <img 
-              src="/Red_Car_1765315847646.gif" 
-              alt="Loading car" 
-              className="h-16 w-auto"
-              style={{ imageRendering: 'auto' }}
-            />
-          </div>
-
-          {/* Road */}
-          <div className="relative w-64 h-2 bg-slate-700 rounded-full overflow-hidden mb-4">
-            <div 
-              className="absolute inset-0 flex items-center"
-              style={{ animation: 'moveRoad 0.5s linear infinite' }}
-            >
-              {[...Array(12)].map((_, i) => (
-                <div key={i} className="w-4 h-0.5 bg-yellow-400 mx-2 rounded" />
-              ))}
-            </div>
-            {/* Progress overlay */}
-            <div 
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500/30 to-transparent"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
           {/* Loading text */}
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-400 text-sm mt-6">
             {progress < 30 && "Ligando motor..."}
             {progress >= 30 && progress < 60 && "Aquecendo..."}
             {progress >= 60 && progress < 90 && "Acelerando..."}
             {progress >= 90 && "Pronto para partir!"}
           </p>
-        </div>
-
-        {/* Background gears */}
-        <div className="absolute top-10 left-10 opacity-10">
-          <svg width="80" height="80" viewBox="0 0 100 100" style={{ animation: 'spin 10s linear infinite' }}>
-            <path 
-              d="M50 10 L55 25 L70 20 L65 35 L80 40 L70 50 L80 60 L65 65 L70 80 L55 75 L50 90 L45 75 L30 80 L35 65 L20 60 L30 50 L20 40 L35 35 L30 20 L45 25 Z"
-              fill="#3b82f6"
-            />
-            <circle cx="50" cy="50" r="15" fill="#1e293b" />
-          </svg>
-        </div>
-        <div className="absolute bottom-20 right-10 opacity-10">
-          <svg width="60" height="60" viewBox="0 0 100 100" style={{ animation: 'spin 8s linear infinite reverse' }}>
-            <path 
-              d="M50 10 L55 25 L70 20 L65 35 L80 40 L70 50 L80 60 L65 65 L70 80 L55 75 L50 90 L45 75 L30 80 L35 65 L20 60 L30 50 L20 40 L35 35 L30 20 L45 25 Z"
-              fill="#6366f1"
-            />
-            <circle cx="50" cy="50" r="15" fill="#1e293b" />
-          </svg>
         </div>
       </div>
     );
