@@ -24,7 +24,7 @@ export default function BrandsCarousel() {
             Parceiros
           </span>
           <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold text-white">
-            Marcas que Atendemos
+            Bandeiras em que Atuamos
           </h2>
         </div>
       </div>

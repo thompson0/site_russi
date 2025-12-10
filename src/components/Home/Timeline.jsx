@@ -68,7 +68,7 @@ export default function Timeline() {
       year: "2019",
       title: "Novo Sistema ERP",
       Icon: CogIcon,
-      description: "Implantação de sistema de gestão avançado"
+      description: "Melhorias e atualizações no sistema de gestão"
     },
     {
       year: "2021",
@@ -80,7 +80,7 @@ export default function Timeline() {
       year: "2023",
       title: "Transformação Digital",
       Icon: GlobeAmericasIcon,
-      description: "Implementação de plataforma e-commerce integrada"
+      description: "Digitalização total dos processos físicos para reduzir impacto ambiental."
     },
     {
       year: "2024",
