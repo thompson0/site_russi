@@ -61,7 +61,7 @@ const diferenciais = [
     },
     {
         titulo: "Marcas Atendidas",
-        texto: "Hyundai, Chery, Honda, Ford, Chevrolet, Subaru, Toyota, Volkswagen, GWM",
+        texto: "Hyundai, Caoa Chery, Honda, Ford, Chevrolet, Subaru, Toyota, Volkswagen, GWM",
         icon: <TruckIcon className="w-7 h-7 sm:w-8 sm:h-8 text-purple-400" />,
         destaque: "Parcerias"
     }
