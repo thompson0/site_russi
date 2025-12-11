@@ -55,10 +55,14 @@ export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleMouseMove = (e) => {
+      const width = window.innerWidth || 1;
+      const height = window.innerHeight || 1;
       setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
+        x: (e.clientX / width - 0.5) * 20,
+        y: (e.clientY / height - 0.5) * 20,
       });
     };
 
