@@ -5,7 +5,6 @@ import Link from "next/link";
 import { 
   EnvelopeIcon, 
   PhoneIcon, 
-  MapPinIcon, 
   ArrowLeftIcon,
   BuildingOffice2Icon,
   UserGroupIcon,
@@ -105,7 +104,7 @@ export default function SACPage() {
               ))}
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div className="grid sm:grid-cols-2 gap-6 mb-12">
               <a 
                 href="tel:+551123717000"
                 className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1"
@@ -118,25 +117,7 @@ export default function SACPage() {
                 <p className="text-slate-500 text-sm mt-2">Clique para ligar</p>
               </a>
 
-              <a
-                href="https://maps.google.com/?q=R.+Gomes+Nogueira,+299+-+Ipiranga,+São+Paulo+-+SP,+04265-010"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-orange-500/50 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <MapPinIcon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-1">Endereço</h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  R. Gomes Nogueira, 299<br />
-                  Ipiranga, São Paulo - SP<br />
-                  CEP: 04265-010
-                </p>
-                <p className="text-slate-500 text-sm mt-2">Clique para ver no mapa</p>
-              </a>
-
-              <div className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 sm:col-span-2 lg:col-span-1">
+              <div className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4">
                   <ClockIcon className="w-6 h-6 text-white" />
                 </div>
