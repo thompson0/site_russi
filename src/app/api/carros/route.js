@@ -42,6 +42,10 @@ export async function GET(req) {
           montadora_id: true,
           foto_url: true,
           imagem: true,
+          fotos: {
+            select: { id: true, foto_url: true, ordem: true },
+            orderBy: { ordem: 'asc' }
+          },
         },
       })
 
@@ -67,6 +71,10 @@ export async function GET(req) {
         montadora_id: true,
         foto_url: true,
         imagem: true,
+        fotos: {
+          select: { id: true, foto_url: true, ordem: true },
+          orderBy: { ordem: 'asc' }
+        },
       },
     })
 
@@ -91,7 +99,7 @@ export async function POST(req) {
     }
 
     const body = await req.json()
-    const { nome, ano_de, ano_ate, versao, montadora_id, foto_url, imagem } = body
+    const { nome, ano_de, ano_ate, versao, montadora_id, foto_url, imagem, fotos } = body
 
     const anoDeVal = ano_de !== undefined && ano_de !== null && `${ano_de}` !== ""
       ? BigInt(ano_de)
@@ -110,9 +118,18 @@ export async function POST(req) {
         ano_ate: anoAteVal,
         versao,
         montadora_id: montadoraIdVal,
-        foto_url,
+        foto_url: fotos?.[0] || foto_url,
         imagem,
+        fotos: fotos?.length > 0 ? {
+          create: fotos.map((url, index) => ({
+            foto_url: url,
+            ordem: index
+          }))
+        } : undefined,
       },
+      include: {
+        fotos: { orderBy: { ordem: 'asc' } }
+      }
     })
 
     return NextResponse.json(serializeBigInt(novoCarro), { 
@@ -136,18 +153,44 @@ export async function PUT(req) {
     }
 
     const body = await req.json()
-    const { id, ...dados } = body
+    const { id, fotos, ...dados } = body
 
     if (!id) return NextResponse.json({ error: "ID não fornecido" }, { status: 400 })
 
+    const updateData = {
+      ...dados,
+      ano_de: dados.ano_de ? BigInt(dados.ano_de) : undefined,
+      ano_ate: dados.ano_ate ? BigInt(dados.ano_ate) : undefined,
+      montadora_id: dados.montadora_id ? BigInt(dados.montadora_id) : undefined,
+    }
+
+    // Only update photos if fotos array is explicitly provided (not undefined)
+    // This prevents accidental deletion when form submits without photo changes
+    if (fotos !== undefined) {
+      const validFotos = Array.isArray(fotos) ? fotos.filter(url => url && url.trim() !== '') : []
+      
+      // Delete existing photos and recreate
+      await prisma.carro_fotos.deleteMany({ where: { carro_id: BigInt(id) } })
+      
+      if (validFotos.length > 0) {
+        updateData.foto_url = validFotos[0]
+        updateData.fotos = {
+          create: validFotos.map((url, index) => ({
+            foto_url: url,
+            ordem: index
+          }))
+        }
+      } else {
+        updateData.foto_url = dados.foto_url || null
+      }
+    }
+
     const carroAtualizado = await prisma.carros.update({
       where: { id: BigInt(id) },
-      data: {
-        ...dados,
-        ano_de: dados.ano_de ? BigInt(dados.ano_de) : undefined,
-        ano_ate: dados.ano_ate ? BigInt(dados.ano_ate) : undefined,
-        montadora_id: dados.montadora_id ? BigInt(dados.montadora_id) : undefined,
-      },
+      data: updateData,
+      include: {
+        fotos: { orderBy: { ordem: 'asc' } }
+      }
     })
 
     return NextResponse.json(serializeBigInt(carroAtualizado), {
@@ -176,6 +219,7 @@ export async function DELETE(req) {
     if (!id) return NextResponse.json({ error: "ID não fornecido" }, { status: 400 })
 
     await prisma.$transaction([
+      prisma.carro_fotos.deleteMany({ where: { carro_id: BigInt(id) } }),
       prisma.carro_produtos.deleteMany({ where: { carro_id: BigInt(id) } }),
       prisma.carros.delete({ where: { id: BigInt(id) } }),
     ])

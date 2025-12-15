@@ -3,7 +3,18 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
   try {
     const produtos = await prisma.produtos.findMany({
-      select: { id: true, nome: true, codigo: true, foto_url: true, video_url: true, views: true },
+      select: { 
+        id: true, 
+        nome: true, 
+        codigo: true, 
+        foto_url: true, 
+        video_url: true, 
+        views: true,
+        fotos: {
+          select: { id: true, foto_url: true, ordem: true },
+          orderBy: { ordem: 'asc' }
+        }
+      },
     });
 
     const normalized = produtos.map((p) => ({

@@ -8,18 +8,17 @@ import {
   TagIcon, 
   QrCodeIcon, 
   PlayCircleIcon,
-  SparklesIcon,
   CheckBadgeIcon,
   ArrowLeftIcon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
 import ProdutoVideo from "../Videos/ProdutoVideo";
+import ImageCarousel from "@/components/ui/ImageCarousel";
 
 export default function VisitorProductView({ id }) {
   const [produto, setProduto] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchProduto() {
@@ -73,6 +72,10 @@ export default function VisitorProductView({ id }) {
     );
   }
 
+  const images = produto.fotos?.length > 0 
+    ? produto.fotos.map(f => f.foto_url)
+    : (produto.foto_url ? [produto.foto_url] : []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-12">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -108,23 +111,13 @@ export default function VisitorProductView({ id }) {
               <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 sm:p-8 flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
                 
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <div className={`relative transition-all duration-500 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                    <img
-                      src={produto.foto_url || "/placeholder.png"}
-                      alt={produto.nome}
-                      className="max-w-full max-h-[350px] object-contain rounded-lg shadow-2xl"
-                      onLoad={() => setImageLoaded(true)}
-                    />
-                  </div>
-                  
-                  {!imageLoaded && (
-                    <div className="w-64 h-64 bg-slate-700/50 rounded-lg animate-pulse flex items-center justify-center">
-                      <SparklesIcon className="w-12 h-12 text-slate-600" />
-                    </div>
-                  )}
+                <div className="relative w-full max-w-md">
+                  <ImageCarousel 
+                    images={images}
+                    aspectRatio="aspect-square"
+                    showThumbnails={images.length > 1}
+                    className="[&_img]:rounded-lg [&_img]:shadow-2xl"
+                  />
                 </div>
               </div>
 

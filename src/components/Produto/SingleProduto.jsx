@@ -7,8 +7,9 @@ import EditProduto from "./EditProduto";
 import QrCodeButton from "./QrCode";
 import { useRefresh } from "@/context/RefreshContext";
 import ProdutoVideo from "../Videos/ProdutoVideo";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+import ImageCarousel from "@/components/ui/ImageCarousel";
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 export default function SingleProduto({ id, qrcode = false }) {
   const [produto, setProduto] = useState(null);
@@ -52,6 +53,10 @@ export default function SingleProduto({ id, qrcode = false }) {
 
   if (!produto)
     return <p className="text-center text-gray-400 mt-10">Produto não encontrado.</p>;
+
+  const images = produto.fotos?.length > 0 
+    ? produto.fotos.map(f => f.foto_url)
+    : (produto.foto_url ? [produto.foto_url] : []);
         
   return (
     <div className="flex justify-center items-start min-h-full">
@@ -62,19 +67,19 @@ export default function SingleProduto({ id, qrcode = false }) {
         </CardHeader>
 
         <CardContent className="flex flex-col items-center gap-4">
-          <img
-            src={produto.foto_url || "/placeholder.png"}
-            alt={produto.nome}
-            className="w-64 h-64 object-contain"
-          />
+          <div className="w-full max-w-md">
+            <ImageCarousel 
+              images={images}
+              aspectRatio="aspect-square"
+              showThumbnails={images.length > 1}
+            />
+          </div>
 
           <p className="text-lg">
             <strong>Código:</strong> {produto.codigo}
           </p>
 
-        <ProdutoVideo url={produto.video_url} />
-
-
+          <ProdutoVideo url={produto.video_url} />
         </CardContent>
 
         {!qrcode && (

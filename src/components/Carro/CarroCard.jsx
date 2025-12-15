@@ -96,7 +96,7 @@ function CarroCard({ montadoraId }) {
             <Link href={`/admin/produtos/${carro.id}`}>
               <CardHeader className="flex items-center justify-center h-48">
                 <img
-                  src={carro.foto_url || "/placeholder.png"}
+                  src={carro.fotos?.[0]?.foto_url || carro.foto_url || "/placeholder.png"}
                   alt={carro.nome}
                   className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
                 />

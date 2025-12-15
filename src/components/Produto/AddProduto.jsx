@@ -16,14 +16,13 @@ import { useAlert } from "@/context/AlertContext";
 import { useRefresh } from "@/context/RefreshContext";
 import { useSecureFetch } from "@/hooks/useSecureFetch";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { Label } from "../ui/label";
-
+import MultiImageUpload from "@/components/ui/MultiImageUpload";
 
 export default function AddProduto({ carroId, Allprodutos }) {
   const [form, setForm] = useState({
     nome: "",
     codigo: "",
-    foto_url: "",
+    fotos: [],
     video_url: "",
     carro_id: carroId || "",
   });
@@ -57,11 +56,16 @@ export default function AddProduto({ carroId, Allprodutos }) {
       const idParaUsar = Allprodutos ? form.carro_id : carroId;
       if (!idParaUsar) throw new Error("Selecione um carro");
 
+      const fotosValidas = form.fotos.filter(url => url && url.trim() !== "")
+
       const res = await secureFetch(
         `/api/produtos/carros/${idParaUsar}`,
         {
           method: "POST",
-          body: JSON.stringify(form),
+          body: JSON.stringify({
+            ...form,
+            fotos: fotosValidas,
+          }),
         },
         {
           successMsg: "Produto adicionado com sucesso!",
@@ -75,7 +79,7 @@ export default function AddProduto({ carroId, Allprodutos }) {
       setForm({
         nome: "",
         codigo: "",
-        foto_url: "",
+        fotos: [],
         video_url: "",
         carro_id: carroId || "",
       });
@@ -94,7 +98,7 @@ export default function AddProduto({ carroId, Allprodutos }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Novo Produto</DialogTitle>
         </DialogHeader>
@@ -132,23 +136,13 @@ export default function AddProduto({ carroId, Allprodutos }) {
             onChange={(e) => setForm({ ...form, codigo: e.target.value })}
             required
           />
-             <Label>Foto do produto</Label>
-           <Input
-            placeholder="URL da foto"
-            id="picture"
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0]
-              if (!file) return
 
-              const reader = new FileReader()
-              reader.onloadend = () => {
-                setForm({ ...form, foto_url: reader.result }) 
-              }
-              reader.readAsDataURL(file)
-            }}
+          <MultiImageUpload
+            label="Fotos do produto"
+            value={form.fotos}
+            onChange={(fotos) => setForm({ ...form, fotos })}
           />
+
           <Input
             placeholder="URL do vídeo"
             value={form.video_url}

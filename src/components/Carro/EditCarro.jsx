@@ -18,9 +18,12 @@ import { Pencil } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
 import { useRefresh } from "@/context/RefreshContext"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
+import MultiImageUpload from "../ui/MultiImageUpload"
 
 export default function EditCarro({ id, onUpdated }) {
   const [carro, setCarro] = useState(null)
+  const [fotos, setFotos] = useState([])
+  const [fotosModified, setFotosModified] = useState(false)
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const { triggerAlert } = useAlert()
@@ -30,13 +33,14 @@ export default function EditCarro({ id, onUpdated }) {
   async function fetchCarro() {
     try {
       setLoading(true)
-      const res = await secureFetch(`/api/carros?k=${refreshKey}`)
-      if (!res.ok) throw new Error("Erro ao buscar carros")
+      const res = await secureFetch(`/api/carros?id=${id}&k=${refreshKey}`)
+      if (!res.ok) throw new Error("Erro ao buscar carro")
       const data = await res.json()
-      const found = Array.isArray(data)
-        ? data.find((c) => String(c.id) === String(id))
-        : null
-      setCarro(found || null)
+      const { fotos: _dataFotos, ...carroData } = data
+      setCarro(carroData)
+      const fotosUrls = data.fotos?.map(f => f.foto_url) || (data.foto_url ? [data.foto_url] : [])
+      setFotos(fotosUrls)
+      setFotosModified(false)
     } catch (err) {
       console.error("Erro ao carregar carro:", err)
     } finally {
@@ -44,13 +48,25 @@ export default function EditCarro({ id, onUpdated }) {
     }
   }
 
+  function handleFotosChange(newFotos) {
+    setFotos(newFotos)
+    setFotosModified(true)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setSaving(true)
+
+    const { fotos: _omitFotos, ...carroData } = carro || {}
+    const payload = { ...carroData, id }
+    if (fotosModified) {
+      payload.fotos = fotos.filter(url => url && url.trim() !== "")
+    }
+
     try {
       const res = await secureFetch("/api/carros", {
         method: "PUT",
-        body: JSON.stringify({ ...carro, id }),
+        body: JSON.stringify(payload),
       })
 
       if (!res.ok) throw new Error("Erro ao salvar alterações")
@@ -78,7 +94,7 @@ export default function EditCarro({ id, onUpdated }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Editar Carro</DialogTitle>
         </DialogHeader>
@@ -133,25 +149,12 @@ export default function EditCarro({ id, onUpdated }) {
               </div>
             </div>
 
-            <div>
-              <Label>Foto do carro</Label>
-              <Input
-                placeholder="URL da foto"
-                id="picture"
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0]
-                  if (!file) return
+            <MultiImageUpload
+              label="Fotos do carro"
+              value={fotos}
+              onChange={handleFotosChange}
+            />
 
-                  const reader = new FileReader()
-                  reader.onloadend = () => {
-                    setCarro({ ...carro, foto_url: reader.result })
-                  }
-                  reader.readAsDataURL(file)
-                }}
-              />
-            </div>
             <DialogFooter className="mt-6 flex justify-end gap-2">
               <DialogClose asChild>
                 <Button type="button" variant="outline">

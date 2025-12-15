@@ -10,6 +10,12 @@ export async function GET(req, context) {
       where: {
         montadora_id: BigInt(montadoraId),
       },
+      include: {
+        fotos: {
+          select: { id: true, foto_url: true, ordem: true },
+          orderBy: { ordem: 'asc' }
+        }
+      }
     });
 
     return new Response(

@@ -17,6 +17,7 @@ import { PlusSquare } from "lucide-react"
 import { useSecureFetch } from "@/hooks/useSecureFetch"
 import { useRefresh } from "@/context/RefreshContext"
 import { Label } from "../ui/label"
+import MultiImageUpload from "../ui/MultiImageUpload"
 
 export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
   const [form, setForm] = useState({
@@ -25,8 +26,7 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
     ano_ate: "",
     versao: "",
     montadora_id: montadoraId ? String(montadoraId) : "",
-    foto_url: "",
-    imagem: "",
+    fotos: [],
   })
   const [open, setOpen] = useState(false)
   const [montadoras, setMontadoras] = useState([])
@@ -60,6 +60,8 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
       return
     }
 
+    const fotosValidas = form.fotos.filter(url => url && url.trim() !== "")
+
     try {
       const res = await secureFetch(
         "/api/carros",
@@ -70,6 +72,7 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
             ano_de: Number(form.ano_de),
             ano_ate: Number(form.ano_ate),
             montadora_id: form.montadora_id ? Number(form.montadora_id) : undefined,
+            fotos: fotosValidas,
           }),
         },
         {
@@ -85,15 +88,13 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
 
       triggerRefresh()
 
-
       setForm({
         nome: "",
         ano_de: "",
         ano_ate: "",
         versao: "",
         montadora_id: montadoraId ? String(montadoraId) : "",
-        foto_url: "",
-        imagem: "",
+        fotos: [],
       })
       setOpen(false)
     } catch (err) {
@@ -109,7 +110,7 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Cadastrar novo carro</DialogTitle>
         </DialogHeader>
@@ -160,21 +161,10 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
             </Select>
           )}
 
-          <Label>Foto do carro</Label>
-          <Input
-            placeholder="URL da foto"
-            id="picture"
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files[0]
-              if (!file) return
-              const reader = new FileReader()
-              reader.onloadend = () => {
-                setForm({ ...form, foto_url: reader.result })
-              }
-              reader.readAsDataURL(file)
-            }}
+          <MultiImageUpload
+            label="Fotos do carro"
+            value={form.fotos}
+            onChange={(fotos) => setForm({ ...form, fotos })}
           />
 
           <DialogFooter>

@@ -14,6 +14,10 @@ export async function GET() {
         montadora_id: true,
         foto_url: true,
         imagem: true,
+        fotos: {
+          select: { id: true, foto_url: true, ordem: true },
+          orderBy: { ordem: 'asc' }
+        }
       },
     });
 

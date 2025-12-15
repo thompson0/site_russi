@@ -2,6 +2,12 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifyToken } from "@/lib/jwt";
 
+function serializeBigInt(data) {
+  return JSON.parse(
+    JSON.stringify(data, (_, v) => (typeof v === "bigint" ? Number(v) : v))
+  )
+}
+
 async function requireAdmin() {
   const cookieStore = await cookies()
   const token = cookieStore.get("token")?.value
@@ -38,13 +44,14 @@ export async function GET(req, { params }) {
         codigo: true,
         foto_url: true,
         video_url: true,
+        fotos: {
+          select: { id: true, foto_url: true, ordem: true },
+          orderBy: { ordem: 'asc' }
+        },
       },
     });
 
-    return Response.json(
-      produtos.map((p) => ({ ...p, id: Number(p.id) })),
-      { status: 200 }
-    );
+    return Response.json(serializeBigInt(produtos), { status: 200 });
   } catch (error) {
     console.error("Erro ao buscar produtos por carro:", error);
     return Response.json({ error: error.message }, { status: 500 });
@@ -75,13 +82,27 @@ export async function POST(req, { params }) {
     }
 
     const body = await req.json();
-    const { nome, codigo, foto_url, video_url } = body;
+    const { nome, codigo, foto_url, video_url, fotos } = body;
 
     if (!nome || !codigo)
       return Response.json({ error: "Campos obrigatórios ausentes" }, { status: 400 });
 
     const novoProduto = await prisma.produtos.create({
-      data: { nome, codigo, foto_url, video_url },
+      data: { 
+        nome, 
+        codigo, 
+        foto_url: fotos?.[0] || foto_url, 
+        video_url,
+        fotos: fotos?.length > 0 ? {
+          create: fotos.map((url, index) => ({
+            foto_url: url,
+            ordem: index
+          }))
+        } : undefined,
+      },
+      include: {
+        fotos: { orderBy: { ordem: 'asc' } }
+      }
     });
 
     await prisma.carro_produtos.create({
@@ -91,10 +112,7 @@ export async function POST(req, { params }) {
       },
     });
 
-    return Response.json(
-      { ...novoProduto, id: Number(novoProduto.id) },
-      { status: 200 }
-    );
+    return Response.json(serializeBigInt(novoProduto), { status: 200 });
   } catch (error) {
     console.error("Erro ao criar produto:", error);
     return Response.json({ error: error.message }, { status: 500 });
@@ -108,7 +126,7 @@ export async function DELETE(req, { params }) {
       return Response.json({ error: authResult.error }, { status: authResult.status })
     }
 
-    const { carroId } = params || {};
+    const { carroId } = await params || {};
     let carroIdBig;
     try {
       carroIdBig = BigInt(carroId);
@@ -134,9 +152,10 @@ export async function DELETE(req, { params }) {
     });
 
     if (!isLinked) {
-      await prisma.produtos.delete({
-        where: { id: BigInt(produtoId) },
-      });
+      await prisma.$transaction([
+        prisma.produto_fotos.deleteMany({ where: { produto_id: BigInt(produtoId) } }),
+        prisma.produtos.delete({ where: { id: BigInt(produtoId) } }),
+      ])
     }
 
     return Response.json(
