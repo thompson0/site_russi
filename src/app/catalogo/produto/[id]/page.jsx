@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, QrCode, Play, Package, Download } from "lucide-react";
+import ImageCarousel from "@/components/ui/ImageCarousel";
 
 export default function CatalogoProdutoDetalhePage() {
   const params = useParams();
@@ -83,26 +84,31 @@ export default function CatalogoProdutoDetalhePage() {
         </button>
 
         <div className="bg-white rounded-3xl overflow-hidden shadow-2xl">
-          <div className="aspect-video bg-gray-50 flex items-center justify-center p-8 relative">
+          <div className="bg-gray-50 p-8 relative">
             {showVideo && produto.video_url ? (
-              <iframe
-                src={getEmbedUrl(produto.video_url)}
-                title={produto.nome}
-                className="w-full h-full absolute inset-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <div className="aspect-video">
+                <iframe
+                  src={getEmbedUrl(produto.video_url)}
+                  title={produto.nome}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             ) : (
               <>
-                <img
-                  src={produto.foto_url || "/placeholder.png"}
-                  alt={produto.nome}
-                  className="max-w-full max-h-full object-contain"
+                <ImageCarousel 
+                  images={produto.fotos?.length > 0 
+                    ? produto.fotos.map(f => f.foto_url) 
+                    : (produto.foto_url ? [produto.foto_url] : [])}
+                  aspectRatio="aspect-video"
+                  showThumbnails={produto.fotos?.length > 1}
+                  showIndicators={produto.fotos?.length > 1}
                 />
                 {produto.video_url && (
                   <button
                     onClick={() => setShowVideo(true)}
-                    className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-lg transition-colors"
+                    className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-lg transition-colors z-10"
                   >
                     <Play className="w-5 h-5" />
                     Ver vídeo
