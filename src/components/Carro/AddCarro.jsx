@@ -81,7 +81,8 @@ export default function AddCarro({ onCreated, Allcarros, montadoraId }) {
         }
       )
 
-      if (!res.ok) throw new Error("Erro ao criar carro")
+      if (!res) return
+      
       const novoCarro = await res.json()
 
       if (onCreated) onCreated(novoCarro)
