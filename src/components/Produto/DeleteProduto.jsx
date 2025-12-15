@@ -12,7 +12,11 @@ export default function DeleteProduto({produtoId, onDelete }) {
   const { secureFetch, loading } = useSecureFetch();
 
   async function handleDelete() {
+    if (loading) return;
     if (!confirm("Tem certeza que deseja excluir este produto?")) return;
+    
+    onDelete?.(produtoId);
+    
     const res = await secureFetch(
       `/api/produtos/${produtoId}`,
       {
@@ -26,7 +30,6 @@ export default function DeleteProduto({produtoId, onDelete }) {
 
     if (!res) return;
 
-    onDelete?.(produtoId);
     triggerRefresh();
   }
 

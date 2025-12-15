@@ -12,13 +12,15 @@ export default function DeleteCarro({ id, onDelete }) {
   const { secureFetch, loading } = useSecureFetch()
 
   async function handleDelete() {
-    if (!id) {
-      triggerAlert("error", "Erro!", "ID do carro não informado.")
+    if (!id || loading) {
+      if (!id) triggerAlert("error", "Erro!", "ID do carro não informado.")
       return
     }
 
     const confirmar = confirm("Tem certeza que deseja excluir este carro?")
     if (!confirmar) return
+
+    if (onDelete) onDelete(id)
 
     const res = await secureFetch(
       `/api/carros?id=${id}`,
@@ -32,7 +34,6 @@ export default function DeleteCarro({ id, onDelete }) {
     if (!res) return
 
     triggerRefresh()
-    if (onDelete) onDelete(id)
   }
 
   return (
