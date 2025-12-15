@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
-import { ProgressDemo } from "@/components/Home/ProgressDemo";
+import { LoadingGrid } from "@/components/ui/LoadingSpinner";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { useRefresh } from "@/context/RefreshContext";
 import EditProduto from "./EditProduto";
 import DeleteProduto from "./DeleteProduto";
@@ -34,9 +35,9 @@ export default function AllProdutos() {
 
   if (loading)
     return (
-      <div>
-        <p className="text-gray-400 text-center mt-10">Carregando produtos...</p>
-        <ProgressDemo />
+      <div className="space-y-6">
+        <p className="text-gray-400 text-center">Carregando produtos...</p>
+        <LoadingGrid count={6} />
       </div>
     );
 
@@ -60,17 +61,29 @@ if (produtos.length === 0)
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-end px-4">
-        <AddProduto Allprodutos={true} />
+        <AddProduto
+          Allprodutos={true}
+          onCreated={(novo) => {
+            if (!novo) return;
+            setProdutos((prev) => [novo, ...prev]);
+          }}
+        />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {produtos.map((p) => (
-          <Card key={p.id} className="group overflow-hidden transition-all hover:shadow-lg">
-            <CardHeader className="flex items-center justify-center h-48 cursor-pointer">
-              <img
-                src={p.foto_url || "/placeholder.png"}
+        {produtos.map((p, index) => (
+          <Card 
+            key={p.id} 
+            className="group overflow-hidden hover-lift animate-fadeInUp opacity-0"
+            style={{ animationDelay: `${Math.min(index * 50, 300)}ms`, animationFillMode: 'forwards' }}
+          >
+            <CardHeader className="p-0 cursor-pointer overflow-hidden">
+              <OptimizedImage
+                src={p.foto_url}
                 alt={p.nome}
-                className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                className="p-3 group-hover:scale-105 transition-transform duration-300"
+                containerClassName="h-48"
+                aspectRatio=""
               />
             </CardHeader>
 

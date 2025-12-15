@@ -83,11 +83,12 @@ export default function CatalogoMontadorasPage() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {filteredMontadoras.map((m) => (
+            {filteredMontadoras.map((m, index) => (
               <Link
                 key={m.id}
                 href={`/catalogo/montadoras/${m.id}`}
-                className="group bg-white rounded-2xl p-4 flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:shadow-green-500/10 hover:scale-[1.02] hover:-translate-y-1"
+                className="group bg-white rounded-2xl p-4 flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:shadow-green-500/10 hover:scale-[1.02] hover:-translate-y-1 animate-fadeInUp opacity-0"
+                style={{ animationDelay: `${Math.min(index * 40, 400)}ms`, animationFillMode: 'forwards' }}
               >
                 <div className="w-full aspect-square flex items-center justify-center mb-3 bg-gray-50 rounded-xl overflow-hidden">
                   <img

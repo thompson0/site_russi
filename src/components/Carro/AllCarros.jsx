@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
-import { ProgressDemo } from "@/components/Home/ProgressDemo";
+import { LoadingGrid } from "@/components/ui/LoadingSpinner";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import EditCarro from "./EditCarro";
 import DeleteCarro from "./DeleteCarro";
 import AddCarro from "./AddCarro";
@@ -44,9 +45,9 @@ export default function AllCarros() {
 
   if (loading)
     return (
-      <div>
-        <p className="text-gray-400 text-center mt-10">Carregando carros...</p>
-        <ProgressDemo />
+      <div className="space-y-6">
+        <p className="text-gray-400 text-center">Carregando carros...</p>
+        <LoadingGrid count={6} />
       </div>
     );
 
@@ -90,15 +91,21 @@ export default function AllCarros() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {carros.map((carro) => (
-          <Card key={carro.id} className="group overflow-hidden transition-all hover:shadow-lg">
+        {carros.map((carro, index) => (
+          <Card 
+            key={carro.id} 
+            className="group overflow-hidden hover-lift animate-fadeInUp opacity-0"
+            style={{ animationDelay: `${Math.min(index * 50, 300)}ms`, animationFillMode: 'forwards' }}
+          >
 
             <Link href={`/catalogo/produtos/${carro.id}`}>
-              <CardHeader className="flex items-center justify-center h-48 bg-gray-50 cursor-pointer">
-                <img
-                  src={carro.foto_url || "/placeholder.png"}
+              <CardHeader className="p-0 cursor-pointer overflow-hidden">
+                <OptimizedImage
+                  src={carro.foto_url}
                   alt={carro.nome}
-                  className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                  className="p-3 group-hover:scale-105 transition-transform duration-300"
+                  containerClassName="h-48 bg-gray-50"
+                  aspectRatio=""
                 />
               </CardHeader>
             </Link>
