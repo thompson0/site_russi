@@ -44,8 +44,13 @@ export type manuais = $Result.DefaultSelection<Prisma.$manuaisPayload>
  */
 export type montadoras = $Result.DefaultSelection<Prisma.$montadorasPayload>
 /**
+ * Model carro_fotos
+ * 
+ */
+export type carro_fotos = $Result.DefaultSelection<Prisma.$carro_fotosPayload>
+/**
  * Model produto_fotos
- * The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+ * 
  */
 export type produto_fotos = $Result.DefaultSelection<Prisma.$produto_fotosPayload>
 /**
@@ -290,6 +295,16 @@ export class PrismaClient<
     * ```
     */
   get montadoras(): Prisma.montadorasDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.carro_fotos`: Exposes CRUD operations for the **carro_fotos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Carro_fotos
+    * const carro_fotos = await prisma.carro_fotos.findMany()
+    * ```
+    */
+  get carro_fotos(): Prisma.carro_fotosDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.produto_fotos`: Exposes CRUD operations for the **produto_fotos** model.
@@ -836,6 +851,7 @@ export namespace Prisma {
     duvidas: 'duvidas',
     manuais: 'manuais',
     montadoras: 'montadoras',
+    carro_fotos: 'carro_fotos',
     produto_fotos: 'produto_fotos',
     produtos: 'produtos',
     setores: 'setores',
@@ -864,7 +880,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "carros" | "categorias" | "contatos" | "duvidas" | "manuais" | "montadoras" | "produto_fotos" | "produtos" | "setores" | "usuarios" | "videos_internos" | "videos_rh_procedimentos" | "videos" | "videos_assistidos" | "videos_instalador" | "carro_produtos"
+      modelProps: "carros" | "categorias" | "contatos" | "duvidas" | "manuais" | "montadoras" | "carro_fotos" | "produto_fotos" | "produtos" | "setores" | "usuarios" | "videos_internos" | "videos_rh_procedimentos" | "videos" | "videos_assistidos" | "videos_instalador" | "carro_produtos"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1309,6 +1325,80 @@ export namespace Prisma {
           count: {
             args: Prisma.montadorasCountArgs<ExtArgs>
             result: $Utils.Optional<MontadorasCountAggregateOutputType> | number
+          }
+        }
+      }
+      carro_fotos: {
+        payload: Prisma.$carro_fotosPayload<ExtArgs>
+        fields: Prisma.carro_fotosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.carro_fotosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.carro_fotosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          findFirst: {
+            args: Prisma.carro_fotosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.carro_fotosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          findMany: {
+            args: Prisma.carro_fotosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>[]
+          }
+          create: {
+            args: Prisma.carro_fotosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          createMany: {
+            args: Prisma.carro_fotosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.carro_fotosCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>[]
+          }
+          delete: {
+            args: Prisma.carro_fotosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          update: {
+            args: Prisma.carro_fotosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          deleteMany: {
+            args: Prisma.carro_fotosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.carro_fotosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.carro_fotosUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>[]
+          }
+          upsert: {
+            args: Prisma.carro_fotosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$carro_fotosPayload>
+          }
+          aggregate: {
+            args: Prisma.Carro_fotosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCarro_fotos>
+          }
+          groupBy: {
+            args: Prisma.carro_fotosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Carro_fotosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.carro_fotosCountArgs<ExtArgs>
+            result: $Utils.Optional<Carro_fotosCountAggregateOutputType> | number
           }
         }
       }
@@ -2154,6 +2244,7 @@ export namespace Prisma {
     duvidas?: duvidasOmit
     manuais?: manuaisOmit
     montadoras?: montadorasOmit
+    carro_fotos?: carro_fotosOmit
     produto_fotos?: produto_fotosOmit
     produtos?: produtosOmit
     setores?: setoresOmit
@@ -2245,10 +2336,12 @@ export namespace Prisma {
 
   export type CarrosCountOutputType = {
     produtos: number
+    fotos: number
   }
 
   export type CarrosCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produtos?: boolean | CarrosCountOutputTypeCountProdutosArgs
+    fotos?: boolean | CarrosCountOutputTypeCountFotosArgs
   }
 
   // Custom InputTypes
@@ -2267,6 +2360,13 @@ export namespace Prisma {
    */
   export type CarrosCountOutputTypeCountProdutosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: carro_produtosWhereInput
+  }
+
+  /**
+   * CarrosCountOutputType without action
+   */
+  export type CarrosCountOutputTypeCountFotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: carro_fotosWhereInput
   }
 
 
@@ -2307,10 +2407,12 @@ export namespace Prisma {
 
   export type ProdutosCountOutputType = {
     carros: number
+    fotos: number
   }
 
   export type ProdutosCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carros?: boolean | ProdutosCountOutputTypeCountCarrosArgs
+    fotos?: boolean | ProdutosCountOutputTypeCountFotosArgs
   }
 
   // Custom InputTypes
@@ -2329,6 +2431,13 @@ export namespace Prisma {
    */
   export type ProdutosCountOutputTypeCountCarrosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: carro_produtosWhereInput
+  }
+
+  /**
+   * ProdutosCountOutputType without action
+   */
+  export type ProdutosCountOutputTypeCountFotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: produto_fotosWhereInput
   }
 
 
@@ -2650,6 +2759,7 @@ export namespace Prisma {
     imagem?: boolean
     data_criacao?: boolean
     produtos?: boolean | carros$produtosArgs<ExtArgs>
+    fotos?: boolean | carros$fotosArgs<ExtArgs>
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
     _count?: boolean | CarrosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["carros"]>
@@ -2695,6 +2805,7 @@ export namespace Prisma {
   export type carrosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "ano_de" | "ano_ate" | "versao" | "montadora_id" | "foto_url" | "imagem" | "data_criacao", ExtArgs["result"]["carros"]>
   export type carrosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produtos?: boolean | carros$produtosArgs<ExtArgs>
+    fotos?: boolean | carros$fotosArgs<ExtArgs>
     montadora?: boolean | carros$montadoraArgs<ExtArgs>
     _count?: boolean | CarrosCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2709,6 +2820,7 @@ export namespace Prisma {
     name: "carros"
     objects: {
       produtos: Prisma.$carro_produtosPayload<ExtArgs>[]
+      fotos: Prisma.$carro_fotosPayload<ExtArgs>[]
       montadora: Prisma.$montadorasPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3116,6 +3228,7 @@ export namespace Prisma {
   export interface Prisma__carrosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     produtos<T extends carros$produtosArgs<ExtArgs> = {}>(args?: Subset<T, carros$produtosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_produtosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    fotos<T extends carros$fotosArgs<ExtArgs> = {}>(args?: Subset<T, carros$fotosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     montadora<T extends carros$montadoraArgs<ExtArgs> = {}>(args?: Subset<T, carros$montadoraArgs<ExtArgs>>): Prisma__montadorasClient<$Result.GetResult<Prisma.$montadorasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3572,6 +3685,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Carro_produtosScalarFieldEnum | Carro_produtosScalarFieldEnum[]
+  }
+
+  /**
+   * carros.fotos
+   */
+  export type carros$fotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    where?: carro_fotosWhereInput
+    orderBy?: carro_fotosOrderByWithRelationInput | carro_fotosOrderByWithRelationInput[]
+    cursor?: carro_fotosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Carro_fotosScalarFieldEnum | Carro_fotosScalarFieldEnum[]
   }
 
   /**
@@ -8810,6 +8947,1093 @@ export namespace Prisma {
 
 
   /**
+   * Model carro_fotos
+   */
+
+  export type AggregateCarro_fotos = {
+    _count: Carro_fotosCountAggregateOutputType | null
+    _avg: Carro_fotosAvgAggregateOutputType | null
+    _sum: Carro_fotosSumAggregateOutputType | null
+    _min: Carro_fotosMinAggregateOutputType | null
+    _max: Carro_fotosMaxAggregateOutputType | null
+  }
+
+  export type Carro_fotosAvgAggregateOutputType = {
+    id: number | null
+    carro_id: number | null
+    ordem: number | null
+  }
+
+  export type Carro_fotosSumAggregateOutputType = {
+    id: bigint | null
+    carro_id: bigint | null
+    ordem: number | null
+  }
+
+  export type Carro_fotosMinAggregateOutputType = {
+    id: bigint | null
+    carro_id: bigint | null
+    foto_url: string | null
+    ordem: number | null
+  }
+
+  export type Carro_fotosMaxAggregateOutputType = {
+    id: bigint | null
+    carro_id: bigint | null
+    foto_url: string | null
+    ordem: number | null
+  }
+
+  export type Carro_fotosCountAggregateOutputType = {
+    id: number
+    carro_id: number
+    foto_url: number
+    ordem: number
+    _all: number
+  }
+
+
+  export type Carro_fotosAvgAggregateInputType = {
+    id?: true
+    carro_id?: true
+    ordem?: true
+  }
+
+  export type Carro_fotosSumAggregateInputType = {
+    id?: true
+    carro_id?: true
+    ordem?: true
+  }
+
+  export type Carro_fotosMinAggregateInputType = {
+    id?: true
+    carro_id?: true
+    foto_url?: true
+    ordem?: true
+  }
+
+  export type Carro_fotosMaxAggregateInputType = {
+    id?: true
+    carro_id?: true
+    foto_url?: true
+    ordem?: true
+  }
+
+  export type Carro_fotosCountAggregateInputType = {
+    id?: true
+    carro_id?: true
+    foto_url?: true
+    ordem?: true
+    _all?: true
+  }
+
+  export type Carro_fotosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which carro_fotos to aggregate.
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of carro_fotos to fetch.
+     */
+    orderBy?: carro_fotosOrderByWithRelationInput | carro_fotosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: carro_fotosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` carro_fotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` carro_fotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned carro_fotos
+    **/
+    _count?: true | Carro_fotosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Carro_fotosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Carro_fotosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Carro_fotosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Carro_fotosMaxAggregateInputType
+  }
+
+  export type GetCarro_fotosAggregateType<T extends Carro_fotosAggregateArgs> = {
+        [P in keyof T & keyof AggregateCarro_fotos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCarro_fotos[P]>
+      : GetScalarType<T[P], AggregateCarro_fotos[P]>
+  }
+
+
+
+
+  export type carro_fotosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: carro_fotosWhereInput
+    orderBy?: carro_fotosOrderByWithAggregationInput | carro_fotosOrderByWithAggregationInput[]
+    by: Carro_fotosScalarFieldEnum[] | Carro_fotosScalarFieldEnum
+    having?: carro_fotosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Carro_fotosCountAggregateInputType | true
+    _avg?: Carro_fotosAvgAggregateInputType
+    _sum?: Carro_fotosSumAggregateInputType
+    _min?: Carro_fotosMinAggregateInputType
+    _max?: Carro_fotosMaxAggregateInputType
+  }
+
+  export type Carro_fotosGroupByOutputType = {
+    id: bigint
+    carro_id: bigint
+    foto_url: string
+    ordem: number
+    _count: Carro_fotosCountAggregateOutputType | null
+    _avg: Carro_fotosAvgAggregateOutputType | null
+    _sum: Carro_fotosSumAggregateOutputType | null
+    _min: Carro_fotosMinAggregateOutputType | null
+    _max: Carro_fotosMaxAggregateOutputType | null
+  }
+
+  type GetCarro_fotosGroupByPayload<T extends carro_fotosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Carro_fotosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Carro_fotosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Carro_fotosGroupByOutputType[P]>
+            : GetScalarType<T[P], Carro_fotosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type carro_fotosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    carro_id?: boolean
+    foto_url?: boolean
+    ordem?: boolean
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carro_fotos"]>
+
+  export type carro_fotosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    carro_id?: boolean
+    foto_url?: boolean
+    ordem?: boolean
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carro_fotos"]>
+
+  export type carro_fotosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    carro_id?: boolean
+    foto_url?: boolean
+    ordem?: boolean
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["carro_fotos"]>
+
+  export type carro_fotosSelectScalar = {
+    id?: boolean
+    carro_id?: boolean
+    foto_url?: boolean
+    ordem?: boolean
+  }
+
+  export type carro_fotosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "carro_id" | "foto_url" | "ordem", ExtArgs["result"]["carro_fotos"]>
+  export type carro_fotosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }
+  export type carro_fotosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }
+  export type carro_fotosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    carro?: boolean | carrosDefaultArgs<ExtArgs>
+  }
+
+  export type $carro_fotosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "carro_fotos"
+    objects: {
+      carro: Prisma.$carrosPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      carro_id: bigint
+      foto_url: string
+      ordem: number
+    }, ExtArgs["result"]["carro_fotos"]>
+    composites: {}
+  }
+
+  type carro_fotosGetPayload<S extends boolean | null | undefined | carro_fotosDefaultArgs> = $Result.GetResult<Prisma.$carro_fotosPayload, S>
+
+  type carro_fotosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<carro_fotosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Carro_fotosCountAggregateInputType | true
+    }
+
+  export interface carro_fotosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['carro_fotos'], meta: { name: 'carro_fotos' } }
+    /**
+     * Find zero or one Carro_fotos that matches the filter.
+     * @param {carro_fotosFindUniqueArgs} args - Arguments to find a Carro_fotos
+     * @example
+     * // Get one Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends carro_fotosFindUniqueArgs>(args: SelectSubset<T, carro_fotosFindUniqueArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Carro_fotos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {carro_fotosFindUniqueOrThrowArgs} args - Arguments to find a Carro_fotos
+     * @example
+     * // Get one Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends carro_fotosFindUniqueOrThrowArgs>(args: SelectSubset<T, carro_fotosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Carro_fotos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosFindFirstArgs} args - Arguments to find a Carro_fotos
+     * @example
+     * // Get one Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends carro_fotosFindFirstArgs>(args?: SelectSubset<T, carro_fotosFindFirstArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Carro_fotos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosFindFirstOrThrowArgs} args - Arguments to find a Carro_fotos
+     * @example
+     * // Get one Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends carro_fotosFindFirstOrThrowArgs>(args?: SelectSubset<T, carro_fotosFindFirstOrThrowArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Carro_fotos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findMany()
+     * 
+     * // Get first 10 Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const carro_fotosWithIdOnly = await prisma.carro_fotos.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends carro_fotosFindManyArgs>(args?: SelectSubset<T, carro_fotosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Carro_fotos.
+     * @param {carro_fotosCreateArgs} args - Arguments to create a Carro_fotos.
+     * @example
+     * // Create one Carro_fotos
+     * const Carro_fotos = await prisma.carro_fotos.create({
+     *   data: {
+     *     // ... data to create a Carro_fotos
+     *   }
+     * })
+     * 
+     */
+    create<T extends carro_fotosCreateArgs>(args: SelectSubset<T, carro_fotosCreateArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Carro_fotos.
+     * @param {carro_fotosCreateManyArgs} args - Arguments to create many Carro_fotos.
+     * @example
+     * // Create many Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends carro_fotosCreateManyArgs>(args?: SelectSubset<T, carro_fotosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Carro_fotos and returns the data saved in the database.
+     * @param {carro_fotosCreateManyAndReturnArgs} args - Arguments to create many Carro_fotos.
+     * @example
+     * // Create many Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Carro_fotos and only return the `id`
+     * const carro_fotosWithIdOnly = await prisma.carro_fotos.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends carro_fotosCreateManyAndReturnArgs>(args?: SelectSubset<T, carro_fotosCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Carro_fotos.
+     * @param {carro_fotosDeleteArgs} args - Arguments to delete one Carro_fotos.
+     * @example
+     * // Delete one Carro_fotos
+     * const Carro_fotos = await prisma.carro_fotos.delete({
+     *   where: {
+     *     // ... filter to delete one Carro_fotos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends carro_fotosDeleteArgs>(args: SelectSubset<T, carro_fotosDeleteArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Carro_fotos.
+     * @param {carro_fotosUpdateArgs} args - Arguments to update one Carro_fotos.
+     * @example
+     * // Update one Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends carro_fotosUpdateArgs>(args: SelectSubset<T, carro_fotosUpdateArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Carro_fotos.
+     * @param {carro_fotosDeleteManyArgs} args - Arguments to filter Carro_fotos to delete.
+     * @example
+     * // Delete a few Carro_fotos
+     * const { count } = await prisma.carro_fotos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends carro_fotosDeleteManyArgs>(args?: SelectSubset<T, carro_fotosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Carro_fotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends carro_fotosUpdateManyArgs>(args: SelectSubset<T, carro_fotosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Carro_fotos and returns the data updated in the database.
+     * @param {carro_fotosUpdateManyAndReturnArgs} args - Arguments to update many Carro_fotos.
+     * @example
+     * // Update many Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Carro_fotos and only return the `id`
+     * const carro_fotosWithIdOnly = await prisma.carro_fotos.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends carro_fotosUpdateManyAndReturnArgs>(args: SelectSubset<T, carro_fotosUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Carro_fotos.
+     * @param {carro_fotosUpsertArgs} args - Arguments to update or create a Carro_fotos.
+     * @example
+     * // Update or create a Carro_fotos
+     * const carro_fotos = await prisma.carro_fotos.upsert({
+     *   create: {
+     *     // ... data to create a Carro_fotos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Carro_fotos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends carro_fotosUpsertArgs>(args: SelectSubset<T, carro_fotosUpsertArgs<ExtArgs>>): Prisma__carro_fotosClient<$Result.GetResult<Prisma.$carro_fotosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Carro_fotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosCountArgs} args - Arguments to filter Carro_fotos to count.
+     * @example
+     * // Count the number of Carro_fotos
+     * const count = await prisma.carro_fotos.count({
+     *   where: {
+     *     // ... the filter for the Carro_fotos we want to count
+     *   }
+     * })
+    **/
+    count<T extends carro_fotosCountArgs>(
+      args?: Subset<T, carro_fotosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Carro_fotosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Carro_fotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Carro_fotosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Carro_fotosAggregateArgs>(args: Subset<T, Carro_fotosAggregateArgs>): Prisma.PrismaPromise<GetCarro_fotosAggregateType<T>>
+
+    /**
+     * Group by Carro_fotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {carro_fotosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends carro_fotosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: carro_fotosGroupByArgs['orderBy'] }
+        : { orderBy?: carro_fotosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, carro_fotosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCarro_fotosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the carro_fotos model
+   */
+  readonly fields: carro_fotosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for carro_fotos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__carro_fotosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    carro<T extends carrosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, carrosDefaultArgs<ExtArgs>>): Prisma__carrosClient<$Result.GetResult<Prisma.$carrosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the carro_fotos model
+   */
+  interface carro_fotosFieldRefs {
+    readonly id: FieldRef<"carro_fotos", 'BigInt'>
+    readonly carro_id: FieldRef<"carro_fotos", 'BigInt'>
+    readonly foto_url: FieldRef<"carro_fotos", 'String'>
+    readonly ordem: FieldRef<"carro_fotos", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * carro_fotos findUnique
+   */
+  export type carro_fotosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter, which carro_fotos to fetch.
+     */
+    where: carro_fotosWhereUniqueInput
+  }
+
+  /**
+   * carro_fotos findUniqueOrThrow
+   */
+  export type carro_fotosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter, which carro_fotos to fetch.
+     */
+    where: carro_fotosWhereUniqueInput
+  }
+
+  /**
+   * carro_fotos findFirst
+   */
+  export type carro_fotosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter, which carro_fotos to fetch.
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of carro_fotos to fetch.
+     */
+    orderBy?: carro_fotosOrderByWithRelationInput | carro_fotosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for carro_fotos.
+     */
+    cursor?: carro_fotosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` carro_fotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` carro_fotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of carro_fotos.
+     */
+    distinct?: Carro_fotosScalarFieldEnum | Carro_fotosScalarFieldEnum[]
+  }
+
+  /**
+   * carro_fotos findFirstOrThrow
+   */
+  export type carro_fotosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter, which carro_fotos to fetch.
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of carro_fotos to fetch.
+     */
+    orderBy?: carro_fotosOrderByWithRelationInput | carro_fotosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for carro_fotos.
+     */
+    cursor?: carro_fotosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` carro_fotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` carro_fotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of carro_fotos.
+     */
+    distinct?: Carro_fotosScalarFieldEnum | Carro_fotosScalarFieldEnum[]
+  }
+
+  /**
+   * carro_fotos findMany
+   */
+  export type carro_fotosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter, which carro_fotos to fetch.
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of carro_fotos to fetch.
+     */
+    orderBy?: carro_fotosOrderByWithRelationInput | carro_fotosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing carro_fotos.
+     */
+    cursor?: carro_fotosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` carro_fotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` carro_fotos.
+     */
+    skip?: number
+    distinct?: Carro_fotosScalarFieldEnum | Carro_fotosScalarFieldEnum[]
+  }
+
+  /**
+   * carro_fotos create
+   */
+  export type carro_fotosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * The data needed to create a carro_fotos.
+     */
+    data: XOR<carro_fotosCreateInput, carro_fotosUncheckedCreateInput>
+  }
+
+  /**
+   * carro_fotos createMany
+   */
+  export type carro_fotosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many carro_fotos.
+     */
+    data: carro_fotosCreateManyInput | carro_fotosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * carro_fotos createManyAndReturn
+   */
+  export type carro_fotosCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * The data used to create many carro_fotos.
+     */
+    data: carro_fotosCreateManyInput | carro_fotosCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * carro_fotos update
+   */
+  export type carro_fotosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * The data needed to update a carro_fotos.
+     */
+    data: XOR<carro_fotosUpdateInput, carro_fotosUncheckedUpdateInput>
+    /**
+     * Choose, which carro_fotos to update.
+     */
+    where: carro_fotosWhereUniqueInput
+  }
+
+  /**
+   * carro_fotos updateMany
+   */
+  export type carro_fotosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update carro_fotos.
+     */
+    data: XOR<carro_fotosUpdateManyMutationInput, carro_fotosUncheckedUpdateManyInput>
+    /**
+     * Filter which carro_fotos to update
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * Limit how many carro_fotos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * carro_fotos updateManyAndReturn
+   */
+  export type carro_fotosUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * The data used to update carro_fotos.
+     */
+    data: XOR<carro_fotosUpdateManyMutationInput, carro_fotosUncheckedUpdateManyInput>
+    /**
+     * Filter which carro_fotos to update
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * Limit how many carro_fotos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * carro_fotos upsert
+   */
+  export type carro_fotosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * The filter to search for the carro_fotos to update in case it exists.
+     */
+    where: carro_fotosWhereUniqueInput
+    /**
+     * In case the carro_fotos found by the `where` argument doesn't exist, create a new carro_fotos with this data.
+     */
+    create: XOR<carro_fotosCreateInput, carro_fotosUncheckedCreateInput>
+    /**
+     * In case the carro_fotos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<carro_fotosUpdateInput, carro_fotosUncheckedUpdateInput>
+  }
+
+  /**
+   * carro_fotos delete
+   */
+  export type carro_fotosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+    /**
+     * Filter which carro_fotos to delete.
+     */
+    where: carro_fotosWhereUniqueInput
+  }
+
+  /**
+   * carro_fotos deleteMany
+   */
+  export type carro_fotosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which carro_fotos to delete
+     */
+    where?: carro_fotosWhereInput
+    /**
+     * Limit how many carro_fotos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * carro_fotos without action
+   */
+  export type carro_fotosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the carro_fotos
+     */
+    select?: carro_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the carro_fotos
+     */
+    omit?: carro_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: carro_fotosInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model produto_fotos
    */
 
@@ -8824,29 +10048,34 @@ export namespace Prisma {
   export type Produto_fotosAvgAggregateOutputType = {
     id: number | null
     produto_id: number | null
+    ordem: number | null
   }
 
   export type Produto_fotosSumAggregateOutputType = {
     id: bigint | null
     produto_id: bigint | null
+    ordem: number | null
   }
 
   export type Produto_fotosMinAggregateOutputType = {
     id: bigint | null
     produto_id: bigint | null
     foto_url: string | null
+    ordem: number | null
   }
 
   export type Produto_fotosMaxAggregateOutputType = {
     id: bigint | null
     produto_id: bigint | null
     foto_url: string | null
+    ordem: number | null
   }
 
   export type Produto_fotosCountAggregateOutputType = {
     id: number
     produto_id: number
     foto_url: number
+    ordem: number
     _all: number
   }
 
@@ -8854,29 +10083,34 @@ export namespace Prisma {
   export type Produto_fotosAvgAggregateInputType = {
     id?: true
     produto_id?: true
+    ordem?: true
   }
 
   export type Produto_fotosSumAggregateInputType = {
     id?: true
     produto_id?: true
+    ordem?: true
   }
 
   export type Produto_fotosMinAggregateInputType = {
     id?: true
     produto_id?: true
     foto_url?: true
+    ordem?: true
   }
 
   export type Produto_fotosMaxAggregateInputType = {
     id?: true
     produto_id?: true
     foto_url?: true
+    ordem?: true
   }
 
   export type Produto_fotosCountAggregateInputType = {
     id?: true
     produto_id?: true
     foto_url?: true
+    ordem?: true
     _all?: true
   }
 
@@ -8969,7 +10203,8 @@ export namespace Prisma {
   export type Produto_fotosGroupByOutputType = {
     id: bigint
     produto_id: bigint
-    foto_url: string | null
+    foto_url: string
+    ordem: number
     _count: Produto_fotosCountAggregateOutputType | null
     _avg: Produto_fotosAvgAggregateOutputType | null
     _sum: Produto_fotosSumAggregateOutputType | null
@@ -8995,35 +10230,54 @@ export namespace Prisma {
     id?: boolean
     produto_id?: boolean
     foto_url?: boolean
+    ordem?: boolean
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto_fotos"]>
 
   export type produto_fotosSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     produto_id?: boolean
     foto_url?: boolean
+    ordem?: boolean
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto_fotos"]>
 
   export type produto_fotosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     produto_id?: boolean
     foto_url?: boolean
+    ordem?: boolean
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produto_fotos"]>
 
   export type produto_fotosSelectScalar = {
     id?: boolean
     produto_id?: boolean
     foto_url?: boolean
+    ordem?: boolean
   }
 
-  export type produto_fotosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produto_id" | "foto_url", ExtArgs["result"]["produto_fotos"]>
+  export type produto_fotosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produto_id" | "foto_url" | "ordem", ExtArgs["result"]["produto_fotos"]>
+  export type produto_fotosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
+  }
+  export type produto_fotosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
+  }
+  export type produto_fotosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | produtosDefaultArgs<ExtArgs>
+  }
 
   export type $produto_fotosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "produto_fotos"
-    objects: {}
+    objects: {
+      produto: Prisma.$produtosPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       produto_id: bigint
-      foto_url: string | null
+      foto_url: string
+      ordem: number
     }, ExtArgs["result"]["produto_fotos"]>
     composites: {}
   }
@@ -9418,6 +10672,7 @@ export namespace Prisma {
    */
   export interface Prisma__produto_fotosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    produto<T extends produtosDefaultArgs<ExtArgs> = {}>(args?: Subset<T, produtosDefaultArgs<ExtArgs>>): Prisma__produtosClient<$Result.GetResult<Prisma.$produtosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9450,6 +10705,7 @@ export namespace Prisma {
     readonly id: FieldRef<"produto_fotos", 'BigInt'>
     readonly produto_id: FieldRef<"produto_fotos", 'BigInt'>
     readonly foto_url: FieldRef<"produto_fotos", 'String'>
+    readonly ordem: FieldRef<"produto_fotos", 'Int'>
   }
     
 
@@ -9466,6 +10722,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
     /**
      * Filter, which produto_fotos to fetch.
      */
@@ -9485,6 +10745,10 @@ export namespace Prisma {
      */
     omit?: produto_fotosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
+    /**
      * Filter, which produto_fotos to fetch.
      */
     where: produto_fotosWhereUniqueInput
@@ -9502,6 +10766,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
     /**
      * Filter, which produto_fotos to fetch.
      */
@@ -9551,6 +10819,10 @@ export namespace Prisma {
      */
     omit?: produto_fotosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
+    /**
      * Filter, which produto_fotos to fetch.
      */
     where?: produto_fotosWhereInput
@@ -9599,6 +10871,10 @@ export namespace Prisma {
      */
     omit?: produto_fotosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
+    /**
      * Filter, which produto_fotos to fetch.
      */
     where?: produto_fotosWhereInput
@@ -9642,6 +10918,10 @@ export namespace Prisma {
      */
     omit?: produto_fotosOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
+    /**
      * The data needed to create a produto_fotos.
      */
     data: XOR<produto_fotosCreateInput, produto_fotosUncheckedCreateInput>
@@ -9675,6 +10955,10 @@ export namespace Prisma {
      */
     data: produto_fotosCreateManyInput | produto_fotosCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9689,6 +10973,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
     /**
      * The data needed to update a produto_fotos.
      */
@@ -9741,6 +11029,10 @@ export namespace Prisma {
      * Limit how many produto_fotos to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9755,6 +11047,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
     /**
      * The filter to search for the produto_fotos to update in case it exists.
      */
@@ -9781,6 +11077,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
     /**
      * Filter which produto_fotos to delete.
      */
@@ -9813,6 +11113,10 @@ export namespace Prisma {
      * Omit specific fields from the produto_fotos
      */
     omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
   }
 
 
@@ -10035,6 +11339,7 @@ export namespace Prisma {
     views?: boolean
     data_criacao?: boolean
     carros?: boolean | produtos$carrosArgs<ExtArgs>
+    fotos?: boolean | produtos$fotosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produtos"]>
 
@@ -10071,6 +11376,7 @@ export namespace Prisma {
   export type produtosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codigo" | "foto_url" | "video_url" | "views" | "data_criacao", ExtArgs["result"]["produtos"]>
   export type produtosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carros?: boolean | produtos$carrosArgs<ExtArgs>
+    fotos?: boolean | produtos$fotosArgs<ExtArgs>
     _count?: boolean | ProdutosCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type produtosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -10080,6 +11386,7 @@ export namespace Prisma {
     name: "produtos"
     objects: {
       carros: Prisma.$carro_produtosPayload<ExtArgs>[]
+      fotos: Prisma.$produto_fotosPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -10484,6 +11791,7 @@ export namespace Prisma {
   export interface Prisma__produtosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     carros<T extends produtos$carrosArgs<ExtArgs> = {}>(args?: Subset<T, produtos$carrosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$carro_produtosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    fotos<T extends produtos$fotosArgs<ExtArgs> = {}>(args?: Subset<T, produtos$fotosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$produto_fotosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10929,6 +12237,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Carro_produtosScalarFieldEnum | Carro_produtosScalarFieldEnum[]
+  }
+
+  /**
+   * produtos.fotos
+   */
+  export type produtos$fotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the produto_fotos
+     */
+    select?: produto_fotosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the produto_fotos
+     */
+    omit?: produto_fotosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: produto_fotosInclude<ExtArgs> | null
+    where?: produto_fotosWhereInput
+    orderBy?: produto_fotosOrderByWithRelationInput | produto_fotosOrderByWithRelationInput[]
+    cursor?: produto_fotosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Produto_fotosScalarFieldEnum | Produto_fotosScalarFieldEnum[]
   }
 
   /**
@@ -19824,10 +21156,21 @@ export namespace Prisma {
   export type MontadorasScalarFieldEnum = (typeof MontadorasScalarFieldEnum)[keyof typeof MontadorasScalarFieldEnum]
 
 
+  export const Carro_fotosScalarFieldEnum: {
+    id: 'id',
+    carro_id: 'carro_id',
+    foto_url: 'foto_url',
+    ordem: 'ordem'
+  };
+
+  export type Carro_fotosScalarFieldEnum = (typeof Carro_fotosScalarFieldEnum)[keyof typeof Carro_fotosScalarFieldEnum]
+
+
   export const Produto_fotosScalarFieldEnum: {
     id: 'id',
     produto_id: 'produto_id',
-    foto_url: 'foto_url'
+    foto_url: 'foto_url',
+    ordem: 'ordem'
   };
 
   export type Produto_fotosScalarFieldEnum = (typeof Produto_fotosScalarFieldEnum)[keyof typeof Produto_fotosScalarFieldEnum]
@@ -20081,6 +21424,7 @@ export namespace Prisma {
     imagem?: StringNullableFilter<"carros"> | string | null
     data_criacao?: DateTimeFilter<"carros"> | Date | string
     produtos?: Carro_produtosListRelationFilter
+    fotos?: Carro_fotosListRelationFilter
     montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }
 
@@ -20095,6 +21439,7 @@ export namespace Prisma {
     imagem?: SortOrderInput | SortOrder
     data_criacao?: SortOrder
     produtos?: carro_produtosOrderByRelationAggregateInput
+    fotos?: carro_fotosOrderByRelationAggregateInput
     montadora?: montadorasOrderByWithRelationInput
   }
 
@@ -20112,6 +21457,7 @@ export namespace Prisma {
     imagem?: StringNullableFilter<"carros"> | string | null
     data_criacao?: DateTimeFilter<"carros"> | Date | string
     produtos?: Carro_produtosListRelationFilter
+    fotos?: Carro_fotosListRelationFilter
     montadora?: XOR<MontadorasNullableScalarRelationFilter, montadorasWhereInput> | null
   }, "id" | "id">
 
@@ -20405,35 +21751,93 @@ export namespace Prisma {
     logo_url?: StringNullableWithAggregatesFilter<"montadoras"> | string | null
   }
 
+  export type carro_fotosWhereInput = {
+    AND?: carro_fotosWhereInput | carro_fotosWhereInput[]
+    OR?: carro_fotosWhereInput[]
+    NOT?: carro_fotosWhereInput | carro_fotosWhereInput[]
+    id?: BigIntFilter<"carro_fotos"> | bigint | number
+    carro_id?: BigIntFilter<"carro_fotos"> | bigint | number
+    foto_url?: StringFilter<"carro_fotos"> | string
+    ordem?: IntFilter<"carro_fotos"> | number
+    carro?: XOR<CarrosScalarRelationFilter, carrosWhereInput>
+  }
+
+  export type carro_fotosOrderByWithRelationInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+    carro?: carrosOrderByWithRelationInput
+  }
+
+  export type carro_fotosWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: carro_fotosWhereInput | carro_fotosWhereInput[]
+    OR?: carro_fotosWhereInput[]
+    NOT?: carro_fotosWhereInput | carro_fotosWhereInput[]
+    carro_id?: BigIntFilter<"carro_fotos"> | bigint | number
+    foto_url?: StringFilter<"carro_fotos"> | string
+    ordem?: IntFilter<"carro_fotos"> | number
+    carro?: XOR<CarrosScalarRelationFilter, carrosWhereInput>
+  }, "id" | "id">
+
+  export type carro_fotosOrderByWithAggregationInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+    _count?: carro_fotosCountOrderByAggregateInput
+    _avg?: carro_fotosAvgOrderByAggregateInput
+    _max?: carro_fotosMaxOrderByAggregateInput
+    _min?: carro_fotosMinOrderByAggregateInput
+    _sum?: carro_fotosSumOrderByAggregateInput
+  }
+
+  export type carro_fotosScalarWhereWithAggregatesInput = {
+    AND?: carro_fotosScalarWhereWithAggregatesInput | carro_fotosScalarWhereWithAggregatesInput[]
+    OR?: carro_fotosScalarWhereWithAggregatesInput[]
+    NOT?: carro_fotosScalarWhereWithAggregatesInput | carro_fotosScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"carro_fotos"> | bigint | number
+    carro_id?: BigIntWithAggregatesFilter<"carro_fotos"> | bigint | number
+    foto_url?: StringWithAggregatesFilter<"carro_fotos"> | string
+    ordem?: IntWithAggregatesFilter<"carro_fotos"> | number
+  }
+
   export type produto_fotosWhereInput = {
     AND?: produto_fotosWhereInput | produto_fotosWhereInput[]
     OR?: produto_fotosWhereInput[]
     NOT?: produto_fotosWhereInput | produto_fotosWhereInput[]
     id?: BigIntFilter<"produto_fotos"> | bigint | number
     produto_id?: BigIntFilter<"produto_fotos"> | bigint | number
-    foto_url?: StringNullableFilter<"produto_fotos"> | string | null
+    foto_url?: StringFilter<"produto_fotos"> | string
+    ordem?: IntFilter<"produto_fotos"> | number
+    produto?: XOR<ProdutosScalarRelationFilter, produtosWhereInput>
   }
 
   export type produto_fotosOrderByWithRelationInput = {
     id?: SortOrder
     produto_id?: SortOrder
-    foto_url?: SortOrderInput | SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+    produto?: produtosOrderByWithRelationInput
   }
 
   export type produto_fotosWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    id_produto_id?: produto_fotosIdProduto_idCompoundUniqueInput
     AND?: produto_fotosWhereInput | produto_fotosWhereInput[]
     OR?: produto_fotosWhereInput[]
     NOT?: produto_fotosWhereInput | produto_fotosWhereInput[]
     produto_id?: BigIntFilter<"produto_fotos"> | bigint | number
-    foto_url?: StringNullableFilter<"produto_fotos"> | string | null
-  }, "id_produto_id" | "id">
+    foto_url?: StringFilter<"produto_fotos"> | string
+    ordem?: IntFilter<"produto_fotos"> | number
+    produto?: XOR<ProdutosScalarRelationFilter, produtosWhereInput>
+  }, "id" | "id">
 
   export type produto_fotosOrderByWithAggregationInput = {
     id?: SortOrder
     produto_id?: SortOrder
-    foto_url?: SortOrderInput | SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
     _count?: produto_fotosCountOrderByAggregateInput
     _avg?: produto_fotosAvgOrderByAggregateInput
     _max?: produto_fotosMaxOrderByAggregateInput
@@ -20447,7 +21851,8 @@ export namespace Prisma {
     NOT?: produto_fotosScalarWhereWithAggregatesInput | produto_fotosScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"produto_fotos"> | bigint | number
     produto_id?: BigIntWithAggregatesFilter<"produto_fotos"> | bigint | number
-    foto_url?: StringNullableWithAggregatesFilter<"produto_fotos"> | string | null
+    foto_url?: StringWithAggregatesFilter<"produto_fotos"> | string
+    ordem?: IntWithAggregatesFilter<"produto_fotos"> | number
   }
 
   export type produtosWhereInput = {
@@ -20462,6 +21867,7 @@ export namespace Prisma {
     views?: IntNullableFilter<"produtos"> | number | null
     data_criacao?: DateTimeFilter<"produtos"> | Date | string
     carros?: Carro_produtosListRelationFilter
+    fotos?: Produto_fotosListRelationFilter
   }
 
   export type produtosOrderByWithRelationInput = {
@@ -20473,6 +21879,7 @@ export namespace Prisma {
     views?: SortOrderInput | SortOrder
     data_criacao?: SortOrder
     carros?: carro_produtosOrderByRelationAggregateInput
+    fotos?: produto_fotosOrderByRelationAggregateInput
   }
 
   export type produtosWhereUniqueInput = Prisma.AtLeast<{
@@ -20487,6 +21894,7 @@ export namespace Prisma {
     views?: IntNullableFilter<"produtos"> | number | null
     data_criacao?: DateTimeFilter<"produtos"> | Date | string
     carros?: Carro_produtosListRelationFilter
+    fotos?: Produto_fotosListRelationFilter
   }, "id" | "id">
 
   export type produtosOrderByWithAggregationInput = {
@@ -21034,6 +22442,7 @@ export namespace Prisma {
     imagem?: string | null
     data_criacao?: Date | string
     produtos?: carro_produtosCreateNestedManyWithoutCarroInput
+    fotos?: carro_fotosCreateNestedManyWithoutCarroInput
     montadora?: montadorasCreateNestedOneWithoutCarrosInput
   }
 
@@ -21048,6 +22457,7 @@ export namespace Prisma {
     imagem?: string | null
     data_criacao?: Date | string
     produtos?: carro_produtosUncheckedCreateNestedManyWithoutCarroInput
+    fotos?: carro_fotosUncheckedCreateNestedManyWithoutCarroInput
   }
 
   export type carrosUpdateInput = {
@@ -21060,6 +22470,7 @@ export namespace Prisma {
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
+    fotos?: carro_fotosUpdateManyWithoutCarroNestedInput
     montadora?: montadorasUpdateOneWithoutCarrosNestedInput
   }
 
@@ -21074,6 +22485,7 @@ export namespace Prisma {
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUncheckedUpdateManyWithoutCarroNestedInput
+    fotos?: carro_fotosUncheckedUpdateManyWithoutCarroNestedInput
   }
 
   export type carrosCreateManyInput = {
@@ -21374,46 +22786,100 @@ export namespace Prisma {
     logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type carro_fotosCreateInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+    carro: carrosCreateNestedOneWithoutFotosInput
+  }
+
+  export type carro_fotosUncheckedCreateInput = {
+    id?: bigint | number
+    carro_id: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type carro_fotosUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+    carro?: carrosUpdateOneRequiredWithoutFotosNestedInput
+  }
+
+  export type carro_fotosUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    carro_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type carro_fotosCreateManyInput = {
+    id?: bigint | number
+    carro_id: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type carro_fotosUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type carro_fotosUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    carro_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
   export type produto_fotosCreateInput = {
     id?: bigint | number
-    produto_id: bigint | number
-    foto_url?: string | null
+    foto_url: string
+    ordem?: number
+    produto: produtosCreateNestedOneWithoutFotosInput
   }
 
   export type produto_fotosUncheckedCreateInput = {
     id?: bigint | number
     produto_id: bigint | number
-    foto_url?: string | null
+    foto_url: string
+    ordem?: number
   }
 
   export type produto_fotosUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+    produto?: produtosUpdateOneRequiredWithoutFotosNestedInput
   }
 
   export type produto_fotosUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
   }
 
   export type produto_fotosCreateManyInput = {
     id?: bigint | number
     produto_id: bigint | number
-    foto_url?: string | null
+    foto_url: string
+    ordem?: number
   }
 
   export type produto_fotosUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
   }
 
   export type produto_fotosUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
   }
 
   export type produtosCreateInput = {
@@ -21425,6 +22891,7 @@ export namespace Prisma {
     views?: number | null
     data_criacao?: Date | string
     carros?: carro_produtosCreateNestedManyWithoutProdutoInput
+    fotos?: produto_fotosCreateNestedManyWithoutProdutoInput
   }
 
   export type produtosUncheckedCreateInput = {
@@ -21436,6 +22903,7 @@ export namespace Prisma {
     views?: number | null
     data_criacao?: Date | string
     carros?: carro_produtosUncheckedCreateNestedManyWithoutProdutoInput
+    fotos?: produto_fotosUncheckedCreateNestedManyWithoutProdutoInput
   }
 
   export type produtosUpdateInput = {
@@ -21447,6 +22915,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     carros?: carro_produtosUpdateManyWithoutProdutoNestedInput
+    fotos?: produto_fotosUpdateManyWithoutProdutoNestedInput
   }
 
   export type produtosUncheckedUpdateInput = {
@@ -21458,6 +22927,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     carros?: carro_produtosUncheckedUpdateManyWithoutProdutoNestedInput
+    fotos?: produto_fotosUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
   export type produtosCreateManyInput = {
@@ -22070,6 +23540,12 @@ export namespace Prisma {
     none?: carro_produtosWhereInput
   }
 
+  export type Carro_fotosListRelationFilter = {
+    every?: carro_fotosWhereInput
+    some?: carro_fotosWhereInput
+    none?: carro_fotosWhereInput
+  }
+
   export type MontadorasNullableScalarRelationFilter = {
     is?: montadorasWhereInput | null
     isNot?: montadorasWhereInput | null
@@ -22081,6 +23557,10 @@ export namespace Prisma {
   }
 
   export type carro_produtosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type carro_fotosOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22367,37 +23847,140 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type produto_fotosIdProduto_idCompoundUniqueInput = {
-    id: bigint | number
-    produto_id: bigint | number
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type CarrosScalarRelationFilter = {
+    is?: carrosWhereInput
+    isNot?: carrosWhereInput
+  }
+
+  export type carro_fotosCountOrderByAggregateInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type carro_fotosAvgOrderByAggregateInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type carro_fotosMaxOrderByAggregateInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type carro_fotosMinOrderByAggregateInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    foto_url?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type carro_fotosSumOrderByAggregateInput = {
+    id?: SortOrder
+    carro_id?: SortOrder
+    ordem?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type ProdutosScalarRelationFilter = {
+    is?: produtosWhereInput
+    isNot?: produtosWhereInput
   }
 
   export type produto_fotosCountOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
     foto_url?: SortOrder
+    ordem?: SortOrder
   }
 
   export type produto_fotosAvgOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
+    ordem?: SortOrder
   }
 
   export type produto_fotosMaxOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
     foto_url?: SortOrder
+    ordem?: SortOrder
   }
 
   export type produto_fotosMinOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
     foto_url?: SortOrder
+    ordem?: SortOrder
   }
 
   export type produto_fotosSumOrderByAggregateInput = {
     id?: SortOrder
     produto_id?: SortOrder
+    ordem?: SortOrder
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -22409,6 +23992,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type Produto_fotosListRelationFilter = {
+    every?: produto_fotosWhereInput
+    some?: produto_fotosWhereInput
+    none?: produto_fotosWhereInput
+  }
+
+  export type produto_fotosOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type produtosCountOrderByAggregateInput = {
@@ -22467,21 +24060,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
   export type UsuariosListRelationFilter = {
     every?: usuariosWhereInput
     some?: usuariosWhereInput
@@ -22529,24 +24107,6 @@ export namespace Prisma {
 
   export type setoresSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type EnumUserRoleFilter<$PrismaModel = never> = {
@@ -22663,17 +24223,6 @@ export namespace Prisma {
     not?: NestedEnumUserRoleNullableFilter<$PrismaModel> | $Enums.UserRole | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -22748,22 +24297,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumUserRoleNullableFilter<$PrismaModel>
     _max?: NestedEnumUserRoleNullableFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -22908,16 +24441,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type CarrosScalarRelationFilter = {
-    is?: carrosWhereInput
-    isNot?: carrosWhereInput
-  }
-
-  export type ProdutosScalarRelationFilter = {
-    is?: produtosWhereInput
-    isNot?: produtosWhereInput
-  }
-
   export type carro_produtosCarro_idProduto_idCompoundUniqueInput = {
     carro_id: bigint | number
     produto_id: bigint | number
@@ -22955,6 +24478,13 @@ export namespace Prisma {
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
   }
 
+  export type carro_fotosCreateNestedManyWithoutCarroInput = {
+    create?: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput> | carro_fotosCreateWithoutCarroInput[] | carro_fotosUncheckedCreateWithoutCarroInput[]
+    connectOrCreate?: carro_fotosCreateOrConnectWithoutCarroInput | carro_fotosCreateOrConnectWithoutCarroInput[]
+    createMany?: carro_fotosCreateManyCarroInputEnvelope
+    connect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+  }
+
   export type montadorasCreateNestedOneWithoutCarrosInput = {
     create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
     connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
@@ -22966,6 +24496,13 @@ export namespace Prisma {
     connectOrCreate?: carro_produtosCreateOrConnectWithoutCarroInput | carro_produtosCreateOrConnectWithoutCarroInput[]
     createMany?: carro_produtosCreateManyCarroInputEnvelope
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
+  }
+
+  export type carro_fotosUncheckedCreateNestedManyWithoutCarroInput = {
+    create?: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput> | carro_fotosCreateWithoutCarroInput[] | carro_fotosUncheckedCreateWithoutCarroInput[]
+    connectOrCreate?: carro_fotosCreateOrConnectWithoutCarroInput | carro_fotosCreateOrConnectWithoutCarroInput[]
+    createMany?: carro_fotosCreateManyCarroInputEnvelope
+    connect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -23006,6 +24543,20 @@ export namespace Prisma {
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
   }
 
+  export type carro_fotosUpdateManyWithoutCarroNestedInput = {
+    create?: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput> | carro_fotosCreateWithoutCarroInput[] | carro_fotosUncheckedCreateWithoutCarroInput[]
+    connectOrCreate?: carro_fotosCreateOrConnectWithoutCarroInput | carro_fotosCreateOrConnectWithoutCarroInput[]
+    upsert?: carro_fotosUpsertWithWhereUniqueWithoutCarroInput | carro_fotosUpsertWithWhereUniqueWithoutCarroInput[]
+    createMany?: carro_fotosCreateManyCarroInputEnvelope
+    set?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    disconnect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    delete?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    connect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    update?: carro_fotosUpdateWithWhereUniqueWithoutCarroInput | carro_fotosUpdateWithWhereUniqueWithoutCarroInput[]
+    updateMany?: carro_fotosUpdateManyWithWhereWithoutCarroInput | carro_fotosUpdateManyWithWhereWithoutCarroInput[]
+    deleteMany?: carro_fotosScalarWhereInput | carro_fotosScalarWhereInput[]
+  }
+
   export type montadorasUpdateOneWithoutCarrosNestedInput = {
     create?: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
     connectOrCreate?: montadorasCreateOrConnectWithoutCarrosInput
@@ -23028,6 +24579,20 @@ export namespace Prisma {
     update?: carro_produtosUpdateWithWhereUniqueWithoutCarroInput | carro_produtosUpdateWithWhereUniqueWithoutCarroInput[]
     updateMany?: carro_produtosUpdateManyWithWhereWithoutCarroInput | carro_produtosUpdateManyWithWhereWithoutCarroInput[]
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
+  }
+
+  export type carro_fotosUncheckedUpdateManyWithoutCarroNestedInput = {
+    create?: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput> | carro_fotosCreateWithoutCarroInput[] | carro_fotosUncheckedCreateWithoutCarroInput[]
+    connectOrCreate?: carro_fotosCreateOrConnectWithoutCarroInput | carro_fotosCreateOrConnectWithoutCarroInput[]
+    upsert?: carro_fotosUpsertWithWhereUniqueWithoutCarroInput | carro_fotosUpsertWithWhereUniqueWithoutCarroInput[]
+    createMany?: carro_fotosCreateManyCarroInputEnvelope
+    set?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    disconnect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    delete?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    connect?: carro_fotosWhereUniqueInput | carro_fotosWhereUniqueInput[]
+    update?: carro_fotosUpdateWithWhereUniqueWithoutCarroInput | carro_fotosUpdateWithWhereUniqueWithoutCarroInput[]
+    updateMany?: carro_fotosUpdateManyWithWhereWithoutCarroInput | carro_fotosUpdateManyWithWhereWithoutCarroInput[]
+    deleteMany?: carro_fotosScalarWhereInput | carro_fotosScalarWhereInput[]
   }
 
   export type carrosCreateNestedManyWithoutMontadoraInput = {
@@ -23072,6 +24637,46 @@ export namespace Prisma {
     deleteMany?: carrosScalarWhereInput | carrosScalarWhereInput[]
   }
 
+  export type carrosCreateNestedOneWithoutFotosInput = {
+    create?: XOR<carrosCreateWithoutFotosInput, carrosUncheckedCreateWithoutFotosInput>
+    connectOrCreate?: carrosCreateOrConnectWithoutFotosInput
+    connect?: carrosWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type carrosUpdateOneRequiredWithoutFotosNestedInput = {
+    create?: XOR<carrosCreateWithoutFotosInput, carrosUncheckedCreateWithoutFotosInput>
+    connectOrCreate?: carrosCreateOrConnectWithoutFotosInput
+    upsert?: carrosUpsertWithoutFotosInput
+    connect?: carrosWhereUniqueInput
+    update?: XOR<XOR<carrosUpdateToOneWithWhereWithoutFotosInput, carrosUpdateWithoutFotosInput>, carrosUncheckedUpdateWithoutFotosInput>
+  }
+
+  export type produtosCreateNestedOneWithoutFotosInput = {
+    create?: XOR<produtosCreateWithoutFotosInput, produtosUncheckedCreateWithoutFotosInput>
+    connectOrCreate?: produtosCreateOrConnectWithoutFotosInput
+    connect?: produtosWhereUniqueInput
+  }
+
+  export type produtosUpdateOneRequiredWithoutFotosNestedInput = {
+    create?: XOR<produtosCreateWithoutFotosInput, produtosUncheckedCreateWithoutFotosInput>
+    connectOrCreate?: produtosCreateOrConnectWithoutFotosInput
+    upsert?: produtosUpsertWithoutFotosInput
+    connect?: produtosWhereUniqueInput
+    update?: XOR<XOR<produtosUpdateToOneWithWhereWithoutFotosInput, produtosUpdateWithoutFotosInput>, produtosUncheckedUpdateWithoutFotosInput>
+  }
+
   export type carro_produtosCreateNestedManyWithoutProdutoInput = {
     create?: XOR<carro_produtosCreateWithoutProdutoInput, carro_produtosUncheckedCreateWithoutProdutoInput> | carro_produtosCreateWithoutProdutoInput[] | carro_produtosUncheckedCreateWithoutProdutoInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutProdutoInput | carro_produtosCreateOrConnectWithoutProdutoInput[]
@@ -23079,11 +24684,25 @@ export namespace Prisma {
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
   }
 
+  export type produto_fotosCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput> | produto_fotosCreateWithoutProdutoInput[] | produto_fotosUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: produto_fotosCreateOrConnectWithoutProdutoInput | produto_fotosCreateOrConnectWithoutProdutoInput[]
+    createMany?: produto_fotosCreateManyProdutoInputEnvelope
+    connect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+  }
+
   export type carro_produtosUncheckedCreateNestedManyWithoutProdutoInput = {
     create?: XOR<carro_produtosCreateWithoutProdutoInput, carro_produtosUncheckedCreateWithoutProdutoInput> | carro_produtosCreateWithoutProdutoInput[] | carro_produtosUncheckedCreateWithoutProdutoInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutProdutoInput | carro_produtosCreateOrConnectWithoutProdutoInput[]
     createMany?: carro_produtosCreateManyProdutoInputEnvelope
     connect?: carro_produtosWhereUniqueInput | carro_produtosWhereUniqueInput[]
+  }
+
+  export type produto_fotosUncheckedCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput> | produto_fotosCreateWithoutProdutoInput[] | produto_fotosUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: produto_fotosCreateOrConnectWithoutProdutoInput | produto_fotosCreateOrConnectWithoutProdutoInput[]
+    createMany?: produto_fotosCreateManyProdutoInputEnvelope
+    connect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -23108,6 +24727,20 @@ export namespace Prisma {
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
   }
 
+  export type produto_fotosUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput> | produto_fotosCreateWithoutProdutoInput[] | produto_fotosUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: produto_fotosCreateOrConnectWithoutProdutoInput | produto_fotosCreateOrConnectWithoutProdutoInput[]
+    upsert?: produto_fotosUpsertWithWhereUniqueWithoutProdutoInput | produto_fotosUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: produto_fotosCreateManyProdutoInputEnvelope
+    set?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    disconnect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    delete?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    connect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    update?: produto_fotosUpdateWithWhereUniqueWithoutProdutoInput | produto_fotosUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: produto_fotosUpdateManyWithWhereWithoutProdutoInput | produto_fotosUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: produto_fotosScalarWhereInput | produto_fotosScalarWhereInput[]
+  }
+
   export type carro_produtosUncheckedUpdateManyWithoutProdutoNestedInput = {
     create?: XOR<carro_produtosCreateWithoutProdutoInput, carro_produtosUncheckedCreateWithoutProdutoInput> | carro_produtosCreateWithoutProdutoInput[] | carro_produtosUncheckedCreateWithoutProdutoInput[]
     connectOrCreate?: carro_produtosCreateOrConnectWithoutProdutoInput | carro_produtosCreateOrConnectWithoutProdutoInput[]
@@ -23120,6 +24753,20 @@ export namespace Prisma {
     update?: carro_produtosUpdateWithWhereUniqueWithoutProdutoInput | carro_produtosUpdateWithWhereUniqueWithoutProdutoInput[]
     updateMany?: carro_produtosUpdateManyWithWhereWithoutProdutoInput | carro_produtosUpdateManyWithWhereWithoutProdutoInput[]
     deleteMany?: carro_produtosScalarWhereInput | carro_produtosScalarWhereInput[]
+  }
+
+  export type produto_fotosUncheckedUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput> | produto_fotosCreateWithoutProdutoInput[] | produto_fotosUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: produto_fotosCreateOrConnectWithoutProdutoInput | produto_fotosCreateOrConnectWithoutProdutoInput[]
+    upsert?: produto_fotosUpsertWithWhereUniqueWithoutProdutoInput | produto_fotosUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: produto_fotosCreateManyProdutoInputEnvelope
+    set?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    disconnect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    delete?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    connect?: produto_fotosWhereUniqueInput | produto_fotosWhereUniqueInput[]
+    update?: produto_fotosUpdateWithWhereUniqueWithoutProdutoInput | produto_fotosUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: produto_fotosUpdateManyWithWhereWithoutProdutoInput | produto_fotosUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: produto_fotosScalarWhereInput | produto_fotosScalarWhereInput[]
   }
 
   export type usuariosCreateNestedManyWithoutSetorInput = {
@@ -23148,10 +24795,6 @@ export namespace Prisma {
     connectOrCreate?: videos_internosCreateOrConnectWithoutSetorInput | videos_internosCreateOrConnectWithoutSetorInput[]
     createMany?: videos_internosCreateManySetorInputEnvelope
     connect?: videos_internosWhereUniqueInput | videos_internosWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type usuariosUpdateManyWithoutSetorNestedInput = {
@@ -23290,14 +24933,6 @@ export namespace Prisma {
 
   export type NullableEnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole | null
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -23506,22 +25141,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -23551,6 +25170,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
@@ -23617,22 +25268,6 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -23656,6 +25291,28 @@ export namespace Prisma {
 
   export type carro_produtosCreateManyCarroInputEnvelope = {
     data: carro_produtosCreateManyCarroInput | carro_produtosCreateManyCarroInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type carro_fotosCreateWithoutCarroInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type carro_fotosUncheckedCreateWithoutCarroInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type carro_fotosCreateOrConnectWithoutCarroInput = {
+    where: carro_fotosWhereUniqueInput
+    create: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput>
+  }
+
+  export type carro_fotosCreateManyCarroInputEnvelope = {
+    data: carro_fotosCreateManyCarroInput | carro_fotosCreateManyCarroInput[]
     skipDuplicates?: boolean
   }
 
@@ -23700,6 +25357,32 @@ export namespace Prisma {
     produto_id?: BigIntFilter<"carro_produtos"> | bigint | number
   }
 
+  export type carro_fotosUpsertWithWhereUniqueWithoutCarroInput = {
+    where: carro_fotosWhereUniqueInput
+    update: XOR<carro_fotosUpdateWithoutCarroInput, carro_fotosUncheckedUpdateWithoutCarroInput>
+    create: XOR<carro_fotosCreateWithoutCarroInput, carro_fotosUncheckedCreateWithoutCarroInput>
+  }
+
+  export type carro_fotosUpdateWithWhereUniqueWithoutCarroInput = {
+    where: carro_fotosWhereUniqueInput
+    data: XOR<carro_fotosUpdateWithoutCarroInput, carro_fotosUncheckedUpdateWithoutCarroInput>
+  }
+
+  export type carro_fotosUpdateManyWithWhereWithoutCarroInput = {
+    where: carro_fotosScalarWhereInput
+    data: XOR<carro_fotosUpdateManyMutationInput, carro_fotosUncheckedUpdateManyWithoutCarroInput>
+  }
+
+  export type carro_fotosScalarWhereInput = {
+    AND?: carro_fotosScalarWhereInput | carro_fotosScalarWhereInput[]
+    OR?: carro_fotosScalarWhereInput[]
+    NOT?: carro_fotosScalarWhereInput | carro_fotosScalarWhereInput[]
+    id?: BigIntFilter<"carro_fotos"> | bigint | number
+    carro_id?: BigIntFilter<"carro_fotos"> | bigint | number
+    foto_url?: StringFilter<"carro_fotos"> | string
+    ordem?: IntFilter<"carro_fotos"> | number
+  }
+
   export type montadorasUpsertWithoutCarrosInput = {
     update: XOR<montadorasUpdateWithoutCarrosInput, montadorasUncheckedUpdateWithoutCarrosInput>
     create: XOR<montadorasCreateWithoutCarrosInput, montadorasUncheckedCreateWithoutCarrosInput>
@@ -23733,6 +25416,7 @@ export namespace Prisma {
     imagem?: string | null
     data_criacao?: Date | string
     produtos?: carro_produtosCreateNestedManyWithoutCarroInput
+    fotos?: carro_fotosCreateNestedManyWithoutCarroInput
   }
 
   export type carrosUncheckedCreateWithoutMontadoraInput = {
@@ -23745,6 +25429,7 @@ export namespace Prisma {
     imagem?: string | null
     data_criacao?: Date | string
     produtos?: carro_produtosUncheckedCreateNestedManyWithoutCarroInput
+    fotos?: carro_fotosUncheckedCreateNestedManyWithoutCarroInput
   }
 
   export type carrosCreateOrConnectWithoutMontadoraInput = {
@@ -23788,6 +25473,134 @@ export namespace Prisma {
     data_criacao?: DateTimeFilter<"carros"> | Date | string
   }
 
+  export type carrosCreateWithoutFotosInput = {
+    id?: bigint | number
+    nome?: string | null
+    ano_de?: bigint | number | null
+    ano_ate?: bigint | number | null
+    versao?: string | null
+    foto_url?: string | null
+    imagem?: string | null
+    data_criacao?: Date | string
+    produtos?: carro_produtosCreateNestedManyWithoutCarroInput
+    montadora?: montadorasCreateNestedOneWithoutCarrosInput
+  }
+
+  export type carrosUncheckedCreateWithoutFotosInput = {
+    id?: bigint | number
+    nome?: string | null
+    ano_de?: bigint | number | null
+    ano_ate?: bigint | number | null
+    versao?: string | null
+    montadora_id?: bigint | number | null
+    foto_url?: string | null
+    imagem?: string | null
+    data_criacao?: Date | string
+    produtos?: carro_produtosUncheckedCreateNestedManyWithoutCarroInput
+  }
+
+  export type carrosCreateOrConnectWithoutFotosInput = {
+    where: carrosWhereUniqueInput
+    create: XOR<carrosCreateWithoutFotosInput, carrosUncheckedCreateWithoutFotosInput>
+  }
+
+  export type carrosUpsertWithoutFotosInput = {
+    update: XOR<carrosUpdateWithoutFotosInput, carrosUncheckedUpdateWithoutFotosInput>
+    create: XOR<carrosCreateWithoutFotosInput, carrosUncheckedCreateWithoutFotosInput>
+    where?: carrosWhereInput
+  }
+
+  export type carrosUpdateToOneWithWhereWithoutFotosInput = {
+    where?: carrosWhereInput
+    data: XOR<carrosUpdateWithoutFotosInput, carrosUncheckedUpdateWithoutFotosInput>
+  }
+
+  export type carrosUpdateWithoutFotosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    ano_de?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ano_ate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    versao?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
+    montadora?: montadorasUpdateOneWithoutCarrosNestedInput
+  }
+
+  export type carrosUncheckedUpdateWithoutFotosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    ano_de?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    ano_ate?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    versao?: NullableStringFieldUpdateOperationsInput | string | null
+    montadora_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    imagem?: NullableStringFieldUpdateOperationsInput | string | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtos?: carro_produtosUncheckedUpdateManyWithoutCarroNestedInput
+  }
+
+  export type produtosCreateWithoutFotosInput = {
+    id?: bigint | number
+    nome?: string | null
+    codigo?: string | null
+    foto_url?: string | null
+    video_url?: string | null
+    views?: number | null
+    data_criacao?: Date | string
+    carros?: carro_produtosCreateNestedManyWithoutProdutoInput
+  }
+
+  export type produtosUncheckedCreateWithoutFotosInput = {
+    id?: bigint | number
+    nome?: string | null
+    codigo?: string | null
+    foto_url?: string | null
+    video_url?: string | null
+    views?: number | null
+    data_criacao?: Date | string
+    carros?: carro_produtosUncheckedCreateNestedManyWithoutProdutoInput
+  }
+
+  export type produtosCreateOrConnectWithoutFotosInput = {
+    where: produtosWhereUniqueInput
+    create: XOR<produtosCreateWithoutFotosInput, produtosUncheckedCreateWithoutFotosInput>
+  }
+
+  export type produtosUpsertWithoutFotosInput = {
+    update: XOR<produtosUpdateWithoutFotosInput, produtosUncheckedUpdateWithoutFotosInput>
+    create: XOR<produtosCreateWithoutFotosInput, produtosUncheckedCreateWithoutFotosInput>
+    where?: produtosWhereInput
+  }
+
+  export type produtosUpdateToOneWithWhereWithoutFotosInput = {
+    where?: produtosWhereInput
+    data: XOR<produtosUpdateWithoutFotosInput, produtosUncheckedUpdateWithoutFotosInput>
+  }
+
+  export type produtosUpdateWithoutFotosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    codigo?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    carros?: carro_produtosUpdateManyWithoutProdutoNestedInput
+  }
+
+  export type produtosUncheckedUpdateWithoutFotosInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    nome?: NullableStringFieldUpdateOperationsInput | string | null
+    codigo?: NullableStringFieldUpdateOperationsInput | string | null
+    foto_url?: NullableStringFieldUpdateOperationsInput | string | null
+    video_url?: NullableStringFieldUpdateOperationsInput | string | null
+    views?: NullableIntFieldUpdateOperationsInput | number | null
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    carros?: carro_produtosUncheckedUpdateManyWithoutProdutoNestedInput
+  }
+
   export type carro_produtosCreateWithoutProdutoInput = {
     carro: carrosCreateNestedOneWithoutProdutosInput
   }
@@ -23806,6 +25619,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type produto_fotosCreateWithoutProdutoInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type produto_fotosUncheckedCreateWithoutProdutoInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
+  export type produto_fotosCreateOrConnectWithoutProdutoInput = {
+    where: produto_fotosWhereUniqueInput
+    create: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type produto_fotosCreateManyProdutoInputEnvelope = {
+    data: produto_fotosCreateManyProdutoInput | produto_fotosCreateManyProdutoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type carro_produtosUpsertWithWhereUniqueWithoutProdutoInput = {
     where: carro_produtosWhereUniqueInput
     update: XOR<carro_produtosUpdateWithoutProdutoInput, carro_produtosUncheckedUpdateWithoutProdutoInput>
@@ -23820,6 +25655,32 @@ export namespace Prisma {
   export type carro_produtosUpdateManyWithWhereWithoutProdutoInput = {
     where: carro_produtosScalarWhereInput
     data: XOR<carro_produtosUpdateManyMutationInput, carro_produtosUncheckedUpdateManyWithoutProdutoInput>
+  }
+
+  export type produto_fotosUpsertWithWhereUniqueWithoutProdutoInput = {
+    where: produto_fotosWhereUniqueInput
+    update: XOR<produto_fotosUpdateWithoutProdutoInput, produto_fotosUncheckedUpdateWithoutProdutoInput>
+    create: XOR<produto_fotosCreateWithoutProdutoInput, produto_fotosUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type produto_fotosUpdateWithWhereUniqueWithoutProdutoInput = {
+    where: produto_fotosWhereUniqueInput
+    data: XOR<produto_fotosUpdateWithoutProdutoInput, produto_fotosUncheckedUpdateWithoutProdutoInput>
+  }
+
+  export type produto_fotosUpdateManyWithWhereWithoutProdutoInput = {
+    where: produto_fotosScalarWhereInput
+    data: XOR<produto_fotosUpdateManyMutationInput, produto_fotosUncheckedUpdateManyWithoutProdutoInput>
+  }
+
+  export type produto_fotosScalarWhereInput = {
+    AND?: produto_fotosScalarWhereInput | produto_fotosScalarWhereInput[]
+    OR?: produto_fotosScalarWhereInput[]
+    NOT?: produto_fotosScalarWhereInput | produto_fotosScalarWhereInput[]
+    id?: BigIntFilter<"produto_fotos"> | bigint | number
+    produto_id?: BigIntFilter<"produto_fotos"> | bigint | number
+    foto_url?: StringFilter<"produto_fotos"> | string
+    ordem?: IntFilter<"produto_fotos"> | number
   }
 
   export type usuariosCreateWithoutSetorInput = {
@@ -24205,6 +26066,7 @@ export namespace Prisma {
     foto_url?: string | null
     imagem?: string | null
     data_criacao?: Date | string
+    fotos?: carro_fotosCreateNestedManyWithoutCarroInput
     montadora?: montadorasCreateNestedOneWithoutCarrosInput
   }
 
@@ -24218,6 +26080,7 @@ export namespace Prisma {
     foto_url?: string | null
     imagem?: string | null
     data_criacao?: Date | string
+    fotos?: carro_fotosUncheckedCreateNestedManyWithoutCarroInput
   }
 
   export type carrosCreateOrConnectWithoutProdutosInput = {
@@ -24233,6 +26096,7 @@ export namespace Prisma {
     video_url?: string | null
     views?: number | null
     data_criacao?: Date | string
+    fotos?: produto_fotosCreateNestedManyWithoutProdutoInput
   }
 
   export type produtosUncheckedCreateWithoutCarrosInput = {
@@ -24243,6 +26107,7 @@ export namespace Prisma {
     video_url?: string | null
     views?: number | null
     data_criacao?: Date | string
+    fotos?: produto_fotosUncheckedCreateNestedManyWithoutProdutoInput
   }
 
   export type produtosCreateOrConnectWithoutCarrosInput = {
@@ -24270,6 +26135,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    fotos?: carro_fotosUpdateManyWithoutCarroNestedInput
     montadora?: montadorasUpdateOneWithoutCarrosNestedInput
   }
 
@@ -24283,6 +26149,7 @@ export namespace Prisma {
     foto_url?: NullableStringFieldUpdateOperationsInput | string | null
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    fotos?: carro_fotosUncheckedUpdateManyWithoutCarroNestedInput
   }
 
   export type produtosUpsertWithoutCarrosInput = {
@@ -24304,6 +26171,7 @@ export namespace Prisma {
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    fotos?: produto_fotosUpdateManyWithoutProdutoNestedInput
   }
 
   export type produtosUncheckedUpdateWithoutCarrosInput = {
@@ -24314,10 +26182,17 @@ export namespace Prisma {
     video_url?: NullableStringFieldUpdateOperationsInput | string | null
     views?: NullableIntFieldUpdateOperationsInput | number | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    fotos?: produto_fotosUncheckedUpdateManyWithoutProdutoNestedInput
   }
 
   export type carro_produtosCreateManyCarroInput = {
     produto_id: bigint | number
+  }
+
+  export type carro_fotosCreateManyCarroInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
   }
 
   export type carro_produtosUpdateWithoutCarroInput = {
@@ -24330,6 +26205,24 @@ export namespace Prisma {
 
   export type carro_produtosUncheckedUpdateManyWithoutCarroInput = {
     produto_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type carro_fotosUpdateWithoutCarroInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type carro_fotosUncheckedUpdateWithoutCarroInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type carro_fotosUncheckedUpdateManyWithoutCarroInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
   }
 
   export type carrosCreateManyMontadoraInput = {
@@ -24353,6 +26246,7 @@ export namespace Prisma {
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUpdateManyWithoutCarroNestedInput
+    fotos?: carro_fotosUpdateManyWithoutCarroNestedInput
   }
 
   export type carrosUncheckedUpdateWithoutMontadoraInput = {
@@ -24365,6 +26259,7 @@ export namespace Prisma {
     imagem?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     produtos?: carro_produtosUncheckedUpdateManyWithoutCarroNestedInput
+    fotos?: carro_fotosUncheckedUpdateManyWithoutCarroNestedInput
   }
 
   export type carrosUncheckedUpdateManyWithoutMontadoraInput = {
@@ -24382,6 +26277,12 @@ export namespace Prisma {
     carro_id: bigint | number
   }
 
+  export type produto_fotosCreateManyProdutoInput = {
+    id?: bigint | number
+    foto_url: string
+    ordem?: number
+  }
+
   export type carro_produtosUpdateWithoutProdutoInput = {
     carro?: carrosUpdateOneRequiredWithoutProdutosNestedInput
   }
@@ -24392,6 +26293,24 @@ export namespace Prisma {
 
   export type carro_produtosUncheckedUpdateManyWithoutProdutoInput = {
     carro_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type produto_fotosUpdateWithoutProdutoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type produto_fotosUncheckedUpdateWithoutProdutoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type produto_fotosUncheckedUpdateManyWithoutProdutoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    foto_url?: StringFieldUpdateOperationsInput | string
+    ordem?: IntFieldUpdateOperationsInput | number
   }
 
   export type usuariosCreateManySetorInput = {

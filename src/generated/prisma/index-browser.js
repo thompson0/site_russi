@@ -169,10 +169,18 @@ exports.Prisma.MontadorasScalarFieldEnum = {
   logo_url: 'logo_url'
 };
 
+exports.Prisma.Carro_fotosScalarFieldEnum = {
+  id: 'id',
+  carro_id: 'carro_id',
+  foto_url: 'foto_url',
+  ordem: 'ordem'
+};
+
 exports.Prisma.Produto_fotosScalarFieldEnum = {
   id: 'id',
   produto_id: 'produto_id',
-  foto_url: 'foto_url'
+  foto_url: 'foto_url',
+  ordem: 'ordem'
 };
 
 exports.Prisma.ProdutosScalarFieldEnum = {
@@ -287,6 +295,7 @@ exports.Prisma.ModelName = {
   duvidas: 'duvidas',
   manuais: 'manuais',
   montadoras: 'montadoras',
+  carro_fotos: 'carro_fotos',
   produto_fotos: 'produto_fotos',
   produtos: 'produtos',
   setores: 'setores',
