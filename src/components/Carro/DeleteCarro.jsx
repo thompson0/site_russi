@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
 import { useAlert } from "@/context/AlertContext"
@@ -10,15 +11,19 @@ export default function DeleteCarro({ id, onDelete }) {
   const { triggerAlert } = useAlert()
   const { triggerRefresh } = useRefresh()
   const { secureFetch, loading } = useSecureFetch()
+  const [deleted, setDeleted] = useState(false)
 
   async function handleDelete() {
-    if (!id || loading) {
+    if (!id || loading || deleted) {
       if (!id) triggerAlert("error", "Erro!", "ID do carro não informado.")
       return
     }
 
     const confirmar = confirm("Tem certeza que deseja excluir este carro?")
     if (!confirmar) return
+
+    setDeleted(true)
+    if (onDelete) onDelete(id)
 
     const res = await secureFetch(
       `/api/carros?id=${id}`,
@@ -29,9 +34,11 @@ export default function DeleteCarro({ id, onDelete }) {
       }
     )
 
-    if (!res) return
+    if (!res) {
+      setDeleted(false)
+      return
+    }
 
-    if (onDelete) onDelete(id)
     triggerRefresh()
   }
 
@@ -39,11 +46,10 @@ export default function DeleteCarro({ id, onDelete }) {
     <Button
       variant="destructive"
       onClick={handleDelete}
-      disabled={loading}
+      disabled={loading || deleted}
       size="icon"
     >
       <Trash2 />
-      {loading ? "Excluindo..." : ""}
     </Button>
   )
 }
