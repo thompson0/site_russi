@@ -20,8 +20,6 @@ export default function DeleteCarro({ id, onDelete }) {
     const confirmar = confirm("Tem certeza que deseja excluir este carro?")
     if (!confirmar) return
 
-    if (onDelete) onDelete(id)
-
     const res = await secureFetch(
       `/api/carros?id=${id}`,
       { method: "DELETE" },
@@ -33,6 +31,7 @@ export default function DeleteCarro({ id, onDelete }) {
 
     if (!res) return
 
+    if (onDelete) onDelete(id)
     triggerRefresh()
   }
 

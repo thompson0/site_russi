@@ -15,8 +15,6 @@ export default function DeleteProduto({produtoId, onDelete }) {
     if (loading) return;
     if (!confirm("Tem certeza que deseja excluir este produto?")) return;
     
-    onDelete?.(produtoId);
-    
     const res = await secureFetch(
       `/api/produtos/${produtoId}`,
       {
@@ -30,6 +28,7 @@ export default function DeleteProduto({produtoId, onDelete }) {
 
     if (!res) return;
 
+    onDelete?.(produtoId);
     triggerRefresh();
   }
 
