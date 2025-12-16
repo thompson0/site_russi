@@ -44,10 +44,6 @@ export async function GET(req, { params }) {
         codigo: true,
         foto_url: true,
         video_url: true,
-        fotos: {
-          select: { id: true, foto_url: true, ordem: true },
-          orderBy: { ordem: 'asc' }
-        },
       },
     });
 

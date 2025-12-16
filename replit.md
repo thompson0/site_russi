@@ -29,6 +29,14 @@ The application is built with Next.js 15.5.4 and Turbopack, utilizing React 19. 
 - Cookie-based JWT token storage with 8-hour expiration.
 - Multiple images support with drag-and-drop reordering and carousel display.
 
+**Performance Optimizations:**
+- Product catalog API uses pagination (12 items per page) with "load more" functionality.
+- Product-by-car page uses Server-Side Rendering (SSR) for faster initial load.
+- Database indexes on `carro_produtos.carro_id` for faster queries.
+- Lazy loading for images with IntersectionObserver.
+- CSS animations (fadeInUp, hover-lift) for better perceived performance.
+- Note: Development mode is slower due to on-demand compilation. Production builds are pre-compiled and load instantly.
+
 **Database Schema (PostgreSQL with Prisma ORM):**
 - `usuarios`: User accounts with roles and sector assignments.
 - `setores`: Departments for user organization and content access.
