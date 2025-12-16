@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Package, Search, QrCode, Play, Eye } from "lucide-react";
 
 export default function ProdutoSearch({ produtos }) {
@@ -44,15 +45,17 @@ export default function ProdutoSearch({ produtos }) {
               className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-green-500/10 hover:scale-[1.01] hover:-translate-y-1 animate-fadeInUp opacity-0"
               style={{ animationDelay: `${Math.min(index * 50, 300)}ms`, animationFillMode: 'forwards' }}
             >
-              <div className="aspect-square bg-gray-50 flex items-center justify-center p-6 relative">
-                <img
+              <div className="aspect-square bg-gray-50 flex items-center justify-center relative overflow-hidden">
+                <Image
                   src={p.foto_url || "/placeholder.png"}
                   alt={p.nome}
-                  className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
                 {p.video_url && (
-                  <div className="absolute top-3 right-3 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="absolute top-3 right-3 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center shadow-lg z-10">
                     <Play className="w-4 h-4 text-white ml-0.5" />
                   </div>
                 )}

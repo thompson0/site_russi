@@ -5,6 +5,29 @@ const nextConfig = {
       allowedOrigins: ['*.replit.dev', '*.repl.co', '*.russiacessorios.com.br', 'infra.russiacessorios.com.br'],
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.russiacessorios.com.br',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.replit.dev',
+      },
+    ],
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    formats: ['image/avif', 'image/webp'],
+  },
   async headers() {
     return [
       {
