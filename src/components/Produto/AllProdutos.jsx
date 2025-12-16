@@ -1,37 +1,70 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LoadingGrid } from "@/components/ui/LoadingSpinner";
+import { LoadingGrid, LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { useRefresh } from "@/context/RefreshContext";
 import EditProduto from "./EditProduto";
 import DeleteProduto from "./DeleteProduto";
 import AddProduto from "./AddProduto";
 
-
+const ITEMS_PER_PAGE = 12;
 
 export default function AllProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [pagination, setPagination] = useState(null);
   const { refreshKey } = useRefresh();
 
-  useEffect(() => {
-    async function fetchProdutos() {
-      try {
-        const res = await fetch(`/api/catalogo/produtos?k=${refreshKey}`);
-        if (!res.ok) throw new Error("Erro ao buscar produtos");
-        const data = await res.json();
-        setProdutos(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+  const fetchProdutos = useCallback(async (page = 1, append = false) => {
+    try {
+      if (page === 1) setLoading(true);
+      else setLoadingMore(true);
+
+      const res = await fetch(
+        `/api/catalogo/produtos?page=${page}&limit=${ITEMS_PER_PAGE}&k=${refreshKey}`
+      );
+      if (!res.ok) throw new Error("Erro ao buscar produtos");
+      const data = await res.json();
+
+      if (append) {
+        setProdutos((prev) => [...prev, ...data.produtos]);
+      } else {
+        setProdutos(data.produtos);
       }
+      setPagination(data.pagination);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
     }
-    fetchProdutos();
   }, [refreshKey]);
+
+  useEffect(() => {
+    fetchProdutos(1, false);
+  }, [fetchProdutos]);
+
+  const loadMore = () => {
+    if (pagination?.hasMore && !loadingMore) {
+      fetchProdutos(pagination.page + 1, true);
+    }
+  };
+
+  const handleCreated = (novo) => {
+    if (!novo) return;
+    setProdutos((prev) => [novo, ...prev]);
+    if (pagination) {
+      setPagination((prev) => ({
+        ...prev,
+        total: prev.total + 1,
+      }));
+    }
+  };
 
   if (loading)
     return (
@@ -41,41 +74,34 @@ export default function AllProdutos() {
       </div>
     );
 
-if (produtos.length === 0)
-  return (
-    <div className="flex flex-col gap-6">
-      <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>
-
-      <div className="flex justify-end px-4">
-        <AddProduto
-          Allprodutos={true}
-          onCreated={(novo) => {
-            if (!novo) return;
-            setProdutos((prev) => [novo, ...prev]);
-          }}
-        />
+  if (produtos.length === 0)
+    return (
+      <div className="flex flex-col gap-6">
+        <p className="text-gray-400 text-center mt-10">Nenhum produto encontrado.</p>
+        <div className="flex justify-end px-4">
+          <AddProduto Allprodutos={true} onCreated={handleCreated} />
+        </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex justify-end px-4">
-        <AddProduto
-          Allprodutos={true}
-          onCreated={(novo) => {
-            if (!novo) return;
-            setProdutos((prev) => [novo, ...prev]);
-          }}
-        />
+      <div className="flex justify-between items-center px-4">
+        <p className="text-sm text-muted-foreground">
+          Mostrando {produtos.length} de {pagination?.total || produtos.length} produtos
+        </p>
+        <AddProduto Allprodutos={true} onCreated={handleCreated} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {produtos.map((p, index) => (
           <Card 
             key={p.id} 
             className="group overflow-hidden hover-lift animate-fadeInUp opacity-0"
-            style={{ animationDelay: `${Math.min(index * 50, 300)}ms`, animationFillMode: 'forwards' }}
+            style={{ 
+              animationDelay: `${Math.min((index % ITEMS_PER_PAGE) * 50, 300)}ms`, 
+              animationFillMode: 'forwards' 
+            }}
           >
             <CardHeader className="p-0 cursor-pointer overflow-hidden">
               <OptimizedImage
@@ -106,6 +132,27 @@ if (produtos.length === 0)
           </Card>
         ))}
       </div>
+
+      {pagination?.hasMore && (
+        <div className="flex justify-center py-6">
+          <Button
+            onClick={loadMore}
+            disabled={loadingMore}
+            variant="outline"
+            size="lg"
+            className="min-w-[200px]"
+          >
+            {loadingMore ? (
+              <>
+                <LoadingSpinner size="sm" />
+                <span className="ml-2">Carregando...</span>
+              </>
+            ) : (
+              `Carregar mais (${pagination.total - produtos.length} restantes)`
+            )}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
