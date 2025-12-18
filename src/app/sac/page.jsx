@@ -21,9 +21,9 @@ const contactCards = [
     color: "blue"
   },
   {
-    title: "Contato Geral",
+    title: "SAC / Auditoria",
     description: "Dúvidas, sugestões e informações gerais",
-    email: "contato@russiacessorios.com.br",
+    email: "carla.lombardi@russiacessorios.com.br",
     icon: ChatBubbleLeftRightIcon,
     color: "indigo"
   }
