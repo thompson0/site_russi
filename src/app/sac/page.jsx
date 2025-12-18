@@ -123,9 +123,8 @@ export default function SACPage() {
                 </div>
                 <h3 className="text-lg font-bold text-white mb-1">Horário de Atendimento</h3>
                 <div className="space-y-1 text-slate-300 text-sm">
-                  <p>Segunda a Sexta: 8h às 18h</p>
-                  <p>Sábado: 8h às 12h</p>
-                  <p className="text-slate-500">Domingo: Fechado</p>
+                  <p>Segunda a Sexta: 9h às 17h</p>
+                  <p className="text-slate-500">Sábado e Domingo: Fechado</p>
                 </div>
               </div>
             </div>
