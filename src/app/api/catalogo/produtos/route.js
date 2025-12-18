@@ -19,7 +19,7 @@ export async function GET(request) {
             foto_url: true,
             views: true,
           },
-          orderBy: { id: 'desc' },
+          orderBy: { nome: 'asc' },
           skip,
           take: limit,
         }),
@@ -62,7 +62,7 @@ export async function GET(request) {
         video_url: true, 
         views: true,
       },
-      orderBy: { id: 'desc' },
+      orderBy: { nome: 'asc' },
     });
 
     const normalized = produtos.map((p) => ({

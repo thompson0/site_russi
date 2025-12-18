@@ -45,6 +45,7 @@ export async function GET(req, { params }) {
         foto_url: true,
         video_url: true,
       },
+      orderBy: { nome: 'asc' },
     });
 
     return Response.json(serializeBigInt(produtos), { status: 200 });

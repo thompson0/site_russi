@@ -15,7 +15,8 @@ export async function GET(req, context) {
           select: { id: true, foto_url: true, ordem: true },
           orderBy: { ordem: 'asc' }
         }
-      }
+      },
+      orderBy: { nome: 'asc' },
     });
 
     return new Response(

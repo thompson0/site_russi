@@ -39,6 +39,7 @@ export default async function CatalogoProdutosPorCarroPage({ params }) {
         foto_url: true,
         video_url: true,
       },
+      orderBy: { nome: 'asc' },
     }),
   ]);
 

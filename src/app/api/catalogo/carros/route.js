@@ -20,6 +20,7 @@ export async function GET() {
           orderBy: { ordem: 'asc' }
         }
       },
+      orderBy: { nome: 'asc' },
     });
 
     return new Response(

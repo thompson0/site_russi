@@ -76,6 +76,7 @@ export async function GET(req) {
           orderBy: { ordem: 'asc' }
         },
       },
+      orderBy: { nome: 'asc' },
     })
 
     return NextResponse.json(serializeBigInt(carros), {
