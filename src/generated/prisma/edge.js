@@ -290,7 +290,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/runner/workspace/src/generated/prisma",
+      "value": "/Users/victorrippi/Documents/site_russi/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -299,12 +299,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/runner/workspace/prisma/schema.prisma",
+    "sourceFilePath": "/Users/victorrippi/Documents/site_russi/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -317,7 +317,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
