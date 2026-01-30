@@ -1,9 +1,10 @@
 FROM node:20-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+COPY yarn.lock ./
+RUN yarn install --frozen-lockfile
 COPY . .
 RUN npx prisma generate
-RUN npm run build
+RUN yarn build
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
