@@ -12,7 +12,7 @@ RUN yarn install --immutable
 
 COPY . .
 
-RUN npx prisma generate
+RUN yarn prisma generate
 RUN yarn build
 
 EXPOSE 5000
