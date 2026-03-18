@@ -1,10 +1,19 @@
 FROM node:20-alpine
+
 WORKDIR /app
-COPY package.json ./
-COPY yarn.lock ./
+
+RUN corepack enable
+
+RUN corepack prepare yarn@4.13.0 --activate
+
+COPY package.json yarn.lock ./
+
 RUN yarn install
+
 COPY . .
+
 RUN npx prisma generate
 RUN yarn build
+
 EXPOSE 5000
 CMD ["yarn", "start"]
