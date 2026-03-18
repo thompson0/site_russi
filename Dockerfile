@@ -6,6 +6,8 @@ RUN corepack enable
 
 RUN corepack prepare yarn@4.13.0 --activate
 
+ENV YARN_NODE_LINKER=node-modules
+
 COPY package.json yarn.lock ./
 
 RUN yarn install --immutable
