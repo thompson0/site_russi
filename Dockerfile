@@ -8,7 +8,7 @@ RUN corepack prepare yarn@4.13.0 --activate
 
 COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN yarn install --immutable
 
 COPY . .
 
