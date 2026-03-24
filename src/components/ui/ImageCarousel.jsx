@@ -8,6 +8,7 @@ export default function ImageCarousel({
   images = [], 
   className = "",
   aspectRatio = "aspect-video",
+  imageFit = "cover",
   showThumbnails = true,
   showIndicators = true
 }) {
@@ -45,7 +46,7 @@ export default function ImageCarousel({
         <img
           src={typeof currentImage === 'string' ? currentImage : currentImage?.foto_url}
           alt={`Imagem ${currentIndex + 1}`}
-          className="w-full h-full object-cover transition-opacity duration-300"
+          className={cn("w-full h-full transition-opacity duration-300", imageFit === "contain" ? "object-contain" : "object-cover")}
           onError={(e) => {
             e.target.src = ""
             e.target.style.display = "none"

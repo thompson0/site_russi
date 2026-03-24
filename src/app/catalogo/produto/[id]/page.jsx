@@ -102,6 +102,7 @@ export default function CatalogoProdutoDetalhePage() {
                     ? produto.fotos.map(f => f.foto_url) 
                     : (produto.foto_url ? [produto.foto_url] : [])}
                   aspectRatio="aspect-video"
+                  imageFit="contain"
                   showThumbnails={produto.fotos?.length > 1}
                   showIndicators={produto.fotos?.length > 1}
                 />
