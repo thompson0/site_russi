@@ -1,9 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPinIcon, PhoneIcon, EnvelopeIcon, ClockIcon } from "@heroicons/react/24/outline";
+import { Instagram, Linkedin, Youtube } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const socialLinks = [
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/russi_acessorios/",
+      icon: Instagram,
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/russi-acess%C3%B3rios/",
+      icon: Linkedin,
+    },
+    {
+      name: "YouTube",
+      href: "https://www.youtube.com/@Russi-Midia",
+      icon: Youtube,
+    },
+  ];
 
   return (
     <footer className="bg-slate-900 text-white">
@@ -26,6 +44,23 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
               Especialistas em terceirização de acessórios automotivos para concessionárias.
             </p>
+            <div className="pt-1">
+              <p className="text-xs sm:text-sm text-slate-400">Siga a Russi</p>
+              <div className="mt-2 flex items-center gap-2">
+                {socialLinks.map(({ name, href, icon: Icon }) => (
+                  <Link
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Russi Acessórios no ${name}`}
+                    className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-slate-700 text-slate-300 transition-colors hover:border-blue-400 hover:text-blue-400"
+                  >
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="space-y-3 sm:space-y-4">
