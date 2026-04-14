@@ -3,11 +3,35 @@
 import { useEffect, useState } from "react";
 import ProdutoVideoCard from "@/components/Videos/ProdutoVideoCard";
 import NavHome from "@/components/Home/NavHome";
-import { VideoCameraIcon } from "@heroicons/react/24/outline";
+import {
+  PlayCircleIcon,
+  VideoCameraIcon,
+  BuildingOffice2Icon,
+  SparklesIcon,
+  TrophyIcon,
+} from "@heroicons/react/24/outline";
 
 export default function VideosPage() {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const features = [
+    {
+      icon: BuildingOffice2Icon,
+      title: "Nossa História",
+      description: "Conheça a trajetória de mais de 35 anos de excelência no mercado automotivo",
+    },
+    {
+      icon: SparklesIcon,
+      title: "Nossos Valores",
+      description: "Compromisso com qualidade, inovação e atendimento diferenciado",
+    },
+    {
+      icon: TrophyIcon,
+      title: "Conquistas",
+      description: "Referência nacional em acessórios automotivos para concessionárias",
+    },
+  ];
 
   async function fetchVideos() {
     try {
@@ -28,8 +52,37 @@ export default function VideosPage() {
   return (
     <div className="min-h-screen">
       <NavHome />
+      
+      <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
 
-      <section className="pt-24 pb-12 md:pt-28 md:pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium mb-6">
+            <VideoCameraIcon className="w-4 h-4" />
+            <span>Vídeos Institucionais</span>
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Conheça a
+            <span className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+              Russi Acessórios
+            </span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10">
+            Acesse nossa biblioteca de vídeos institucionais e conheça mais sobre 
+            a história e os valores da Russi Acessórios.
+          </p>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
+      </section>
+
+      <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
@@ -67,6 +120,28 @@ export default function VideosPage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* 3 CARDS MOVIDOS PARA BAIXO DOS VÍDEOS */}
+      <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 text-center"
+            >
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                <feature.icon className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
