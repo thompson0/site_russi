@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DarkMode } from "./Darkmode";
 import { PlayCircleIcon, Bars3Icon, XMarkIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
+import { FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 
 function NavHome() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,8 +23,8 @@ function NavHome() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 flex-shrink-0 transition-colors duration-300 ${isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
-          : "bg-transparent border-b border-transparent"
+        ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+        : "bg-transparent border-b border-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,8 +56,8 @@ function NavHome() {
               <Button
                 variant="ghost"
                 className={`flex gap-2 items-center transition-colors ${isScrolled
-                    ? "text-foreground hover:bg-accent hover:text-foreground"
-                    : "text-white hover:bg-white/10 hover:text-white"
+                  ? "text-foreground hover:bg-accent hover:text-foreground"
+                  : "text-white hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <ChatBubbleLeftRightIcon className="w-5 h-5" />
@@ -68,14 +69,70 @@ function NavHome() {
               <Button
                 variant="ghost"
                 className={`flex gap-2 items-center transition-colors ${isScrolled
-                    ? "text-foreground hover:bg-accent hover:text-foreground"
-                    : "text-white hover:bg-white/10 hover:text-white"
+                  ? "text-foreground hover:bg-accent hover:text-foreground"
+                  : "text-white hover:bg-white/10 hover:text-white"
                   }`}
               >
                 <PlayCircleIcon className="w-5 h-5" />
                 Vídeos
               </Button>
             </Link>
+
+            <div className="flex items-center gap-1 mr-2">
+              <a
+                href="https://www.instagram.com/russi_acessorios/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`transition-colors ${isScrolled
+                    ? "text-foreground hover:bg-accent"
+                    : "text-white hover:bg-white/10"
+                    }`}
+                >
+                  <FaInstagram className="w-5 h-5" />
+                </Button>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/company/russi-acess%C3%B3rios/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`transition-colors ${isScrolled
+                    ? "text-foreground hover:bg-accent"
+                    : "text-white hover:bg-white/10"
+                    }`}
+                >
+                  <FaLinkedinIn className="w-5 h-5" />
+                </Button>
+              </a>
+
+              <a
+                href="https://www.youtube.com/@Russi-Midia"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`transition-colors ${isScrolled
+                    ? "text-foreground hover:bg-accent"
+                    : "text-white hover:bg-white/10"
+                    }`}
+                >
+                  <FaYoutube className="w-5 h-5" />
+                </Button>
+              </a>
+            </div>
 
             <Link href="/login">
               <Button
@@ -112,6 +169,37 @@ function NavHome() {
                 Vídeos
               </Button>
             </Link>
+            
+              <a
+                href="https://www.instagram.com/russi_acessorios/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon">
+                  <FaInstagram className="w-5 h-5" />
+                </Button>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/company/russi-acess%C3%B3rios/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon">
+                  <FaLinkedinIn className="w-5 h-5" />
+                </Button>
+              </a>
+
+              <a
+                href="https://www.youtube.com/@Russi-Midia"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon">
+                  <FaYoutube className="w-5 h-5" />
+                </Button>
+              </a>
+            
             <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
               <Button className="w-full">Entrar</Button>
             </Link>
@@ -126,3 +214,4 @@ function NavHome() {
 }
 
 export default NavHome;
+
