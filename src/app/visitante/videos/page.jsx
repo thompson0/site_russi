@@ -50,34 +50,20 @@ export default function VideosPage() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="relative min-h-screen"> {/* Adicione 'relative' aqui */}
+
+      {/* GRADIENTE QUE SOBE ATÉ A NAVBAR */}
+      <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 -z-10">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+      </div>
       <NavHome />
-      
+
       <section className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800"></div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
 
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"></div>
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium mb-6">
-            <VideoCameraIcon className="w-4 h-4" />
-            <span>Vídeos Institucionais</span>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Conheça a
-            <span className="block bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-              Russi Acessórios
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10">
-            Acesse nossa biblioteca de vídeos institucionais e conheça mais sobre 
-            a história e os valores da Russi Acessórios.
-          </p>
-        </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
       </section>
@@ -101,6 +87,7 @@ export default function VideosPage() {
               </span>
             </div>
           )}
+
         </div>
 
         {loading ? (
